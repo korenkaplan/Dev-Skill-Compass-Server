@@ -15,6 +15,14 @@ jobs:
           password: ${{secrets.DOCKERHUB_TOKEN}}
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Create env file
+        run:
+          echo "DATABASE_NAME=${{ secrets.DATABASE_NAME }}" >> .env
+          echo "DATABASE_USER=${{ secrets.DATABASE_USER }}" >> .env
+          echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> .env
+          echo "DATABASE_HOST=${{ secrets.DATABASE_HOST }}" >> .env
+          echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> .env
+
       - name: Test
         run: docker-compose run --rm web sh -c "python manage.py test"
         env:
