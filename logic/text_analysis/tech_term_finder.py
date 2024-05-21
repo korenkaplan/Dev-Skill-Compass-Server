@@ -11,12 +11,12 @@ Functions:
 - find_phrases(words, tech_set): Finds phrases from the tokenized words that match any terms in the provided tech set.
 - find_tech_terms(text, tech_set): Finds technical terms in the input text based on the provided set of technical terms.
 """
-
 import re
-from data.skills_data import get_tech_set
+from concurrent.futures import ThreadPoolExecutor
+from logic.text_analysis.data.skills_data import get_tech_set
 
 
-def remove_subsets(tech_list):
+def remove_subsets(tech_list: list) -> set:
     """
     Remove subsets from a list of technical terms.
 
@@ -30,15 +30,15 @@ def remove_subsets(tech_list):
     for i, tech_word in enumerate(tech_list):
         # Check if the current tech word is not a subset of any other tech word in the list
         if not any(
-            tech_word != other_word and set(tech_word.split()).issubset(set(other_word.split()))
-            for j, other_word in enumerate(tech_list) if i != j
+                tech_word != other_word and set(tech_word.split()).issubset(set(other_word.split()))
+                for j, other_word in enumerate(tech_list) if i != j
         ):
             # If the current tech word is not a subset, add it to the cleaned set
             cleaned_tech_set.add(tech_word)
     return cleaned_tech_set
 
 
-def preprocess_text(text):
+def preprocess_text(text: str) -> str:
     """
     Preprocess the input text by converting it to lowercase and removing special characters,
     numbers, and punctuation except for specific patterns like ci/cd, ui/ux.
@@ -52,11 +52,11 @@ def preprocess_text(text):
     # Convert text to lowercase
     text = text.lower()
     # Remove special characters, numbers, and punctuation except for specific patterns like ci/cd, ui/ux
-    text = re.sub(r'[^a-z0-9\s/]', '', text)
-    return text
+    text = re.sub(r'[^a-z0-9\s/#]', '', text)
+    return text.strip()
 
 
-def tokenize_text_with_slash(text):
+def tokenize_text_with_slash(text: str) -> list[str]:
     """
     Tokenize the preprocessed text into words while preserving specific patterns like ci/cd, ui/ux.
 
@@ -69,20 +69,20 @@ def tokenize_text_with_slash(text):
     return re.findall(r'\b\w+(?:/\w+)?\b', text)
 
 
-def tokenize_text(text):
+def tokenize_text(text: str) -> list[str]:
     """
-    Tokenize the preprocessed text into words while preserving specific patterns like ci/cd, ui/ux.
+  Tokenize the preprocessed text into words while preserving specific patterns like ci/cd, ui/ux.
 
-    Parameters:
-    text (str): The preprocessed text.
+  Parameters:
+  text (str): The preprocessed text.
 
-    Returns:
-    list: A list of tokenized words.
-    """
-    return re.findall(r'\b\w+\b', text)
+  Returns:
+  list: A list of tokenized words.
+  """
+    return re.findall(r'\b\w+#|#\w+|\b\w+\b|\'\w+', text)
 
 
-def find_phrases(words, tech_set):
+def find_phrases(words, tech_set: set) -> list[str]:
     """
     Find and return phrases from the tokenized words that match any terms in the provided tech set.
 
@@ -102,7 +102,7 @@ def find_phrases(words, tech_set):
     return found_phrases
 
 
-def find_tech_terms(text, tech_set):
+def find_tech_terms(text: str, tech_set: set) -> set:
     """
     Find technical terms in the input text based on the provided set of technical terms.
 
@@ -122,36 +122,38 @@ def find_tech_terms(text, tech_set):
     return remove_subsets(found_tech_words)
 
 
-if __name__ == '__main__':
-    job = """Sightfull is a rapidly growing Revenue Analytics startup backed by top-tier VCs. Our platform helps SaaS companies quickly drive revenue growth by leveraging the full power of their real-time business data.
-This is a rare opportunity to join a startup on the ground floor. You will join a small but powerful R&D team that is ambitious and dynamic. We take pride in creating a hugely impactful product that is being built at the highest level of craft and execution and is already delighting multiple customers.
-Who are we looking for?
-•	You are a positive problem solver with a can-do spirit, an autodidact, and enjoy working in a team
-•	You are looking to make a significant impact on the company and its journey
-•	You take pride in writing high-quality code with attention to product needs
-What will you be doing?
-•	As a senior backend engineer, you will take a central role in building Sightfull’s platform. You will have a real impact on our product and company.
-•	You will choose and use cutting-edge technologies and methodologies.
-•	You’ll take full ownership of new features by defining the need together with our PMs; designing and implementing scalable solutions for them, and improving them using immediate feedback from our users.
-•	You will work on all parts of the platform – from our infrastructure, backend services and APIs.
-Requirements
-•	6+ Years of hands-on experience as a backend engineer
-•	Experience in at least two modern runtimes/languages such as Node (Typescript/JavaScript), GoLang, Python, JVM-based (Java / Scala / Kotlin), etc.
-•	Experience with AWS and/or GCP, preferably with k8s/ and container-based deployments
-Advantages
-•	Experience working in small startup companies
-•	Experience working with modern data stacks, columnar databases and data processing
-•	Experience with cloud platforms (e.g AWS, GCP, Azure)
-•	Experience with contributing to open source code
-•	Experience with modern CI/CD pipelines.
-•	Github actions
-•	Sql server
-•	Microsoft sql server
-•	Ux/ui
-If your experience is close but doesn’t fulfill all requirements, please apply! We value talent and motivation and believe that specific knowledge will follow.
-Our Tech Stack
- Our requirements are not limited to our current tech stack. However, because some are curious, our current tech stack is mainly composed of Node/Typescript, React/Typescript, Python, big-scale ETL, SQL, Columnar databases, GraphQL, Pulumi, Kubernetes, AWS, and many more :).
+def find_tech_terms_pool_threads(listings_list: list[str], tech_set: set) -> list[list[str]]:
+    """Handle multiple listings with thread pool simultaneously"""
+    result = []
+    # start the thread pool
+    with ThreadPoolExecutor(max_workers=len(listings_list)) as executor:
+        # submit task for each listing
+        futures = [executor.submit(find_tech_terms, listing, tech_set) for listing in listings_list]
 
-"""
-    sett = get_tech_set()
-    print(sorted(find_tech_terms(job, sett)))
+        # collect and store results from all tasks
+        for future in futures:
+            print(future.result())
+            result.append(future.result())
+
+    return result
+
+
+
+sample_data_developer_job_listings = [
+    "Backend Engineer (Python/Django): Build and maintain scalable web applications using Python and Django framework. (RESTful API, Databases)",
+    "Node.js Developer (Social Media): Develop real-time features and backend services for a high-traffic social media platform. (JavaScript, express.js, MongoDB)",
+    "Java Backend Developer (FinTech): Create secure and reliable backend systems for financial transactions. (Spring Boot, Java EE, Microservices)",
+    "Go Developer (Cloud Infrastructure): Develop and maintain backend services for a cloud platform using Go. (Concurrency, Postgresql)",
+    "DevOps Engineer (E-commerce): Automate infrastructure provisioning and integrate development and deployment processes. (Linux, K8's, Docker)",
+    "API Developer (Healthcare): Develop secure and well-documented APIs for healthcare data exchange. (RESTful APIs, OAuth, Security)",
+    "Backend Developer (Machine Learning): Build backend infrastructure to support machine learning models and data pipelines. (Python, TensorFlow, Cloud Storage)",
+    "Software Engineer (Embedded Systems): Develop low-level software for interacting with hardware components. (C/C++, Assembly)",
+    "Front-End Developer (React/JS): Build interactive and user-friendly web interfaces using React and JavaScript. (HTML, CSS, UI/UX Design)",
+    "Angular Developer (E-commerce): Develop single-page applications for an e-commerce platform using Angular. (TypeScript, RxJS)",
+    "UI/UX Designer & Front-End Developer (Mobile App): Design and develop user interfaces for a mobile application. (React Native/Flutter, UI/UX Best Practices)",
+    "Front-End Developer (VR/AR): Develop interactive front-end experiences for virtual and augmented reality platforms. (WebGL, Three.js)",
+    "Front-End Developer (SSR): Build server-side rendered web applications for improved SEO and performance. (Next.js, Nuxt.js)",
+  ]
+
+myset = get_tech_set()
+find_tech_terms_pool_threads(sample_data_developer_job_listings, myset)

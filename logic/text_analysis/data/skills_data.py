@@ -120,7 +120,7 @@ _tech = {
         'node.js', 'nodejs', 'node',
         'react', 'react.js', 'reactjs',
         'jquery',
-        'express',
+        'express', "Express.js", "expressjs"
         'angular', 'angular.js', 'angularjs',
         'next.js', 'nextjs', 'next',
         'asp.net core', 'aspnet core', 'aspnetcore', 'dotnet core', '.net core',
@@ -149,13 +149,16 @@ _tech = {
         'elm',
         'play framework',
         'lit',
-        'qwik'
+        'qwik',
+        'RxJS',
+        'webgl',
+        'three'
     ],
     'other_frameworks_expanded': [
         'scikit-learn', 'scikit', 'sklearn',
         'flutter',
         'torch/pytorch', 'torch', 'pytorch',
-        'react native', 'react-native',
+        'react native',
         'opencv',
         'electron',
         'opengl',
@@ -348,7 +351,7 @@ _tech = {
     'data_exchange_apis_and_tools_expanded': [
         "json",
         "xml",
-        "restful", "rest api", "rest",
+        "restful", "rest api", "rest", "restful api", "restful apis"
         "soap",
         "graphql",
         "protobuf",
@@ -458,6 +461,7 @@ _tech = {
         "flake8",
 
         # JavaScript
+        "Three.js", "threejs"
         "axios",
         "babel",
         "lodash",
@@ -606,3 +610,4 @@ def find_word_in_dict(word):
 # Example usage
 # duplicate_counts_with_lists = find_duplicate_words_with_lists(_tech)
 # print("Duplicate word counts with associated lists:", duplicate_counts_with_lists)
+
