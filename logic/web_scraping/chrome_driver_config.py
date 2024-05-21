@@ -12,7 +12,7 @@ chrome_headless_arguments = ('--headless', '--no-sandbox', '--disable-dev-shm-us
 chrome_arguments = ('--no-sandbox', '--disable-dev-shm-usage')
 
 
-def initialize_headless_chrome_driver(arguments=chrome_headless_arguments) -> tuple[Service, Options]:
+def initialize_headless_chrome_driver(arguments=chrome_arguments) -> tuple[Service, Options]:
     """Function to initialize the headless chrome driver"""
     # Setup Chrome options
     chrome_options = Options()
