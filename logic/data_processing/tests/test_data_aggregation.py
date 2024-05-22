@@ -1,6 +1,5 @@
 """This is a test module for data_aggregation file"""
 
-# imports
 import pytest
 from logic.data_processing.data_aggragation import (get_lists_of_jobs_and_their_role,
                                                     sum_results_of_job_listings_analysis, group_synonyms_words,
@@ -8,5 +7,9 @@ from logic.data_processing.data_aggragation import (get_lists_of_jobs_and_their_
                                                     data_processing_pipeline)
 
 # region Sample Data For Tests
+
+# endregion
+
+# region Tests
 
 # endregion
