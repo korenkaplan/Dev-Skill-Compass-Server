@@ -4,7 +4,7 @@ _tech = {
     'programming_languages': [
         'javascript', 'js',
         'html', 'hypertext markup language',
-        'css', 'cascading style sheets',
+        'css', 'cascading style sheets', 'css animations',
         'python', 'py',
         'sql', 'structured query language',
         'typescript', 'ts',
@@ -116,10 +116,10 @@ _tech = {
         'colocation', 'colo'
     ],
     'web_frameworks': [
-        'node.js', 'nodejs', 'node',
+        'node.js', 'nodejs', 'node', 'ts-Node',
         'react', 'react.js', 'reactjs',
         'jquery',
-        'express', "Express.js", "expressjs"
+        'express', 'express.js', "expressjs",
         'angular', 'angular.js', 'angularjs',
         'next.js', 'nextjs', 'next',
         'asp.net core', 'aspnet core', 'aspnetcore', 'dotnet core', '.net core', '.net',
@@ -460,6 +460,8 @@ _tech = {
 
         # JavaScript
         "three.js", "threejs",
+        'lottie',
+        'svg',
         "axios",
         "babel",
         "lodash",
@@ -611,4 +613,4 @@ def find_word_in_dict(word):
 # duplicate_counts_with_lists = find_duplicate_words_with_lists(_tech)
 # print("Duplicate word counts with associated lists:", duplicate_counts_with_lists)
 
-# print(find_word_in_dict('.net'))
+print(find_word_in_dict('css'))
