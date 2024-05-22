@@ -1,8 +1,7 @@
 """A module that holds Tech names in lists"""
-from collections import defaultdict
 
 _tech = {
-    'programming_languages_expanded': [
+    'programming_languages': [
         'javascript', 'js',
         'html', 'hypertext markup language',
         'css', 'cascading style sheets',
@@ -57,7 +56,7 @@ _tech = {
         'flow',
         'raku', 'perl 6'
     ],
-    'databases_expanded': [
+    'databases': [
         'postgresql', 'postgres', 'pgsql',
         'mysql', 'my sql',
         'sqlite', 'sqlite3',
@@ -91,7 +90,7 @@ _tech = {
         'ravendb', 'raven db',
         'tidb', 'ti db'
     ],
-    'cloud_platforms_expanded': [
+    'cloud_platforms': [
         'amazon web services (aws)', 'aws', 'amazon aws',
         'microsoft azure', 'azure',
         'google cloud', 'gcp', 'google cloud platform',
@@ -116,14 +115,14 @@ _tech = {
         'scaleway',
         'colocation', 'colo'
     ],
-    'web_frameworks_expanded': [
+    'web_frameworks': [
         'node.js', 'nodejs', 'node',
         'react', 'react.js', 'reactjs',
         'jquery',
         'express', "Express.js", "expressjs"
         'angular', 'angular.js', 'angularjs',
         'next.js', 'nextjs', 'next',
-        'asp.net core', 'aspnet core', 'aspnetcore', 'dotnet core', '.net core',
+        'asp.net core', 'aspnet core', 'aspnetcore', 'dotnet core', '.net core', '.net',
         'vue.js', 'vuejs', 'vue',
         'wordpress',
         'asp.net', 'aspnet',
@@ -152,9 +151,8 @@ _tech = {
         'qwik',
         'RxJS',
         'webgl',
-        'three'
     ],
-    'other_frameworks_expanded': [
+    'other_frameworks': [
         'scikit-learn', 'scikit', 'sklearn',
         'flutter',
         'torch/pytorch', 'torch', 'pytorch',
@@ -351,7 +349,7 @@ _tech = {
     'data_exchange_apis_and_tools_expanded': [
         "json",
         "xml",
-        "restful", "rest api", "rest", "restful api", "restful apis"
+        "restful", "rest api", "rest", "restful api", "restful apis", 'api', 'apis',
         "soap",
         "graphql",
         "protobuf",
@@ -461,7 +459,7 @@ _tech = {
         "flake8",
 
         # JavaScript
-        "Three.js", "threejs"
+        "three.js", "threejs",
         "axios",
         "babel",
         "lodash",
@@ -508,7 +506,6 @@ _tech = {
         "s3",
         "lambda",
         "rds",
-        "dynamodb",
         "elastic beanstalk",
         "ecs",
         "eks",
@@ -557,11 +554,14 @@ _tech = {
         "ios",
         "android"
     ],
-    'general_phrases': ['etl', 'data warehouse', 'columnar database', 'columnar databases', 'ux/ui', 'ui/ux', 'ci/cd', 'ci/cd pipelines']
+    'general_phrases': ['etl', 'data warehouse', 'columnar database', 'columnar databases', 'ux/ui',
+                        'ci/cd pipelines', 'saas', 'b2b', 'e2e', 'mern', 'mean stack'],
+    'security': ['oauth', 'jwt', 'jason web token', 'jason web tokens']
 }
 
 
-def get_tech_set():
+
+def get_tech_set() -> set:
     tech_set = set()
     for key in _tech:
         tech_set.update(_tech[key])
@@ -598,9 +598,10 @@ def find_duplicate_words_with_lists(dictionary):
 def find_word_in_dict(word):
     result = []
     for key, value_list in _tech.items():
-        if word.lower() in map(str.lower, value_list):
+        lower_case_list = [value.lower() for value in value_list]
+        if word.lower() in lower_case_list:
             result.append(key)
-    return result if result else None
+    return result
 
 
 # Example usage:
@@ -611,3 +612,4 @@ def find_word_in_dict(word):
 # duplicate_counts_with_lists = find_duplicate_words_with_lists(_tech)
 # print("Duplicate word counts with associated lists:", duplicate_counts_with_lists)
 
+# print(find_word_in_dict('.net'))
