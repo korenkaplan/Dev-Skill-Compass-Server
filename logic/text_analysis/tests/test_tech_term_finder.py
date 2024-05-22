@@ -20,19 +20,32 @@ sample_data_for_test_remove_subset = ['microsoft sql server', 'github actions', 
 sample_data_for_test_preprocess_text = 'HeLLo WoR!@$ld'
 sample_data_for_test_tokenize_text = 'Python, SQL, C#,$, Typescript, DOCKER, java, NodeJs c++, ci/cd, ux/ui .net'
 sample_data_developer_job_listings = [
-    "Backend Engineer (Python/Django): Build and maintain scalable web applications using Python and Django framework. (RESTful API, Databases)",
-    "Node.js Developer (Social Media): Develop real-time features and backend services for a high-traffic social media platform. (JavaScript, Express.js, MongoDB)",
-    "Java Backend Developer (FinTech): Create secure and reliable backend systems for financial transactions. (Spring Boot, Java EE, Microservices)",
-    "Go Developer (Cloud Infrastructure): Develop and maintain backend services for a cloud platform using Go. (Concurrency, Postgresql)",
-    "DevOps Engineer (E-commerce): Automate infrastructure provisioning and integrate development and deployment processes. (Linux, K8's, Docker)",
-    "API Developer (Healthcare): Develop secure and well-documented APIs for healthcare data exchange. (RESTful APIs, OAuth, Security)",
-    "Backend Developer (Machine Learning): Build backend infrastructure to support machine learning models and data pipelines. (Python, TensorFlow, Cloud Storage)",
-    "Software Engineer (Embedded Systems): Develop low-level software for interacting with hardware components. (C/C++, Assembly)",
-    "Front-End Developer (React/JS): Build interactive and user-friendly web interfaces using React and JavaScript. (HTML, CSS, UI/UX Design)",
-    "Angular Developer (E-commerce): Develop single-page applications for an e-commerce platform using Angular. (TypeScript, RxJS)",
-    "UI/UX Designer & Front-End Developer (Mobile App): Design and develop user interfaces for a mobile application. (React Native/Flutter, UI/UX Best Practices)",
-    "Front-End Developer (VR/AR): Develop interactive front-end experiences for virtual and augmented reality platforms. (WebGL, Three.js)",
-    "Front-End Developer (SSR): Build server-side rendered web applications for improved SEO and performance. (Next.js, Nuxt.js)",
+    "Backend Engineer (Python/Django): Build and maintain scalable web applications using Python and Django"
+    " framework. (RESTful API, Databases)",
+    "Node.js Developer (Social Media): Develop real-time features and backend services for a high-traffic "
+    "social media platform. (JavaScript, Express.js, MongoDB)",
+    "Java Backend Developer (FinTech): Create secure and reliable backend systems for financial transactions."
+    " (Spring Boot, Java EE, Microservices)",
+    "Go Developer (Cloud Infrastructure): Develop and maintain backend services for a cloud platform using Go."
+    " (Concurrency, Postgresql)",
+    "DevOps Engineer (E-commerce): Automate infrastructure provisioning and integrate development and"
+    " deployment processes. (Linux, K8's, Docker)",
+    "API Developer (Healthcare): Develop secure and well-documented APIs for healthcare data exchange."
+    " (RESTful APIs, OAuth, Security)",
+    "Backend Developer (Machine Learning): Build backend infrastructure to support machine learning"
+    " models and data pipelines. (Python, TensorFlow, Cloud Storage)",
+    "Software Engineer (Embedded Systems): Develop low-level software for interacting with hardware "
+    "components. (C/C++, Assembly)",
+    "Front-End Developer (React/JS): Build interactive and user-friendly web interfaces using React"
+    " and JavaScript. (HTML, CSS, UI/UX Design)",
+    "Angular Developer (E-commerce): Develop single-page applications for an e-commerce platform"
+    " using Angular. (TypeScript, RxJS)",
+    "UI/UX Designer & Front-End Developer (Mobile App): Design and develop user interfaces for a"
+    " mobile application. (React Native/Flutter, UI/UX Best Practices)",
+    "Front-End Developer (VR/AR): Develop interactive front-end experiences for virtual and"
+    " augmented reality platforms. (WebGL, Three.js)",
+    "Front-End Developer (SSR): Build server-side rendered web applications for improved SEO"
+    " and performance. (Next.js, Nuxt.js)",
   ]
 max_time_for_handling_multiple_listings_in_seconds = 10
 

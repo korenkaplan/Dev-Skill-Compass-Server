@@ -20,4 +20,3 @@ def measure_function_time(func):
         return results
 
     return wrapper
-

@@ -1,5 +1,5 @@
 """This Module is responsible for initialzing the webdriver service with chrome Options"""
-import os
+
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from dotenv import load_dotenv
@@ -22,7 +22,8 @@ def initialize_headless_chrome_driver(arguments=chrome_arguments) -> tuple[Servi
         chrome_options.add_argument(argument)
 
     # Set path to chromedriver as per your configuration
-    webdriver_service = Service("C:\\Users\\Koren Kaplan\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe")
+    webdriver_service = Service("C:\\Users\\Koren Kaplan\\Downloads\\chromedriver-win64\\"
+                                "chromedriver-win64\\chromedriver.exe")
 
     # return the chrome_options and the webdriver_service
     return webdriver_service, chrome_options

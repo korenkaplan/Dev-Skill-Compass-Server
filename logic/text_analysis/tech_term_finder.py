@@ -68,10 +68,10 @@ def tokenize_text(text: str) -> list[str]:
     list: A list of tokenized words.
     """
     pattern = rf'''
-          \b\w{{1,{max_letters}}}/\w{{1,{max_letters}}}\b|  # Match sequences with a maximum of {max_letters} letters on both sides of a slash
-          \b\w+(?:\.\w+)*[#\w+]*|                           # Match words, including periods within words and optional trailing hash, word, or plus characters
-          [#\w+]+                                           # Match sequences of hash, word, or plus characters
-          |\.\w+                                            # Match words starting with period, like .net
+          \b\w{{1,{max_letters}}}/\w{{1,{max_letters}}}\b|
+          \b\w+(?:\.\w+)*[#\w+]*|
+          [#\w+]+
+          |\.\w+
       '''
     return re.findall(pattern, text, re.VERBOSE)
 

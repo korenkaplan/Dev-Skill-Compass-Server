@@ -560,7 +560,6 @@ _tech = {
 }
 
 
-
 def get_tech_set() -> set:
     tech_set = set()
     for key in _tech:
