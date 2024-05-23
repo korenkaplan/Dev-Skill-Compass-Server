@@ -13,6 +13,7 @@ Functions:
 """
 import re
 from concurrent.futures import ThreadPoolExecutor
+
 # the maximum letter around the / to not separate the word: ux/ui will stay because 2 < MAX_LETTERS_AROUND_SLASH
 max_letters = 3
 
@@ -127,5 +128,4 @@ def find_tech_terms_pool_threads(listings_list: list[str], tech_set: set) -> lis
         # collect and store results from all tasks
         for future in futures:
             result.append(future.result())
-
     return result
