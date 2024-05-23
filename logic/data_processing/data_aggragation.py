@@ -2,11 +2,6 @@
 from collections import defaultdict
 
 
-# Get a list of sets of technologies (str) and the role that the job listings represent.
-def get_lists_of_jobs_and_their_role(jobs_sets_list: list[set[str]], role: str) -> (list[set[str]], str):
-    pass
-
-
 # Sum the results of the job listings.
 def sum_results_of_job_listings_analysis(jobs_sets_list: list[set[str]]) -> dict:
     pass
@@ -14,7 +9,7 @@ def sum_results_of_job_listings_analysis(jobs_sets_list: list[set[str]]) -> dict
 
 # Group Synonyms words together example: postgres and postgresql or gcp and google cloud,
 # decide the representing word for the group.
-def group_synonyms_words(terms_dict: defaultdict) -> defaultdict:
+def group_synonyms_words(terms_dict: dict) -> dict:
     pass
 
 

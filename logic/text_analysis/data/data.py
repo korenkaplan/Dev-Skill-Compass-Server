@@ -9,7 +9,7 @@ def get_tech_set() -> set:
     return tech_set
 
 
-def get_tech_dict():
+def get_tech_dict() -> dict:
     return _tech_list_synonyms
 
 
@@ -195,7 +195,7 @@ _tech_dict = {
         'micronaut',
         'uno platform'
     ],
-    'other_tools_expanded': [
+    'other_tools': [
         'docker',
         'npm',
         'pip',
@@ -251,7 +251,7 @@ _tech_dict = {
         'elfspy',
         'liblittletest'
     ],
-    'integrated_development_environment_expanded': [
+    'integrated_development_environment': [
         'visual studio solution', 'visual studio code', 'vs code', 'visual studio', 'intellij idea', 'intellij',
         'notepad++',
         'notepad plus plus', 'vim', 'android studio', 'android-studio', 'pycharm', 'sublime text', 'neovim', 'neo vim',
@@ -261,7 +261,7 @@ _tech_dict = {
         'rad studio (delphi, c++ builder)', 'rad studio', 'fleet', 'helix', 'kate', 'spyder', 'rubymine', 'ruby mine',
         'geany', 'bbedit', 'bb edit', 'textmate', 'micro', 'nova', 'condo'
     ],
-    'async_tools_expanded': [
+    'async_tools': [
         'confluence', 'markdown file', 'markdown', 'trello', 'notion', 'github discussions',
         'azure devops', 'miro', 'wikis', 'asana', 'clickup', 'doxygen', 'redmine', 'monday.com',
         'stack overflow for teams', 'stack overflow', 'youtrack', 'microsoft planner', 'microsoft lists', 'smartsheet',
@@ -269,12 +269,12 @@ _tech_dict = {
         'dingtalk', 'tettra', 'workzone', 'planview projectplace or clarizen', 'planview projectplace', 'clarizen',
         'wimi', 'cerri', 'leankor'
     ],
-    'synchronous_tools_expanded': [
+    'synchronous_tools': [
         'microsoft teams', 'slack', 'zoom', 'discord', 'google meet', 'whatsapp', 'telegram', 'skype',
         'signal', 'google chat', 'cisco webex teams', 'webex teams', 'mattermost', 'jitsi', 'matrix', 'irc',
         'rocketchat', 'zulip', 'ringcentral', 'symphony', 'wire', 'wickr', 'unify circuit', 'coolfire core'
     ],
-    'version_control_tech_expanded': [
+    'version_control_tech': [
         "git",
         "subversion (svn)", "svn",
         "mercurial", "hg",
@@ -288,7 +288,7 @@ _tech_dict = {
         "gitlab",
         "aws codecommit", "codecommit"
     ],
-    'data_analyst_tools_expanded': [
+    'data_analyst_tools': [
         "excel",
         "tableau",
         "power bi",
@@ -359,7 +359,7 @@ _tech_dict = {
         "galen framework",
         "wraith"
     ],
-    'data_exchange_apis_and_tools_expanded': [
+    'data_exchange_apis_and_tools': [
         "json",
         "xml",
         "restful", "rest api", "rest", "restful api", "restful apis", 'api', 'apis',
@@ -382,7 +382,7 @@ _tech_dict = {
         "oas",
         "insomnia"
     ],
-    'messaging_queues_tech_expanded': [
+    'messaging_queues_tech': [
         "mqtt",
         "amqp",
         "rabbitmq",
@@ -400,7 +400,7 @@ _tech_dict = {
         "nsq",
         "beanstalkd"
     ],
-    'methodologies_expanded': [
+    'methodologies': [
         "waterfall",
         "agile",
         "scrum",
@@ -425,7 +425,7 @@ _tech_dict = {
         "scaled agile framework (safe)",
         "disciplined agile (da)"
     ],
-    'code_architecture_expanded': [
+    'code_architecture': [
         "design patterns",
         "software architecture",
         "clean code",
@@ -448,7 +448,7 @@ _tech_dict = {
         "isp", "interface segregation principle",
         "dip", "dependency inversion principle"
     ],
-    'top_libraries_expanded': [
+    'top_libraries': [
         # Python
         "matplotlib",
         "tensorflow",
@@ -755,7 +755,7 @@ _tech_list_synonyms = {
         'micronaut': ['micronaut'],
         'uno platform': ['uno platform']
     },
-    'other_tools_expanded': {
+    'other_tools': {
         'docker': ['docker'],
         'npm': ['npm'],
         'pip': ['pip'],
@@ -811,7 +811,7 @@ _tech_list_synonyms = {
         'elfspy': ['elfspy'],
         'liblittletest': ['liblittletest']
     },
-    'integrated_development_environment_expanded': {
+    'integrated_development_environment': {
         'visual studio solution': ['visual studio solution'],
         'visual studio code': ['visual studio code', 'vs code'],
         'visual studio': ['visual studio'],
@@ -853,7 +853,7 @@ _tech_list_synonyms = {
         'nova': ['nova'],
         'condo': ['condo']
     },
-    'async_tools_expanded': {
+    'async_tools': {
         'confluence': ['confluence'],
         'markdown file': ['markdown file', 'markdown'],
         'trello': ['trello'],
@@ -887,7 +887,7 @@ _tech_list_synonyms = {
         'cerri': ['cerri'],
         'leankor': ['leankor']
     },
-    'synchronous_tools_expanded': {
+    'synchronous_tools': {
         'microsoft teams': ['microsoft teams'],
         'slack': ['slack'],
         'zoom': ['zoom'],
@@ -912,7 +912,7 @@ _tech_list_synonyms = {
         'unify circuit': ['unify circuit'],
         'coolfire core': ['coolfire core']
     },
-    'version_control_tech_expanded': {
+    'version_control_tech': {
         'git': ['git'],
         'svn': ['subversion (svn)', 'svn'],
         'mercurial': ['mercurial', 'hg'],
@@ -926,7 +926,7 @@ _tech_list_synonyms = {
         'gitlab': ['gitlab'],
         'aws codecommit': ['aws codecommit', 'codecommit']
     },
-    'data_analyst_tools_expanded': {
+    'data_analyst_tools': {
         'excel': ['excel'],
         'tableau': ['tableau'],
         'power bi': ['power bi'],
@@ -997,7 +997,7 @@ _tech_list_synonyms = {
         'galen framework': ['galen framework'],
         'wraith': ['wraith']
     },
-    'data_exchange_apis_and_tools_expanded': {
+    'data_exchange_apis_and_tools': {
         'json': ['json'],
         'xml': ['xml'],
         'restful': ['restful', 'rest api', 'rest', 'restful api', 'restful apis', 'api', 'apis'],
@@ -1015,7 +1015,7 @@ _tech_list_synonyms = {
         'raml': ['raml', 'restful api modeling language'],
         'insomnia': ['insomnia']
     },
-    'messaging_queues_tech_expanded': {
+    'messaging_queues_tech': {
         'mqtt': ['mqtt'],
         'amqp': ['amqp'],
         'rabbitmq': ['rabbitmq'],
@@ -1032,7 +1032,7 @@ _tech_list_synonyms = {
         'nsq': ['nsq'],
         'beanstalkd': ['beanstalkd']
     },
-    'methodologies_expanded': {
+    'methodologies': {
         'waterfall': ['waterfall'],
         'agile': ['agile'],
         'scrum': ['scrum'],
@@ -1051,7 +1051,7 @@ _tech_list_synonyms = {
         'safe': ['scaled agile framework (safe)'],
         'da': ['disciplined agile (da)']
     },
-    'code_architecture_expanded': {
+    'code_architecture': {
         'design patterns': ['design patterns'],
         'software architecture': ['software architecture'],
         'clean code': ['clean code'],
@@ -1074,7 +1074,7 @@ _tech_list_synonyms = {
         'isp': ['isp', 'interface segregation principle'],
         'dip': ['dip', 'dependency inversion principle']
     },
-    'top_libraries_expanded': {
+    'top_libraries': {
         # Python
         'matplotlib': ['matplotlib'],
         'tensorflow': ['tensorflow'],
