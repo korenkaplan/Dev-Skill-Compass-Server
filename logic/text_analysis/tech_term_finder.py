@@ -13,7 +13,7 @@ Functions:
 """
 import re
 from concurrent.futures import ThreadPoolExecutor
-from logic.text_analysis.data.skills_data import get_tech_set
+from logic.text_analysis.data.data import get_tech_set
 
 # the maximum letter around the / to not separate the word: ux/ui will stay because 2 < MAX_LETTERS_AROUND_SLASH
 max_letters = 3

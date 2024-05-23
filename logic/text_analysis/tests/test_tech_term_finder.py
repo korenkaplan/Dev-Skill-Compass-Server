@@ -4,7 +4,7 @@ import pytest
 from logic.text_analysis.tech_term_finder import (remove_subsets, find_phrases, preprocess_text,
                                                   tokenize_text, find_tech_terms, find_tech_terms_pool_threads)
 
-from logic.text_analysis.data.skills_data import get_tech_set
+from logic.text_analysis.data.data import get_tech_set
 # region  Sample data for tests
 sample_text = """"
 this is a test job listing for testing purposes here are some technical terms and technologies.
