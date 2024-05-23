@@ -1,4 +1,4 @@
-from data import get_tech_dict
+from logic.text_analysis.data.data import get_tech_dict
 
 tech_dict = get_tech_dict()
 
@@ -28,11 +28,25 @@ def find_duplicate_words_with_lists():
     return duplicate_counts
 
 
-def find_word_in_dict(word):
+def find_word_in_dict(word) -> list:
     result = []
     for category, category_dict in tech_dict.items():
         for group_word, group_list in category_dict.items():
             if word in group_list:
                 result.append({category, group_word})
+
+    return result
+
+
+def find_first_word_in_dict(word) -> tuple:
+    """
+    :param word: tech term to find
+    :return: tuple(category, group word)
+    """
+    result = ()
+    for category, category_dict in tech_dict.items():
+        for group_word, group_list in category_dict.items():
+            if word in group_list:
+                result = (category, group_word)
 
     return result

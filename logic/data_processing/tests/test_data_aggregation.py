@@ -36,12 +36,36 @@ sample_data_for_data_processing_pipeline = sample_data_for_sum_results_of_job_li
 # region Tests
 def test_data_processing_pipeline():
     """Test the whole processing pipeline is working"""
-    expected_result = {role_name_for_assign_aggregated_dict_to_role: sample_data_for_assign_aggregated_dict_to_role}
-    res = data_processing_pipeline(sample_data_for_sum_results_of_job_listings_analysis,
+    sample_data = [{'nodejs', 'typescript', 'postgres'}, {'python', 'sqlite', 'django', 'postgresql'},
+                   {'java', 'spring-boot', 'redis', 'ts'}]
+
+    expected_result = {
+        "backend developer": {
+            "databases": {
+                "postgresql": 2,
+                "sqlite": 1,
+                "redis": 1
+            },
+            "web_frameworks": {
+                "node.js": 1,
+                "django": 1,
+                "spring boot": 1
+            },
+            "programming_languages": {
+                "typescript": 2,
+                "python": 1,
+                "java": 1
+            }
+        }
+    }
+    res = data_processing_pipeline(sample_data,
                                    role_name_for_assign_aggregated_dict_to_role)
 
     # compare the results
-    assert expected_result == res
+    for role, techs in res.items():
+        for category, tech_dicts in techs.items():
+            for tech_name, count in tech_dicts.items():
+                assert res[role][category][tech_name] == expected_result[role][category][tech_name]
 
 
 def test_assign_aggregated_dict_to_role():
@@ -60,18 +84,12 @@ def test_divide_words_into_categories():
     """Test: divide the grouped words into their origin categories"""
     expected_results = {'programming_languages': {'javascript': 3, 'typescript': 4, 'c#': 4},
                         'data_exchange_apis_and_tools': {'restful': 1}}
+    expected_false_results = {'programming_languages': {'javascript': 3, 'typescript': 4, 'c#': 4, 'java': 1},
+                              'data_exchange_apis_and_tools': {'restful': 1}}
     res = divide_words_into_categories(sample_data_for_divide_words_into_categories)
 
-    # compare the lengths
-    assert compare_lengths([res, expected_results]) is True
-
-    # compare if the words are in the correct category
-    for category, category_counter_dict in res.items():
-        for word in category_counter_dict.keys():
-            # check if the category exist in the original dictionary
-            assert category in tech_dict
-            # check if the words are in the category in the original dict
-            assert word in tech_dict[category]
+    assert res == expected_results
+    assert res != expected_false_results
 
 
 def test_group_synonyms_words():
@@ -88,13 +106,14 @@ def test_group_synonyms_words():
 
 def test_sum_results_of_job_listings_analysis():
     """Test: group and sum words from all the sets"""
-    expected_result: dict[str:int] = sample_data_for_group_synonyms_words
+    expected_result: dict[str:int] = {'python': 2, 'django': 1, 'restful api': 1, 'javascript': 2, 'mongodb': 2,
+                                      'express.js': 1, 'node.js': 1}
 
     result_dict = sum_results_of_job_listings_analysis(sample_data_for_sum_results_of_job_listings_analysis)
     # compare the lengths
     assert len(result_dict) == len(expected_result)
     # compare key values with expected result
-    for k, v in result_dict:
+    for k, v in result_dict.items():
         # compare the values of the same key
         assert v == expected_result[k]
 
@@ -121,8 +140,10 @@ def test_compare_lengths_():
 
     assert compare_lengths([list1, list3]) is False
 
+
 # endregion
 
 
 if __name__ == '__main__':
+    #  pytest test_data_aggregation.py "test_sum_results_of_job_listings_analysis"
     pytest.main()

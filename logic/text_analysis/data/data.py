@@ -630,7 +630,7 @@ _tech_list_synonyms = {
         'raku': ['raku', 'perl 6']
     },
     'databases': {
-        'postgresql': ['postgresql', 'postgres', 'pgsql', 'javascript'],
+        'postgresql': ['postgresql', 'postgres', 'pgsql'],
         'mysql': ['mysql', 'my sql'],
         'sqlite': ['sqlite', 'sqlite3'],
         'mongodb': ['mongodb', 'mongo'],
@@ -700,7 +700,7 @@ _tech_list_synonyms = {
         'wordpress': ['wordpress'],
         'asp.net': ['asp.net', 'aspnet'],
         'flask': ['flask'],
-        'spring boot': ['spring boot', 'springboot'],
+        'spring boot': ['spring boot', 'springboot', 'spring-boot'],
         'django': ['django'],
         'laravel': ['laravel'],
         'fastapi': ['fastapi'],
@@ -1114,7 +1114,6 @@ _tech_list_synonyms = {
         'vuex': ['vuex'],
 
         # Java
-        'spring-boot': ['spring-boot'],
         'hibernate': ['hibernate'],
         'log4j': ['log4j'],
         'guava': ['guava'],
