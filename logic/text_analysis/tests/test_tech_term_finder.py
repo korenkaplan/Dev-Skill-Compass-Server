@@ -5,6 +5,7 @@ from logic.text_analysis.tech_term_finder import (remove_subsets, find_phrases, 
                                                   tokenize_text, find_tech_terms, find_tech_terms_pool_threads)
 
 from logic.text_analysis.data.data import get_tech_set
+
 # region  Sample data for tests
 sample_text = """"
 this is a test job listing for testing purposes here are some technical terms and technologies.
@@ -46,12 +47,12 @@ sample_data_developer_job_listings = [
     " augmented reality platforms. (WebGL, Three.js)",
     "Front-End Developer (SSR): Build server-side rendered web applications for improved SEO"
     " and performance. (Next.js, Nuxt.js)",
-  ]
+]
 max_time_for_handling_multiple_listings_in_seconds = 10
+
+
 # endregion
-
-
-# Tests
+# region Tests
 def test_remove_subset():
     """Test removing a subset of a phrase"""
     expected_result = ['microsoft sql server', 'github actions']
@@ -109,6 +110,9 @@ def test_find_tech_terms_pool_threads():
     assert total_time <= max_time_for_handling_multiple_listings_in_seconds
     # check all the jobs finished
     assert len(result) == len(sample_data_developer_job_listings)
+
+
+# endregion
 
 
 if __name__ == '__main__':
