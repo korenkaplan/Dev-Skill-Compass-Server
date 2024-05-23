@@ -1226,5 +1226,3 @@ _tech_list_synonyms = {
         'jwt': ['jwt', 'jason web token', 'jason web tokens']
     }
 }
-
-

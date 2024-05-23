@@ -1,12 +1,14 @@
-from data import get_tech_set, get_tech_dict
+from data import get_tech_dict
+
+tech_dict = get_tech_dict()
 
 
-def find_duplicate_words_with_lists(dictionary):
+def find_duplicate_words_with_lists():
     # Create a dictionary to store word counts and associated lists
     word_counts = {}
 
     # Iterate through each category in the dictionary
-    for category, sub_dict in dictionary.items():
+    for category, sub_dict in tech_dict.items():
         # Iterate through each sub-category list in the sub-dictionary
         for list_name, word_list in sub_dict.items():
             # Iterate through each word in the list
@@ -26,7 +28,7 @@ def find_duplicate_words_with_lists(dictionary):
     return duplicate_counts
 
 
-def find_word_in_dict(word, tech_dict):
+def find_word_in_dict(word):
     result = []
     for category, category_dict in tech_dict.items():
         for group_word, group_list in category_dict.items():
@@ -34,7 +36,3 @@ def find_word_in_dict(word, tech_dict):
                 result.append({category, group_word})
 
     return result
-
-
-# mydict = get_tech_dict()
-# res = find_word_in_dict('js', mydict)
