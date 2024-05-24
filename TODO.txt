@@ -5,6 +5,6 @@
 4.(done) write tests for the CRUD operations
 5. create the functions to interact with the database not via an api + tests
 6. create service class
-7. create crin jobs
+7. create cron jobs
 
 
