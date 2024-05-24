@@ -4,5 +4,5 @@
 4. add the apps to settings.py and to urls.py
 4. write tests for the CRUD operations
 5. create the functions to interact with the database not via an api + tests
-6.
+6. create service class
 
