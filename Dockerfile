@@ -24,8 +24,6 @@ RUN poetry config virtualenvs.create false \
 # Copy the rest of the application code
 COPY . /app/
 
-# Install dotenv
-RUN poetry add python-dotenv
 
 # Expose port 8000 for Django
 EXPOSE 8000

@@ -1,18 +1,21 @@
 from rest_framework import serializers
-from .models import Technology, Role, Category
+from .models import Technologies, Roles, Categories
 
 
 class TechnologySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Technology
+        model = Technologies
         fields = '__all__'
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    model = Category
-    fields = '__all__'
+    class Meta:
+        model = Categories
+        fields = '__all__'
 
 
 class RoleSerializer(serializers.ModelSerializer):
-    model = Role
-    fields = '__all__'
+    class Meta:
+        model = Roles
+        fields = '__all__'
+

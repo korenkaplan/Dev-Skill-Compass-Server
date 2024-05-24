@@ -1,7 +1,7 @@
-1. Create the urls(router) for all the CRUD routes for the models.
-2. Create Validation for all the fields.
+1.(done) Create the urls(router) for all the CRUD routes for the models.
+2.(done) Create Validation for all the fields.
 3. migrate and make migrations and create the database.
-4. add the apps to settings.py and to urls.py
+4.(done) add the apps to settings.py and to urls.py
 4. write tests for the CRUD operations
 5. create the functions to interact with the database not via an api + tests
 6. create service class

@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Technology, Role, Category
+from .models import Technologies, Roles, Categories
 
 
 # Register your models here.
-admin.site.register(Technology)
-admin.site.register(Role)
-admin.site.register(Category)
+admin.site.register(Technologies)
+admin.site.register(Roles)
+admin.site.register(Categories)
