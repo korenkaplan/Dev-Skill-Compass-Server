@@ -18,4 +18,3 @@ class RoleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Roles
         fields = '__all__'
-

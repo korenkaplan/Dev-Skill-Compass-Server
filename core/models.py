@@ -11,8 +11,6 @@ class Roles(models.Model):
         return f"{self.name.title()}"
 
 
-
-
 class Categories(models.Model):
     name = models.CharField(max_length=255, unique=True, validators=[MinLengthValidator(1)])
     created_at = models.DateTimeField(auto_now_add=True)
@@ -20,8 +18,6 @@ class Categories(models.Model):
 
     def __str__(self):
         return f"{self.name.title()}"
-
-
 
 
 class Technologies(models.Model):
@@ -32,6 +28,3 @@ class Technologies(models.Model):
 
     def __str__(self):
         return f"Name: {self.name.title()} | Category: {self.category_id} | ID: {self.id}"
-
-
-
