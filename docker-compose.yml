@@ -18,7 +18,7 @@ services:
 
   web:
     build: .
-    command: ["poetry run python manage.py migrate && poetry run python manage.py crontab add && cron && poetry run python manage.py runserver 0.0.0.0:8000"]
+    command: ["sh", "-c", "poetry run python manage.py migrate && poetry run python manage.py crontab add && cron && poetry run python manage.py runserver 0.0.0.0:8000"]
     container_name: "django_server"
     volumes:
       - .:/app

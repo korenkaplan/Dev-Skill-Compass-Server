@@ -24,7 +24,8 @@ jobs:
           echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> .env
 
       - name: Test
-        run: docker-compose run --rm web sh -c "python manage.py test"
+        #run: docker-compose run --rm web sh -c "python manage.py test"
+        run: docker-compose exec it django_server "python manage.py test"
         env:
           DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
