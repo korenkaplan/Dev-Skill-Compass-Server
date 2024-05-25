@@ -24,11 +24,10 @@ jobs:
           echo "DATABASE_PORT=${{ secrets.DATABASE_PORT }}" >> .env
 
       - name: Test
-        #run: docker-compose run --rm web sh -c "python manage.py test"
-        run: python manage.py test
+        run: docker-compose run --rm web sh -c "python manage.py test"
         env:
           DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
           DATABASE_USER: ${{ secrets.DATABASE_USER }}
           DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
       - name: Lint
-        run: flake8
+        run: docker-compose run --rm web sh -c "flake8"
