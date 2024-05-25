@@ -28,7 +28,7 @@ load_dotenv(dotenv_path=env_path)
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG').lower() == 'true'
+DEBUG = os.environ.get('DEBUG') == 'true'
 
 ALLOWED_HOSTS = []
 
