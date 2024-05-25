@@ -117,7 +117,7 @@ def find_tech_terms(text: str, tech_set: set) -> set:
     return remove_subsets(found_tech_words)
 
 
-def find_tech_terms_pool_threads(listings_list: list[str], tech_set: set) -> list[list[str]]:
+ def find_tech_terms_pool_threads(listings_list: list[str], tech_set: set) -> list[set]:
     """Handle multiple listings with thread pool simultaneously"""
     result = []
     # start the thread pool
