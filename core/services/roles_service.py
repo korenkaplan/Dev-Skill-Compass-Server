@@ -1,10 +1,4 @@
-import os
-import django
 from core.models import Roles
-
-
-# Initialize Django
-django.setup()
 
 
 def create_role(name: str):
@@ -29,7 +23,3 @@ def update_role(pk: int, name: str) -> Roles:
 
 def delete_role(pk: int) -> Roles:
     pass
-
-
-role = create_role("backend_developer")
-print(role)

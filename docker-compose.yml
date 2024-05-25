@@ -3,6 +3,7 @@ version: '3.9'
 services:
   db:
     image: postgres:14
+    container_name: postgres_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
@@ -17,7 +18,8 @@ services:
 
   web:
     build: .
-    command: poetry run python manage.py runserver 0.0.0.0:8000
+    command: ["sh", "-c", "poetry run python manage.py migrate && poetry run python manage.py crontab add && cron && poetry run python manage.py runserver 0.0.0.0:8000"]
+    container_name: "django_server"
     volumes:
       - .:/app
     ports:
@@ -25,7 +27,8 @@ services:
     env_file:
       - .env
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
 volumes:
   postgres_data:

@@ -9,7 +9,7 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential
+    && apt-get install -y --no-install-recommends build-essential cron postgresql-client
 
 # Install Poetry
 RUN pip install poetry
@@ -24,9 +24,11 @@ RUN poetry config virtualenvs.create false \
 # Copy the rest of the application code
 COPY . /app/
 
+# Add cron job to start when the container starts
+RUN poetry run python manage.py crontab add
 
 # Expose port 8000 for Django
 EXPOSE 8000
 
-# Run the development server
-CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Command to run migrations and start both cron and Django server
+CMD ["sh", "-c", "poetry run python manage.py migrate && cron && poetry run python manage.py runserver 0.0.0.0:8000"]
