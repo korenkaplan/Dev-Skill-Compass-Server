@@ -1,5 +1,5 @@
 ============= Database Integration: Insert the processed data into the database =============
-- Create script to insert the core data into the database: Roles, Categories and Technologies.
+- (Done) Create script to insert the core data into the database: Roles, Categories and Technologies.
 - Create service classes for all the models to handle database interactions. (with testing)
 
 ============= Main Entrypoint And Cron job (depends on: Database Integration)  =============

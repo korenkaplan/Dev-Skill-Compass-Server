@@ -18,17 +18,34 @@ services:
 
   web:
     build: .
-    command: ["sh", "-c", "poetry run python manage.py migrate && poetry run python manage.py crontab add && cron && poetry run python manage.py runserver 0.0.0.0:8000"]
     container_name: "django_server"
+    command: [ "sh", "-c", "poetry run python manage.py migrate &&
+      poetry run python manage.py crontab add && cron &&
+      poetry run python manage.py runserver 0.0.0.0:8000" ]
+
     volumes:
       - .:/app
     ports:
       - "8000:8000"
     env_file:
       - .env
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://127.0.0.1:8000/admin/login/?next=/admin/" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s  # Delay before starting health checks after container is started
     depends_on:
       db:
         condition: service_healthy
 
+  initialize_database:
+    build: .
+    container_name: "database_init"
+    entrypoint: ["/app/entrypoint.sh"]
+    volumes:
+      - .:/app
+    depends_on:
+     - web
 volumes:
   postgres_data:

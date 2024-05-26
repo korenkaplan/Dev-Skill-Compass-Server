@@ -1,10 +1,5 @@
 import pytest
-from rest_framework.test import APITestCase
-from django.urls import reverse
-from rest_framework import status
-from core.models import Categories, Technologies, Roles
-from init_db.init_database_functions import (extract_keys_from_dictionary, extract_tech_and_category_from_dictionary)
-
+from init_db.init_database_functions import (_extract_keys_from_dictionary, _extract_tech_and_category_from_dictionary)
 
 # region Sample Data
 tech_dict = {
@@ -699,12 +694,16 @@ sample_key_for_extract_tech_and_category_from_dictionary = 'programming_language
 
 def test_extract_keys_from_dictionary():
     """ function to extract keys from dictionary"""
-    assert extract_keys_from_dictionary(tech_dict) == expected_result_extract_keys_from_dictionary
+    assert _extract_keys_from_dictionary(tech_dict) == expected_result_extract_keys_from_dictionary
 
 
 def test_extract_tech_and_category_from_dictionary():
     """ test extract the tech name and its category from dictionary"""
-    assert (extract_tech_and_category_from_dictionary(sample_data_extract_tech_and_category_from_dictionary,
-                                                      sample_key_for_extract_tech_and_category_from_dictionary)
+    assert (_extract_tech_and_category_from_dictionary(sample_data_extract_tech_and_category_from_dictionary,
+                                                       sample_key_for_extract_tech_and_category_from_dictionary)
             == expected_result_extract_tech_and_category_from_dictionary)
 # endregion
+
+
+if __name__ == '__main__':
+    pytest.main()

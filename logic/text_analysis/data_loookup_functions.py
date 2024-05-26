@@ -1,4 +1,4 @@
-from logic.text_analysis.data.data import get_tech_dict
+from init_db.data.data import get_tech_dict
 
 tech_dict = get_tech_dict()
 

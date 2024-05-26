@@ -1113,7 +1113,6 @@ _tech_list_synonyms = {
         'grunt': ['grunt'],
         'rollup': ['rollup'],
         'socket.io': ['socket.io'],
-        'rxjs': ['rxjs'],
         'redux': ['redux'],
         'vuex': ['vuex'],
 
@@ -1243,4 +1242,3 @@ _software_job_roles = [
     "Data Scientist",
     "Data Analyst",
 ]
-

@@ -10,5 +10,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Call your initialization function here
-        initialize_pipeline(self.tech_dict, self.roles)
+        res_message = initialize_pipeline(self.tech_dict, self.roles)
+        self.stdout.write(res_message)
         self.stdout.write("Initialize the database command executed")

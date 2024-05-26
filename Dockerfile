@@ -14,6 +14,12 @@ RUN apt-get update \
 # Install Poetry
 RUN pip install poetry
 
+# Copy the entrypoint script into the container
+COPY entrypoint.sh /app/
+
+# Make the entrypoint script executable
+RUN chmod +x entrypoint.sh
+
 # Copy the current directory contents into the container at /app
 COPY pyproject.toml poetry.lock* /app/
 
@@ -21,14 +27,11 @@ COPY pyproject.toml poetry.lock* /app/
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
 
-# Copy the rest of the application code
-COPY . /app/
-
-# Add cron job to start when the container starts
-RUN poetry run python manage.py crontab add
-
 # Expose port 8000 for Django
 EXPOSE 8000
 
 # Command to run migrations and start both cron and Django server
-CMD ["sh", "-c", "poetry run python manage.py migrate && cron && poetry run python manage.py runserver 0.0.0.0:8000"]
+#CMD  [ "sh", "-c", "poetry run python manage.py migrate && poetry run python manage.py crontab add && cron && poetry run python manage.py runserver 0.0.0.0:8000 && python manage.py initialize_database"]
+
+
+

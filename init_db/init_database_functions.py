@@ -2,8 +2,6 @@
 import logging
 import sys
 from typing import List, Tuple
-
-from data.data import get_tech_dict
 from core.models import Categories, Technologies, Roles
 
 
@@ -147,14 +145,11 @@ def initialize_pipeline(tech_dict: dict, roles: List[str]):
         insert_count_roles = _insert_roles_to_db(roles)
         insert_count_techs = _insert_technologies_to_db_pipeline(tech_dict)
 
-        logger.info(f'''Total insert sum:
+        result = f'''Total insert sum:
             Roles: {insert_count_roles}
             Categories: {insert_count_categories}
-            Technologies: {insert_count_techs}''')
+            Technologies: {insert_count_techs}'''
+        logger.info(result)
+        return result
     except Exception as e:
-        logger.error("Error occurred during database initialization: %s", str(e))
-
-
-if __name__ == "__main__":
-    tech_dicts = get_tech_dict()
-    initialize_pipeline(tech_dicts, ["Role1", "Role2"])
+        return "Error occurred during database initialization: %s", str(e)
