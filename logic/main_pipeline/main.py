@@ -1,12 +1,11 @@
 """This is the main pipeline that runs once a week to refresh the data in the database."""
-
 from core.models import Roles, Technologies
 from logic.web_scraping.main_scrape_file import job_scrape_pipeline
-import uuid
 from logic.text_analysis.tech_term_finder import find_tech_terms_pool_threads
 from logic.data_processing.data_aggragation import data_processing_pipeline
 from concurrent.futures import ThreadPoolExecutor
 from usage_stats.services.technologies_counts_service import update_technologies_counts_table_in_db_pipeline
+from core.services.technologies_service import get_tech_dict
 
 
 def get_all_roles() -> list[str]:
@@ -45,10 +44,10 @@ def extract_tech_words_from_job_listings(listings_list: list[str], tech_set: set
         return []
 
 
-def process_the_tech_words_from_analysis(jobs_sets_list: list[set[str]], role: str) -> dict:
+def process_the_tech_words_from_analysis(jobs_sets_list: list[set[str]], role: str, tech_dict: dict) -> dict:
     """Process tech words from analysis."""
     try:
-        return data_processing_pipeline(jobs_sets_list, role)
+        return data_processing_pipeline(jobs_sets_list, role, tech_dict)
     except Exception as e:
         print(f"Error while processing tech words from analysis for role {role}: {e}")
         return {}
@@ -62,12 +61,12 @@ def update_the_database(role_techs_tuple: (str, dict)):
         print(f"Error while updating the database for role {role_techs_tuple[0]}: {e}")
 
 
-def single_role_pipline(role: str, tech_set: set):
+def single_role_pipline(role: str, tech_set: set, tech_dict: dict):
     """Pipeline for each role."""
     try:
         job_listings: list[str] = scrape_job_listings(role)
         tech_sets_list: list[set[str]] = extract_tech_words_from_job_listings(job_listings, tech_set)
-        role_techs_tuple: (str, dict) = process_the_tech_words_from_analysis(tech_sets_list, role)
+        role_techs_tuple: (str, dict) = process_the_tech_words_from_analysis(tech_sets_list, role, tech_dict)
         update_the_database(role_techs_tuple)
     except Exception as e:
         print(f"Error in pipeline for role {role}: {e}")
@@ -78,16 +77,13 @@ def process_pool_role_pipline():
     try:
         roles_list = get_all_roles()
         tech_set = get_all_techs_from_db()
+        tech_dictionary = get_tech_dict()
 
         with ThreadPoolExecutor(max_workers=len(roles_list)) as executor:
-            futures = [executor.submit(single_role_pipline, role, tech_set) for role in roles_list]
+            futures = [executor.submit(single_role_pipline, role, tech_set, tech_dictionary) for role in roles_list]
 
             # Wait for all tasks to complete
             for future in futures:
                 future.result()
     except Exception as e:
         print(f"Error in main pipeline: {e}")
-
-
-# Example usage
-process_pool_role_pipline()

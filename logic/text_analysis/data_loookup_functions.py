@@ -1,9 +1,4 @@
-from init_db.data.data import get_tech_dict
-
-tech_dict = get_tech_dict()
-
-
-def find_duplicate_words_with_lists():
+def find_duplicate_words_with_lists(tech_dict):
     # Create a dictionary to store word counts and associated lists
     word_counts = {}
 
@@ -28,7 +23,7 @@ def find_duplicate_words_with_lists():
     return duplicate_counts
 
 
-def find_word_in_dict(word) -> list:
+def find_word_in_dict(word, tech_dict) -> list:
     result = []
     for category, category_dict in tech_dict.items():
         for group_word, group_list in category_dict.items():
@@ -38,9 +33,9 @@ def find_word_in_dict(word) -> list:
     return result
 
 
-def find_first_word_in_dict(word) -> tuple:
-
+def find_first_word_in_dict(word, tech_dict) -> tuple:
     """
+    :param tech_dict:
     :param word: tech term to find
     :return: tuple(category, group word)
     """

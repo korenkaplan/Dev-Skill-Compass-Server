@@ -1,13 +1,6 @@
-# region WSGI INITIAL
-import os
-from django.core.wsgi import get_wsgi_application
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_server.settings')
-application = get_wsgi_application()
-# endregion
 from logic.main_pipeline.main import (get_all_roles, get_all_techs_from_db, scrape_job_listings,
                                       extract_tech_words_from_job_listings, process_the_tech_words_from_analysis,
                                       update_the_database)
-import json
 from usage_stats.models import TechnologiesCounts
 role = "Backend Developer"
 
@@ -48,10 +41,10 @@ def test_update_the_database(role_techs_tuple):
 
 
 def get_top_techs_for_role(role_id, count):
-    technologies_counts = [tech for tech in TechnologiesCounts.objects.filter(role_id=role_id).order_by('-counter')[:10]]
+    technologies_counts = [tech for tech in TechnologiesCounts.objects.filter(role_id=role_id).order_by('-counter')]
     top_programming_languages = [tech for tech in technologies_counts if tech.technology_id.category_id.id == 1]
 
-    for index, tech_count in enumerate(technologies_counts):
+    for index, tech_count in enumerate(top_programming_languages):
         legnth = 100
         name = tech_count.technology_id.name
         counter = tech_count.counter
@@ -60,7 +53,7 @@ def get_top_techs_for_role(role_id, count):
         part_a = f'Role: {role} | Category: {category} | Tech: {name} '
         remaining_length = legnth - len(part_a)
         part_b = " " * remaining_length + str(counter)
-        print(str(f'{index+1}. ') + part_a + part_b)
+        print(str(f'{index + 1}. ') + part_a + part_b)
 
 
 if __name__ == '__main__':
@@ -71,6 +64,3 @@ if __name__ == '__main__':
     # tuple_tech = test_process_the_tech_words_from_analysis(sets_list)
     # test_update_the_database(tuple_tech)
     get_top_techs_for_role(3, 10)
-
-
-

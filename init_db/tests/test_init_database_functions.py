@@ -670,7 +670,7 @@ expected_result_extract_keys_from_dictionary = ['programming_languages', 'databa
                                                 'top_libraries', 'protocols', 'amazon_tech', 'operating_systems',
                                                 'general_phrases', 'security']
 expected_result_extract_tech_and_category_from_dictionary = ('programming_languages', {'javascript', 'python', 'sql'})
-sample_key_for_extract_tech_and_category_from_dictionary = 'programming_languages'
+sample_key = 'programming_languages'
 
 
 # endregion
@@ -699,11 +699,12 @@ def test_extract_keys_from_dictionary():
 
 def test_extract_tech_and_category_from_dictionary():
     """ test extract the tech name and its category from dictionary"""
-    assert (_extract_tech_and_category_from_dictionary(sample_data_extract_tech_and_category_from_dictionary,
-                                                       sample_key_for_extract_tech_and_category_from_dictionary)
-            == expected_result_extract_tech_and_category_from_dictionary)
-# endregion
+    assert (_extract_tech_and_category_from_dictionary(
+        sample_data_extract_tech_and_category_from_dictionary,
+        sample_key) == expected_result_extract_tech_and_category_from_dictionary)
 
+
+# endregion
 
 if __name__ == '__main__':
     pytest.main()

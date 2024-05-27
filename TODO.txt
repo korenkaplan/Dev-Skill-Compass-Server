@@ -1,6 +1,19 @@
+=============  Most Important =================
+- Change the dependency on find_first_word_in_dict to a function that gets a dictionary from db
+- WEB Scraping
+
+
 ============= General Assignments =================
 - Change the dependency on find_first_word_in_dict to a function that gets a dictionary from db
 - Think of tech counting logic and implement it with scheduled commands
+- Create the HistoricalTechCounts service and pipeline.
+- Organize the files and naming in the project
+
+
+============= Historical tech count Assignments =================
+- Create service class
+- Create logic for when to transfer records into the table
+- Create pipeline for inserting data
 
 
 ============= Database Integration: Insert the processed data into the database =============
@@ -46,3 +59,6 @@
  ==========================================  Done ==========================================
  - Text Analysis: get the tech words out of the job listings. -> Done.
  - Data Processing And Aggregation: process the tech words found in the job listings, and prepare it for database insert. -> Done.
+
+
+ https://www.glassdoor.com/Job/israel-frontend-developer-jobs-SRCH_IL.0,6_IN119_KO7,24.htm

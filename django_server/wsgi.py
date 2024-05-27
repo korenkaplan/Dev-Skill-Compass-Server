@@ -1,3 +1,4 @@
+# region WSGI
 """
 WSGI config for django_server project.
 
@@ -14,13 +15,4 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_server.settings')
 
 application = get_wsgi_application()
-
-
-import os
-from django.conf import settings
-from logic.main_pipeline.main import get_all_roles
-
-
-
-
-print([get_all_roles()])
+# endregion

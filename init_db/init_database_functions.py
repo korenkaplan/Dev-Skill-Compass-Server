@@ -2,7 +2,7 @@
 import logging
 import sys
 from typing import List, Tuple
-from core.models import Categories, Technologies, Roles
+from core.models import Categories, Technologies, Roles, Synonyms
 
 
 def _get_logger() -> logging.Logger:
@@ -125,6 +125,31 @@ def _insert_categories_to_db(categories: List[str]) -> int:
         return 0
 
 
+def _insert_synonyms_to_db(synonyms: set[str], technology: Technologies) -> int:
+    logger = _get_logger()
+    try:
+        res = [Synonyms.objects.create(origin_tech_id=technology, name=synonym) for synonym in synonyms]
+        return len(res)
+    except Exception as e:
+        logger.error("Error occurred while inserting Synonyms: %s", str(e))
+        return 0
+
+
+def _insert_synonyms_to_db_pipeline(tech_dict: dict) -> int:
+    logger = _get_logger()
+    total_inserted = 0
+    try:
+        for category, synonyms_dict in tech_dict.items():
+            for tech_name, synonyms_list in synonyms_dict.items():
+                tech_object = Technologies.objects.filter(name=tech_name).first()
+                total_inserted += _insert_synonyms_to_db(set(synonyms_list), tech_object)
+        return total_inserted
+
+    except Exception as e:
+        logger.error("Error occurred while inserting synonyms: %s", str(e))
+        return 0
+
+
 def initialize_pipeline(tech_dict: dict, roles: List[str]):
     """
     Initialize the database with initial data.
@@ -144,11 +169,13 @@ def initialize_pipeline(tech_dict: dict, roles: List[str]):
         insert_count_categories = _insert_categories_to_db(categories_keys)
         insert_count_roles = _insert_roles_to_db(roles)
         insert_count_techs = _insert_technologies_to_db_pipeline(tech_dict)
-
+        insert_count_synonyms = _insert_synonyms_to_db_pipeline(tech_dict)
         result = f'''Total insert sum:
             Roles: {insert_count_roles}
             Categories: {insert_count_categories}
-            Technologies: {insert_count_techs}'''
+            Technologies: {insert_count_techs}
+            Synonyms: {insert_count_synonyms}
+'''
         logger.info(result)
         return result
     except Exception as e:

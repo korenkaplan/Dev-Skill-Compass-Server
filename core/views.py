@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Technologies, Roles, Categories
-from .serializers import TechnologySerializer, CategorySerializer, RoleSerializer
+from .models import Technologies, Roles, Categories, Synonyms
+from .serializers import TechnologySerializer, CategorySerializer, RoleSerializer, SynonymsSerializer
 
 
 class TechnologiesListCreate(generics.ListCreateAPIView):
@@ -33,16 +33,11 @@ class RolesRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RoleSerializer
 
 
-# class TechnologyViewSet(viewsets.ModelViewSet):
-#     queryset = Technologies.objects.all()
-#     serializer_class = TechnologySerializer
-#
-#
-# class CategoryViewSet(viewsets.ModelViewSet):
-#     queryset = Categories.objects.all()
-#     serializer_class = CategorySerializer
-#
-#
-# class RoleViewSet(viewsets.ModelViewSet):
-#     queryset = Roles.objects.all()
-#     serializer_class = RoleSerializer
+class SynonymsListCreate(generics.ListCreateAPIView):
+    queryset = Synonyms.objects.all()
+    serializer_class = SynonymsSerializer
+
+
+class SynonymsRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Synonyms.objects.all()
+    serializer_class = RoleSerializer

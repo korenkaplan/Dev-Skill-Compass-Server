@@ -3,6 +3,13 @@ from usage_stats.models import TechnologiesCounts
 from core.models import Roles, Technologies
 
 """
+backend_developer : {
+programming_language : {'python': 10,'js': 11},
+databases: {'mysql':2, 'postgresql':4}
+}
+"""
+
+"""
   expected_result = {
         "backend developer": {
             "databases": {
@@ -25,15 +32,29 @@ from core.models import Roles, Technologies
 
 
 def update_technologies_counts_table_in_db_pipeline(role_techs_tuple: (str, dict)):
-    # Get the role id from db
-    role = get_role_from_db(role_techs_tuple[0])
+    try:
+        # Get the role id from db
+        role = get_role_from_db(role_techs_tuple[0])
+    except Exception as e:
+        print(f"Error getting role from database for role '{role_techs_tuple[0]}': {e}")
+        return
 
     # Get the technology id and update the count
     tech_categories_dict: dict[str, dict[str, int]] = role_techs_tuple[1]
+
     for category, tech_count_dict in tech_categories_dict.items():
         for tech_name, count in tech_count_dict.items():
-            tech = get_technology_from_db(tech_name)
-            update_count_of_technology_in_db(tech, role, count)
+            try:
+                tech = get_technology_from_db(tech_name)
+            except Exception as e:
+                print(f"Error getting technology from database for tech '{tech_name}': {e}")
+                continue
+
+            try:
+                update_count_of_technology_in_db(tech, role, count)
+            except Exception as e:
+                print(f"Error updating count of technology '{tech_name}' for role '{role_techs_tuple[0]}': {e}")
+                continue
 
 
 # Get the role id from db
@@ -55,8 +76,9 @@ def update_count_of_technology_in_db(tech: int, role: Roles, count: int):
 
     # check if exists
     if tech_count_obj:
+        pass
         tech_count_obj.counter += count
         tech_count_obj.save()
     # if not exist create
     else:
-        new_tech_count = TechnologiesCounts.objects.create(role_id=role, technology_id=tech, counter=count)
+        TechnologiesCounts.objects.create(role_id=role, technology_id=tech, counter=count)
