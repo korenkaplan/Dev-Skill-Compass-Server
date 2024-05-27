@@ -1,18 +1,27 @@
+============= General Assignments =================
+- Change the dependency on find_first_word_in_dict to a function that gets a dictionary from db
+- Think of tech counting logic and implement it with scheduled commands
+
+
 ============= Database Integration: Insert the processed data into the database =============
 - (Done) Create script to insert the core data into the database: Roles, Categories and Technologies.
 - Create service classes for all the models to handle database interactions. (with testing)
 
+
 ============= Main Entrypoint And Cron job (depends on: Database Integration)  =============
-- Create script to fetch a dictionary of techs and categories from the db before starting the main pipeline.
-- Create the main pipeline: Scraping, text analysis, data processing, database insertion and update.
-- Create the cron job to run the main pipeline each certain time.
-- Temporary prepare sample data until the scraping will work.
+- (Done)  Create script to fetch a dictionary of techs and categories from the db before starting the main pipeline.
+- (Done) Create the main pipeline: Scraping, text analysis, data processing, database insertion and update.
+- (Done) Create the cron job to run the main pipeline each certain time.
+- (Done) Temporary prepare sample data until the scraping will work.
 
 ============= WEB Scraping =============
 - Learn how to scrape job listing sites.
 - Handle the Chrome driver problem.
 - Finish the module.
 - Add the module to the main pipeline and replace sample data.
+
+============= CI-CD =============
+- Fix healthcheck for web service
 
 ============= Repository & CV Adjustment =============
 - Create a Readme.md file to the project.

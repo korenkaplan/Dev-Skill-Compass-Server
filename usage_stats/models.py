@@ -6,7 +6,7 @@ from django.core.validators import MinValueValidator
 class TechnologiesCounts(models.Model):
     role_id = models.ForeignKey(Roles, on_delete=models.PROTECT)
     technology_id = models.ForeignKey(Technologies, on_delete=models.PROTECT)
-    counter = models.IntegerField(default=1, validators=[MinValueValidator(0)])
+    counter = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

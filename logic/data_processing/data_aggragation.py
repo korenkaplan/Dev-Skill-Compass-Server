@@ -1,6 +1,7 @@
 """This is a module for data aggregating and processing the results of the job listings text analysis"""
 from collections import defaultdict
 from logic.text_analysis.data_loookup_functions import find_first_word_in_dict
+# TODO: Change the dependency on find_first_word_in_dict to a function th
 
 
 def sum_results_of_job_listings_analysis(jobs_sets_list: list[set[str]]) -> dict[str:int]:
@@ -76,7 +77,7 @@ def divide_words_into_categories(terms_dict: dict) -> defaultdict[str, defaultdi
     return result_dict
 
 
-def assign_aggregated_dict_to_role(role: str, terms_and_technologies_dictionary: dict[str, dict[str:int]]):
+def assign_aggregated_dict_to_role(role: str, terms_and_technologies_dictionary: (str, dict)):
     """
     Assigns an aggregated dictionary of terms and technologies to a role.
 
@@ -88,10 +89,10 @@ def assign_aggregated_dict_to_role(role: str, terms_and_technologies_dictionary:
     Returns:
         dict: A dictionary where the role is the key and the aggregated dictionary is the value.
     """
-    return {role: terms_and_technologies_dictionary}
+    return role, terms_and_technologies_dictionary
 
 
-def data_processing_pipeline(jobs_sets_list: list[set[str]], role: str) -> dict:
+def data_processing_pipeline(jobs_sets_list: list[set[str]], role: str) -> (str, dict):
     """
     Runs the data processing pipeline to aggregate and categorize job listing terms and technologies.
 

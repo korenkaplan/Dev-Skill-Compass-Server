@@ -130,6 +130,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+EVERY_MONDAY_AT_10_10 = '10 10 * * 1'
 CRONJOBS = [
-    ('*/1 * * * *', 'core.cron.create_role_cron', '>> /var/log/cron.log 2>&1')
+    (EVERY_MONDAY_AT_10_10, 'logic.main_pipeline.main.process_pool_role_pipline', '>> /var/log/cron.log 2>&1'),
 ]

@@ -39,6 +39,7 @@ def find_word_in_dict(word) -> list:
 
 
 def find_first_word_in_dict(word) -> tuple:
+
     """
     :param word: tech term to find
     :return: tuple(category, group word)
