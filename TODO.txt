@@ -1,12 +1,9 @@
 =============  Most Important =================
-- Change the dependency on find_first_word_in_dict to a function that gets a dictionary from db
 - WEB Scraping
 
 
 ============= General Assignments =================
-- Change the dependency on find_first_word_in_dict to a function that gets a dictionary from db
 - Think of tech counting logic and implement it with scheduled commands
-- Create the HistoricalTechCounts service and pipeline.
 - Organize the files and naming in the project
 
 
@@ -18,7 +15,6 @@
 
 ============= Database Integration: Insert the processed data into the database =============
 - (Done) Create script to insert the core data into the database: Roles, Categories and Technologies.
-- Create service classes for all the models to handle database interactions. (with testing)
 
 
 ============= Main Entrypoint And Cron job (depends on: Database Integration)  =============

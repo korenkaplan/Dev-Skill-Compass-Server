@@ -29,9 +29,3 @@ RUN poetry config virtualenvs.create false \
 
 # Expose port 8000 for Django
 EXPOSE 8000
-
-# Command to run migrations and start both cron and Django server
-#CMD  [ "sh", "-c", "poetry run python manage.py migrate && poetry run python manage.py crontab add && cron && poetry run python manage.py runserver 0.0.0.0:8000 && python manage.py initialize_database"]
-
-
-

@@ -3,29 +3,6 @@
 # Define a flag file path
 FLAG_FILE="/app/initialized_database"
 
-# Function to check if the services are ready
-#check_services_ready() {
-#    echo "Running service check..."
-#    OUTPUT=$(poetry run python manage.py check 2>&1)
-#    echo "Check command output:"
-#    echo "$OUTPUT"
-#    if echo "$OUTPUT" | grep -q "System check identified no issues (0 silenced)."; then
-#        echo "Services are ready."
-#        return 0
-#    else
-#        echo "Waiting for services to be ready..."
-#        return 1
-#    fi
-#}
-#
-#slepp 15
-## Wait for services to be ready
-#until check_services_ready; do
-#    sleep 5
-#done
-
-# Check if the flag file exists
-
 sleep 60
 if [ ! -f "$FLAG_FILE" ]; then
     # Initialize the database (your custom command)
