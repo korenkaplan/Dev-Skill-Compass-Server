@@ -1,5 +1,6 @@
 """This is the main pipeline that runs once a week to refresh the data in the database."""
 from core.models import Roles, Technologies
+from logic.web_scraping.google_jobs.google_jobs_scraping import GoogleJobsTimePeriod
 from logic.web_scraping.main_scrape_file import job_scrape_pipeline
 from logic.text_analysis.tech_term_finder import find_tech_terms_pool_threads
 from logic.data_processing.data_aggragation import data_processing_pipeline
@@ -26,10 +27,10 @@ def get_all_techs_from_db() -> set:
         return set()
 
 
-def scrape_job_listings(role: str) -> list[str]:
+def scrape_job_listings(role: str, time_period: GoogleJobsTimePeriod) -> list[str]:
     """Scrape job listings for a given role."""
     try:
-        return job_scrape_pipeline(role)
+        return job_scrape_pipeline(role, time_period)
     except Exception as e:
         print(f"Error while scraping job listings for role {role}: {e}")
         return []
@@ -61,13 +62,18 @@ def update_the_database(role_techs_tuple: (str, dict)):
         print(f"Error while updating the database for role {role_techs_tuple[0]}: {e}")
 
 
-def single_role_pipline(role: str, tech_set: set, tech_dict: dict):
+def single_role_pipline(role: str, tech_set: set, tech_dict: dict, time_period: GoogleJobsTimePeriod):
     """Pipeline for each role."""
     try:
-        job_listings: list[str] = scrape_job_listings(role)
+        print('Started collecting job listings...')
+        job_listings: list[str] = scrape_job_listings(role, time_period)
+        print('Started extracting tech words from job listings...')
         tech_sets_list: list[set[str]] = extract_tech_words_from_job_listings(job_listings, tech_set)
+        print('Started processing the extracted words...')
         role_techs_tuple: (str, dict) = process_the_tech_words_from_analysis(tech_sets_list, role, tech_dict)
+        print('Started inserting to db...')
         update_the_database(role_techs_tuple)
+        print('Finished pipeline successfully')
     except Exception as e:
         print(f"Error in pipeline for role {role}: {e}")
 
@@ -78,9 +84,9 @@ def process_pool_role_pipline():
         roles_list = get_all_roles()
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
-
+        google_jobs_time_period_month = GoogleJobsTimePeriod.MONTH
         with ThreadPoolExecutor(max_workers=len(roles_list)) as executor:
-            futures = [executor.submit(single_role_pipline, role, tech_set, tech_dictionary) for role in roles_list]
+            futures = [executor.submit(single_role_pipline, role, tech_set, tech_dictionary, google_jobs_time_period_month) for role in roles_list]
 
             # Wait for all tasks to complete
             for future in futures:

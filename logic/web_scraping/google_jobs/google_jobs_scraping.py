@@ -13,10 +13,10 @@ from enum import Enum
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-
-from decorators.decorator_measure_function_time import measure_function_time
 import os
 from dotenv import load_dotenv
+
+from logic.web_scraping.DTOS.google_jobs_configuration_dto import GoogleJobsConfigDto
 
 """
 - Add docstring 
@@ -279,55 +279,94 @@ def get_job_listings(driver: WebDriver, wait: WebDriverWait, expand_job_descript
 
     # log the final result of the function how many listings were collected
     text = f"Inserted descriptions: {inserted_descriptions}, job_listings:{len(job_listings)}"
-    write_text_to_file('../web_scrape_main_run_log.txt', 'a', text)
+    write_text_to_file('../Logs/web_scrape_main_run_log.txt', 'a', text)
 
     return job_listings_result_list
 
 
-def main():
+def get_job_listings_google_jobs_pipeline(config_object: GoogleJobsConfigDto):
     # region params
-    # Define the search key and time period
-    search_value = 'backend developer'
-    time_period = GoogleJobsTimePeriod.MONTH
-    button_full_xpath = os.environ.get('SHOME_FULL_DESCRIPTION_BUTTON_XPATH_GOOGLE_JOBS')
-    expandable_text_full_xpath = os.environ.get('EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS')
-    not_expandable_text_full_xpath = os.environ.get('NOT_EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS')
-
     listings_list = []
     interval_attempts = 0
-    max_interval_attempts = 10
-    sleep_time_between_attempt_in_seconds = 30
     is_success = False
-    url = build_google_jobs_url(search_value, time_period)
+    click_button_timeout = 1
+    url = build_google_jobs_url(config_object.search_value, config_object.time_period)
     driver = setup_chrome_driver(url=url, activate=True, headless=False)
     wait = setup_web_driver_wait(driver, 3)
     # endregion
 
     # create intervals
-    while is_success is False and interval_attempts < max_interval_attempts:
+    while is_success is False and interval_attempts < config_object.max_interval_attempts:
         if interval_attempts > 0:
             print("Interval attempt failed retry in: ")
-            countdown(sleep_time_between_attempt_in_seconds)
+            countdown(config_object.sleep_time_between_attempt_in_seconds)
             driver = setup_chrome_driver(url=url, activate=True)
             wait = setup_web_driver_wait(driver, 10)
 
         interval_attempts += 1
         text = 'Attempt number: %d' % interval_attempts
-        write_text_to_file('../web_scrape_main_run_log.txt', 'a', text)
-        listings_list = get_job_listings(driver, wait, button_full_xpath,
-                                         expandable_text_full_xpath,
-                                         not_expandable_text_full_xpath, 1)
+        write_text_to_file('../Logs/web_scrape_main_run_log.txt', 'a', text)
+        listings_list = get_job_listings(driver, wait, config_object.show_full_description_button_xpath,
+                                         config_object.expandable_job_description_text_xpath,
+                                         config_object.not_expandable_job_description_text_xpath, click_button_timeout)
 
         if len(listings_list) > 0:
             is_success = True
 
+    # check the results after the while loop
     if is_success is True:
         for job in listings_list:
             write_text_to_file('../descriptions.txt', 'a', job)
     else:
-        text = 'Failed to scrape job listings after maximum attempts(%d)' % max_interval_attempts
-        write_text_to_file('../web_scrape_main_run_log.txt', 'a', text)
+        text = 'Failed to scrape job listings after maximum attempts(%d)' % config_object.max_interval_attempts
+        write_text_to_file('../Logs/web_scrape_main_run_log.txt', 'a', text)
 
 
-if __name__ == '__main__':
-    main()
+
+# def main():
+#     # region params
+#     # Define the search key and time period
+#     search_value = 'backend developer'
+#     time_period = GoogleJobsTimePeriod.MONTH
+#     button_full_xpath = os.environ.get('SHOW_FULL_DESCRIPTION_BUTTON_XPATH_GOOGLE_JOBS')
+#     expandable_text_full_xpath = os.environ.get('EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS')
+#     not_expandable_text_full_xpath = os.environ.get('NOT_EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS')
+#
+#     listings_list = []
+#     interval_attempts = 0
+#     max_interval_attempts = 10
+#     sleep_time_between_attempt_in_seconds = 30
+#     is_success = False
+#     url = build_google_jobs_url(search_value, time_period)
+#     driver = setup_chrome_driver(url=url, activate=True, headless=False)
+#     wait = setup_web_driver_wait(driver, 3)
+#     # endregion
+#
+#     # create intervals
+#     while is_success is False and interval_attempts < max_interval_attempts:
+#         if interval_attempts > 0:
+#             print("Interval attempt failed retry in: ")
+#             countdown(sleep_time_between_attempt_in_seconds)
+#             driver = setup_chrome_driver(url=url, activate=True)
+#             wait = setup_web_driver_wait(driver, 10)
+#
+#         interval_attempts += 1
+#         text = 'Attempt number: %d' % interval_attempts
+#         write_text_to_file('../web_scrape_main_run_log.txt', 'a', text)
+#         listings_list = get_job_listings(driver, wait, button_full_xpath,
+#                                          expandable_text_full_xpath,
+#                                          not_expandable_text_full_xpath, 1)
+#
+#         if len(listings_list) > 0:
+#             is_success = True
+#
+#     if is_success is True:
+#         for job in listings_list:
+#             write_text_to_file('../descriptions.txt', 'a', job)
+#     else:
+#         text = 'Failed to scrape job listings after maximum attempts(%d)' % max_interval_attempts
+#         write_text_to_file('../web_scrape_main_run_log.txt', 'a', text)
+#
+#
+# if __name__ == '__main__':
+#     main()
