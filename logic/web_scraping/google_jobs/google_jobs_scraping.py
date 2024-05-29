@@ -34,7 +34,6 @@ def countdown(n):
     print("\r0", flush=True)  # Ensure the last number is also printed on the same line
 
 
-
 class GoogleJobsTimePeriod(Enum):
     TODAY = 'today'
     THREE_DAYS = '3days'
@@ -42,13 +41,13 @@ class GoogleJobsTimePeriod(Enum):
     MONTH = 'month'
 
 
-def click_button(xpath, _driver, timeout=1.0) -> (bool, str):
+def click_button(xpath, driver, timeout=1.0) -> (bool, str):
     try:
         # Wait for the button to be present in the DOM
-        button = WebDriverWait(_driver, timeout).until(EC.presence_of_element_located((By.XPATH, xpath)))
+        button = WebDriverWait(driver, timeout).until(EC.presence_of_element_located((By.XPATH, xpath)))
 
         # Once present, wait for it to be clickable
-        WebDriverWait(_driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpath)))
+        WebDriverWait(driver, timeout).until(EC.element_to_be_clickable((By.XPATH, xpath)))
 
         # Click the button
         button.click()
@@ -119,7 +118,8 @@ def setup_chrome_driver(params=None, set_auto_params=True, activate=False, url='
 
     if headless:
         chrome_options = Options()
-        chrome_headless_arguments = ('--headless', '--no-sandbox', '--disable-dev-shm-usage', "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" )
+        chrome_headless_arguments = ('--headless', '--no-sandbox', '--disable-dev-shm-usage',
+                                     "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
         for option in chrome_headless_arguments:
             chrome_options.add_argument(option)
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
@@ -151,68 +151,125 @@ def setup_web_driver_wait(driver: WebDriver, timeout=10) -> WebDriverWait[WebDri
     return WebDriverWait(driver, timeout)
 
 
+# region Sub scroll_and_click_and_visited_pipeline
+def scroll_element_to_view(element: WebElement, driver: WebDriver) -> bool:
+    try:
+        # Scroll to view
+        driver.execute_script("arguments[0].scrollIntoView();", element)
+        return True
+
+    except StaleElementReferenceException:
+        return False
+
+
+def is_listing_visited(url: str, visited_urls: set[str]):
+    if url in visited_urls:
+        return True
+    else:
+        visited_urls.add(url)
+        return False
+
+
+def scroll_and_click_and_visited_pipeline(driver: WebDriver, job_listing_element: WebElement, visited_urls: set[str],
+                                          log_file_path: str) -> bool:
+    # scroll to view the element
+    is_scrolled = scroll_element_to_view(job_listing_element, driver)
+
+    if is_scrolled is False:
+        write_text_to_file(log_file_path, 'a',
+                           'StaleElementReferenceException: Element no longer exists in the dom problem fetching list to soon error')
+        return False
+
+    # click the element for the full description to appear and change the url
+    job_listing_element.click()
+
+    # get the url from driver and check if it has been visited
+    url = driver.current_url
+    is_visited = is_listing_visited(url, visited_urls)
+
+    if is_visited:
+        write_text_to_file(log_file_path, 'a',
+                           f"Scraping has Repeated this url: {url}")
+
+    return True
+
+
+# endregion
+
+# region get initial job listings li elements
+def get_job_listings_li_elements_list(wait: WebDriverWait, log_file_path: str) -> list[WebElement]:
+    try:
+        job_listings = wait.until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "li")))
+        return job_listings if job_listings is not None else []
+    except TimeoutException:
+        write_text_to_file(log_file_path, 'a', "Job listings did not appear within the timeout period.")
+        return []
+
+
+# endregion
+
+# region get description and show more button
+def get_description(driver: WebDriver, expand_job_description_button_xpath: str, expandable_job_description_xpath: str,
+                    not_expanded_job_description_xpath: str, click_button_timeout: float, log_file_path: str):
+    try:
+        is_clicked, result_message_click_button = click_button(expand_job_description_button_xpath, driver,
+                                                               timeout=click_button_timeout)
+        if is_clicked:
+            is_successful, description = get_full_description(expandable_job_description_xpath, driver)
+        else:
+            is_successful, description = get_full_description(not_expanded_job_description_xpath, driver)
+
+        if is_successful is False:
+            write_text_to_file(log_file_path, 'a', description)
+
+        return is_successful, description
+
+    except NoSuchElementException:
+        write_text_to_file(log_file_path, 'a',
+                           'NoSuchElementException: did not find button or description check logs')
+        return False, "Failed"
+# endregion
+
 
 def get_job_listings(driver: WebDriver, wait: WebDriverWait, expand_job_description_button_xpath: str,
                      expandable_job_description_xpath: str,
-                     not_expanded_job_description_xpath: str, click_button_timeout=1.0) -> list[str]:
-    try:
-        job_listings = wait.until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "li")))
-    except TimeoutException:
-        write_text_to_file('../web_scrape_main_run_log.txt', 'a', "Job listings did not appear within the timeout period.")
+                     not_expanded_job_description_xpath: str, click_button_timeout=1.0,
+                     log_file_path='web_scrape_main_run_log.txt') -> list[str]:
+
+    # get the initial job_listings visible on page load
+    job_listings = get_job_listings_li_elements_list(wait, log_file_path)
+    if len(job_listings) == 0:
         driver.quit()
         return []
 
-    skip_amount = 0
-    previous_size = -1
-    inserted_descriptions = 0
-    job_listings_result_list = []
-    urls_attempted_set = set()
+    # if successful init variables
+    skip_amount, previous_size, inserted_descriptions, job_listings_result_list, urls_attempted_set = 0, -1, 0, [], set()
+
     while job_listings:
         # If the previous size is the same as the current size, there are no more job listings to load
         if previous_size == len(job_listings):
             break
-
+        # update the size after the check
         previous_size = len(job_listings)
+
         # Iterate through each job listing, skipping the previously clicked ones
         for i in range(skip_amount, len(job_listings)):
-            try:
-                # Scroll to view
-                driver.execute_script("arguments[0].scrollIntoView();", job_listings[i])
-                # Click on the listing
-                job_listings[i].click()
 
-
-                listing_url = driver.current_url
-                if listing_url in urls_attempted_set:
-                    write_text_to_file('../web_scrape_main_run_log.txt', 'a',
-                                       f"Repeated this url(No. {i}): {listing_url}")
-                else:
-                    urls_attempted_set.update(listing_url)
-
-
-            except StaleElementReferenceException:
-                write_text_to_file('../web_scrape_main_run_log.txt', 'a',
-                                   'StaleElementReferenceException: Element no longer exists in the dom problem fetching list to soon error')
+            result = scroll_and_click_and_visited_pipeline(driver, job_listings[i], urls_attempted_set, log_file_path)
+            if result is False:
                 driver.quit()
                 return []
 
-            try:
-                is_clicked, result_message_click_button = click_button(expand_job_description_button_xpath, driver, timeout=click_button_timeout)
-                if is_clicked:
-                    is_successful, description = get_full_description(expandable_job_description_xpath, driver)
-                else:
-                    write_text_to_file('../web_scrape_main_run_log.txt', 'a', result_message_click_button)
-                    is_successful, description = get_full_description(not_expanded_job_description_xpath, driver)
+            is_successful, description = get_description(driver, expand_job_description_button_xpath,
+                                                         expandable_job_description_xpath,
+                                                         not_expanded_job_description_xpath,
+                                                         click_button_timeout,
+                                                         log_file_path)
 
-                if is_successful:
-                    inserted_descriptions += 1
-                    job_listings_result_list.append(description)
-                else:
-                    write_text_to_file('../web_scrape_main_run_log.txt', 'a', description)
+            if is_successful:
+                job_listings_result_list.append(description)
+                inserted_descriptions += 1
 
-            except NoSuchElementException:
-                write_text_to_file('../web_scrape_main_run_log.txt', 'a',
-                                   'NoSuchElementException: did not find button or description check logs')
 
             # Update the skip amount for the next iteration
             skip_amount = len(job_listings)
@@ -220,6 +277,7 @@ def get_job_listings(driver: WebDriver, wait: WebDriverWait, expand_job_descript
         # Refind the job listings to avoid StaleElementReferenceException
         job_listings = driver.find_elements(By.CSS_SELECTOR, "li")
 
+    # log the final result of the function how many listings were collected
     text = f"Inserted descriptions: {inserted_descriptions}, job_listings:{len(job_listings)}"
     write_text_to_file('../web_scrape_main_run_log.txt', 'a', text)
 
@@ -235,14 +293,13 @@ def main():
     expandable_text_full_xpath = os.environ.get('EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS')
     not_expandable_text_full_xpath = os.environ.get('NOT_EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS')
 
-
     listings_list = []
     interval_attempts = 0
     max_interval_attempts = 10
     sleep_time_between_attempt_in_seconds = 30
     is_success = False
     url = build_google_jobs_url(search_value, time_period)
-    driver = setup_chrome_driver(url=url, activate=True)
+    driver = setup_chrome_driver(url=url, activate=True, headless=False)
     wait = setup_web_driver_wait(driver, 3)
     # endregion
 
@@ -272,7 +329,5 @@ def main():
         write_text_to_file('../web_scrape_main_run_log.txt', 'a', text)
 
 
-
 if __name__ == '__main__':
     main()
-
