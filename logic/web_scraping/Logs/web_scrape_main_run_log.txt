@@ -1,114 +1,126 @@
-(29/05/2024 12:50:44) -> Attempt number: 1
+(29/05/2024 17:52:20) -> Attempt number: 1
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:50:50) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:52:32) -> get_full_description() -> Timed out waiting for element to be present
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:50:52) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:52:32) -> StaleElementReferenceException: Element no longer exists in the dom problem fetching list to soon error
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:50:55) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:16) -> Attempt number: 2
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:50:56) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:21) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=6LRzKBQk5C3mO_0eAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:00) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:21) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=IdXR-bRZSn4LYZgTAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:02) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:21) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=nPmFkUrgbES8cLN1AAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:12) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:21) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=i469CGmqFY3U0KoyAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:15) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:21) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=Z0X2WResJnMYWGURAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:23) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:21) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=K6yULhUuXdSohvMjAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:28) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:21) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=WD6hbmfugKs6NtXtAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:30) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:21) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=DGBA6hS_rOMZBfAJAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:32) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:22) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=X6EVdimxs0zVsOAAAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:35) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:22) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=gK_n8YK3ldoKGLDMAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:37) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:53:35) -> Inserted descriptions: 44, job_listings:54
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:49) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:55:32) -> Attempt number: 1
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 12:51:57) -> Inserted descriptions: 142, job_listings:142
+(29/05/2024 17:55:32) -> Attempt number: 1
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:25:56) -> Attempt number: 1
+(29/05/2024 17:55:33) -> scroll_and_click_and_visited_pipeline() - > An error occurred: Message: stale element reference: stale element not found in the current frame
+  (Session info: chrome-headless-shell=125.0.6422.112); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#stale-element-reference-exception
+Stacktrace:
+	GetHandleVerifier [0x004AB793+45827]
+	(No symbol) [0x0043DB74]
+	(No symbol) [0x0033150F]
+	(No symbol) [0x0033660F]
+	(No symbol) [0x00338298]
+	(No symbol) [0x00338310]
+	(No symbol) [0x00377F89]
+	(No symbol) [0x00375E66]
+	(No symbol) [0x0037425B]
+	(No symbol) [0x00373823]
+	(No symbol) [0x003685EF]
+	(No symbol) [0x00392DFC]
+	(No symbol) [0x00368075]
+	(No symbol) [0x00393094]
+	(No symbol) [0x003AC034]
+	(No symbol) [0x00392B96]
+	(No symbol) [0x00366998]
+	(No symbol) [0x0036751D]
+	GetHandleVerifier [0x007643C3+2899763]
+	GetHandleVerifier [0x007B77ED+3240797]
+	GetHandleVerifier [0x00531264+593364]
+	GetHandleVerifier [0x0053818C+621820]
+	(No symbol) [0x00446F54]
+	(No symbol) [0x00443658]
+	(No symbol) [0x004437F7]
+	(No symbol) [0x004358AE]
+	BaseThreadInitThunk [0x767C7BA9+25]
+	RtlInitializeExceptionChain [0x770DBE3B+107]
+	RtlClearBits [0x770DBDBF+191]
+
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:25:59) -> Job listings did not appear within the timeout period.
+(29/05/2024 17:55:39) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=6LRzKBQk5C3mO_0eAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:27:02) -> Attempt number: 1
+(29/05/2024 17:55:39) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=IdXR-bRZSn4LYZgTAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:27:04) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:55:39) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=nPmFkUrgbES8cLN1AAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:27:14) -> get_full_description() -> Timed out waiting for element to be present
+(29/05/2024 17:55:39) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=i469CGmqFY3U0KoyAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:27:14) -> StaleElementReferenceException: Element no longer exists in the dom problem fetching list to soon error
+(29/05/2024 17:55:39) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=Z0X2WResJnMYWGURAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:27:31) -> Attempt number: 1
+(29/05/2024 17:55:39) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=K6yULhUuXdSohvMjAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:27:33) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:55:39) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=WD6hbmfugKs6NtXtAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:27:43) -> get_full_description() -> Timed out waiting for element to be present
+(29/05/2024 17:55:40) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=X6EVdimxs0zVsOAAAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:27:43) -> StaleElementReferenceException: Element no longer exists in the dom problem fetching list to soon error
+(29/05/2024 17:55:40) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=DGBA6hS_rOMZBfAJAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:28:30) -> Attempt number: 2
+(29/05/2024 17:55:40) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=gK_n8YK3ldoKGLDMAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:28:37) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:55:52) -> Scraping has Repeated this url: https://www.google.com/search?q=Backend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=aYDYp44biiAS6GuBAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:28:38) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:55:54) -> Inserted descriptions: 45, job_listings:56
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:28:39) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:14) -> Attempt number: 2
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:28:43) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:16) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=EoXLkm1fJP2cEoUtAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:28:46) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:16) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=10EBvDSUWPpQSv4TAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:28:47) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:17) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=KguJ7vSQs0PvkBA2AAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:29:00) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:17) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=ISkdgyILucy5ND5sAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:29:09) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:17) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=cQr_Df2aggC6zaQGAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:29:19) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:17) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=jB93mSHwMDlvhgfKAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:30:33) -> Attempt number: 1
+(29/05/2024 17:56:17) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=NJSD3Dm0txeM4dpuAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:31:32) -> Attempt number: 1
+(29/05/2024 17:56:17) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=ebFI7AOK_zgqf7_xAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:31:40) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:17) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=Ba0gNYN2ZnINIJrZAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:31:41) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:18) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=oq4gDLwYWUVjWmYHAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:31:43) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:19) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=oq4gDLwYWUVjWmYHAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:31:45) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:27) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=B-w0wFMttQHIlAP0AAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:31:54) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:28) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=S8wGayKjqC4yIdVDAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:31:56) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:28) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=hGUHQl6YZk_T0ZX7AAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:32:04) -> click_button() -> Timed out waiting for button to be present or clickable
+(29/05/2024 17:56:28) -> Scraping has Repeated this url: https://www.google.com/search?q=Frontend+Developer+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:week&htischips=date_posted;week&htidocid=I3rrZ69Z-nnm5yQPAAAAAA%3D%3D
 ============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:32:12) -> click_button() -> Timed out waiting for button to be present or clickable
-============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:32:14) -> click_button() -> Timed out waiting for button to be present or clickable
-============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:32:19) -> click_button() -> Timed out waiting for button to be present or clickable
-============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:32:22) -> click_button() -> Timed out waiting for button to be present or clickable
-============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:32:24) -> click_button() -> Timed out waiting for button to be present or clickable
-============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:32:28) -> click_button() -> Timed out waiting for button to be present or clickable
-============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:32:30) -> click_button() -> Timed out waiting for button to be present or clickable
-============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:32:53) -> click_button() -> Timed out waiting for button to be present or clickable
-============================================================================================================================================================================================================================================================================================================
-(29/05/2024 13:33:00) -> Inserted descriptions: 142, job_listings:142
-============================================================================================================================================================================================================================================================================================================
-(29/05/2024 15:22:10) -> Attempt number: 1
-============================================================================================================================================================================================================================================================================================================
-(29/05/2024 15:23:32) -> Inserted descriptions: 141, job_listings:141
+(29/05/2024 17:56:28) -> Inserted descriptions: 30, job_listings:45
 ============================================================================================================================================================================================================================================================================================================

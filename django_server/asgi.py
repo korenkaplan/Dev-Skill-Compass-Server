@@ -11,6 +11,10 @@ import os
 
 from django.core.asgi import get_asgi_application
 
+from usage_stats.models import TechnologiesCounts
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_server.settings')
 
 application = get_asgi_application()
+
+

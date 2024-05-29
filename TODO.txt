@@ -1,6 +1,8 @@
 =============  Most Important =================
 - WEB Scraping
-
+- Filter the listings by : if the role name appears in the heading of the listing
+- Docker image of chrome and selenium
+- check if to turn the list of jobs to one long string
 
 ============= General Assignments =================
 - Think of tech counting logic and implement it with scheduled commands
@@ -24,10 +26,10 @@
 - (Done) Temporary prepare sample data until the scraping will work.
 
 ============= WEB Scraping =============
-- Learn how to scrape job listing sites.
-- Handle the Chrome driver problem.
+- (Done) Learn how to scrape job listing sites.
+- (Done) Handle the Chrome driver problem.
 - Finish the module.
-- Add the module to the main pipeline and replace sample data.
+- (Done) Add the module to the main pipeline and replace sample data.
 
 ============= CI-CD =============
 - Fix healthcheck for web service

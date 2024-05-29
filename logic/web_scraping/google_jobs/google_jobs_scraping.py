@@ -9,22 +9,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException, StaleElementReferenceException, \
     ElementClickInterceptedException
-from enum import Enum
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-import os
-from dotenv import load_dotenv
-
+from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
 from logic.web_scraping.DTOS.google_jobs_configuration_dto import GoogleJobsConfigDto
-
-"""
-- Add docstring 
-- remove unnecessary file writing and imports
-- make it a class
-- check in main pipeline
-"""
-load_dotenv()
 
 
 def countdown(n):
@@ -32,13 +21,6 @@ def countdown(n):
         print(f"\r{i}", end="", flush=True)
         time.sleep(1)
     print("\r0", flush=True)  # Ensure the last number is also printed on the same line
-
-
-class GoogleJobsTimePeriod(Enum):
-    TODAY = 'today'
-    THREE_DAYS = '3days'
-    WEEK = 'week'
-    MONTH = 'month'
 
 
 def click_button(xpath, driver, timeout=1.0) -> (bool, str):
@@ -141,9 +123,8 @@ def setup_chrome_driver(params=None, set_auto_params=True, activate=False, url='
 def build_google_jobs_url(search_value: str, googleJobsTimePeriod: GoogleJobsTimePeriod, replace_with_char='+') -> str:
     snake_case_search_value = search_value.replace(' ', replace_with_char)
     time_period = googleJobsTimePeriod.value
-    url = (f"""
-    https://www.google.com/search?q={snake_case_search_value}+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:{time_period}&htischips=date_posted;{time_period}
-    """)
+    url = f"""https://www.google.com/search?q={snake_case_search_value}+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:{time_period}&htischips=date_posted;{time_period}"""
+
     return url
 
 
@@ -171,27 +152,35 @@ def is_listing_visited(url: str, visited_urls: set[str]):
 
 
 def scroll_and_click_and_visited_pipeline(driver: WebDriver, job_listing_element: WebElement, visited_urls: set[str],
-                                          log_file_path: str) -> bool:
-    # scroll to view the element
-    is_scrolled = scroll_element_to_view(job_listing_element, driver)
+                                          log_file_path: str) -> int:
+    try:
+        # scroll to view the element
+        is_scrolled = scroll_element_to_view(job_listing_element, driver)
 
-    if is_scrolled is False:
+        if is_scrolled is False:
+            write_text_to_file(log_file_path, 'a',
+                               'StaleElementReferenceException: Element no longer exists in the dom problem fetching list to soon error')
+            return 0
+
+        # click the element for the full description to appear and change the url
+        job_listing_element.click()
+
+        # get the url from driver and check if it has been visited
+        url = driver.current_url
+        is_visited = is_listing_visited(url, visited_urls)
+
+        if is_visited:
+            write_text_to_file(log_file_path, 'a',
+                               f"Scraping has Repeated this url: {url}")
+            return 1
+
+        return 2
+
+    except Exception as e:
+        # Handle any other exceptions that may occur
         write_text_to_file(log_file_path, 'a',
-                           'StaleElementReferenceException: Element no longer exists in the dom problem fetching list to soon error')
-        return False
-
-    # click the element for the full description to appear and change the url
-    job_listing_element.click()
-
-    # get the url from driver and check if it has been visited
-    url = driver.current_url
-    is_visited = is_listing_visited(url, visited_urls)
-
-    if is_visited:
-        write_text_to_file(log_file_path, 'a',
-                           f"Scraping has Repeated this url: {url}")
-
-    return True
+                           f"scroll_and_click_and_visited_pipeline() - > An error occurred: {str(e)}")
+        return 0
 
 
 # endregion
@@ -228,14 +217,15 @@ def get_description(driver: WebDriver, expand_job_description_button_xpath: str,
         write_text_to_file(log_file_path, 'a',
                            'NoSuchElementException: did not find button or description check logs')
         return False, "Failed"
+
+
 # endregion
 
 
 def get_job_listings(driver: WebDriver, wait: WebDriverWait, expand_job_description_button_xpath: str,
-                     expandable_job_description_xpath: str,
+                     expandable_job_description_xpath: str, log_file_path: str,
                      not_expanded_job_description_xpath: str, click_button_timeout=1.0,
-                     log_file_path='web_scrape_main_run_log.txt') -> list[str]:
-
+                     ) -> list[str]:
     # get the initial job_listings visible on page load
     job_listings = get_job_listings_li_elements_list(wait, log_file_path)
     if len(job_listings) == 0:
@@ -255,10 +245,13 @@ def get_job_listings(driver: WebDriver, wait: WebDriverWait, expand_job_descript
         # Iterate through each job listing, skipping the previously clicked ones
         for i in range(skip_amount, len(job_listings)):
 
-            result = scroll_and_click_and_visited_pipeline(driver, job_listings[i], urls_attempted_set, log_file_path)
-            if result is False:
+            result: int = scroll_and_click_and_visited_pipeline(driver, job_listings[i], urls_attempted_set,
+                                                                log_file_path)
+            if result == 0:
                 driver.quit()
                 return []
+            elif result == 1:
+                continue
 
             is_successful, description = get_description(driver, expand_job_description_button_xpath,
                                                          expandable_job_description_xpath,
@@ -270,7 +263,6 @@ def get_job_listings(driver: WebDriver, wait: WebDriverWait, expand_job_descript
                 job_listings_result_list.append(description)
                 inserted_descriptions += 1
 
-
             # Update the skip amount for the next iteration
             skip_amount = len(job_listings)
 
@@ -279,19 +271,19 @@ def get_job_listings(driver: WebDriver, wait: WebDriverWait, expand_job_descript
 
     # log the final result of the function how many listings were collected
     text = f"Inserted descriptions: {inserted_descriptions}, job_listings:{len(job_listings)}"
-    write_text_to_file('../Logs/web_scrape_main_run_log.txt', 'a', text)
+    write_text_to_file(log_file_path, 'a', text)
 
     return job_listings_result_list
 
 
-def get_job_listings_google_jobs_pipeline(config_object: GoogleJobsConfigDto):
+def get_job_listings_google_jobs_pipeline(config_object: GoogleJobsConfigDto) -> list[str]:
     # region params
     listings_list = []
     interval_attempts = 0
     is_success = False
     click_button_timeout = 1
     url = build_google_jobs_url(config_object.search_value, config_object.time_period)
-    driver = setup_chrome_driver(url=url, activate=True, headless=False)
+    driver = setup_chrome_driver(url=url, activate=True)
     wait = setup_web_driver_wait(driver, 3)
     # endregion
 
@@ -305,68 +297,19 @@ def get_job_listings_google_jobs_pipeline(config_object: GoogleJobsConfigDto):
 
         interval_attempts += 1
         text = 'Attempt number: %d' % interval_attempts
-        write_text_to_file('../Logs/web_scrape_main_run_log.txt', 'a', text)
+        write_text_to_file(config_object.log_file_path, 'a', text)
         listings_list = get_job_listings(driver, wait, config_object.show_full_description_button_xpath,
                                          config_object.expandable_job_description_text_xpath,
+                                         config_object.log_file_path,
                                          config_object.not_expandable_job_description_text_xpath, click_button_timeout)
 
         if len(listings_list) > 0:
             is_success = True
 
     # check the results after the while loop
-    if is_success is True:
-        for job in listings_list:
-            write_text_to_file('../descriptions.txt', 'a', job)
-    else:
+    if is_success is False:
         text = 'Failed to scrape job listings after maximum attempts(%d)' % config_object.max_interval_attempts
-        write_text_to_file('../Logs/web_scrape_main_run_log.txt', 'a', text)
+        write_text_to_file(config_object.log_file_path, 'a', text)
 
+    return listings_list
 
-
-# def main():
-#     # region params
-#     # Define the search key and time period
-#     search_value = 'backend developer'
-#     time_period = GoogleJobsTimePeriod.MONTH
-#     button_full_xpath = os.environ.get('SHOW_FULL_DESCRIPTION_BUTTON_XPATH_GOOGLE_JOBS')
-#     expandable_text_full_xpath = os.environ.get('EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS')
-#     not_expandable_text_full_xpath = os.environ.get('NOT_EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS')
-#
-#     listings_list = []
-#     interval_attempts = 0
-#     max_interval_attempts = 10
-#     sleep_time_between_attempt_in_seconds = 30
-#     is_success = False
-#     url = build_google_jobs_url(search_value, time_period)
-#     driver = setup_chrome_driver(url=url, activate=True, headless=False)
-#     wait = setup_web_driver_wait(driver, 3)
-#     # endregion
-#
-#     # create intervals
-#     while is_success is False and interval_attempts < max_interval_attempts:
-#         if interval_attempts > 0:
-#             print("Interval attempt failed retry in: ")
-#             countdown(sleep_time_between_attempt_in_seconds)
-#             driver = setup_chrome_driver(url=url, activate=True)
-#             wait = setup_web_driver_wait(driver, 10)
-#
-#         interval_attempts += 1
-#         text = 'Attempt number: %d' % interval_attempts
-#         write_text_to_file('../web_scrape_main_run_log.txt', 'a', text)
-#         listings_list = get_job_listings(driver, wait, button_full_xpath,
-#                                          expandable_text_full_xpath,
-#                                          not_expandable_text_full_xpath, 1)
-#
-#         if len(listings_list) > 0:
-#             is_success = True
-#
-#     if is_success is True:
-#         for job in listings_list:
-#             write_text_to_file('../descriptions.txt', 'a', job)
-#     else:
-#         text = 'Failed to scrape job listings after maximum attempts(%d)' % max_interval_attempts
-#         write_text_to_file('../web_scrape_main_run_log.txt', 'a', text)
-#
-#
-# if __name__ == '__main__':
-#     main()

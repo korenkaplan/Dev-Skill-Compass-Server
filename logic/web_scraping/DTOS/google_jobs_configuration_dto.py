@@ -1,5 +1,4 @@
 from pydantic import BaseModel
-
 from logic.web_scraping.google_jobs.google_jobs_scraping import GoogleJobsTimePeriod
 
 

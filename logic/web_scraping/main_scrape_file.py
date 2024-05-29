@@ -1,7 +1,8 @@
 """ this is the main entry point for scraping module"""
+from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
 from logic.web_scraping.DTOS.google_jobs_configuration_dto import GoogleJobsConfigDto
-from logic.web_scraping.google_jobs.google_jobs_scraping import GoogleJobsTimePeriod, \
-    get_job_listings_google_jobs_pipeline
+from logic.web_scraping.google_jobs.google_jobs_scraping import get_job_listings_google_jobs_pipeline
+
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -412,7 +413,7 @@ Obligo 'Most Promising Israeli-Founded Fintech Startup in Lending and Financing'
 
 https://www.israelhayom.com/2021/03/23/obligo-most-promising-israeli-founded-fintech-startup-in-lending-and-financing"""
 ]
-log_file_path = 'logic/web_scraping/Logs/web_scrape_main_run_log.txt'
+log_file_path = r'C:\Users\Koren Kaplan\Desktop\Dev-Skill-Compass-Server\logic\web_scraping\Logs\web_scrape_main_run_log.txt'
 
 
 # region Google Jobs Configuration
@@ -447,7 +448,7 @@ def google_jobs_scraping_pipeline(role: str, time_period: GoogleJobsTimePeriod) 
 
 def job_scrape_pipeline(role: str, time_period: GoogleJobsTimePeriod) -> list[str]:
     # All jobs listings from all sites
-    job_listings_list: list[str]= []
+    job_listings_list: list[str]=[]
 
     # get the listings from Google jobs
     google_jobs_listings = google_jobs_scraping_pipeline(role, time_period)
