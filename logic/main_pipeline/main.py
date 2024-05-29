@@ -1,5 +1,5 @@
 """This is the main pipeline that runs once a week to refresh the data in the database."""
-from core.models import Roles, Technologies, Categories
+from core.models import Roles, Technologies
 from logic.web_scraping.google_jobs.google_jobs_scraping import GoogleJobsTimePeriod
 from logic.web_scraping.main_scrape_file import job_scrape_pipeline
 from logic.text_analysis.tech_term_finder import find_tech_terms_pool_threads
@@ -86,13 +86,11 @@ def process_pool_role_pipline():
         tech_dictionary = get_tech_dict()
         google_jobs_time_period_month = GoogleJobsTimePeriod.WEEK
         with ThreadPoolExecutor(max_workers=len(roles_list)) as executor:
-            futures = [executor.submit(single_role_pipline, role, tech_set, tech_dictionary, google_jobs_time_period_month) for role in roles_list]
+            futures = [executor.submit(single_role_pipline, role, tech_set, tech_dictionary,
+                                       google_jobs_time_period_month) for role in roles_list]
 
             # Wait for all tasks to complete
             for future in futures:
                 future.result()
     except Exception as e:
         print(f"Error in main pipeline: {e}")
-
-
-

@@ -34,14 +34,14 @@ def click_button(xpath, driver, timeout=1.0) -> (bool, str):
         # Click the button
         button.click()
         return True, ''
-    except TimeoutException as e:
-        error = f"click_button() -> Timed out waiting for button to be present or clickable"
+    except TimeoutException:
+        error = "click_button() -> Timed out waiting for button to be present or clickable"
         return False, error
-    except NoSuchElementException as e:
-        error = f"click_button() -> Button not found"
+    except NoSuchElementException:
+        error = "click_button() -> Button not found"
         return False, error
-    except ElementClickInterceptedException as e:
-        error = f"click_button() -> Button click intercepted"
+    except ElementClickInterceptedException:
+        error = "click_button() -> Button click intercepted"
         return False, error
 
 
@@ -49,14 +49,14 @@ def get_full_description(xpath, _driver) -> (bool, str):
     try:
         # Wait for the element to be present in the DOM
         element = WebDriverWait(_driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath)))
-    except TimeoutException as e:
-        error = f"get_full_description() -> Timed out waiting for element to be present"
+    except TimeoutException:
+        error = "get_full_description() -> Timed out waiting for element to be present"
         return False, error
     try:
         # Once present, wait for it to be visible
         WebDriverWait(_driver, 10).until(EC.visibility_of(element))
-    except TimeoutException as e:
-        error = f"get_full_description() -> Timed out waiting for element to be visible"
+    except TimeoutException:
+        error = "get_full_description() -> Timed out waiting for element to be visible"
         return False, error
 
     try:
@@ -101,7 +101,8 @@ def setup_chrome_driver(params=None, set_auto_params=True, activate=False, url='
     if headless:
         chrome_options = Options()
         chrome_headless_arguments = ('--headless', '--no-sandbox', '--disable-dev-shm-usage',
-                                     "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+                                     "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                                     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
         for option in chrome_headless_arguments:
             chrome_options.add_argument(option)
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
@@ -123,7 +124,9 @@ def setup_chrome_driver(params=None, set_auto_params=True, activate=False, url='
 def build_google_jobs_url(search_value: str, googleJobsTimePeriod: GoogleJobsTimePeriod, replace_with_char='+') -> str:
     snake_case_search_value = search_value.replace(' ', replace_with_char)
     time_period = googleJobsTimePeriod.value
-    url = f"""https://www.google.com/search?q={snake_case_search_value}+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:{time_period}&htischips=date_posted;{time_period}"""
+    url = f"""https://www.google.com/search?q={snake_case_search_value}
+    +jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=
+    date_posted:{time_period}&htischips=date_posted;{time_period}"""
 
     return url
 
@@ -159,7 +162,8 @@ def scroll_and_click_and_visited_pipeline(driver: WebDriver, job_listing_element
 
         if is_scrolled is False:
             write_text_to_file(log_file_path, 'a',
-                               'StaleElementReferenceException: Element no longer exists in the dom problem fetching list to soon error')
+                               'StaleElementReferenceException: Element no longer'
+                               ' exists in the dom problem fetching list to soon error')
             return 0
 
         # click the element for the full description to appear and change the url
@@ -233,7 +237,8 @@ def get_job_listings(driver: WebDriver, wait: WebDriverWait, expand_job_descript
         return []
 
     # if successful init variables
-    skip_amount, previous_size, inserted_descriptions, job_listings_result_list, urls_attempted_set = 0, -1, 0, [], set()
+    (skip_amount, previous_size, inserted_descriptions,
+     job_listings_result_list, urls_attempted_set) = 0, -1, 0, [], set()
 
     while job_listings:
         # If the previous size is the same as the current size, there are no more job listings to load
@@ -312,4 +317,3 @@ def get_job_listings_google_jobs_pipeline(config_object: GoogleJobsConfigDto) ->
         write_text_to_file(config_object.log_file_path, 'a', text)
 
     return listings_list
-

@@ -413,7 +413,8 @@ Obligo 'Most Promising Israeli-Founded Fintech Startup in Lending and Financing'
 
 https://www.israelhayom.com/2021/03/23/obligo-most-promising-israeli-founded-fintech-startup-in-lending-and-financing"""
 ]
-log_file_path = r'C:\Users\Koren Kaplan\Desktop\Dev-Skill-Compass-Server\logic\web_scraping\Logs\web_scrape_main_run_log.txt'
+log_file_path = (r'C:\Users\Koren Kaplan\Desktop\Dev-Skill'
+                 r'-Compass-Server\logic\web_scraping\Logs\web_scrape_main_run_log.txt')
 
 
 # region Google Jobs Configuration
@@ -423,7 +424,8 @@ def configure_google_jobs_scrape_engine(role: str, time_period: GoogleJobsTimePe
         time_period=time_period,
         show_full_description_button_xpath=os.environ.get('SHOW_FULL_DESCRIPTION_BUTTON_XPATH_GOOGLE_JOBS'),
         expandable_job_description_text_xpath=os.environ.get('EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS'),
-        not_expandable_job_description_text_xpath=os.environ.get('NOT_EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS'),
+        not_expandable_job_description_text_xpath=os.environ.get('NOT_EXPANDABLE_JOB_DESCRIPTION'
+                                                                 '_TEXT_XPATH_GOOGLE_JOBS'),
         max_interval_attempts=10,
         sleep_time_between_attempt_in_seconds=30,
         wait_driver_timeout=3,
@@ -448,7 +450,7 @@ def google_jobs_scraping_pipeline(role: str, time_period: GoogleJobsTimePeriod) 
 
 def job_scrape_pipeline(role: str, time_period: GoogleJobsTimePeriod) -> list[str]:
     # All jobs listings from all sites
-    job_listings_list: list[str]=[]
+    job_listings_list: list[str] = []
 
     # get the listings from Google jobs
     google_jobs_listings = google_jobs_scraping_pipeline(role, time_period)
