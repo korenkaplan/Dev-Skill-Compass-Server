@@ -21,7 +21,7 @@ def configure_google_jobs_scrape_engine(role: str, time_period: GoogleJobsTimePe
         max_interval_attempts=10,
         sleep_time_between_attempt_in_seconds=30,
         wait_driver_timeout=3,
-        log_file_path=os.environ.get('SCRAPE_GOOGLE_LOG_FILE_PATH')
+        log_file_path=f"{os.environ.get('SCRAPE_GOOGLE_LOG_FILE_PATH')}_{role.replace(' ', '_')}.txt"
 
     )
     return google_jobs_configuration

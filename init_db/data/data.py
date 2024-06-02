@@ -1218,13 +1218,7 @@ _software_job_roles = [
     "Backend Developer",
     "Full Stack Developer",
     "DevOps Engineer",
-    "Mobile Developer",
-    "QA Engineer/Tester",
-    "Security Engineer",
-    "Project Manager",
-    "Product Manager",
-    "UI/UX Designer",
-    "Data Scientist",
+    "QA Engineer",
     "Data Analyst",
 ]
 _words_to_remove_dict = {

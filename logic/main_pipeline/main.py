@@ -13,13 +13,14 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_server.settings')
 
 application = get_wsgi_application()
 # endregion
 
-from core.models import Roles, Technologies
+from usage_stats.models import TechnologiesCounts
+from decorators.decorator_measure_function_time import log_runtime
+from core.models import Roles, Technologies, Categories
 from logic.web_scraping.google_jobs.google_jobs_scraping import GoogleJobsTimePeriod, \
     get_job_listings_google_jobs_pipeline
 from logic.web_scraping.main_scrape_file import job_scrape_pipeline, configure_google_jobs_scrape_engine
@@ -86,15 +87,15 @@ def update_the_database(role_techs_tuple: (str, dict)):
 def single_role_pipline(role: str, tech_set: set, tech_dict: dict, time_period: GoogleJobsTimePeriod):
     """Pipeline for each role."""
     try:
-        print('Started collecting job listings...')
+        print(f'({role}) Started collecting job listings...')
         job_listings: list[str] = scrape_job_listings(role, time_period)
-        print('Started extracting tech words from job listings...')
+        print(f'({role}) Started extracting tech words from job listings...')
         tech_sets_list: list[set[str]] = extract_tech_words_from_job_listings(job_listings, tech_set)
-        print('Started processing the extracted words...')
+        print(f'({role}) Started processing the extracted words...')
         role_techs_tuple: (str, dict) = process_the_tech_words_from_analysis(tech_sets_list, role, tech_dict)
-        print('Started inserting to db...')
+        print(f'({role}) Started inserting to db...')
         update_the_database(role_techs_tuple)
-        print('Finished pipeline successfully')
+        print(f'({role}) Finished pipeline successfully')
     except Exception as e:
         print(f"Error in pipeline for role {role}: {e}")
 
@@ -102,8 +103,7 @@ def single_role_pipline(role: str, tech_set: set, tech_dict: dict, time_period: 
 def process_pool_role_pipline():
     """Main function that creates a process for each role."""
     try:
-        # roles_list = get_all_roles()
-        roles_list = ["Backend Developer"]
+        roles_list = get_all_roles()
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
         google_jobs_time_period_month = GoogleJobsTimePeriod.MONTH
@@ -118,9 +118,54 @@ def process_pool_role_pipline():
         print(f"Error in main pipeline: {e}")
 
 
+log_path = r"logic/web_scraping/Logs/main_pipeline_runtime.txt"
 
 
-config = configure_google_jobs_scrape_engine('Backend Developer', GoogleJobsTimePeriod.MONTH)
-# /html/body/div[2]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[1]/div[4]/div[9]/div/ul/li/div/div[2]/div[2]/div/div/div[2]/div[2]
+# Get the role
+backend_role = Roles.objects.filter(name="Backend Developer").first()
 
-get_job_listings_google_jobs_pipeline(config)
+# get the counts for the role
+backend_role_counts = TechnologiesCounts.objects.filter(role_id=backend_role)
+
+# Assuming you want to filter Technologies based on its name
+programming_language_category_name = "web_frameworks"
+
+# Get the category
+programming_language_category = Categories.objects.filter(name=programming_language_category_name).first()
+
+# Make sure the category exists before proceeding
+if programming_language_category:
+    # Now get the top 10 from tech counts and order by counter
+    top_backend_programming_counts = backend_role_counts.all().order_by("-counter")[:20]
+
+
+
+    for item in top_backend_programming_counts:
+        print(item)
+else:
+    print(f"Category '{programming_language_category_name}' does not exist.")
+
+
+# @log_runtime(log_path)
+# def process_pool_role_pipline_test():
+#     """Main function that creates a process for each role."""
+#     try:
+#         # roles_list = get_all_roles()
+#         roles_list = ["Backend Developer", "Frontend Developer", "Full Stack Developer"]
+#         tech_set = get_all_techs_from_db()
+#         tech_dictionary = get_tech_dict()
+#         google_jobs_time_period_month = GoogleJobsTimePeriod.MONTH
+#         with ThreadPoolExecutor(max_workers=len(roles_list)) as executor:
+#             futures = [executor.submit(single_role_pipline, role, tech_set, tech_dictionary,
+#                                        google_jobs_time_period_month) for role in roles_list]
+#
+#             # Wait for all tasks to complete
+#             for future in futures:
+#                 future.result()
+#     except Exception as e:
+#         print(f"Error in main pipeline: {e}")
+#
+#
+# process_pool_role_pipline_test()
+# config = configure_google_jobs_scrape_engine('Backend Developer', GoogleJobsTimePeriod.MONTH)
+# get_job_listings_google_jobs_pipeline(config)

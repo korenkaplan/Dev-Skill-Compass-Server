@@ -1,4 +1,4 @@
-""" this module is dedicated to script job listings from google jobs"""
+""" this module is dedicated to script job listings from Google jobs"""
 import time
 import re
 from datetime import datetime
@@ -22,6 +22,7 @@ from logic.web_scraping.google_jobs.DTO.google_jobs_get_job_listings_dto import 
 from logic.web_scraping.google_jobs.DTO.google_jobs_title_element_xpath_dto import GoogleJobsTitleElementXpathDto
 
 
+# region General Functions
 def countdown(n):
     """
     Prints a countdown from n to 0 in the console, updating the same line every second.
@@ -35,6 +36,42 @@ def countdown(n):
     print("\r0", flush=True)  # Ensure the last number is also printed on the same line
 
 
+def write_text_to_file(filepath: str, mode: str, text: str, separator_sign='=', separator_length=300, encoding='utf-8',
+                       add_time_stamp=True) -> bool:
+    """
+      Writes text to a file with optional timestamp and separator.
+
+      Args:
+          filepath (str): The path to the file.
+          mode (str): The file opening mode, e.g., 'w' for write, 'a' for append.
+          text (str): The text to write to the file.
+          separator_sign (str): The character to use for the separator line.
+          separator_length (int): The length of the separator line.
+          encoding (str): The file encoding.
+          add_time_stamp (bool): Whether to add a timestamp to the text.
+
+      Returns:
+          bool: True if the operation was successful, False otherwise.
+      """
+    try:
+        seperator = separator_length * separator_sign
+        with open(filepath, mode, encoding=encoding) as file:
+            if add_time_stamp:
+                timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                file.write(f"({timestamp}) -> {text}\n")
+            else:
+                file.write(f"{text} \n")
+            if seperator:
+                file.write(seperator + '\n')
+        return True
+    except Exception as e:
+        print("An error occurred: ", e)
+        return False
+
+
+# endregion
+
+# region Elements interaction functions
 def click_button(xpath, driver, timeout=1.0) -> (bool, str):
     """
     Attempts to click a button located by its XPath within a given timeout.
@@ -105,41 +142,10 @@ def get_full_description(xpath, _driver) -> (bool, str):
         return False, error
 
 
-def write_text_to_file(filepath: str, mode: str, text: str, separator_sign='=', separator_length=300, encoding='utf-8',
-                       add_time_stamp=True) -> bool:
-    """
-      Writes text to a file with optional timestamp and separator.
-
-      Args:
-          filepath (str): The path to the file.
-          mode (str): The file opening mode, e.g., 'w' for write, 'a' for append.
-          text (str): The text to write to the file.
-          separator_sign (str): The character to use for the separator line.
-          separator_length (int): The length of the separator line.
-          encoding (str): The file encoding.
-          add_time_stamp (bool): Whether to add a timestamp to the text.
-
-      Returns:
-          bool: True if the operation was successful, False otherwise.
-      """
-    try:
-        seperator = separator_length * separator_sign
-        with open(filepath, mode, encoding=encoding) as file:
-            if add_time_stamp:
-                timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-                file.write(f"({timestamp}) -> {text}\n")
-            else:
-                file.write(f"{text} \n")
-            if seperator:
-                file.write(seperator + '\n')
-        return True
-    except Exception as e:
-        print("An error occurred: ", e)
-        return False
-
+# endregion
 
 # region Setup and Initialization functions
-def setup_chrome_driver(params=None, set_auto_params=True, activate=False, url='', headless=False) -> WebDriver:
+def setup_chrome_driver(params=None, set_auto_params=True, activate=False, url='', headless=True) -> WebDriver:
     """
         Sets up a Chrome WebDriver with optional geolocation parameters and headless mode.
 
@@ -287,12 +293,7 @@ def scroll_and_click_and_visited_pipeline(driver: WebDriver, job_listing_element
         url = driver.current_url
         is_visited = is_listing_visited(url, visited_urls)
 
-        if is_visited:
-            write_text_to_file(log_file_path, 'a',
-                               f"Scraping has Repeated this url: {url}")
-            return 1
-
-        return 2
+        return 1 if is_visited else 2
 
     except Exception as e:
         # Handle any other exceptions that may occur
@@ -421,7 +422,7 @@ def remove_non_letters_characters(text: str) -> str:
     return result
 
 
-def is_title_match_role(role: str, title: str) -> bool:
+def is_title_match_role(role: str, title: str, log_file_path: str) -> bool:
     # Get the words to remove from the title by role
     words_to_remove = get_words_to_remove_from_title(role)
 
@@ -434,11 +435,18 @@ def is_title_match_role(role: str, title: str) -> bool:
     cleaned_title = remove_non_letters_characters(cleaned_title)
 
     # Check if the cleaned role is in the cleaned title
-    return cleaned_role in cleaned_title
+    res =  cleaned_role in cleaned_title
+
+    # log if not matched
+    if res is False:
+        log_text = f"""False match: {cleaned_title}({title} <-> {cleaned_role}({role})"""
+        write_text_to_file(log_file_path, 'a', log_text)
+
+    return res
 
 
 def find_and_match_title(role: str, i: int, increase_every_ten: int, listing_li_element: WebElement,
-                         wait: WebDriverWait) -> (bool, int):
+                         wait: WebDriverWait, log_file_path: str) -> (bool, int):
     # Define the result variables
     is_title_exist = False
     is_match = False
@@ -461,13 +469,15 @@ def find_and_match_title(role: str, i: int, increase_every_ten: int, listing_li_
     title = find_title(dto)
 
     if title:
-        is_match = is_title_match_role(role, title)
+        is_match = is_title_match_role(role, title, log_file_path)
         is_title_exist = True
 
     if not is_title_exist:
         print("Could not find title element returned false")
 
     return is_match, increase_every_ten
+
+
 # endregion
 
 
@@ -489,16 +499,16 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
         return []
     # if successful init variables
     (skip_amount, previous_size, inserted_descriptions,
-     job_listings_result_list, urls_attempted_set, title_counter) = 0, -1, 0, [], set(), 0
+     job_listings_result_list, urls_attempted_set, false_title_counter) = 0, -1, 0, [], set(), 0
     increase_every_ten = 0
-
+    repeated_urls_counter = 0
     while job_listings:
         # If the previous size is the same as the current size, there are no more job listings to load
         if previous_size == len(job_listings):
             break
         # update the size after the check
         previous_size = len(job_listings)
-
+        print(f"Total listings collected {dto.role}: {inserted_descriptions}")
         # Iterate through each job listing, skipping the previously clicked ones
         for i in range(skip_amount, len(job_listings)):
             # Start the process bys scrolling to view and clicking the listing
@@ -510,13 +520,16 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
                 return []
 
             elif result == 1:
+                repeated_urls_counter += 1
                 continue
 
             # find and match the title to the role
             is_title_match, increase_every_ten = find_and_match_title(dto.role, i, increase_every_ten,
-                                                                      job_listings[i], dto.wait)
+                                                                      job_listings[i], dto.wait,
+                                                                      dto.log_file_path)
 
             if is_title_match is False:
+                false_title_counter += 1
                 continue
 
             get_full_description_dto: GoogleJobsGetFullDescriptionDto = GoogleJobsGetFullDescriptionDto(
@@ -533,7 +546,6 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
 
             if is_successful:
                 job_listings_result_list.append(description)
-                write_text_to_file('Job_description.txt', 'a', description)
                 inserted_descriptions += 1
 
             # Update the skip amount for the next iteration
@@ -543,7 +555,13 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
         job_listings = dto.driver.find_elements(By.CSS_SELECTOR, "li")
 
     # log the final result of the function how many listings were collected
-    text = f"Inserted descriptions: {inserted_descriptions} | title counter: {title_counter} | job_listings:{len(job_listings)}"
+    text = f"""
+    Inserted descriptions: {inserted_descriptions} 
+    Error titles counter: {false_title_counter} 
+    Repeated URLS: {repeated_urls_counter}
+    --------------------------------------
+    Total Job Listings: {len(job_listings)}
+"""
     write_text_to_file(dto.log_file_path, 'a', text)
 
     return job_listings_result_list
@@ -601,4 +619,3 @@ def get_job_listings_google_jobs_pipeline(config_object: GoogleJobsConfigDto) ->
         write_text_to_file(config_object.log_file_path, 'a', text)
 
     return listings_list
-

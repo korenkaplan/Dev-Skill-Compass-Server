@@ -1,10 +1,8 @@
 =============  Most Important =================
-- WEB Scraping
-- Filter the listings by : if the role name appears in the heading of the listing
 - Docker image of chrome and selenium
-- check if to turn the list of jobs to one long string is faster
-- add new environment variables to GitHub actions
-- finish tite filtering
+- (later) check if to turn the list of jobs to one long string is faster
+- (Done) add new environment variables to GitHub actions
+
 
 ============= General Assignments =================
 - Think of tech counting logic and implement it with scheduled commands

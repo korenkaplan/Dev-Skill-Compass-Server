@@ -1,3 +1,5 @@
+from datetime import datetime
+import functools
 import time
 
 
@@ -20,3 +22,23 @@ def measure_function_time(func):
         return results
 
     return wrapper
+
+
+def log_runtime(log_file_path):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            start_time = time.time()
+            result = func(*args, **kwargs)
+            end_time = time.time()
+            runtime = end_time - start_time
+            seperator = 100 * "="
+            timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+            with open(log_file_path, 'a') as log_file:
+                log_file.write(f"""
+                {seperator}
+                (Started {timestamp}) Function {func.__name__} executed in {runtime:.4f} seconds\n
+""")
+            return result
+        return wrapper
+    return decorator
