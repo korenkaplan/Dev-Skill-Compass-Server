@@ -1,21 +1,6 @@
 """A module that holds Tech names in lists"""
 
 
-def get_tech_set() -> set:
-    tech_set = set()
-    for category in _tech_list_synonyms.values():
-        for synonyms in category.values():
-            tech_set.update(synonyms)
-    return tech_set
-
-
-def get_tech_dict() -> dict:
-    return _tech_list_synonyms
-
-
-def get_roles_list() -> list:
-    return _software_job_roles
-
 
 _tech_dict = {
     'programming_languages_synonyms': [
@@ -1242,3 +1227,34 @@ _software_job_roles = [
     "Data Scientist",
     "Data Analyst",
 ]
+_words_to_remove_dict = {
+        'Backend Developer': ['engineer', 'developer'],
+        'Frontend Developer': ['engineer', 'developer'],
+        'Full Stack Developer': ['engineer', 'developer'],
+}
+
+
+
+def get_tech_set() -> set:
+    tech_set = set()
+    for category in _tech_list_synonyms.values():
+        for synonyms in category.values():
+            tech_set.update(synonyms)
+    return tech_set
+
+
+def get_tech_dict() -> dict:
+    return _tech_list_synonyms
+
+
+def get_roles_list() -> list:
+    return _software_job_roles
+
+
+def get_words_to_remove_from_title(role: str = None) -> list[str]:
+    if role is None or role not in _words_to_remove_dict:
+        return []
+    else:
+        return _words_to_remove_dict[role]
+
+

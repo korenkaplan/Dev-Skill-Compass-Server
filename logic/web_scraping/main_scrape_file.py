@@ -1,6 +1,6 @@
 """ this is the main entry point for scraping module"""
 from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
-from logic.web_scraping.DTOS.google_jobs_configuration_dto import GoogleJobsConfigDto
+from logic.web_scraping.google_jobs.DTO.google_jobs_configuration_dto import GoogleJobsConfigDto
 from logic.web_scraping.google_jobs.google_jobs_scraping import get_job_listings_google_jobs_pipeline
 
 import os
@@ -12,7 +12,7 @@ load_dotenv()
 # region Google Jobs Configuration
 def configure_google_jobs_scrape_engine(role: str, time_period: GoogleJobsTimePeriod) -> GoogleJobsConfigDto:
     google_jobs_configuration = GoogleJobsConfigDto(
-        search_value=role,
+        role=role,
         time_period=time_period,
         show_full_description_button_xpath=os.environ.get('SHOW_FULL_DESCRIPTION_BUTTON_XPATH_GOOGLE_JOBS'),
         expandable_job_description_text_xpath=os.environ.get('EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS'),

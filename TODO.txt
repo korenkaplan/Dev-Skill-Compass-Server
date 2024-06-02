@@ -4,6 +4,7 @@
 - Docker image of chrome and selenium
 - check if to turn the list of jobs to one long string is faster
 - add new environment variables to GitHub actions
+- finish tite filtering
 
 ============= General Assignments =================
 - Think of tech counting logic and implement it with scheduled commands
@@ -25,28 +26,35 @@
 - (Done) Create the main pipeline: Scraping, text analysis, data processing, database insertion and update.
 - (Done) Create the cron job to run the main pipeline each certain time.
 
+
 ============= WEB Scraping =============
 - (Done) Learn how to scrape job listing sites.
 - (Done) Handle the Chrome driver problem.
 - Finish the module.
 - (Done) Add the module to the main pipeline and replace sample data.
 
+
 ============= CI-CD =============
 - Fix healthcheck for web service
+
 
 ============= Repository & CV Adjustment =============
 - Create a Readme.md file to the project.
 - Create the CV and add the project to the CV.
 
+
 ============= Website Mockup =============
 - Create a mockup for the website using figma
 - List the endpoints and prepare functions for them.
 
+
 ============= Create a Restful API  =============
 - Create specific endpoints for the website.
 
+
 ============= Build Website  =============
 - Create a new React/streamlit project.
+
 
 ============= Deploy Website  =============
 - Deploy the react site to netlify. adjust the cors
@@ -59,4 +67,3 @@
  - Data Processing And Aggregation: process the tech words found in the job listings, and prepare it for database insert. -> Done.
 
 
- https://www.glassdoor.com/Job/israel-frontend-developer-jobs-SRCH_IL.0,6_IN119_KO7,24.htm

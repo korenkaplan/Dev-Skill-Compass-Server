@@ -3,7 +3,7 @@ from logic.web_scraping.google_jobs.google_jobs_scraping import GoogleJobsTimePe
 
 
 class GoogleJobsConfigDto(BaseModel):
-    search_value: str
+    role: str
     time_period: GoogleJobsTimePeriod
     show_full_description_button_xpath: str
     expandable_job_description_text_xpath: str

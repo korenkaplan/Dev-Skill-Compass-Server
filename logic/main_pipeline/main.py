@@ -1,7 +1,28 @@
 """This is the main pipeline that runs once a week to refresh the data in the database."""
+# region WSGI
+"""
+WSGI config for django_server project.
+
+It exposes the WSGI callable as a module-level variable named ``application``.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
+"""
+
+import os
+
+from django.core.wsgi import get_wsgi_application
+
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_server.settings')
+
+application = get_wsgi_application()
+# endregion
+
 from core.models import Roles, Technologies
-from logic.web_scraping.google_jobs.google_jobs_scraping import GoogleJobsTimePeriod
-from logic.web_scraping.main_scrape_file import job_scrape_pipeline
+from logic.web_scraping.google_jobs.google_jobs_scraping import GoogleJobsTimePeriod, \
+    get_job_listings_google_jobs_pipeline
+from logic.web_scraping.main_scrape_file import job_scrape_pipeline, configure_google_jobs_scrape_engine
 from logic.text_analysis.tech_term_finder import find_tech_terms_pool_threads
 from logic.data_processing.data_aggragation import data_processing_pipeline
 from concurrent.futures import ThreadPoolExecutor
@@ -81,10 +102,11 @@ def single_role_pipline(role: str, tech_set: set, tech_dict: dict, time_period: 
 def process_pool_role_pipline():
     """Main function that creates a process for each role."""
     try:
-        roles_list = get_all_roles()
+        # roles_list = get_all_roles()
+        roles_list = ["Backend Developer"]
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
-        google_jobs_time_period_month = GoogleJobsTimePeriod.WEEK
+        google_jobs_time_period_month = GoogleJobsTimePeriod.MONTH
         with ThreadPoolExecutor(max_workers=len(roles_list)) as executor:
             futures = [executor.submit(single_role_pipline, role, tech_set, tech_dictionary,
                                        google_jobs_time_period_month) for role in roles_list]
@@ -94,3 +116,11 @@ def process_pool_role_pipline():
                 future.result()
     except Exception as e:
         print(f"Error in main pipeline: {e}")
+
+
+
+
+config = configure_google_jobs_scrape_engine('Backend Developer', GoogleJobsTimePeriod.MONTH)
+# /html/body/div[2]/div/div[2]/div[1]/div/div/div[3]/div[1]/div[1]/div[4]/div[9]/div/ul/li/div/div[2]/div[2]/div/div/div[2]/div[2]
+
+get_job_listings_google_jobs_pipeline(config)
