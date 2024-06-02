@@ -1,6 +1,7 @@
 """
 Dto for getting the job description of a listing in google jobs
 """
+
 from pydantic import BaseModel
 from selenium.webdriver.chrome.webdriver import WebDriver
 

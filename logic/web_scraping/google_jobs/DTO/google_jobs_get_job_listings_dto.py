@@ -5,6 +5,7 @@ listings_list = get_job_listings(config_object.search_value, driver, wait,
                                          config_object.log_file_path,
                                          config_object.not_expandable_job_description_text_xpath, click_button_timeout)
 """
+
 from pydantic import BaseModel
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait

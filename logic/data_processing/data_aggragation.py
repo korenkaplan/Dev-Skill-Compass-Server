@@ -1,9 +1,12 @@
 """This is a module for data aggregating and processing the results of the job listings text analysis"""
+
 from collections import defaultdict
 from logic.text_analysis.data_loookup_functions import find_first_word_in_dict
 
 
-def sum_results_of_job_listings_analysis(jobs_sets_list: list[set[str]]) -> dict[str, int]:
+def sum_results_of_job_listings_analysis(
+    jobs_sets_list: list[set[str]],
+) -> dict[str, int]:
     """
     Summarizes the results of job listings analysis by counting the occurrences of each term in the provided list
     of sets.
@@ -50,7 +53,9 @@ def group_synonyms_words(terms_dict: dict, tech_dict: dict) -> dict[str, int]:
     return result_dict
 
 
-def divide_words_into_categories(terms_dict: dict, tech_dict: dict) -> defaultdict[str, defaultdict[str, int]]:
+def divide_words_into_categories(
+    terms_dict: dict, tech_dict: dict
+) -> defaultdict[str, defaultdict[str, int]]:
     """
     Divides terms into categories based on the _tech dictionary.
 
@@ -76,7 +81,9 @@ def divide_words_into_categories(terms_dict: dict, tech_dict: dict) -> defaultdi
     return result_dict
 
 
-def assign_aggregated_dict_to_role(role: str, terms_and_technologies_dictionary: (str, dict)) -> (str, dict):
+def assign_aggregated_dict_to_role(
+    role: str, terms_and_technologies_dictionary: (str, dict)
+) -> (str, dict):
     """
     Assigns an aggregated dictionary of terms and technologies to a role.
 
@@ -95,7 +102,9 @@ def assign_aggregated_dict_to_role(role: str, terms_and_technologies_dictionary:
         return role, {}
 
 
-def data_processing_pipeline(jobs_sets_list: list[set[str]], role: str, tech_dictionary: dict) -> (str, dict):
+def data_processing_pipeline(
+    jobs_sets_list: list[set[str]], role: str, tech_dictionary: dict
+) -> (str, dict):
     """
     Runs the data processing pipeline to aggregate and categorize job listing terms and technologies.
 

@@ -1,8 +1,15 @@
 """Test Module for tech_term_finder module"""
+
 import time
 import pytest
-from logic.text_analysis.tech_term_finder import (remove_subsets, find_phrases, preprocess_text,
-                                                  tokenize_text, find_tech_terms, find_tech_terms_pool_threads)
+from logic.text_analysis.tech_term_finder import (
+    remove_subsets,
+    find_phrases,
+    preprocess_text,
+    tokenize_text,
+    find_tech_terms,
+    find_tech_terms_pool_threads,
+)
 
 from logic.text_analysis.data.data import get_tech_set
 
@@ -11,15 +18,58 @@ sample_text = """"
 this is a test job listing for testing purposes here are some technical terms and technologies.
 Python, SQL, C#, Typescript, DOCKER, java, NodeJs
 """
-sample_tech_set = {'python', 'sql', 'c#', 'typescript', 'docker', 'java', 'nodejs', 'c++'}
+sample_tech_set = {
+    "python",
+    "sql",
+    "c#",
+    "typescript",
+    "docker",
+    "java",
+    "nodejs",
+    "c++",
+}
 tokenized_sample_text = [
-    "we", "are", "looking", "for", "someone", "experienced", "with", "ci/cd", "pipelines",
-    "cloud", "computing", "and", "machine", "learning", "knowledge", "of", "ux", "ui", "design", "is", "a", "plus",
-    'python', 'sql', 'c#', 'typescript', 'docker', 'java', 'nodejs', 'c++'
+    "we",
+    "are",
+    "looking",
+    "for",
+    "someone",
+    "experienced",
+    "with",
+    "ci/cd",
+    "pipelines",
+    "cloud",
+    "computing",
+    "and",
+    "machine",
+    "learning",
+    "knowledge",
+    "of",
+    "ux",
+    "ui",
+    "design",
+    "is",
+    "a",
+    "plus",
+    "python",
+    "sql",
+    "c#",
+    "typescript",
+    "docker",
+    "java",
+    "nodejs",
+    "c++",
 ]
-sample_data_for_test_remove_subset = ['microsoft sql server', 'github actions', 'github', 'sql server']
-sample_data_for_test_preprocess_text = 'HeLLo WoR!@$ld'
-sample_data_for_test_tokenize_text = 'Python, SQL, C#,$, Typescript, DOCKER, java, NodeJs c++, ci/cd, ux/ui .net'
+sample_data_for_test_remove_subset = [
+    "microsoft sql server",
+    "github actions",
+    "github",
+    "sql server",
+]
+sample_data_for_test_preprocess_text = "HeLLo WoR!@$ld"
+sample_data_for_test_tokenize_text = (
+    "Python, SQL, C#,$, Typescript, DOCKER, java, NodeJs c++, ci/cd, ux/ui .net"
+)
 sample_data_developer_job_listings = [
     "Backend Engineer (Python/Django): Build and maintain scalable web applications using Python and Django"
     " framework. (RESTful API, Databases)",
@@ -55,7 +105,7 @@ max_time_for_handling_multiple_listings_in_seconds = 10
 # region Tests
 def test_remove_subset():
     """Test removing a subset of a phrase"""
-    expected_result = ['microsoft sql server', 'github actions']
+    expected_result = ["microsoft sql server", "github actions"]
     result = remove_subsets(sample_data_for_test_remove_subset)
 
     # Check length is 2
@@ -67,28 +117,49 @@ def test_remove_subset():
 
 def test_preprocess_text():
     """Test preprocessing a string by  converting it to lowercase and removing special characters (# / ),
-    numbers, and punctuation. """
-    expected_result = 'hello world'
+    numbers, and punctuation."""
+    expected_result = "hello world"
     assert preprocess_text(sample_data_for_test_preprocess_text) == expected_result
 
 
 def test_tokenize_text():
     """Test tokenizing a string into separate words"""
-    expected_result = ['Python', 'SQL', 'C#', 'Typescript', 'DOCKER', 'java', 'NodeJs', 'c++', 'ci/cd', 'ux/ui', '.net']
+    expected_result = [
+        "Python",
+        "SQL",
+        "C#",
+        "Typescript",
+        "DOCKER",
+        "java",
+        "NodeJs",
+        "c++",
+        "ci/cd",
+        "ux/ui",
+        ".net",
+    ]
     assert tokenize_text(sample_data_for_test_tokenize_text) == expected_result
 
 
 def test_find_phrases():
-    """Test find_phrases check that """
-    expected_result = ['python', 'sql', 'c#', 'typescript', 'docker', 'java', 'nodejs', 'c++']
+    """Test find_phrases check that"""
+    expected_result = [
+        "python",
+        "sql",
+        "c#",
+        "typescript",
+        "docker",
+        "java",
+        "nodejs",
+        "c++",
+    ]
     result = find_phrases(tokenized_sample_text, sample_tech_set)
     for item in expected_result:
         assert item in result
 
 
 def test_find_tech_terms():
-    """"Test find_tech_terms receives a text job listing and returns the list of tech skills"""
-    expected_result = ['python', 'sql', 'c#', 'typescript', 'docker', 'java', 'nodejs']
+    """ "Test find_tech_terms receives a text job listing and returns the list of tech skills"""
+    expected_result = ["python", "sql", "c#", "typescript", "docker", "java", "nodejs"]
     result = find_tech_terms(sample_text, sample_tech_set)
     # compare the lengths of the result and the expected result
     assert len(result) == len(expected_result)
@@ -115,5 +186,5 @@ def test_find_tech_terms_pool_threads():
 # endregion
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pytest.main()

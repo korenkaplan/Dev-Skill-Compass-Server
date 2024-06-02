@@ -4,7 +4,7 @@ from init_db.data.data import get_tech_dict, get_roles_list
 
 
 class Command(BaseCommand):
-    help = 'Initialize the database'
+    help = "Initialize the database"
     tech_dict = get_tech_dict()
     roles = get_roles_list()
 

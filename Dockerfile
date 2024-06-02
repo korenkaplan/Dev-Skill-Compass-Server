@@ -9,10 +9,15 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential cron postgresql-client
+    && apt-get install -y --no-install-recommends build-essential cron postgresql-client wget unzip && \
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt install -y ./google-chrome-stable_current_amd64.deb && \
+    rm google-chrome-stable_current_amd64.deb && \
+    apt-get clean
 
 # Install Poetry
 RUN pip install poetry
+
 
 # Copy the entrypoint script into the container
 COPY entrypoint.sh /app/

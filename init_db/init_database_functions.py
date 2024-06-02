@@ -1,4 +1,5 @@
 """Module for initializing the database with initial data"""
+
 import logging
 import sys
 from typing import List, Tuple
@@ -15,7 +16,9 @@ def _get_logger() -> logging.Logger:
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
 
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
 
     stdout_handler = logging.StreamHandler(sys.stdout)
     stdout_handler.setFormatter(formatter)
@@ -42,7 +45,9 @@ def _extract_keys_from_dictionary(tech_dict: dict) -> List[str]:
     return list(tech_dict.keys())
 
 
-def _extract_tech_and_category_from_dictionary(tech_dict: dict, category_key: str) -> Tuple[str, set]:
+def _extract_tech_and_category_from_dictionary(
+    tech_dict: dict, category_key: str
+) -> Tuple[str, set]:
     """
     Extract technologies and category from a dictionary.
 
@@ -75,7 +80,9 @@ def _insert_technologies_to_db_pipeline(tech_dict: dict) -> int:
             category_id = Categories.objects.filter(name=category_key).first()
             if category_id:
                 for tech_key in techs_dict.keys():
-                    new_tech = Technologies.objects.create(name=tech_key, category_id=category_id)
+                    new_tech = Technologies.objects.create(
+                        name=tech_key, category_id=category_id
+                    )
                     if new_tech:
                         total_inserted += 1
             else:
@@ -128,7 +135,10 @@ def _insert_categories_to_db(categories: List[str]) -> int:
 def _insert_synonyms_to_db(synonyms: set[str], technology: Technologies) -> int:
     logger = _get_logger()
     try:
-        res = [Synonyms.objects.create(origin_tech_id=technology, name=synonym) for synonym in synonyms]
+        res = [
+            Synonyms.objects.create(origin_tech_id=technology, name=synonym)
+            for synonym in synonyms
+        ]
         return len(res)
     except Exception as e:
         logger.error("Error occurred while inserting Synonyms: %s", str(e))
@@ -142,7 +152,9 @@ def _insert_synonyms_to_db_pipeline(tech_dict: dict) -> int:
         for category, synonyms_dict in tech_dict.items():
             for tech_name, synonyms_list in synonyms_dict.items():
                 tech_object = Technologies.objects.filter(name=tech_name).first()
-                total_inserted += _insert_synonyms_to_db(set(synonyms_list), tech_object)
+                total_inserted += _insert_synonyms_to_db(
+                    set(synonyms_list), tech_object
+                )
         return total_inserted
 
     except Exception as e:
@@ -170,12 +182,12 @@ def initialize_pipeline(tech_dict: dict, roles: List[str]):
         insert_count_roles = _insert_roles_to_db(roles)
         insert_count_techs = _insert_technologies_to_db_pipeline(tech_dict)
         insert_count_synonyms = _insert_synonyms_to_db_pipeline(tech_dict)
-        result = f'''Total insert sum:
+        result = f"""Total insert sum:
             Roles: {insert_count_roles}
             Categories: {insert_count_categories}
             Technologies: {insert_count_techs}
             Synonyms: {insert_count_synonyms}
-'''
+"""
         logger.info(result)
         return result
     except Exception as e:

@@ -1,6 +1,11 @@
 from rest_framework import generics
 from .models import Technologies, Roles, Categories, Synonyms
-from .serializers import TechnologySerializer, CategorySerializer, RoleSerializer, SynonymsSerializer
+from .serializers import (
+    TechnologySerializer,
+    CategorySerializer,
+    RoleSerializer,
+    SynonymsSerializer,
+)
 
 
 class TechnologiesListCreate(generics.ListCreateAPIView):

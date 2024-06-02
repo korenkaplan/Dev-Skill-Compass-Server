@@ -10,14 +10,16 @@ def find_duplicate_words_with_lists(tech_dict):
             for word in word_list:
                 # If the word is already in the word_counts dictionary, update its count and add the list name
                 if word in word_counts:
-                    word_counts[word]['count'] += 1
-                    word_counts[word]['lists'].append(category)
+                    word_counts[word]["count"] += 1
+                    word_counts[word]["lists"].append(category)
                 # Otherwise, initialize the count for the word and store the list name
                 else:
-                    word_counts[word] = {'count': 1, 'lists': [category]}
+                    word_counts[word] = {"count": 1, "lists": [category]}
 
     # Filter the word counts to get only the duplicates
-    duplicate_counts = {word: info for word, info in word_counts.items() if info['count'] > 1}
+    duplicate_counts = {
+        word: info for word, info in word_counts.items() if info["count"] > 1
+    }
 
     # Return the dictionary of duplicate word counts with associated lists
     return duplicate_counts

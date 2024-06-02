@@ -1,8 +1,13 @@
 class JobListingSite:
     """This class is a representation of a job search site"""
 
-    def __init__(self, name: str, url: str, full_description_element_identifier: str,
-                 full_description_element_type: str):
+    def __init__(
+        self,
+        name: str,
+        url: str,
+        full_description_element_identifier: str,
+        full_description_element_type: str,
+    ):
         self._name = None
         self._url = None
         self._full_description_element_identifier = None

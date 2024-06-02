@@ -1,6 +1,7 @@
 """
 Dto for the function that finds the title element
 """
+
 from pydantic import BaseModel
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait

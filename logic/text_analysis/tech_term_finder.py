@@ -11,6 +11,7 @@ Functions:
 - find_phrases(words, tech_set): Finds phrases from the tokenized words that match any terms in the provided tech set.
 - find_tech_terms(text, tech_set): Finds technical terms in the input text based on the provided set of technical terms.
 """
+
 import re
 from concurrent.futures import ThreadPoolExecutor
 
@@ -32,8 +33,10 @@ def remove_subsets(tech_list: list) -> set:
     for i, tech_word in enumerate(tech_list):
         # Check if the current tech word is not a subset of any other tech word in the list
         if not any(
-                tech_word != other_word and set(tech_word.split()).issubset(set(other_word.split()))
-                for j, other_word in enumerate(tech_list) if i != j
+            tech_word != other_word
+            and set(tech_word.split()).issubset(set(other_word.split()))
+            for j, other_word in enumerate(tech_list)
+            if i != j
         ):
             # If the current tech word is not a subset, add it to the cleaned set
             cleaned_tech_set.add(tech_word)
@@ -54,7 +57,7 @@ def preprocess_text(text: str) -> str:
     # Convert text to lowercase
     text = text.lower()
     # Remove special characters, numbers, and punctuation except for specific patterns like ci/cd, ui/ux
-    text = re.sub(r'[^a-z0-9\s/#+.]', '', text)
+    text = re.sub(r"[^a-z0-9\s/#+.]", "", text)
     return text.strip()
 
 
@@ -68,12 +71,12 @@ def tokenize_text(text: str) -> list[str]:
     Returns:
     list: A list of tokenized words.
     """
-    pattern = rf'''
+    pattern = rf"""
           \b\w{{1,{max_letters}}}/\w{{1,{max_letters}}}\b|
           \b\w+(?:\.\w+)*[#\w+]*|
           [#\w+]+
           |\.\w+
-      '''
+      """
     return re.findall(pattern, text, re.VERBOSE)
 
 
@@ -90,7 +93,9 @@ def find_phrases(words, tech_set: set) -> list[str]:
     """
     found_phrases = []
     for i in range(len(words)):
-        for j in range(i + 1, min(len(words) + 1, i + 4)):  # Adjust range for phrase length
+        for j in range(
+            i + 1, min(len(words) + 1, i + 4)
+        ):  # Adjust range for phrase length
             phrase = " ".join(words[i:j])
             if phrase in tech_set:
                 found_phrases.append(phrase)
@@ -123,7 +128,10 @@ def find_tech_terms_pool_threads(listings_list: list[str], tech_set: set) -> lis
     # start the thread pool
     with ThreadPoolExecutor(max_workers=len(listings_list)) as executor:
         # submit task for each listing
-        futures = [executor.submit(find_tech_terms, listing, tech_set) for listing in listings_list]
+        futures = [
+            executor.submit(find_tech_terms, listing, tech_set)
+            for listing in listings_list
+        ]
 
         # collect and store results from all tasks
         for future in futures:

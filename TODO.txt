@@ -1,7 +1,4 @@
 =============  Most Important =================
-- Docker image of chrome and selenium
-- (later) check if to turn the list of jobs to one long string is faster
-- (Done) add new environment variables to GitHub actions
 
 
 ============= General Assignments =================

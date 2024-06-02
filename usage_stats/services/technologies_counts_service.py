@@ -1,4 +1,5 @@
 """ A service class for database interactions with TechnologiesCounts table"""
+
 from usage_stats.models import TechnologiesCounts
 from core.models import Roles, Technologies
 
@@ -47,13 +48,17 @@ def update_technologies_counts_table_in_db_pipeline(role_techs_tuple: (str, dict
             try:
                 tech = get_technology_from_db(tech_name)
             except Exception as e:
-                print(f"Error getting technology from database for tech '{tech_name}': {e}")
+                print(
+                    f"Error getting technology from database for tech '{tech_name}': {e}"
+                )
                 continue
 
             try:
                 update_count_of_technology_in_db(tech, role, count)
             except Exception as e:
-                print(f"Error updating count of technology '{tech_name}' for role '{role_techs_tuple[0]}': {e}")
+                print(
+                    f"Error updating count of technology '{tech_name}' for role '{role_techs_tuple[0]}': {e}"
+                )
                 continue
 
 
@@ -72,7 +77,9 @@ def get_technology_from_db(tech_name: str):
 # update the count of the technology
 def update_count_of_technology_in_db(tech: int, role: Roles, count: int):
     #  Get the object from db
-    tech_count_obj = TechnologiesCounts.objects.filter(role_id=role, technology_id=tech).first()
+    tech_count_obj = TechnologiesCounts.objects.filter(
+        role_id=role, technology_id=tech
+    ).first()
 
     # check if exists
     if tech_count_obj:
@@ -81,4 +88,6 @@ def update_count_of_technology_in_db(tech: int, role: Roles, count: int):
         tech_count_obj.save()
     # if not exist create
     else:
-        TechnologiesCounts.objects.create(role_id=role, technology_id=tech, counter=count)
+        TechnologiesCounts.objects.create(
+            role_id=role, technology_id=tech, counter=count
+        )

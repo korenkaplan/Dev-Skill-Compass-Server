@@ -11,7 +11,10 @@ def get_tech_dict() -> dict:
     # iterate through the technologies and get all the synonyms of the technology
     for technology in technologies:
         # get all the synonyms of the technology
-        synonyms: list[str] = [synonym.name for synonym in Synonyms.objects.filter(origin_tech_id=technology)]
+        synonyms: list[str] = [
+            synonym.name
+            for synonym in Synonyms.objects.filter(origin_tech_id=technology)
+        ]
         # get the category of the technology
         category: Categories = technology.category_id
         # add to dictionary
@@ -28,7 +31,9 @@ def get_count_of_technologies_for_role(role_name: str) -> dict:
     if role is None:
         raise ValueError("No such role: %s" % role)
     # get the technologies for this role
-    role_tech_counts: list[TechnologiesCounts] = TechnologiesCounts.objects.filter(role_id=role)
+    role_tech_counts: list[TechnologiesCounts] = TechnologiesCounts.objects.filter(
+        role_id=role
+    )
     # create the keys from the technologies
     for tech_count_row in role_tech_counts:
         # get the technology from the row
@@ -36,7 +41,9 @@ def get_count_of_technologies_for_role(role_name: str) -> dict:
         # get the category from the technology
         category_obj: Categories = technology_obj.category_id
         # create the dictionary
-        result_dict[role.name][category_obj.name][technology_obj.name] = tech_count_row.counter
+        result_dict[role.name][category_obj.name][
+            technology_obj.name
+        ] = tech_count_row.counter
 
     # return the dictionary result
     return result_dict
