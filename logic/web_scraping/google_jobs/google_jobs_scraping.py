@@ -510,7 +510,7 @@ def remove_non_letters_characters(text: str) -> str:
     return result
 
 
-def is_title_match_role(role: str, title: str, log_file_path: str) -> bool:
+def is_title_match_role(role: str, title: str, log_file_path: str, false_title_counter: int) -> (bool, int):
     # Get the words to remove from the title by role
     words_to_remove = get_words_to_remove_from_title(role)
 
@@ -531,8 +531,9 @@ def is_title_match_role(role: str, title: str, log_file_path: str) -> bool:
             f"""False match: {cleaned_title}({title} <-> {cleaned_role}({role})"""
         )
         write_text_to_file(log_file_path, "a", log_text)
+        false_title_counter += 1
 
-    return res
+    return res, false_title_counter
 
 
 def find_and_match_title(
@@ -542,6 +543,7 @@ def find_and_match_title(
     listing_li_element: WebElement,
     wait: WebDriverWait,
     log_file_path: str,
+    false_title_counter: int
 ) -> (bool, int):
     # Define the result variables
     is_title_exist = False
@@ -565,13 +567,13 @@ def find_and_match_title(
     title = find_title(dto)
 
     if title:
-        is_match = is_title_match_role(role, title, log_file_path)
+        is_match = is_title_match_role(role, title, log_file_path, false_title_counter)
         is_title_exist = True
 
     if not is_title_exist:
-        print("Could not find title element returned false")
+        print("Could not find title element")
 
-    return is_match, increase_every_ten
+    return is_match, increase_every_ten, false_title_counter
 
 
 # endregion
@@ -594,16 +596,15 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
         dto.driver.quit()
         return []
     # if successful init variables
-    (
-        skip_amount,
-        previous_size,
-        inserted_descriptions,
-        job_listings_result_list,
-        urls_attempted_set,
-        false_title_counter,
-    ) = (0, -1, 0, [], set(), 0)
+    skip_amount = 0
+    previous_size = -1
+    inserted_descriptions = 0
+    job_listings_result_list = []
+    urls_attempted_set = set()
+    false_title_counter = 0
     increase_every_ten = 0
     repeated_urls_counter = 0
+
     while job_listings:
         # If the previous size is the same as the current size, there are no more job listings to load
         if previous_size == len(job_listings):
@@ -627,17 +628,17 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
                 continue
 
             # find and match the title to the role
-            is_title_match, increase_every_ten = find_and_match_title(
+            is_title_match, increase_every_ten, false_title_counter = find_and_match_title(
                 dto.role,
                 i,
                 increase_every_ten,
                 job_listings[i],
                 dto.wait,
                 dto.log_file_path,
+                false_title_counter
             )
 
             if is_title_match is False:
-                false_title_counter += 1
                 continue
 
             get_full_description_dto: GoogleJobsGetFullDescriptionDto = (
@@ -668,6 +669,7 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
     Inserted descriptions: {inserted_descriptions} 
     Error titles counter: {false_title_counter} 
     Repeated URLS: {repeated_urls_counter}
+    Problematic URLS: 1
     --------------------------------------
     Total Job Listings: {len(job_listings)}
 """

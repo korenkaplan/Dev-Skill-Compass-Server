@@ -1519,6 +1519,8 @@ _words_to_remove_dict = {
     "Backend Developer": ["engineer", "developer"],
     "Frontend Developer": ["engineer", "developer"],
     "Full Stack Developer": ["engineer", "developer"],
+    "DevOps Engineer": ["engineer", "developer"],
+    "QA Engineer": ["engineer", "developer"],
 }
 
 

@@ -18,6 +18,11 @@ load_dotenv()
 def configure_google_jobs_scrape_engine(
     role: str, time_period: GoogleJobsTimePeriod
 ) -> GoogleJobsConfigDto:
+    # Determine the project root directory
+    project_root = os.path.dirname(os.path.abspath(__file__))
+
+    # Construct the absolute path to the log file
+    scrape_google_log_file_path = os.path.join(project_root, "Logs", "web_scrape_main_run_log")
     google_jobs_configuration = GoogleJobsConfigDto(
         role=role,
         time_period=time_period,
@@ -33,7 +38,7 @@ def configure_google_jobs_scrape_engine(
         max_interval_attempts=10,
         sleep_time_between_attempt_in_seconds=30,
         wait_driver_timeout=3,
-        log_file_path=f"{os.environ.get('SCRAPE_GOOGLE_LOG_FILE_PATH')}_{role.replace(' ', '_')}.txt",
+        log_file_path=f"{scrape_google_log_file_path}_{role.replace(' ', '_')}.txt",
     )
     return google_jobs_configuration
 
