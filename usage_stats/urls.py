@@ -4,6 +4,8 @@ from .views import (
     TechnologicalCountListCreate,
     HistoricalTopTechnologiesListCreate,
     HistoricalTopTechnologiesRetrieveUpdateDestroy,
+    AggregatedTechCountsListCreate,
+    AggregatedTechCountsRetrieveUpdateDestroy
 )
 
 
@@ -27,6 +29,16 @@ urlpatterns = [
     path(
         "historicalTopTechnologies/<int:pk>",
         HistoricalTopTechnologiesRetrieveUpdateDestroy.as_view(),
+        name="historical_top_details",
+    ),
+    path(
+        "aggregatedTechCounts/",
+        AggregatedTechCountsListCreate.as_view(),
+        name="historical_top_list_create",
+    ),
+    path(
+        "aggregatedTechCounts/<int:pk>",
+        AggregatedTechCountsRetrieveUpdateDestroy.as_view(),
         name="historical_top_details",
     ),
 ]
