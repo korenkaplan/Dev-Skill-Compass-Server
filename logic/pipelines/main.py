@@ -1,24 +1,5 @@
 """This is the main pipeline that runs once a week to refresh the data in the database."""
 
-# # region WSGI
-# """
-# WSGI config for django_server project.
-#
-# It exposes the WSGI callable as a module-level variable named ``application``.
-#
-# For more information on this file, see
-# https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
-# """
-#
-# import os
-#
-# from django.core.wsgi import get_wsgi_application
-#
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_server.settings")
-#
-# application = get_wsgi_application()
-# # endregion
-
 from core.models import Roles, Technologies
 from logic.web_scraping.google_jobs.google_jobs_scraping import (
     GoogleJobsTimePeriod,
@@ -114,13 +95,13 @@ def single_role_pipline(
         print(f"Error in pipeline for role {role}: {e}")
 
 
-def process_pool_role_pipline():
+def process_pool_role_pipline(period: GoogleJobsTimePeriod):
     """Main function that creates a process for each role."""
     try:
         roles_list = get_all_roles()
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
-        google_jobs_time_period_month = GoogleJobsTimePeriod.MONTH
+        google_jobs_time_period_month = period
         with ThreadPoolExecutor(max_workers=len(roles_list)) as executor:
             futures = [
                 executor.submit(
@@ -140,13 +121,13 @@ def process_pool_role_pipline():
         print(f"Error in main pipeline: {e}")
 
 
-def process_pool_role_pipline_test():
+def process_pool_role_pipline_test(period: GoogleJobsTimePeriod):
     """Main function that creates a process for each role."""
     try:
         roles_list = ["Backend Developer"]
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
-        google_jobs_time_period_month = GoogleJobsTimePeriod.WEEK
+        google_jobs_time_period_month = period
         with ThreadPoolExecutor(max_workers=len(roles_list)) as executor:
             futures = [
                 executor.submit(
@@ -164,3 +145,5 @@ def process_pool_role_pipline_test():
                 future.result()
     except Exception as e:
         print(f"Error in main pipeline: {e}")
+
+

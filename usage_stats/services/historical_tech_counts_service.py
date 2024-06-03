@@ -1,4 +1,8 @@
 """This module is a service class for """
+
+
+
+from logic.pipelines.main import process_pool_role_pipline_test
 from dateutil.relativedelta import relativedelta
 from django.utils import timezone
 from usage_stats.models import MonthlyTechnologiesCounts, HistoricalTechCounts
@@ -29,3 +33,13 @@ def get_tech_counts_from_last_number_of_months(number_of_months: int) -> list[Hi
 
 
 
+def main():
+    # objs = MonthlyTechnologiesCounts.objects.all()
+    # insert_rows_from_monthly_tech_table(objs)
+    # MonthlyTechnologiesCounts.objects.all().delete()
+    # process_pool_role_pipline_test()
+    pass
+
+
+if __name__ == '__main__':
+    main()

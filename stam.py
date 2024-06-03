@@ -13,20 +13,20 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_server.settings")
 
 application = get_wsgi_application()
 # endregion
 
-from usage_stats.models import MonthlyTechnologiesCounts
-from dateutil.relativedelta import relativedelta
-from django.utils import timezone
-number_of_months = 2
-today = timezone.now()
-past_date = today - relativedelta(days=2)
+from usage_stats.models import MonthlyTechnologiesCounts, AggregatedTechCounts, HistoricalTechCounts
+from core.models import Roles, Technologies
 
 
-rows = MonthlyTechnologiesCounts.objects.filter(created_at__gt=past_date)
+def print_python_backend():
+    backend_role = Roles.objects.filter(name="Backend Developer").first()
+    python = Technologies.objects.filter(name="python").first()
+    python_backend_count = AggregatedTechCounts.objects.filter(role_id=backend_role, technology_id=python)
+    print(python_backend_count)
 
-for row in rows:
-    print(row)
+

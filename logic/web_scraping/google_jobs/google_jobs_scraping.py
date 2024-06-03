@@ -33,6 +33,8 @@ from logic.web_scraping.google_jobs.DTO.google_jobs_get_job_listings_dto import 
 from logic.web_scraping.google_jobs.DTO.google_jobs_title_element_xpath_dto import (
     GoogleJobsTitleElementXpathDto,
 )
+import os
+from datetime import datetime
 
 
 # region General Functions
@@ -74,6 +76,10 @@ def write_text_to_file(
         bool: True if the operation was successful, False otherwise.
     """
     try:
+        # Ensure the directory exists
+        directory = os.path.dirname(filepath)
+        if directory and not os.path.exists(directory):
+            os.makedirs(directory)
         seperator = separator_length * separator_sign
         with open(filepath, mode, encoding=encoding) as file:
             if add_time_stamp:
@@ -87,6 +93,7 @@ def write_text_to_file(
     except Exception as e:
         print("An error occurred: ", e)
         return False
+
 
 
 # endregion
@@ -177,7 +184,7 @@ def get_full_description(xpath, _driver) -> (bool, str):
 
 # region Setup and Initialization functions
 def setup_chrome_driver(
-    params=None, set_auto_params=True, activate=False, url="", headless=True
+    params=None, set_auto_params=True, activate=False, url="", headless=False
 ) -> WebDriver:
     """
     Sets up a Chrome WebDriver with optional geolocation parameters and headless mode.
