@@ -1,22 +1,19 @@
 =============  Most Important =================
-- finish the historical table service
-- plan the pipeline(weekly and monthly)
-- Create the aggregated table
-- create the service and model for aggregated table
-- schedule the cron jobs and pipelines
-=============  Assignments =================
-- create cron jobs service file to manage all the cron functions
--
+- (done) finish the historical table service
+- (done) plan the pipeline(weekly and monthly)
+- (done) Create the aggregated table
+- (done) create the service and model for aggregated table
+- (done) schedule the cron jobs and pipelines
+
 
 ============= General Assignments =================
-- Think of tech counting logic and implement it with scheduled commands
 - Organize the files and naming in the project
 
 
 ============= Historical tech count Assignments =================
-- Create service class
-- Create logic for when to transfer records into the table
-- Create pipeline for inserting data
+- (done) Create service class
+- (done) Create logic for when to transfer records into the table
+- (done) Create pipeline for inserting data
 
 
 ============= Database Integration: Insert the processed data into the database =============
@@ -32,7 +29,7 @@
 ============= WEB Scraping =============
 - (Done) Learn how to scrape job listing sites.
 - (Done) Handle the Chrome driver problem.
-- Finish the module.
+- (done) Finish the module.
 - (Done) Add the module to the main pipeline and replace sample data.
 
 

@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-
+from utils.enums import CronExpressions
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -130,11 +130,15 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-EVERY_MONDAY_AT_10_10 = "10 10 * * 1"
 CRONJOBS = [
     (
-        EVERY_MONDAY_AT_10_10,
-        "logic.main_pipeline.main.process_pool_role_pipline",
+        CronExpressions.EVERY_MONDAY_AT_4.value,
+        "logic.pipelines.weekly_pipeline.weekly_pipeline",
         ">> /var/log/cron.log 2>&1",
     ),
+    (
+        CronExpressions.EVERY_FIRST_OF_MONTH_AT_4.value,
+        "logic.pipelines.monthly_pipeline.monthly_pipeline",
+        ">> /var/log/cron.log 2>&1",
+    )
 ]

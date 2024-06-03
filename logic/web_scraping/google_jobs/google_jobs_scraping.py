@@ -2,7 +2,6 @@
 
 import time
 import re
-from datetime import datetime
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
@@ -33,71 +32,7 @@ from logic.web_scraping.google_jobs.DTO.google_jobs_get_job_listings_dto import 
 from logic.web_scraping.google_jobs.DTO.google_jobs_title_element_xpath_dto import (
     GoogleJobsTitleElementXpathDto,
 )
-import os
-from datetime import datetime
-
-
-# region General Functions
-def countdown(n):
-    """
-    Prints a countdown from n to 0 in the console, updating the same line every second.
-
-    Args:
-        n (int): The starting number for the countdown.
-    """
-    for i in range(n, 0, -1):
-        print(f"\r{i}", end="", flush=True)
-        time.sleep(1)
-    print("\r0", flush=True)  # Ensure the last number is also printed on the same line
-
-
-def write_text_to_file(
-    filepath: str,
-    mode: str,
-    text: str,
-    separator_sign="=",
-    separator_length=300,
-    encoding="utf-8",
-    add_time_stamp=True,
-) -> bool:
-    """
-    Writes text to a file with optional timestamp and separator.
-
-    Args:
-        filepath (str): The path to the file.
-        mode (str): The file opening mode, e.g., 'w' for write, 'a' for append.
-        text (str): The text to write to the file.
-        separator_sign (str): The character to use for the separator line.
-        separator_length (int): The length of the separator line.
-        encoding (str): The file encoding.
-        add_time_stamp (bool): Whether to add a timestamp to the text.
-
-    Returns:
-        bool: True if the operation was successful, False otherwise.
-    """
-    try:
-        # Ensure the directory exists
-        directory = os.path.dirname(filepath)
-        if directory and not os.path.exists(directory):
-            os.makedirs(directory)
-        seperator = separator_length * separator_sign
-        with open(filepath, mode, encoding=encoding) as file:
-            if add_time_stamp:
-                timestamp = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-                file.write(f"({timestamp}) -> {text}\n")
-            else:
-                file.write(f"{text} \n")
-            if seperator:
-                file.write(seperator + "\n")
-        return True
-    except Exception as e:
-        print("An error occurred: ", e)
-        return False
-
-
-
-# endregion
-
+from utils.functions import write_text_to_file, countdown
 
 # region Elements interaction functions
 def click_button(xpath, driver, timeout=1.0) -> (bool, str):
