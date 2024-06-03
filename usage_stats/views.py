@@ -8,7 +8,9 @@ class HistoricalTopTechnologiesListCreate(generics.ListCreateAPIView):
     serializer_class = HistoricalTopTechnologiesSerializer
 
 
-class HistoricalTopTechnologiesRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+class HistoricalTopTechnologiesRetrieveUpdateDestroy(
+    generics.RetrieveUpdateDestroyAPIView
+):
     queryset = HistoricalTopTechnologies.objects.all()
     serializer_class = HistoricalTopTechnologiesSerializer
 

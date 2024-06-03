@@ -1,10 +1,64 @@
-1.(done) Create the urls(router) for all the CRUD routes for the models.
-2.(done) Create Validation for all the fields.
-3.(done) migrate and make migrations and create the database.
-4.(done) add the apps to settings.py and to urls.py
-4.(done) write tests for the CRUD operations
-5. create the functions to interact with the database not via an api + tests
-6. create service class
-7. create cron jobs
+=============  Most Important =================
+
+
+============= General Assignments =================
+- Think of tech counting logic and implement it with scheduled commands
+- Organize the files and naming in the project
+
+
+============= Historical tech count Assignments =================
+- Create service class
+- Create logic for when to transfer records into the table
+- Create pipeline for inserting data
+
+
+============= Database Integration: Insert the processed data into the database =============
+- (Done) Create script to insert the core data into the database: Roles, Categories and Technologies.
+
+
+============= Main Entrypoint And Cron job (depends on: Database Integration)  =============
+- (Done)  Create script to fetch a dictionary of techs and categories from the db before starting the main pipeline.
+- (Done) Create the main pipeline: Scraping, text analysis, data processing, database insertion and update.
+- (Done) Create the cron job to run the main pipeline each certain time.
+
+
+============= WEB Scraping =============
+- (Done) Learn how to scrape job listing sites.
+- (Done) Handle the Chrome driver problem.
+- Finish the module.
+- (Done) Add the module to the main pipeline and replace sample data.
+
+
+============= CI-CD =============
+- Fix healthcheck for web service
+
+
+============= Repository & CV Adjustment =============
+- Create a Readme.md file to the project.
+- Create the CV and add the project to the CV.
+
+
+============= Website Mockup =============
+- Create a mockup for the website using figma
+- List the endpoints and prepare functions for them.
+
+
+============= Create a Restful API  =============
+- Create specific endpoints for the website.
+
+
+============= Build Website  =============
+- Create a new React/streamlit project.
+
+
+============= Deploy Website  =============
+- Deploy the react site to netlify. adjust the cors
+- Deploy the service to render adjust the allowed hosts.
+- Host the postgresql and adjust the postgresql ENV variables.
+
+
+ ==========================================  Done ==========================================
+ - Text Analysis: get the tech words out of the job listings. -> Done.
+ - Data Processing And Aggregation: process the tech words found in the job listings, and prepare it for database insert. -> Done.
 
 

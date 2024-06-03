@@ -19,12 +19,16 @@ spacy = "^3.7.4"
 nltk = "^3.8.1"
 pytest-django = "^4.8.0"
 django-crontab = "^0.7.1"
+webdriver-manager = "^4.0.1"
+lxml = "^5.2.2"
+pydantic = "^2.7.2"
 
 
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7.0.0"
 pytest = "^8.2.0"
+black = "^24.4.2"
 
 [build-system]
 requires = ["poetry-core"]
