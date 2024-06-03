@@ -1,6 +1,9 @@
 =============  Most Important =================
-
-
+- finish the historical table service
+- plan the pipeline(weekly and monthly)
+- Create the aggregated table
+- create the service and model for aggregated table
+- schedule the cron jobs and pipelines
 =============  Assignments =================
 - create cron jobs service file to manage all the cron functions
 -

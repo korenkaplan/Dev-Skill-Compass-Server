@@ -1,4 +1,4 @@
-from logic.main_pipeline.main import (
+from logic.pipelines.main import (
     get_all_roles,
     get_all_techs_from_db,
     scrape_job_listings,

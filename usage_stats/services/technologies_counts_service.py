@@ -90,3 +90,12 @@ def update_count_of_technology_in_db(tech: int, role: Roles, count: int):
         MonthlyTechnologiesCounts.objects.create(
             role_id=role, technology_id=tech, counter=count
         )
+
+
+# clear the table for monthly reset
+def truncate_technologies_count_table():
+    try:
+        MonthlyTechnologiesCounts.objects.all().delete()
+        print("Deleted all rows in table")
+    except Exception as e:
+        print("Error trunctating table: %s" % e)
