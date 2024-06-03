@@ -1,4 +1,5 @@
 """This is the main pipeline that runs once a week to refresh the data in the database."""
+
 # # region WSGI
 # """
 # WSGI config for django_server project.
@@ -18,16 +19,12 @@
 # application = get_wsgi_application()
 # # endregion
 
-from usage_stats.models import TechnologiesCounts
-from decorators.decorator_measure_function_time import log_runtime
-from core.models import Roles, Technologies, Categories
+from core.models import Roles, Technologies
 from logic.web_scraping.google_jobs.google_jobs_scraping import (
     GoogleJobsTimePeriod,
-    get_job_listings_google_jobs_pipeline,
 )
 from logic.web_scraping.main_scrape_file import (
     job_scrape_pipeline,
-    configure_google_jobs_scrape_engine,
 )
 from logic.text_analysis.tech_term_finder import find_tech_terms_pool_threads
 from logic.data_processing.data_aggragation import data_processing_pipeline
@@ -167,56 +164,3 @@ def process_pool_role_pipline_test():
                 future.result()
     except Exception as e:
         print(f"Error in main pipeline: {e}")
-
-
-# log_path = r"logic/web_scraping/Logs/main_pipeline_runtime.txt"
-
-
-# # Get the role
-# backend_role = Roles.objects.filter(name="Backend Developer").first()
-#
-# # get the counts for the role
-# backend_role_counts = TechnologiesCounts.objects.filter(role_id=backend_role)
-#
-# # Assuming you want to filter Technologies based on its name
-# programming_language_category_name = "web_frameworks"
-#
-# # Get the category
-# programming_language_category = Categories.objects.filter(name=programming_language_category_name).first()
-#
-# # Make sure the category exists before proceeding
-# if programming_language_category:
-#     # Now get the top 10 from tech counts and order by counter
-#     top_backend_programming_counts = backend_role_counts.all().order_by("-counter")[:20]
-#
-#
-#
-#     for item in top_backend_programming_counts:
-#         print(item)
-# else:
-#     print(f"Category '{programming_language_category_name}' does not exist.")
-
-
-# @log_runtime(log_path)
-# def process_pool_role_pipline_test():
-#     """Main function that creates a process for each role."""
-#     try:
-#         # roles_list = get_all_roles()
-#         roles_list = ["Backend Developer", "Frontend Developer", "Full Stack Developer"]
-#         tech_set = get_all_techs_from_db()
-#         tech_dictionary = get_tech_dict()
-#         google_jobs_time_period_month = GoogleJobsTimePeriod.MONTH
-#         with ThreadPoolExecutor(max_workers=len(roles_list)) as executor:
-#             futures = [executor.submit(single_role_pipline, role, tech_set, tech_dictionary,
-#                                        google_jobs_time_period_month) for role in roles_list]
-#
-#             # Wait for all tasks to complete
-#             for future in futures:
-#                 future.result()
-#     except Exception as e:
-#         print(f"Error in main pipeline: {e}")
-#
-#
-# process_pool_role_pipline_test()
-# config = configure_google_jobs_scrape_engine('Backend Developer', GoogleJobsTimePeriod.MONTH)
-# get_job_listings_google_jobs_pipeline(config)

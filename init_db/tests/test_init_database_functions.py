@@ -746,7 +746,8 @@ sample_key = "programming_languages"
 def test_extract_keys_from_dictionary():
     """function to extract keys from dictionary"""
     assert (
-        _extract_keys_from_dictionary(tech_dict) == expected_result_extract_keys_from_dictionary
+        _extract_keys_from_dictionary(tech_dict)
+        == expected_result_extract_keys_from_dictionary
     )
 
 
@@ -756,8 +757,8 @@ def test_extract_tech_and_category_from_dictionary():
         _extract_tech_and_category_from_dictionary(
             sample_data_extract_tech_and_category_from_dictionary, sample_key
         )
-        == expected_result_extract_tech_and_category_from_dictionary)
-
+        == expected_result_extract_tech_and_category_from_dictionary
+    )
 
 
 # endregion

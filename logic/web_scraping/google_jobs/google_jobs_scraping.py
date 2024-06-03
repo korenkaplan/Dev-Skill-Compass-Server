@@ -141,7 +141,8 @@ def get_full_description(xpath, _driver) -> (bool, str):
         _driver (WebDriver): The Selenium WebDriver instance.
 
     Returns:
-        tuple: A tuple containing a boolean indicating success or failure, and the text or an error message if applicable.
+        tuple: A tuple containing a boolean indicating success or failure,
+         and the text or an error message if applicable.
     """
     try:
         # Wait for the element to be present in the DOM
@@ -242,7 +243,9 @@ def build_google_jobs_url(
     """
     snake_case_search_value = search_value.replace(" ", replace_with_char)
     time_period = googleJobsTimePeriod.value
-    url = f"""https://www.google.com/search?q={snake_case_search_value}+jobs+israel&ibp=htl;jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:{time_period}&htischips=date_posted;{time_period}"""
+    url = (f"https://www.google.com/search?q={snake_case_search_value}+jobs+israel&ibp=htl;"
+           f"jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:{time_period}&"
+           f"htischips=date_posted;{time_period}")
     return url
 
 
@@ -472,7 +475,7 @@ def find_title(find_title_dto: GoogleJobsTitleElementXpathDto) -> str:
 
 # Get the list of general words to remove by role
 def get_list_value_by_key(
-    role: str, roles_words_dict: dict[str : list[str]]
+    role: str, roles_words_dict: dict[str: list[str]]
 ) -> list[str]:
     if role in roles_words_dict:
         return roles_words_dict[role]
@@ -682,7 +685,6 @@ def get_job_listings_google_jobs_pipeline(
     listings_list = []
     interval_attempts = 0
     is_success = False
-    click_button_timeout = 1
     url = build_google_jobs_url(config_object.role, config_object.time_period)
     driver = setup_chrome_driver(url=url, activate=True)
     wait = setup_web_driver_wait(driver, 3)
