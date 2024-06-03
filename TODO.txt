@@ -1,36 +1,15 @@
 =============  Most Important =================
-- (done) finish the historical table service
-- (done) plan the pipeline(weekly and monthly)
-- (done) Create the aggregated table
-- (done) create the service and model for aggregated table
-- (done) schedule the cron jobs and pipelines
+- Fix healthcheck for web service database initalization
+
 
 
 ============= General Assignments =================
 - Organize the files and naming in the project
-
-
-============= Historical tech count Assignments =================
-- (done) Create service class
-- (done) Create logic for when to transfer records into the table
-- (done) Create pipeline for inserting data
-
-
-============= Database Integration: Insert the processed data into the database =============
-- (Done) Create script to insert the core data into the database: Roles, Categories and Technologies.
-
-
-============= Main Entrypoint And Cron job (depends on: Database Integration)  =============
-- (Done)  Create script to fetch a dictionary of techs and categories from the db before starting the main pipeline.
-- (Done) Create the main pipeline: Scraping, text analysis, data processing, database insertion and update.
-- (Done) Create the cron job to run the main pipeline each certain time.
-
-
-============= WEB Scraping =============
-- (Done) Learn how to scrape job listing sites.
-- (Done) Handle the Chrome driver problem.
-- (done) Finish the module.
-- (Done) Add the module to the main pipeline and replace sample data.
+- Improve title filtering:
+    -  Adding list of synonyms words for each role
+    -  Explore words like developer and engineer for other roles
+- Check the option to use neon postgresql database
+- Add more scraping sites to the project
 
 
 ============= CI-CD =============
@@ -59,6 +38,31 @@
 - Deploy the react site to netlify. adjust the cors
 - Deploy the service to render adjust the allowed hosts.
 - Host the postgresql and adjust the postgresql ENV variables.
+
+
+
+============= Historical tech count Assignments =================
+- (done) Create service class
+- (done) Create logic for when to transfer records into the table
+- (done) Create pipeline for inserting data
+
+
+============= Database Integration: Insert the processed data into the database =============
+- (Done) Create script to insert the core data into the database: Roles, Categories and Technologies.
+
+
+============= Main Entrypoint And Cron job (depends on: Database Integration)  =============
+- (Done)  Create script to fetch a dictionary of techs and categories from the db before starting the main pipeline.
+- (Done) Create the main pipeline: Scraping, text analysis, data processing, database insertion and update.
+- (Done) Create the cron job to run the main pipeline each certain time.
+
+
+============= WEB Scraping =============
+- (Done) Learn how to scrape job listing sites.
+- (Done) Handle the Chrome driver problem.
+- (done) Finish the module.
+- (Done) Add the module to the main pipeline and replace sample data.
+
 
 
  ==========================================  Done ==========================================
