@@ -143,7 +143,7 @@ def process_pool_role_pipline():
 def process_pool_role_pipline_test():
     """Main function that creates a process for each role."""
     try:
-        roles_list = ["Backend Developer", "Frontend Developer"]
+        roles_list = ["Backend Developer"]
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
         google_jobs_time_period_month = GoogleJobsTimePeriod.WEEK

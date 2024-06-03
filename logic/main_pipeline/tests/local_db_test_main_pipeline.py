@@ -6,7 +6,7 @@ from logic.main_pipeline.main import (
     process_the_tech_words_from_analysis,
     update_the_database,
 )
-from usage_stats.models import TechnologiesCounts
+from usage_stats.models import MonthlyTechnologiesCounts
 
 role = "Backend Developer"
 
@@ -55,7 +55,7 @@ def test_update_the_database(role_techs_tuple):
 def get_top_techs_for_role(role_id, count):
     technologies_counts = [
         tech
-        for tech in TechnologiesCounts.objects.filter(role_id=role_id).order_by(
+        for tech in MonthlyTechnologiesCounts.objects.filter(role_id=role_id).order_by(
             "-counter"
         )
     ]

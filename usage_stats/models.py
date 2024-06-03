@@ -3,7 +3,7 @@ from core.models import Technologies, Roles
 from django.core.validators import MinValueValidator
 
 
-class TechnologiesCounts(models.Model):
+class MonthlyTechnologiesCounts(models.Model):
     role_id = models.ForeignKey(Roles, on_delete=models.PROTECT)
     technology_id = models.ForeignKey(Technologies, on_delete=models.PROTECT)
     counter = models.IntegerField(default=0, validators=[MinValueValidator(0)])
@@ -18,7 +18,7 @@ class TechnologiesCounts(models.Model):
         )
 
 
-class HistoricalTopTechnologies(models.Model):
+class HistoricalTechCounts(models.Model):
     technology_id = models.ForeignKey(Technologies, on_delete=models.PROTECT)
     role_id = models.ForeignKey(Roles, on_delete=models.PROTECT)
     counter = models.IntegerField(default=1, validators=[MinValueValidator(0)])

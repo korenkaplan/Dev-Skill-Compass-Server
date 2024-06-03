@@ -1,6 +1,6 @@
-""" A service class for database interactions with TechnologiesCounts table"""
+""" A service class for database interactions with MonthlyTechnologiesCounts table"""
 
-from usage_stats.models import TechnologiesCounts
+from usage_stats.models import MonthlyTechnologiesCounts
 from core.models import Roles, Technologies
 
 """
@@ -77,17 +77,16 @@ def get_technology_from_db(tech_name: str):
 # update the count of the technology
 def update_count_of_technology_in_db(tech: int, role: Roles, count: int):
     #  Get the object from db
-    tech_count_obj = TechnologiesCounts.objects.filter(
+    tech_count_obj = MonthlyTechnologiesCounts.objects.filter(
         role_id=role, technology_id=tech
     ).first()
 
     # check if exists
     if tech_count_obj:
-        pass
         tech_count_obj.counter += count
         tech_count_obj.save()
     # if not exist create
     else:
-        TechnologiesCounts.objects.create(
+        MonthlyTechnologiesCounts.objects.create(
             role_id=role, technology_id=tech, counter=count
         )

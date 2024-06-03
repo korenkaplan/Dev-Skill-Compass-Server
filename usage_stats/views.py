@@ -1,25 +1,25 @@
 from rest_framework import generics
-from .models import HistoricalTopTechnologies, TechnologiesCounts
-from .serializers import HistoricalTopTechnologiesSerializer, TechnologyCountSerializer
+from .models import HistoricalTechCounts, MonthlyTechnologiesCounts
+from .serializers import MonthlyHistoricalTopTechnologiesSerializer, MonthlyTechnologyCountSerializer
 
 
 class HistoricalTopTechnologiesListCreate(generics.ListCreateAPIView):
-    queryset = HistoricalTopTechnologies.objects.all()
-    serializer_class = HistoricalTopTechnologiesSerializer
+    queryset = HistoricalTechCounts.objects.all()
+    serializer_class = MonthlyHistoricalTopTechnologiesSerializer
 
 
 class HistoricalTopTechnologiesRetrieveUpdateDestroy(
     generics.RetrieveUpdateDestroyAPIView
 ):
-    queryset = HistoricalTopTechnologies.objects.all()
-    serializer_class = HistoricalTopTechnologiesSerializer
+    queryset = HistoricalTechCounts.objects.all()
+    serializer_class = MonthlyHistoricalTopTechnologiesSerializer
 
 
 class TechnologicalCountListCreate(generics.ListCreateAPIView):
-    queryset = TechnologiesCounts.objects.all()
-    serializer_class = TechnologyCountSerializer
+    queryset = MonthlyTechnologiesCounts.objects.all()
+    serializer_class = MonthlyTechnologyCountSerializer
 
 
 class TechnologicalCountRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
-    queryset = TechnologiesCounts.objects.all()
-    serializer_class = TechnologyCountSerializer
+    queryset = MonthlyTechnologiesCounts.objects.all()
+    serializer_class = MonthlyTechnologyCountSerializer

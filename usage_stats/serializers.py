@@ -1,14 +1,14 @@
 from rest_framework import serializers
-from .models import TechnologiesCounts, HistoricalTopTechnologies
+from .models import MonthlyTechnologiesCounts, HistoricalTechCounts
 
 
-class TechnologyCountSerializer(serializers.ModelSerializer):
+class MonthlyTechnologyCountSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TechnologiesCounts
+        model = MonthlyTechnologiesCounts
         fields = "__all__"
 
 
-class HistoricalTopTechnologiesSerializer(serializers.ModelSerializer):
+class MonthlyHistoricalTopTechnologiesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = HistoricalTopTechnologies
+        model = HistoricalTechCounts
         fields = "__all__"

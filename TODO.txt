@@ -1,6 +1,10 @@
 =============  Most Important =================
 
 
+=============  Assignments =================
+- create cron jobs service file to manage all the cron functions
+-
+
 ============= General Assignments =================
 - Think of tech counting logic and implement it with scheduled commands
 - Organize the files and naming in the project

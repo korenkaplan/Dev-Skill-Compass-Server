@@ -1,6 +1,6 @@
 from collections import defaultdict
 from core.models import Technologies, Categories, Roles, Synonyms
-from usage_stats.models import TechnologiesCounts
+from usage_stats.models import MonthlyTechnologiesCounts
 
 
 def get_tech_dict() -> dict:
@@ -31,7 +31,7 @@ def get_count_of_technologies_for_role(role_name: str) -> dict:
     if role is None:
         raise ValueError("No such role: %s" % role)
     # get the technologies for this role
-    role_tech_counts: list[TechnologiesCounts] = TechnologiesCounts.objects.filter(
+    role_tech_counts: list[MonthlyTechnologiesCounts] = MonthlyTechnologiesCounts.objects.filter(
         role_id=role
     )
     # create the keys from the technologies

@@ -5,7 +5,7 @@
 # backend_role = Roles.objects.filter(name="Backend Developer").first()
 #
 # # get the counts for the role
-# backend_role_counts = TechnologiesCounts.objects.filter(role_id=backend_role)
+# backend_role_counts = MonthlyTechnologiesCounts.objects.filter(role_id=backend_role)
 #
 # # Assuming you want to filter Technologies based on its name
 # programming_language_category_name = "web_frameworks"

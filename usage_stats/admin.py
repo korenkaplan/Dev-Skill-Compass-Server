@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import HistoricalTopTechnologies, TechnologiesCounts
+from .models import HistoricalTechCounts, MonthlyTechnologiesCounts
 
 # Register your models here.
-admin.site.register(HistoricalTopTechnologies)
-admin.site.register(TechnologiesCounts)
+admin.site.register(HistoricalTechCounts)
+admin.site.register(MonthlyTechnologiesCounts)
