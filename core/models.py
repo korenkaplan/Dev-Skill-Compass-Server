@@ -1,6 +1,5 @@
 from django.db import models
 from django.core.validators import MinLengthValidator
-from rest_framework.exceptions import ValidationError
 
 
 class Categories(models.Model):
@@ -12,7 +11,6 @@ class Categories(models.Model):
 
     def __str__(self):
         return f"{self.name.title()}"
-
 
 
 class Roles(models.Model):

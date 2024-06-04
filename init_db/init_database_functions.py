@@ -96,7 +96,6 @@ def _insert_technologies_to_db_pipeline(tech_dict: dict) -> int:
 
 def get_category_objects(categories_names: list[str]) -> list[Categories]:
     result: list[Categories] = [category for category in Categories.objects.all() if category.name in categories_names]
-    print(f'Al Categories found in db: {len(result) == len(categories_names)}')
     return result
 
 
