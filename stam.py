@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
 import os
 
 from django.core.wsgi import get_wsgi_application
-from django.db.models import Sum
+
+from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
+from logic.web_scraping.google_jobs.google_jobs_scraping import is_title_in_synonyms_words
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_server.settings")
 
@@ -21,6 +23,9 @@ application = get_wsgi_application()
 from usage_stats.models import MonthlyTechnologiesCounts, AggregatedTechCounts, HistoricalTechCounts
 from logic.pipelines.weekly_pipeline import weekly_pipeline
 from core.models import Roles, Technologies
+from logic.pipelines.main import process_pool_role_pipline_test
+
+
 
 
 def print_python_backend(tech, role):
@@ -29,3 +34,9 @@ def print_python_backend(tech, role):
     python_backend_count = AggregatedTechCounts.objects.filter(role_id=backend_role, technology_id=python)
     print(python_backend_count)
 
+
+
+
+
+if __name__ == '__main__':
+    process_pool_role_pipline_test(GoogleJobsTimePeriod.MONTH)

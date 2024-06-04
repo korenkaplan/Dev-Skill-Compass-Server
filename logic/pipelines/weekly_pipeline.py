@@ -42,5 +42,3 @@ def weekly_pipeline():
         write_text_to_file(log_file_path, 'a', message)
 
 
-# Call the weekly_pipeline() function
-weekly_pipeline()

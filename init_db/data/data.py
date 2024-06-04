@@ -1472,7 +1472,6 @@ _tech_list_synonyms = {
         "rekognition": ["rekognition"],
         "polly": ["polly"],
         "lex": ["lex"],
-        "translate": ["translate"],
         "forecast": ["forecast"],
         "personalize": ["personalize"],
         "textract": ["textract"],
@@ -1514,14 +1513,27 @@ _software_job_roles = [
     "DevOps Engineer",
     "QA Engineer",
     "Data Analyst",
+    "Cloud Engineer"
 ]
 _words_to_remove_dict = {
     "Backend Developer": ["engineer", "developer"],
+    "Cloud Engineer": ["engineer", "developer"],
     "Frontend Developer": ["engineer", "developer"],
     "Full Stack Developer": ["engineer", "developer"],
     "DevOps Engineer": ["engineer", "developer"],
-    "QA Engineer": ["engineer", "developer"],
+    "QA Engineer": ["engineer"],
 }
+_synonyms_title = {
+    "Backend Developer": [],
+    "Frontend Developer": [],
+    "Full Stack Developer": [],
+    "DevOps Engineer": ["DevSecOps"],
+    "QA Engineer": ["Quality Assurance", "Quality", "Test Automation"],
+}
+
+
+def get_synonyms_title_dict():
+    return _synonyms_title
 
 
 def get_tech_set() -> set:
@@ -1545,3 +1557,10 @@ def get_words_to_remove_from_title(role: str = None) -> list[str]:
         return []
     else:
         return _words_to_remove_dict[role]
+
+
+def get_synonyms_words_title(role: str = None) -> list[str]:
+    if role is None or role not in _words_to_remove_dict:
+        return []
+    else:
+        return _synonyms_title[role]

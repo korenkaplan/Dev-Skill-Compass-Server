@@ -18,7 +18,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
-from init_db.data.data import get_words_to_remove_from_title
+from init_db.data.data import get_words_to_remove_from_title, get_synonyms_title_dict, get_synonyms_words_title
 from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
 from logic.web_scraping.google_jobs.DTO.google_jobs_configuration_dto import (
     GoogleJobsConfigDto,
@@ -445,7 +445,22 @@ def remove_non_letters_characters(text: str) -> str:
     return result
 
 
-def is_title_match_role(role: str, title: str, log_file_path: str, false_title_counter: int) -> (bool, int):
+def is_title_in_synonyms_words(role: str, clean_title: str) -> bool:
+    # get the synonyms words for the role
+    synonyms_words: list[str] = get_synonyms_words_title(role)
+
+    # clean the words (remove spaces and to lower and signs)
+    formatted_words: list[str] = [word.replace(" ", "").lower().strip() for word in synonyms_words]
+
+    # compare each clean word against the cleaned title
+    for word in formatted_words:
+        if word in clean_title:
+            return True
+    # return false if not found
+    return False
+
+
+def is_title_match_role(role: str, title: str, log_file_path: str) -> (bool, int):
     # Get the words to remove from the title by role
     words_to_remove = get_words_to_remove_from_title(role)
 
@@ -459,16 +474,17 @@ def is_title_match_role(role: str, title: str, log_file_path: str, false_title_c
 
     # Check if the cleaned role is in the cleaned title
     res = cleaned_role in cleaned_title
-
+    if res is False:
+        res = is_title_in_synonyms_words(role, cleaned_title)
     # log if not matched
     if res is False:
         log_text = (
             f"""False match: {cleaned_title}({title} <-> {cleaned_role}({role})"""
         )
         write_text_to_file(log_file_path, "a", log_text)
-        false_title_counter += 1
 
-    return res, false_title_counter
+
+    return res
 
 
 def find_and_match_title(
@@ -478,7 +494,6 @@ def find_and_match_title(
     listing_li_element: WebElement,
     wait: WebDriverWait,
     log_file_path: str,
-    false_title_counter: int
 ) -> (bool, int):
     # Define the result variables
     is_title_exist = False
@@ -502,13 +517,13 @@ def find_and_match_title(
     title = find_title(dto)
 
     if title:
-        is_match = is_title_match_role(role, title, log_file_path, false_title_counter)
+        is_match = is_title_match_role(role, title, log_file_path)
         is_title_exist = True
 
     if not is_title_exist:
         print("Could not find title element")
 
-    return is_match, increase_every_ten, false_title_counter
+    return is_match, increase_every_ten
 
 
 # endregion
@@ -536,7 +551,7 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
     inserted_descriptions = 0
     job_listings_result_list = []
     urls_attempted_set = set()
-    false_title_counter = 0
+    false_title_counter = -1
     increase_every_ten = 0
     repeated_urls_counter = 0
 
@@ -563,17 +578,17 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
                 continue
 
             # find and match the title to the role
-            is_title_match, increase_every_ten, false_title_counter = find_and_match_title(
+            is_title_match, increase_every_ten = find_and_match_title(
                 dto.role,
                 i,
                 increase_every_ten,
                 job_listings[i],
                 dto.wait,
                 dto.log_file_path,
-                false_title_counter
             )
 
             if is_title_match is False:
+                false_title_counter += 1
                 continue
 
             get_full_description_dto: GoogleJobsGetFullDescriptionDto = (
