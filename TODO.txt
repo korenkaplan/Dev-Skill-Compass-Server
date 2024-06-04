@@ -1,26 +1,15 @@
 =============  Most Important =================
-- List the endpoints and prepare functions for them.
-- Create a new React/streamlit project.
-- Fix healthcheck for web service database initalization
-- Add description field to Role and add descriptions
-- Add 4 most relevant categories for each role( decide by getting the most overall and then loop
- until you rich 4 different categories)t
+- (done)  Create a mockup for the website using figma
+- analyze the mock up and get list of endpoints and the result needed.
+- create the endpoints and the views needed
+- test the endpoints with postman
+- Create a new React.
 
-- handle role description changes
 ============= General Assignments =================
 - Organize the files and naming in the project
 - Check the option to use neon postgresql database
 - Add more scraping sites to the project
-
-
-t
-============= Website Mockup =============
-- (done)  Create a mockup for the website using figma
-- List the endpoints and prepare functions for them.
-
-
-============= Build Website  =============
-- Create a new React/streamlit project.
+- Fix healthcheck for web service database initalization
 
 
 ============= Deploy Website  =============
