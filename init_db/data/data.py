@@ -829,7 +829,7 @@ _tech_dict = {
     "security": ["oauth", "jwt", "jason web token", "jason web tokens"],
 }
 _tech_list_synonyms = {
-    "programming_languages": {
+    "programming languages": {
         "javascript": ["javascript", "js"],
         "html": ["html", "hypertext markup language"],
         "css": ["css", "cascading style sheets", "css animations"],
@@ -923,7 +923,7 @@ _tech_list_synonyms = {
         "ravendb": ["ravendb", "raven db"],
         "tidb": ["tidb", "ti db"],
     },
-    "cloud_platforms": {
+    "cloud platforms": {
         "amazon web services (aws)": ["amazon web services (aws)", "aws", "amazon aws"],
         "microsoft azure": ["microsoft azure", "azure"],
         "google cloud": ["google cloud", "gcp", "google cloud platform"],
@@ -952,7 +952,35 @@ _tech_list_synonyms = {
         "scaleway": ["scaleway"],
         "colocation": ["colocation", "colo"],
     },
-    "web_frameworks": {
+    "frameworks": {
+        "scikit-learn": ["scikit-learn", "scikit", "sklearn"],
+        "flutter": ["flutter"],
+        "torch/pytorch": ["torch/pytorch", "torch", "pytorch"],
+        "react native": ["react native"],
+        "opencv": ["opencv"],
+        "electron": ["electron"],
+        "opengl": ["opengl"],
+        "qt": ["qt"],
+        "cuda": ["cuda"],
+        "keras": ["keras"],
+        "apache spark": ["apache spark", "spark"],
+        "swiftui": ["swiftui", "swift ui"],
+        "xamarin": ["xamarin"],
+        "ionic": ["ionic"],
+        "hugging face transformers": ["hugging face transformers", "transformers"],
+        "gtk": ["gtk"],
+        "cordova": ["cordova"],
+        ".net maui": [".net maui", "maui"],
+        "hadoop": ["hadoop"],
+        "tauri": ["tauri"],
+        "capacitor": ["capacitor"],
+        "tidyverse": ["tidyverse"],
+        "quarkus": ["quarkus"],
+        "ktor": ["ktor"],
+        "mfc": ["mfc"],
+        "jax": ["jax"],
+        "micronaut": ["micronaut"],
+        "uno platform": ["uno platform"],
         "node.js": ["node.js", "nodejs", "node", "ts-Node"],
         "react": ["react", "react.js", "reactjs"],
         "jquery": ["jquery"],
@@ -996,37 +1024,7 @@ _tech_list_synonyms = {
         "rxjs": ["RxJS"],
         "webgl": ["webgl"],
     },
-    "other_frameworks": {
-        "scikit-learn": ["scikit-learn", "scikit", "sklearn"],
-        "flutter": ["flutter"],
-        "torch/pytorch": ["torch/pytorch", "torch", "pytorch"],
-        "react native": ["react native"],
-        "opencv": ["opencv"],
-        "electron": ["electron"],
-        "opengl": ["opengl"],
-        "qt": ["qt"],
-        "cuda": ["cuda"],
-        "keras": ["keras"],
-        "apache spark": ["apache spark", "spark"],
-        "swiftui": ["swiftui", "swift ui"],
-        "xamarin": ["xamarin"],
-        "ionic": ["ionic"],
-        "hugging face transformers": ["hugging face transformers", "transformers"],
-        "gtk": ["gtk"],
-        "cordova": ["cordova"],
-        ".net maui": [".net maui", "maui"],
-        "hadoop": ["hadoop"],
-        "tauri": ["tauri"],
-        "capacitor": ["capacitor"],
-        "tidyverse": ["tidyverse"],
-        "quarkus": ["quarkus"],
-        "ktor": ["ktor"],
-        "mfc": ["mfc"],
-        "jax": ["jax"],
-        "micronaut": ["micronaut"],
-        "uno platform": ["uno platform"],
-    },
-    "other_tools": {
+    "other tools": {
         "docker": ["docker"],
         "npm": ["npm"],
         "pip": ["pip"],
@@ -1127,7 +1125,7 @@ _tech_list_synonyms = {
         "nova": ["nova"],
         "condo": ["condo"],
     },
-    "async_tools": {
+    "communication tools": {
         "confluence": ["confluence"],
         "markdown file": ["markdown file", "markdown"],
         "trello": ["trello"],
@@ -1164,8 +1162,6 @@ _tech_list_synonyms = {
         "wimi": ["wimi"],
         "cerri": ["cerri"],
         "leankor": ["leankor"],
-    },
-    "synchronous_tools": {
         "microsoft teams": ["microsoft teams"],
         "slack": ["slack"],
         "zoom": ["zoom"],
@@ -1190,7 +1186,7 @@ _tech_list_synonyms = {
         "unify circuit": ["unify circuit"],
         "coolfire core": ["coolfire core"],
     },
-    "version_control_tech": {
+    "version_control tech": {
         "git": ["git"],
         "svn": ["subversion (svn)", "svn"],
         "mercurial": ["mercurial", "hg"],
@@ -1204,7 +1200,7 @@ _tech_list_synonyms = {
         "gitlab": ["gitlab"],
         "aws codecommit": ["aws codecommit", "codecommit"],
     },
-    "data_analyst_tools": {
+    "data_analyst tools": {
         "excel": ["excel"],
         "tableau": ["tableau"],
         "power bi": ["power bi"],
@@ -1225,7 +1221,7 @@ _tech_list_synonyms = {
         "metabase": ["metabase"],
         "apache superset": ["apache superset", "superset"],
     },
-    "testing_and_qa_tools": {
+    "testing and qa tools": {
         "jenkins": ["jenkins"],
         "travis ci": ["travis ci"],
         "circleci": ["circleci"],
@@ -1275,7 +1271,7 @@ _tech_list_synonyms = {
         "galen framework": ["galen framework"],
         "wraith": ["wraith"],
     },
-    "data_exchange_apis_and_tools": {
+    "data exchange_apis_and_tools": {
         "json": ["json"],
         "xml": ["xml"],
         "restful": [
@@ -1301,7 +1297,7 @@ _tech_list_synonyms = {
         "raml": ["raml", "restful api modeling language"],
         "insomnia": ["insomnia"],
     },
-    "messaging_queues_tech": {
+    "messaging queues tech": {
         "mqtt": ["mqtt"],
         "amqp": ["amqp"],
         "rabbitmq": ["rabbitmq"],
@@ -1337,7 +1333,7 @@ _tech_list_synonyms = {
         "safe": ["scaled agile framework (safe)"],
         "da": ["disciplined agile (da)"],
     },
-    "code_architecture": {
+    "code architecture": {
         "design patterns": ["design patterns"],
         "software architecture": ["software architecture"],
         "clean code": ["clean code"],
@@ -1360,7 +1356,7 @@ _tech_list_synonyms = {
         "isp": ["isp", "interface segregation principle"],
         "dip": ["dip", "dependency inversion principle"],
     },
-    "top_libraries": {
+    "top libraries": {
         # Python
         "matplotlib": ["matplotlib"],
         "tensorflow": ["tensorflow"],
@@ -1436,7 +1432,7 @@ _tech_list_synonyms = {
         "ws": ["ws"],
         "wss": ["wss"],
     },
-    "amazon_tech": {
+    "amazon tech": {
         "ec2": ["ec2"],
         "ec3": ["ec3"],
         "s3": ["s3"],
@@ -1477,7 +1473,7 @@ _tech_list_synonyms = {
         "textract": ["textract"],
         "iot": ["iot"],
     },
-    "operating_systems": {
+    "operating systems": {
         "linux": ["linux"],
         "ubuntu": ["ubuntu"],
         "centos": ["centos"],
@@ -1489,7 +1485,7 @@ _tech_list_synonyms = {
         "ios": ["ios"],
         "android": ["android"],
     },
-    "general_phrases": {
+    "general phrases": {
         "etl": ["etl"],
         "data warehouse": ["data warehouse"],
         "columnar database": ["columnar database", "columnar databases"],
@@ -1506,23 +1502,164 @@ _tech_list_synonyms = {
         "jwt": ["jwt", "jason web token", "jason web tokens"],
     },
 }
-_software_job_roles = [
-    "Frontend Developer",
-    "Backend Developer",
-    "Full Stack Developer",
-    "DevOps Engineer",
-    "QA Engineer",
-    "Data Analyst",
-    "Cloud Engineer"
-]
+_software_job_roles = {
+    "frontend developer": {
+        "description": "A Frontend Developer focuses on the client side of web applications. They are"
+                       "responsible for implementing visual elements that users interact with directly. "
+                       "Using HTML, CSS, and JavaScript,"
+                       "they ensure a seamless and responsive user experience across various devices.",
+        "categories": ["frameworks",
+                       "programming languages",
+                       "version control tech",
+                       "integrated development environment",
+                       "cloud platforms",
+                       "other tools",
+                       "data exchange_apis_and_tools",
+                       "communication tools",
+                       "top libraries",
+                       "methodologies",
+                       "data analyst tools",
+                       "testing and qa tools",
+                       "protocols",
+                       "code architecture",
+                       "amazon tech",
+                       "databases",
+                       "messaging queues tech",
+                       "operating systems",
+                       "general phrases",
+                       "security"]
+    },
+    "backend developer": {
+        "description": "A Backend Developer works on the server side of web applications. They are responsible"
+                       " for building and maintaining the logic, database interactions, and server integration. "
+                       "Using languages like Python, Java, or Node.js, they ensure the application runs smoothly "
+                       "and efficiently.",
+        "categories": [
+            "programming languages",
+            "databases",
+            "frameworks",
+            "cloud platforms",
+            "version control tech",
+            "other tools",
+            "data exchange_apis_and_tools",
+            "communication tools",
+            "top libraries",
+            "methodologies",
+            "data analyst tools",
+            "testing and qa tools",
+            "protocols",
+            "code architecture",
+            "amazon tech",
+            "messaging queues tech",
+            "integrated development environment",
+            "operating systems",
+            "general phrases",
+            "security"]},
+    "full stack developer": {
+        "description": "A Full Stack Developer handles both the frontend and backend aspects of web development."
+                       " They are versatile professionals skilled in a range of technologies, enabling them to"
+                       " build complete, end-to-end solutions. They can work on user interfaces, server-side "
+                       "logic, and database management.",
+        "categories": ["programming languages",
+                       "frameworks",
+                       "databases",
+                       "cloud platforms",
+                       "version control tech",
+                       "other tools",
+                       "data exchange_apis_and_tools",
+                       "communication tools",
+                       "top libraries",
+                       "methodologies",
+                       "data analyst tools",
+                       "testing and qa tools",
+                       "protocols",
+                       "code architecture",
+                       "amazon tech",
+                       "messaging queues tech",
+                       "integrated development environment",
+                       "operating systems",
+                       "general phrases",
+                       "security"]},
+    "devops engineer": {
+        "description": "A DevOps Engineer focuses on streamlining the software development process by integrating"
+                       " development and operations. They work on automating and optimizing the development lifecycle,"
+                       " including code integration, testing, deployment, and monitoring. Tools like Docker, "
+                       "Kubernetes, and Jenkins are commonly used in their workflows.",
+        "categories": ["automation tools",
+                       "containerization",
+                       "continuous integration",
+                       "continuous deployment",
+                       "monitoring tools",
+                       "configuration management",
+                       "cloud platforms",
+                       "version control tech",
+                       "programming languages",
+                       "communication tools",
+                       "testing and qa tools",
+                       "operating systems",
+                       "general phrases",
+                       "security"]},
+    "qa engineer": {
+        "description": "A QA (Quality Assurance) Engineer ensures the quality and reliability of software products"
+                       " through rigorous testing. They design and execute test plans, identify bugs, and work with"
+                       " developers to resolve issues. Their goal is to deliver a product that meets the highest "
+                       "standards of functionality and performance.",
+        "categories": ["testing and qa tools",
+                       "programming languages",
+                       "test planning",
+                       "bug tracking",
+                       "collaboration tools",
+                       "version control tech",
+                       "automation tools",
+                       "cloud platforms",
+                       "data analysis tools",
+                       "operating systems",
+                       "general phrases",
+                       "security"]},
+    "data analyst": {
+        "description": "A Data Analyst interprets complex data to help organizations make informed business decisions."
+                       " They collect, process, and analyze data using tools like SQL, Python, and visualization "
+                       "software. Their insights drive strategic initiatives and improve operational efficiency.",
+        "categories": ["data analysis tools",
+                       "programming languages",
+                       "data visualization",
+                       "data collection",
+                       "data processing",
+                       "database technologies",
+                       "cloud platforms",
+                       "communication tools",
+                       "version control tech",
+                       "operating systems",
+                       "general phrases",
+                       "security"]},
+    "cloud engineer": {
+        "description": "A Cloud Engineer designs, implements, and manages cloud infrastructure and services. "
+                       "They work with platforms like AWS, Azure, and Google Cloud to deploy scalable and secure"
+                       " applications. Their expertise ensures that cloud environments are optimized for performance,"
+                       " cost-efficiency, and reliability.",
+        "categories": [
+            "cloud platforms",
+            "infrastructure as code",
+            "networking",
+            "security",
+            "containerization",
+            "automation tools",
+            "programming languages",
+            "monitoring tools",
+            "version control tech",
+            "communication tools",
+            "operating systems",
+            "general phrases"
+        ]
+    }
+}
 _words_to_remove_dict = {
     "Backend Developer": ["engineer", "developer"],
     "Cloud Engineer": ["engineer", "developer"],
     "Frontend Developer": ["engineer", "developer"],
     "Full Stack Developer": ["engineer", "developer"],
     "DevOps Engineer": ["engineer", "developer"],
-    "QA Engineer": ["engineer"],
-}
+    "QA Engineer": ["engineer"]}
 _synonyms_title = {
     "Backend Developer": [],
     "Frontend Developer": [],
@@ -1548,7 +1685,7 @@ def get_tech_dict() -> dict:
     return _tech_list_synonyms
 
 
-def get_roles_list() -> list:
+def get_roles_list() -> dict:
     return _software_job_roles
 
 

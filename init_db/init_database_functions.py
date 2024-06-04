@@ -94,7 +94,35 @@ def _insert_technologies_to_db_pipeline(tech_dict: dict) -> int:
     return total_inserted
 
 
-def _insert_roles_to_db(roles: List[str]) -> int:
+def get_category_objects(categories_names: list[str]) -> list[Categories]:
+    result: list[Categories] = [category for category in Categories.objects.all() if category.name in categories_names]
+    print(f'Al Categories found in db: {len(result) == len(categories_names)}')
+    return result
+
+
+def create_roles(roles: dict) -> list[Roles]:
+    """ "frontend developer": {
+        "description": "A Frontend Developer focuses on the client ",
+        "categories": ["frameworks","security"]
+    },"""
+    description_field = "description"
+    categories_field = "categories"
+    result: list[Roles] = []
+    for role_name, category_description_dict in roles.items():
+        # get the name and description and categories list from json data
+        role_name = role_name
+        description = category_description_dict[description_field]
+        categories_names = category_description_dict[categories_field]
+        # get the category objects by the names from the json data
+        category_objects = get_category_objects(categories_names)
+        obj: Roles = Roles.objects.create(name=role_name, description=description)
+        obj.categories.set(category_objects)
+        obj.save()
+        result.append(obj)
+    return result
+
+
+def _insert_roles_to_db(roles: dict) -> int:
     """
     Insert roles into the database.
 
@@ -106,8 +134,9 @@ def _insert_roles_to_db(roles: List[str]) -> int:
     """
     logger = _get_logger()
     try:
-        res = [Roles.objects.create(name=role) for role in roles]
-        return len(res)
+        # create roles
+        roles_objects = create_roles(roles)
+        return len(roles_objects)
     except Exception as e:
         logger.error("Error occurred while inserting roles: %s", str(e))
         return 0
@@ -162,7 +191,7 @@ def _insert_synonyms_to_db_pipeline(tech_dict: dict) -> int:
         return 0
 
 
-def initialize_pipeline(tech_dict: dict, roles: List[str]):
+def initialize_pipeline(tech_dict: dict, roles: dict):
     """
     Initialize the database with initial data.
 
