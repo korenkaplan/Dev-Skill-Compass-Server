@@ -5,7 +5,8 @@ from usage_stats.models import MonthlyTechnologiesCounts, HistoricalTechCounts
 
 
 # a function that: Gets all the rows from the monthly tech table and add them to the table.
-def insert_rows_from_monthly_tech_table(tech_counts_list: list[MonthlyTechnologiesCounts]) -> list[HistoricalTechCounts]:
+def insert_rows_from_monthly_tech_table(tech_counts_list: list[MonthlyTechnologiesCounts])\
+        -> list[HistoricalTechCounts]:
     inserted_rows = []
     # Add them to the table
     for tech_count in tech_counts_list:
@@ -26,6 +27,3 @@ def get_tech_counts_from_last_number_of_months(number_of_months: int) -> list[Hi
     rows = HistoricalTechCounts.objects.filter(created_at__gte=past_date)
 
     return rows
-
-
-

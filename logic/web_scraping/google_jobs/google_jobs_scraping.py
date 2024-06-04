@@ -18,7 +18,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
-from init_db.data.data import get_words_to_remove_from_title, get_synonyms_title_dict, get_synonyms_words_title
+from init_db.data.data import get_words_to_remove_from_title, get_synonyms_words_title
 from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
 from logic.web_scraping.google_jobs.DTO.google_jobs_configuration_dto import (
     GoogleJobsConfigDto,
@@ -33,6 +33,7 @@ from logic.web_scraping.google_jobs.DTO.google_jobs_title_element_xpath_dto impo
     GoogleJobsTitleElementXpathDto,
 )
 from utils.functions import write_text_to_file, countdown
+
 
 # region Elements interaction functions
 def click_button(xpath, driver, timeout=1.0) -> (bool, str):
@@ -482,7 +483,6 @@ def is_title_match_role(role: str, title: str, log_file_path: str) -> (bool, int
             f"""False match: {cleaned_title}({title} <-> {cleaned_role}({role})"""
         )
         write_text_to_file(log_file_path, "a", log_text)
-
 
     return res
 

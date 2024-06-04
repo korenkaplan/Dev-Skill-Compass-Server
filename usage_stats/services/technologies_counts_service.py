@@ -99,5 +99,3 @@ def truncate_technologies_count_table():
         print("Deleted all rows in table")
     except Exception as e:
         print("Error trunctating table: %s" % e)
-
-

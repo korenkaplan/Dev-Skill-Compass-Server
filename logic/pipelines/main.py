@@ -1,6 +1,6 @@
 """This is the main pipeline that runs once a week to refresh the data in the database."""
 
-from core.models import Roles, Technologies
+from core.models import Roles, Synonyms
 from logic.web_scraping.google_jobs.google_jobs_scraping import (
     GoogleJobsTimePeriod,
 )
@@ -28,7 +28,7 @@ def get_all_roles() -> list[str]:
 def get_all_techs_from_db() -> set:
     """Query all technologies from the database."""
     try:
-        return {tech.name for tech in Technologies.objects.all()}
+        return {synonym.name for synonym in Synonyms.objects.all()}
     except Exception as e:
         print(f"Error while querying technologies: {e}")
         return set()
@@ -124,7 +124,7 @@ def process_pool_role_pipline(period: GoogleJobsTimePeriod):
 def process_pool_role_pipline_test(period: GoogleJobsTimePeriod):
     """Main function that creates a process for each role."""
     try:
-        roles_list = ["Frontend Developer"]
+        roles_list = ["Backend Developer"]
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
         google_jobs_time_period_month = period
@@ -145,5 +145,3 @@ def process_pool_role_pipline_test(period: GoogleJobsTimePeriod):
                 future.result()
     except Exception as e:
         print(f"Error in main pipeline: {e}")
-
-

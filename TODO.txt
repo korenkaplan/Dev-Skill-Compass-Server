@@ -1,33 +1,20 @@
 =============  Most Important =================
+- List the endpoints and prepare functions for them.
+- Create a new React/streamlit project.
 - Fix healthcheck for web service database initalization
 
 
 
 ============= General Assignments =================
 - Organize the files and naming in the project
-- Improve title filtering:
-    -  Adding list of synonyms words for each role
-    -  Explore words like developer and engineer for other roles
 - Check the option to use neon postgresql database
 - Add more scraping sites to the project
 
 
-============= CI-CD =============
-- Fix healthcheck for web service
-
-
-============= Repository & CV Adjustment =============
-- Create a Readme.md file to the project.
-- Create the CV and add the project to the CV.
-
 
 ============= Website Mockup =============
-- Create a mockup for the website using figma
+- (done)  Create a mockup for the website using figma
 - List the endpoints and prepare functions for them.
-
-
-============= Create a Restful API  =============
-- Create specific endpoints for the website.
 
 
 ============= Build Website  =============
@@ -41,32 +28,6 @@
 
 
 
-============= Historical tech count Assignments =================
-- (done) Create service class
-- (done) Create logic for when to transfer records into the table
-- (done) Create pipeline for inserting data
-
-
-============= Database Integration: Insert the processed data into the database =============
-- (Done) Create script to insert the core data into the database: Roles, Categories and Technologies.
-
-
-============= Main Entrypoint And Cron job (depends on: Database Integration)  =============
-- (Done)  Create script to fetch a dictionary of techs and categories from the db before starting the main pipeline.
-- (Done) Create the main pipeline: Scraping, text analysis, data processing, database insertion and update.
-- (Done) Create the cron job to run the main pipeline each certain time.
-
-
-============= WEB Scraping =============
-- (Done) Learn how to scrape job listing sites.
-- (Done) Handle the Chrome driver problem.
-- (done) Finish the module.
-- (Done) Add the module to the main pipeline and replace sample data.
-
-
-
- ==========================================  Done ==========================================
- - Text Analysis: get the tech words out of the job listings. -> Done.
- - Data Processing And Aggregation: process the tech words found in the job listings, and prepare it for database insert. -> Done.
-
-
+============= Repository & CV Adjustment =============
+- Create a Readme.md file to the project.
+- Create the CV and add the project to the CV.

@@ -16,7 +16,8 @@ log_file_path = os.path.join(project_root, "Logs", "monthly_pipeline.log.txt")
 
 def monthly_pipeline(number_of_months):
     """
-    Executes the monthly pipeline to move data from the MonthlyTechnologiesCounts table to the HistoricalTechCounts table,
+    Executes the monthly pipeline to move data from the MonthlyTechnologiesCounts table to
+     the HistoricalTechCounts table,
     and updates the aggregated counts table with the latest data from the last `number_of_months` months.
 
     Args:
@@ -45,5 +46,3 @@ def monthly_pipeline(number_of_months):
         # Log the error or handle it as needed
         message = f"An error occurred during the monthly pipeline: {e}"
         write_text_to_file(log_file_path, 'a', message)
-
-

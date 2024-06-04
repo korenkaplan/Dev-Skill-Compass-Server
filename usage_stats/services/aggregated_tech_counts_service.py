@@ -84,8 +84,9 @@ def get_top_by_category_role(role: str, categories: list[str], limit=-1):
         categories = [category.name for category in Categories.objects.all()]
 
     for category in categories:
-        items = AggregatedTechCounts.objects.filter(role_id__name=role,
-                                                    technology_id__category_id__name=category).order_by('-counter')[:limit]
+        items = AggregatedTechCounts.objects.filter(
+            role_id__name=role,
+            technology_id__category_id__name=category).order_by('-counter')[:limit]
 
         if items is not None and len(items) > 0:
             formatted_items = format_aggregated_tech_count(items)

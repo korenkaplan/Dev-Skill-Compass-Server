@@ -40,5 +40,3 @@ def weekly_pipeline():
         # Log the error or handle it as needed
         message = f"An error occurred during the monthly pipeline: {e}"
         write_text_to_file(log_file_path, 'a', message)
-
-

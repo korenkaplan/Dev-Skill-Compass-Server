@@ -15,6 +15,7 @@ Functions:
 import re
 from concurrent.futures import ThreadPoolExecutor
 
+
 # the maximum letter around the / to not separate the word: ux/ui will stay because 2 < MAX_LETTERS_AROUND_SLASH
 max_letters = 3
 
