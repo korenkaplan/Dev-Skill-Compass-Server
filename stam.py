@@ -17,27 +17,35 @@
 #
 # application = get_wsgi_application()
 # # endregion
+#
+#
 # from logic.pipelines.weekly_pipeline import weekly_pipeline, weekly_pipeline_test
 # from logic.pipelines.monthly_pipeline import monthly_pipeline
 # from django.core.management.base import BaseCommand
 # from init_db.init_database_functions import initialize_pipeline
-# from init_db.data.data import get_tech_dict, get_roles_list
+# from init_db.data.data import get_tech_dict, get_roles_dict
 # from core.models import Roles, Technologies, Synonyms, Categories
-# from logic.pipelines.main import process_pool_role_pipline_test
+# from usage_stats.models import MonthlyTechnologiesCounts, HistoricalTechCounts, AggregatedTechCounts
+# from logic.pipelines.main import thread_pool_role_pipline_test
 # from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
+# from logic.web_scraping.main_scrape_file import job_scrape_pipeline
+#
 #
 # # tech_dict = get_tech_dict()
 # # roles = get_roles_list()
 # # res_message = initialize_pipeline(tech_dict, roles)
 #
 #
+# def clear_db():
+#     MonthlyTechnologiesCounts.objects.all().delete()
+#     HistoricalTechCounts.objects.all().delete()
+#     AggregatedTechCounts.objects.all().delete()
+#     Synonyms.objects.all().delete()
+#     Technologies.objects.all().delete()
+#     Categories.objects.all().delete()
+#     Roles.objects.all().delete()
 #
 #
-# # Synonyms.objects.all().delete()
-# # Technologies.objects.all().delete()
-# # Categories.objects.all().delete()
-# # q = Roles.objects.all().first()
-# #
-# # res = [category for category in q.categories.all()]
-# # print(q.categories.all())
-#
+# # clear_db()
+# weekly_pipeline()
+# # thread_pool_role_pipline_test(GoogleJobsTimePeriod.WEEK)

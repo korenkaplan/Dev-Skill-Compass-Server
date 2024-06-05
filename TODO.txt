@@ -1,24 +1,25 @@
 =============  Most Important =================
 - (done)  Create a mockup for the website using figma
-- analyze the mock up and get list of endpoints and the result needed.
+- analyze the mockup and get list of endpoints and the result needed.
 - create the endpoints and the views needed
 - test the endpoints with postman
 - Create a new React.
+
 
 ============= General Assignments =================
 - Organize the files and naming in the project
 - Check the option to use neon postgresql database
 - Add more scraping sites to the project
 - Fix healthcheck for web service database initalization
+- add historical data to the website
+
+
+============= Repository & CV Adjustment =============
+- Create a Readme.md file to the project.
+- Create the CV and add the project to the CV.
 
 
 ============= Deploy Website  =============
 - Deploy the react site to netlify. adjust the cors
 - Deploy the service to render adjust the allowed hosts.
 - Host the postgresql and adjust the postgresql ENV variables.
-
-
-
-============= Repository & CV Adjustment =============
-- Create a Readme.md file to the project.
-- Create the CV and add the project to the CV.

@@ -1,3 +1,5 @@
+import logging
+import sys
 from datetime import datetime
 import os
 import time
@@ -58,3 +60,25 @@ def write_text_to_file(
     except Exception as e:
         print("An error occurred: ", e)
         return False
+
+
+def get_logger() -> logging.Logger:
+    """
+    Get a logger instance configured for logging to stdout.
+
+    Returns:
+        logging.Logger: A logger instance.
+    """
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    stdout_handler.setFormatter(formatter)
+
+    logger.addHandler(stdout_handler)
+
+    return logger

@@ -1080,7 +1080,7 @@ _tech_list_synonyms = {
         "elfspy": ["elfspy"],
         "liblittletest": ["liblittletest"],
     },
-    "integrated_development_environment": {
+    "integrated development environment": {
         "visual studio solution": ["visual studio solution"],
         "visual studio code": ["visual studio code", "vs code"],
         "visual studio": ["visual studio"],
@@ -1186,7 +1186,7 @@ _tech_list_synonyms = {
         "unify circuit": ["unify circuit"],
         "coolfire core": ["coolfire core"],
     },
-    "version_control tech": {
+    "version control tech": {
         "git": ["git"],
         "svn": ["subversion (svn)", "svn"],
         "mercurial": ["mercurial", "hg"],
@@ -1200,7 +1200,7 @@ _tech_list_synonyms = {
         "gitlab": ["gitlab"],
         "aws codecommit": ["aws codecommit", "codecommit"],
     },
-    "data_analyst tools": {
+    "data analyst tools": {
         "excel": ["excel"],
         "tableau": ["tableau"],
         "power bi": ["power bi"],
@@ -1271,7 +1271,7 @@ _tech_list_synonyms = {
         "galen framework": ["galen framework"],
         "wraith": ["wraith"],
     },
-    "data exchange_apis_and_tools": {
+    "data exchange apis and tools": {
         "json": ["json"],
         "xml": ["xml"],
         "restful": [
@@ -1508,26 +1508,28 @@ _software_job_roles = {
                        "responsible for implementing visual elements that users interact with directly. "
                        "Using HTML, CSS, and JavaScript,"
                        "they ensure a seamless and responsive user experience across various devices.",
-        "categories": ["frameworks",
-                       "programming languages",
-                       "version control tech",
-                       "integrated development environment",
-                       "cloud platforms",
-                       "other tools",
-                       "data exchange_apis_and_tools",
-                       "communication tools",
-                       "top libraries",
-                       "methodologies",
-                       "data analyst tools",
-                       "testing and qa tools",
-                       "protocols",
-                       "code architecture",
-                       "amazon tech",
-                       "databases",
-                       "messaging queues tech",
-                       "operating systems",
-                       "general phrases",
-                       "security"]
+        "categories": [
+            "frameworks",
+            "top libraries",
+            "programming languages",
+            "integrated development environment",
+            "version control tech",
+            "testing and qa tools",
+            "data exchange apis and tools",
+            "communication tools",
+            "methodologies",
+            "code architecture",
+            "security",
+            "other tools",
+            "cloud platforms",
+            "databases",
+            "protocols",
+            "data analyst tools",
+            "general phrases",
+            "operating systems",
+            "amazon tech",
+            "messaging queues tech"
+        ]
     },
     "backend developer": {
         "description": "A Backend Developer works on the server side of web applications. They are responsible"
@@ -1539,133 +1541,147 @@ _software_job_roles = {
             "databases",
             "frameworks",
             "cloud platforms",
-            "version control tech",
-            "other tools",
-            "data exchange_apis_and_tools",
-            "communication tools",
-            "top libraries",
-            "methodologies",
-            "data analyst tools",
-            "testing and qa tools",
-            "protocols",
             "code architecture",
-            "amazon tech",
             "messaging queues tech",
+            "data exchange apis and tools",
+            "version control tech",
+            "testing and qa tools",
+            "security",
             "integrated development environment",
             "operating systems",
-            "general phrases",
-            "security"]},
+            "protocols",
+            "top libraries",
+            "methodologies",
+            "amazon tech",
+            "data analyst tools",
+            "communication tools",
+            "other tools",
+            "general phrases"
+        ]
+    },
     "full stack developer": {
         "description": "A Full Stack Developer handles both the frontend and backend aspects of web development."
                        " They are versatile professionals skilled in a range of technologies, enabling them to"
                        " build complete, end-to-end solutions. They can work on user interfaces, server-side "
                        "logic, and database management.",
-        "categories": ["programming languages",
-                       "frameworks",
-                       "databases",
-                       "cloud platforms",
-                       "version control tech",
-                       "other tools",
-                       "data exchange_apis_and_tools",
-                       "communication tools",
-                       "top libraries",
-                       "methodologies",
-                       "data analyst tools",
-                       "testing and qa tools",
-                       "protocols",
-                       "code architecture",
-                       "amazon tech",
-                       "messaging queues tech",
-                       "integrated development environment",
-                       "operating systems",
-                       "general phrases",
-                       "security"]},
+        "categories": [
+            "programming languages",
+            "frameworks",
+            "databases",
+            "top libraries",
+            "cloud platforms",
+            "code architecture",
+            "version control tech",
+            "data exchange apis and tools",
+            "integrated development environment",
+            "testing and qa tools",
+            "security",
+            "messaging queues tech",
+            "protocols",
+            "operating systems",
+            "methodologies",
+            "amazon tech",
+            "communication tools",
+            "other tools",
+            "data analyst tools",
+            "general phrases"
+        ]},
     "devops engineer": {
         "description": "A DevOps Engineer focuses on streamlining the software development process by integrating"
                        " development and operations. They work on automating and optimizing the development lifecycle,"
                        " including code integration, testing, deployment, and monitoring. Tools like Docker, "
                        "Kubernetes, and Jenkins are commonly used in their workflows.",
-        "categories": ["automation tools",
-                       "containerization",
-                       "continuous integration",
-                       "continuous deployment",
-                       "monitoring tools",
-                       "configuration management",
-                       "cloud platforms",
-                       "version control tech",
-                       "programming languages",
-                       "communication tools",
-                       "testing and qa tools",
-                       "operating systems",
-                       "general phrases",
-                       "security"]},
+        "categories": [
+            "cloud platforms",
+            "version control tech",
+            "testing and qa tools",
+            "security",
+            "integrated development environment",
+            "programming languages",
+            "frameworks",
+            "databases",
+            "other tools",
+            "data exchange apis and tools",
+            "communication tools",
+            "top libraries",
+            "methodologies",
+            "protocols",
+            "code architecture",
+            "amazon tech",
+            "messaging queues tech",
+            "operating systems",
+            "general phrases",
+            "data analyst tools"
+        ]},
     "qa engineer": {
         "description": "A QA (Quality Assurance) Engineer ensures the quality and reliability of software products"
                        " through rigorous testing. They design and execute test plans, identify bugs, and work with"
                        " developers to resolve issues. Their goal is to deliver a product that meets the highest "
                        "standards of functionality and performance.",
-        "categories": ["testing and qa tools",
-                       "programming languages",
-                       "test planning",
-                       "bug tracking",
-                       "collaboration tools",
-                       "version control tech",
-                       "automation tools",
-                       "cloud platforms",
-                       "data analysis tools",
-                       "operating systems",
-                       "general phrases",
-                       "security"]},
+        "categories": [
+            "testing and qa tools",
+            "frameworks",
+            "programming languages",
+            "integrated development environment",
+            "methodologies",
+            "version control tech",
+            "security",
+            "communication tools",
+            "cloud platforms",
+            "data exchange apis and tools",
+            "other tools",
+            "top libraries",
+            "code architecture",
+            "databases",
+            "operating systems",
+            "protocols",
+            "data analyst tools",
+            "general phrases",
+            "messaging queues tech",
+            "amazon tech"
+        ]},
     "data analyst": {
         "description": "A Data Analyst interprets complex data to help organizations make informed business decisions."
                        " They collect, process, and analyze data using tools like SQL, Python, and visualization "
                        "software. Their insights drive strategic initiatives and improve operational efficiency.",
-        "categories": ["data analysis tools",
-                       "programming languages",
-                       "data visualization",
-                       "data collection",
-                       "data processing",
-                       "database technologies",
-                       "cloud platforms",
-                       "communication tools",
-                       "version control tech",
-                       "operating systems",
-                       "general phrases",
-                       "security"]},
-    "cloud engineer": {
-        "description": "A Cloud Engineer designs, implements, and manages cloud infrastructure and services. "
-                       "They work with platforms like AWS, Azure, and Google Cloud to deploy scalable and secure"
-                       " applications. Their expertise ensures that cloud environments are optimized for performance,"
-                       " cost-efficiency, and reliability.",
         "categories": [
-            "cloud platforms",
-            "infrastructure as code",
-            "networking",
-            "security",
-            "containerization",
-            "automation tools",
+            "data analyst tools",
+            "databases",
             "programming languages",
-            "monitoring tools",
+            "data exchange apis and tools",
+            "frameworks",
+            "top libraries",
+            "cloud platforms",
+            "other tools",
+            "methodologies",
+            "integrated development environment",
             "version control tech",
+            "testing and qa tools",
             "communication tools",
+            "protocols",
+            "code architecture",
             "operating systems",
-            "general phrases"
-        ]
-    }
+            "general phrases",
+            "security",
+            "amazon tech",
+            "messaging queues tech"
+        ]},
 }
 _words_to_remove_dict = {
-    "Backend Developer": ["engineer", "developer"],
-    "Cloud Engineer": ["engineer", "developer"],
-    "Frontend Developer": ["engineer", "developer"],
-    "Full Stack Developer": ["engineer", "developer"],
-    "DevOps Engineer": ["engineer", "developer"],
-    "QA Engineer": ["engineer"]}
+    "backend developer": ["engineer", "developer"],
+    "frontend developer": ["engineer", "developer"],
+    "full stack developer": ["engineer", "developer"],
+    "devops engineer": ["engineer", "developer"],
+    "qa engineer": ["engineer"],
+    "data analyst": []
+}
 _synonyms_title = {
-    "Backend Developer": [],
-    "Frontend Developer": [],
-    "Full Stack Developer": [],
-    "DevOps Engineer": ["DevSecOps"],
-    "QA Engineer": ["Quality Assurance", "Quality", "Test Automation"],
+    "backend developer": [],
+    "frontend developer": [],
+    "full stack developer": [],
+    "dev ops engineer": ["dev sec ops"],
+    "qa engineer": ["quality assurance", "quality", "test automation"],
+    "data analyst": ["analyst", "powerbi", "analytics", "data"]
 }
 
 
@@ -1685,7 +1701,7 @@ def get_tech_dict() -> dict:
     return _tech_list_synonyms
 
 
-def get_roles_list() -> dict:
+def get_roles_dict() -> dict:
     return _software_job_roles
 
 
@@ -1701,3 +1717,23 @@ def get_synonyms_words_title(role: str = None) -> list[str]:
         return []
     else:
         return _synonyms_title[role]
+
+
+def find_not_matching_categories():
+    origin_categories = [key for key, value in _tech_list_synonyms.items()]
+    print('Not origin Categories:')
+
+    for role, categories_description_dict in _software_job_roles.items():
+        for category in categories_description_dict['categories']:
+            if category not in origin_categories:
+                print(role, ' -> ', category)
+
+
+def find_missing_categories():
+    origin_categories = [key for key, value in _tech_list_synonyms.items()]
+    print('Missing Categories:')
+    for role, categories_description_dict in _software_job_roles.items():
+        role_categories = categories_description_dict['categories']
+        for category in origin_categories:
+            if category not in role_categories:
+                print(role, ' -> ', category)

@@ -1,6 +1,6 @@
 import os
 
-from logic.pipelines.main import process_pool_role_pipline, process_pool_role_pipline_test
+from logic.pipelines.main import thread_pool_role_pipline_test, thread_pool_role_pipline
 from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
 from usage_stats.models import MonthlyTechnologiesCounts, AggregatedTechCounts
 from usage_stats.services.aggregated_tech_counts_service import insert_from_monthly_table
@@ -22,7 +22,7 @@ def weekly_pipeline():
         period: GoogleJobsTimePeriod = GoogleJobsTimePeriod.WEEK
 
         # Run the main pipeline with the period time set to one week
-        process_pool_role_pipline(period)
+        thread_pool_role_pipline(period)
 
         # Get the min date
         today = timezone.now()
@@ -48,7 +48,7 @@ def weekly_pipeline_test():
         period: GoogleJobsTimePeriod = GoogleJobsTimePeriod.WEEK
 
         # Run the main pipeline with the period time set to one week
-        process_pool_role_pipline_test(period)
+        thread_pool_role_pipline_test(period)
 
         # Get the min date
         today = timezone.now()

@@ -14,6 +14,7 @@ from usage_stats.services.technologies_counts_service import (
     update_technologies_counts_table_in_db_pipeline,
 )
 from core.services.technologies_service import get_tech_dict
+from utils.settings import MAX_NUMBER_OF_WORKERS, MAX_NUMBER_OF_RETRIES_SCARPING
 
 
 def get_all_roles() -> list[str]:
@@ -36,11 +37,17 @@ def get_all_techs_from_db() -> set:
 
 def scrape_job_listings(role: str, time_period: GoogleJobsTimePeriod) -> list[str]:
     """Scrape job listings for a given role."""
-    try:
-        return job_scrape_pipeline(role, time_period)
-    except Exception as e:
-        print(f"Error while scraping job listings for role {role}: {e}")
-        return []
+    result = []
+    attempts = 1
+    while len(result) == 0 and attempts <= MAX_NUMBER_OF_RETRIES_SCARPING:
+        try:
+            result = job_scrape_pipeline(role, time_period)
+        except Exception as e:
+            print(f"Error while scraping job listings for role {role} attempt number {attempts}: {e}")
+        finally:
+            attempts += 1
+
+    return result
 
 
 def extract_tech_words_from_job_listings(
@@ -95,14 +102,14 @@ def single_role_pipline(
         print(f"Error in pipeline for role {role}: {e}")
 
 
-def process_pool_role_pipline(period: GoogleJobsTimePeriod):
+def thread_pool_role_pipline(period: GoogleJobsTimePeriod):
     """Main function that creates a process for each role."""
     try:
         roles_list = get_all_roles()
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
         google_jobs_time_period_month = period
-        with ThreadPoolExecutor(max_workers=len(roles_list)) as executor:
+        with ThreadPoolExecutor(max_workers=MAX_NUMBER_OF_WORKERS) as executor:
             futures = [
                 executor.submit(
                     single_role_pipline,
@@ -121,14 +128,14 @@ def process_pool_role_pipline(period: GoogleJobsTimePeriod):
         print(f"Error in main pipeline: {e}")
 
 
-def process_pool_role_pipline_test(period: GoogleJobsTimePeriod):
+def thread_pool_role_pipline_test(period: GoogleJobsTimePeriod):
     """Main function that creates a process for each role."""
     try:
-        roles_list = ["backend developer"]
+        roles_list = ["cloud engineer"]
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
         google_jobs_time_period_month = period
-        with ThreadPoolExecutor(max_workers=len(roles_list)) as executor:
+        with ThreadPoolExecutor(max_workers=MAX_NUMBER_OF_WORKERS) as executor:
             futures = [
                 executor.submit(
                     single_role_pipline,

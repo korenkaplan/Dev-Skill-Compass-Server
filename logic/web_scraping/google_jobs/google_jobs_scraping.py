@@ -120,7 +120,7 @@ def get_full_description(xpath, _driver) -> (bool, str):
 
 # region Setup and Initialization functions
 def setup_chrome_driver(
-    params=None, set_auto_params=True, activate=False, url="", headless=False
+    params=None, set_auto_params=True, activate=False, url="", headless=True
 ) -> WebDriver:
     """
     Sets up a Chrome WebDriver with optional geolocation parameters and headless mode.
@@ -305,7 +305,7 @@ def scroll_and_click_and_visited_pipeline(
 
 # region get initial job listings li elements
 def get_job_listings_li_elements_list(
-    wait: WebDriverWait, log_file_path: str
+    wait: WebDriverWait, log_file_path: str, role: str
 ) -> list[WebElement]:
     """
     Retrieves a list of job listing <li> elements.
@@ -313,9 +313,11 @@ def get_job_listings_li_elements_list(
     Args:
         wait (WebDriverWait): The WebDriverWait instance to use for waiting.
         log_file_path (str): The path to the log file.
+        role (str): the role to search for.
 
     Returns:
         list[WebElement]: A list of job listing elements, or an empty list if none were found.
+
     """
     try:
         job_listings = wait.until(
@@ -324,7 +326,7 @@ def get_job_listings_li_elements_list(
         return job_listings if job_listings is not None else []
     except TimeoutException:
         write_text_to_file(
-            log_file_path, "a", "Job listings did not appear within the timeout period."
+            log_file_path, "a", f"({role}) Job listings did not appear within the timeout period."
         )
         return []
 
@@ -541,7 +543,7 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
     """
 
     # get the initial job_listings visible on page load
-    job_listings = get_job_listings_li_elements_list(dto.wait, dto.log_file_path)
+    job_listings = get_job_listings_li_elements_list(dto.wait, dto.log_file_path, dto.role)
     if len(job_listings) == 0:
         dto.driver.quit()
         return []
@@ -561,7 +563,7 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
             break
         # update the size after the check
         previous_size = len(job_listings)
-        print(f"Total listings collected {dto.role}: {inserted_descriptions}")
+        print(f"({dto.role}) Total listings collected: {inserted_descriptions}")
         # Iterate through each job listing, skipping the previously clicked ones
         for i in range(skip_amount, len(job_listings)):
             # Start the process bys scrolling to view and clicking the listing

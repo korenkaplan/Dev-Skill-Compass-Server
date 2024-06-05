@@ -1,35 +1,8 @@
 """Module for initializing the database with initial data"""
 
-import logging
-import sys
 from typing import List, Tuple
 from core.models import Categories, Technologies, Roles, Synonyms
-
-
-def _get_logger() -> logging.Logger:
-    """
-    Get a logger instance configured for logging to stdout and stderr.
-
-    Returns:
-        logging.Logger: A logger instance.
-    """
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
-
-    formatter = logging.Formatter(
-        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    )
-
-    stdout_handler = logging.StreamHandler(sys.stdout)
-    stdout_handler.setFormatter(formatter)
-
-    stderr_handler = logging.StreamHandler(sys.stderr)
-    stderr_handler.setFormatter(formatter)
-
-    logger.addHandler(stdout_handler)
-    logger.addHandler(stderr_handler)
-
-    return logger
+from utils.functions import get_logger
 
 
 def _extract_keys_from_dictionary(tech_dict: dict) -> List[str]:
@@ -46,7 +19,7 @@ def _extract_keys_from_dictionary(tech_dict: dict) -> List[str]:
 
 
 def _extract_tech_and_category_from_dictionary(
-    tech_dict: dict, category_key: str
+        tech_dict: dict, category_key: str
 ) -> Tuple[str, set]:
     """
     Extract technologies and category from a dictionary.
@@ -72,7 +45,7 @@ def _insert_technologies_to_db_pipeline(tech_dict: dict) -> int:
     Returns:
         int: The total number of technologies inserted into the database.
     """
-    logger = _get_logger()
+    logger = get_logger()
     total_inserted = 0
 
     try:
@@ -100,10 +73,7 @@ def get_category_objects(categories_names: list[str]) -> list[Categories]:
 
 
 def create_roles(roles: dict) -> list[Roles]:
-    """ "frontend developer": {
-        "description": "A Frontend Developer focuses on the client ",
-        "categories": ["frameworks","security"]
-    },"""
+    """ Create the Roles objects"""
     description_field = "description"
     categories_field = "categories"
     result: list[Roles] = []
@@ -131,7 +101,7 @@ def _insert_roles_to_db(roles: dict) -> int:
     Returns:
         int: The total number of roles inserted into the database.
     """
-    logger = _get_logger()
+    logger = get_logger()
     try:
         # create roles
         roles_objects = create_roles(roles)
@@ -151,7 +121,7 @@ def _insert_categories_to_db(categories: List[str]) -> int:
     Returns:
         int: The total number of categories inserted into the database.
     """
-    logger = _get_logger()
+    logger = get_logger()
     try:
         res = [Categories.objects.create(name=category) for category in categories]
         return len(res)
@@ -161,7 +131,7 @@ def _insert_categories_to_db(categories: List[str]) -> int:
 
 
 def _insert_synonyms_to_db(synonyms: set[str], technology: Technologies) -> int:
-    logger = _get_logger()
+    logger = get_logger()
     try:
         res = [
             Synonyms.objects.create(origin_tech_id=technology, name=synonym)
@@ -174,7 +144,7 @@ def _insert_synonyms_to_db(synonyms: set[str], technology: Technologies) -> int:
 
 
 def _insert_synonyms_to_db_pipeline(tech_dict: dict) -> int:
-    logger = _get_logger()
+    logger = get_logger()
     total_inserted = 0
     try:
         for category, synonyms_dict in tech_dict.items():
@@ -201,7 +171,6 @@ def initialize_pipeline(tech_dict: dict, roles: dict):
     Returns:
         None
     """
-    logger = _get_logger()
 
     try:
         categories_keys: List[str] = _extract_keys_from_dictionary(tech_dict)
@@ -216,7 +185,7 @@ def initialize_pipeline(tech_dict: dict, roles: dict):
             Technologies: {insert_count_techs}
             Synonyms: {insert_count_synonyms}
 """
-        logger.info(result)
+        # logger.info(result)
         return result
     except Exception as e:
         return "Error occurred during database initialization: %s", str(e)
