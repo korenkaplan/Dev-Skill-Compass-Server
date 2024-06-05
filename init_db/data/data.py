@@ -1680,7 +1680,7 @@ _synonyms_title = {
     "frontend developer": [],
     "full stack developer": [],
     "dev ops engineer": ["dev sec ops"],
-    "qa engineer": ["quality assurance", "quality", "test automation"],
+    "qa engineer": ["quality assurance", "quality", "test automation", "automation"],
     "data analyst": ["analyst", "powerbi", "analytics", "data"]
 }
 
