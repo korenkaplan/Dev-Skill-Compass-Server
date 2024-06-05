@@ -1,6 +1,7 @@
-from core.models import Categories
+from core.models import Categories, Roles
 from usage_stats.models import HistoricalTechCounts, MonthlyTechnologiesCounts, AggregatedTechCounts
 from usage_stats.services.historical_tech_counts_service import get_tech_counts_from_last_number_of_months
+from django.db.models import QuerySet
 
 
 def format_aggregated_tech_count(items: list[AggregatedTechCounts]):
@@ -94,3 +95,47 @@ def get_top_by_category_role(role: str, categories: list[str], limit=-1):
 
     return result_dict
 # endregion
+
+
+def get_top_counts_for_role(role_id: int, number_of_categories=4, limit=10):
+
+    # find the role by the role_id
+    role: Roles = Roles.objects.filter(pk=role_id).first()
+
+    # get all the categories from the role categories list
+    categories: QuerySet[Categories] = role.categories.all()
+
+    # create the dictionary to hold the result
+    result = dict()
+
+    # Get the result for each category
+    for category in categories[:number_of_categories]:
+        res = AggregatedTechCounts.objects.filter(role_id=role_id,
+                                                  technology_id__category_id=category).order_by('-counter')[:limit]
+
+        formatted_list = format_aggregated_tech_count(res)
+        result[category.name] = formatted_list
+
+    # Get tehe top overall
+    queryset = AggregatedTechCounts.objects.filter(role_id=role_id).order_by('-counter')[:limit]
+    result['all_categories'] = format_aggregated_tech_count(queryset)
+    return result
+
+
+def get_top_counts_for_all_roles(number_of_categories=4, limit=10):
+    result = dict()
+
+    # get all the roles
+    roles: QuerySet[Roles] = Roles.objects.all()
+
+    # call get_top_counts_for_role() for each role and add to dictionary
+    for role in roles:
+        result[role.name] = get_top_counts_for_role(role.id, number_of_categories, limit)
+
+    return result
+
+
+def get_last_scan_date_and_time():
+    res: AggregatedTechCounts = AggregatedTechCounts.objects.all().order_by('-created_at').first()
+    date, time = str(res.created_at.strftime("%d/%m/%y %H:%M")).split(' ')
+    return {'date': date, 'time': time}

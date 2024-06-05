@@ -24,7 +24,7 @@ class Roles(models.Model):
     # categories = models.ManyToManyField(Categories, through='RoleCategory', related_name='roles')
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.name} | {self.id}"
 
 
 # class RoleCategory(models.Model):

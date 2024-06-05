@@ -7,35 +7,45 @@ from .serializers import (MonthlyHistoricalTopTechnologiesSerializer, MonthlyTec
                           AggregatedTechCountsSerializer)
 from rest_framework.decorators import api_view
 
-from .services.aggregated_tech_counts_service import get_top_category_for_role, get_top_by_category_role
+from .services.aggregated_tech_counts_service import (get_top_counts_for_role,
+                                                      get_top_counts_for_all_roles, get_last_scan_date_and_time)
 
 
 @api_view(['Post'])
-@check_parameters('role', 'categories')
-def get_top_by_category_role_view(request):
+def get_top_counts_for_all_roles_view(request):
     # get the params from body
-    role = request.data.get('role')
-    category = request.data.get('categories')
+    number_of_categories = request.data.get('number_of_categories')
     limit = request.data.get('limit')
     # Call the function
-    items = get_top_by_category_role(role, category, limit)
+    result = get_top_counts_for_all_roles(number_of_categories, limit)
     # Return the results
     body = {
-        'data': items
+        'data': result
+    }
+    return Response(body, status=200)
+
+
+@api_view(['Post'])
+@check_parameters('role')
+def get_top_by_role_view(request):
+    # get the params from body
+    role = request.data.get('role')
+    number_of_categories = request.data.get('number_of_categories')
+    limit = request.data.get('limit')
+    # Call the function
+    result = get_top_counts_for_role(role, number_of_categories, limit)
+    # Return the results
+    body = {
+        'data': result
     }
     return Response(body, status=200)
 
 
 @api_view(['Get'])
-def hello_world(request):
+def get_last_scan_date_and_time_view(request):
     # get the role
-    role = request.query_params.get('role', None)
-    if role is None:
-        return Response({'error': 'Role parameter is required'}, status=400)
-
-    items = get_top_category_for_role(role=role)
-
-    return Response({'data': items})
+    date_time_json = get_last_scan_date_and_time()
+    return Response({'data': date_time_json})
 
 
 class HistoricalTopTechnologiesListCreate(generics.ListCreateAPIView):

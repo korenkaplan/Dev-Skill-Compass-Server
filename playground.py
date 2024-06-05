@@ -29,7 +29,10 @@
 # from logic.pipelines.main import thread_pool_role_pipline_test
 # from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
 # from logic.web_scraping.main_scrape_file import job_scrape_pipeline
-#
+# from usage_stats.services.aggregated_tech_counts_service import get_top_counts_for_role,
+# get_top_counts_for_all_roles, \
+#     get_last_scan_date_and_time
+# import json
 #
 # # tech_dict = get_tech_dict()
 # # roles = get_roles_list()
@@ -46,6 +49,6 @@
 #     Roles.objects.all().delete()
 #
 #
-# # clear_db()
-# weekly_pipeline()
-# # thread_pool_role_pipline_test(GoogleJobsTimePeriod.WEEK)
+# res = get_last_scan_date_and_time()
+#
+# print(json.dumps(res, indent=4))

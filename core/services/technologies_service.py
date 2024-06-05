@@ -1,4 +1,5 @@
 from collections import defaultdict
+
 from core.models import Technologies, Categories, Roles, Synonyms
 from usage_stats.models import MonthlyTechnologiesCounts
 

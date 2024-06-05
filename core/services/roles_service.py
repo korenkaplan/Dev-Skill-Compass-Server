@@ -11,15 +11,3 @@ def get_role_by_name(name: str) -> Roles:
 
 def get_role_by_pk(id_to_find: int) -> Roles:
     return Roles.objects.get(id=id_to_find)
-
-
-def get_roles(names: list[str]) -> list[Roles]:
-    pass
-
-
-def update_role(pk: int, name: str) -> Roles:
-    pass
-
-
-def delete_role(pk: int) -> Roles:
-    pass

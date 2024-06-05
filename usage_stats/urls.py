@@ -5,21 +5,27 @@ from .views import (
     HistoricalTopTechnologiesListCreate,
     HistoricalTopTechnologiesRetrieveUpdateDestroy,
     AggregatedTechCountsListCreate,
-    AggregatedTechCountsRetrieveUpdateDestroy, hello_world, get_top_by_category_role_view
+    AggregatedTechCountsRetrieveUpdateDestroy, get_top_by_role_view, get_top_counts_for_all_roles_view,
+    get_last_scan_date_and_time_view
 )
 
 
 # Main URL pattern that includes all routes URL
 urlpatterns = [
     path(
-        "top-by-category-role/",
-        get_top_by_category_role_view,
-        name="get_top_by_category_role_view",
+        "get-top-by-role-view/",
+        get_top_by_role_view,
+        name="get_top_by_role_view",
     ),
     path(
-        "hello-world/",
-        hello_world,
-        name="hello_world",
+        "get-last-scan-date-and-time-view/",
+        get_last_scan_date_and_time_view,
+        name="get_last_scan_date_and_time_view",
+    ),
+    path(
+        "get-top-counts-for-all-roles-view/",
+        get_top_counts_for_all_roles_view,
+        name="get_top_counts_for_all_roles_view",
     ),
     path(
         "technologiesCounts/",
