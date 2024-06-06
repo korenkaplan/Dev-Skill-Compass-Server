@@ -1,4 +1,6 @@
 """A module that holds Tech names in lists"""
+from core.models import Categories
+from utils.settings import NUMBER_OF_CATEGORIES
 
 _tech_dict = {
     "programming_languages_synonyms": [
@@ -1677,10 +1679,18 @@ _synonyms_title = {
     "backend developer": [],
     "frontend developer": [],
     "full stack developer": [],
-    "dev ops engineer": ["dev sec ops"],
+    "devops engineer": ["dev sec ops"],
     "qa engineer": ["quality assurance", "quality", "test automation", "automation"],
     "data analyst": ["analyst", "powerbi", "analytics", "data"]
 }
+
+
+def get_top_categories_for_role_data(role_name, number_of_categories=NUMBER_OF_CATEGORIES) -> list[str]:
+    try:
+        # get the roles dictionary
+        return _software_job_roles[role_name]['categories'][:number_of_categories]
+    except KeyError:
+        return []
 
 
 def get_synonyms_title_dict():
@@ -1711,10 +1721,15 @@ def get_words_to_remove_from_title(role: str = None) -> list[str]:
 
 
 def get_synonyms_words_title(role: str = None) -> list[str]:
-    if role is None or role not in _words_to_remove_dict:
+    try:
+        if role is None or role not in _words_to_remove_dict:
+            return []
+        else:
+            return _synonyms_title[role]
+    except KeyError:
+        print(f"get_synonyms_words_title()=> KeyError: Role '{role}' not found in the synonyms dictionary.")
         return []
-    else:
-        return _synonyms_title[role]
+
 
 
 def find_not_matching_categories():

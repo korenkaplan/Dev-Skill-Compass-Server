@@ -20,19 +20,9 @@ class Roles(models.Model):
     description = models.TextField(validators=[MinLengthValidator(1)])
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    categories = models.ManyToManyField('Categories')
-    # categories = models.ManyToManyField(Categories, through='RoleCategory', related_name='roles')
 
     def __str__(self):
         return f"{self.name} | {self.id}"
-
-
-# class RoleCategory(models.Model):
-#     role = models.ForeignKey(Roles, on_delete=models.PROTECT)
-#     category = models.ForeignKey(Categories, on_delete=models.PROTECT)
-#
-#     class Meta:
-#         unique_together = ('role', 'category')
 
 
 class Technologies(models.Model):

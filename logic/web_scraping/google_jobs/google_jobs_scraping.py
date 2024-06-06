@@ -120,7 +120,7 @@ def get_full_description(xpath, _driver) -> (bool, str):
 
 # region Setup and Initialization functions
 def setup_chrome_driver(
-    params=None, set_auto_params=True, activate=False, url="", headless=True
+    params=None, set_auto_params=True, activate=False, url="", headless=False
 ) -> WebDriver:
     """
     Sets up a Chrome WebDriver with optional geolocation parameters and headless mode.
@@ -420,13 +420,12 @@ def find_title(find_title_dto: GoogleJobsTitleElementXpathDto) -> str:
 
 # Get the list of general words to remove by role
 def get_list_value_by_key(
-    role: str, roles_words_dict: dict[str: list[str]]
+    role: str, roles_words_dict: dict[str, list[str]]
 ) -> list[str]:
-    if role in roles_words_dict:
+    try:
         return roles_words_dict[role]
-
-    else:
-        print(f"{role} key is not found in the dictionary returned empty list")
+    except KeyError:
+        print(f"({role}) get_list_value_by_key()=> key is not found in the dictionary, returned empty list")
         return []
 
 
@@ -556,72 +555,83 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
     false_title_counter = -1
     increase_every_ten = 0
     repeated_urls_counter = 0
+    bad_url_counter = 0
 
     while job_listings:
+        try:
         # If the previous size is the same as the current size, there are no more job listings to load
-        if previous_size == len(job_listings):
-            break
-        # update the size after the check
-        previous_size = len(job_listings)
-        print(f"({dto.role}) Total listings collected: {inserted_descriptions}")
-        # Iterate through each job listing, skipping the previously clicked ones
-        for i in range(skip_amount, len(job_listings)):
-            # Start the process bys scrolling to view and clicking the listing
-            result: int = scroll_and_click_and_visited_pipeline(
-                dto.driver, job_listings[i], urls_attempted_set, dto.log_file_path
-            )
+            if previous_size == len(job_listings):
+                break
 
-            if result == 0:
-                dto.driver.quit()
-                return []
+            # update the size after the check
+            previous_size = len(job_listings)
+            print(f"({dto.role}) Total listings collected: {inserted_descriptions}")
 
-            elif result == 1:
-                repeated_urls_counter += 1
-                continue
+            # Iterate through each job listing, skipping the previously clicked ones
+            for i in range(skip_amount, len(job_listings)):
+                # Start the process bys scrolling to view and clicking the listing
 
-            # find and match the title to the role
-            is_title_match, increase_every_ten = find_and_match_title(
-                dto.role,
-                i,
-                increase_every_ten,
-                job_listings[i],
-                dto.wait,
-                dto.log_file_path,
-            )
-
-            if is_title_match is False:
-                false_title_counter += 1
-                continue
-
-            get_full_description_dto: GoogleJobsGetFullDescriptionDto = (
-                GoogleJobsGetFullDescriptionDto(
-                    driver=dto.driver,
-                    expand_job_description_button_xpath=dto.expand_job_description_button_xpath,
-                    expandable_job_description_xpath=dto.expandable_job_description_xpath,
-                    not_expanded_job_description_xpath=dto.not_expanded_job_description_xpath,
-                    click_button_timeout=dto.click_button_timeout,
-                    log_file_path=dto.log_file_path,
+                result: int = scroll_and_click_and_visited_pipeline(
+                    dto.driver, job_listings[i], urls_attempted_set, dto.log_file_path
                 )
-            )
-            # extrac the job description
-            is_successful, description = get_description(get_full_description_dto)
 
-            if is_successful:
-                job_listings_result_list.append(description)
-                inserted_descriptions += 1
+                if result == 0:
+                    print("Returned ZERO")
+                    bad_url_counter += 1
+                    continue
+                    # dto.driver.quit()
+                    # return []
 
-            # Update the skip amount for the next iteration
-            skip_amount = len(job_listings)
+                elif result == 1:
+                    repeated_urls_counter += 1
+                    continue
 
-        # Refind the job listings to avoid StaleElementReferenceException
-        job_listings = dto.driver.find_elements(By.CSS_SELECTOR, "li")
+                # find and match the title to the role
+                is_title_match, increase_every_ten = find_and_match_title(
+                    dto.role,
+                    i,
+                    increase_every_ten,
+                    job_listings[i],
+                    dto.wait,
+                    dto.log_file_path,
+                )
+
+                if is_title_match is False:
+                    false_title_counter += 1
+                    continue
+
+                get_full_description_dto: GoogleJobsGetFullDescriptionDto = (
+                    GoogleJobsGetFullDescriptionDto(
+                        driver=dto.driver,
+                        expand_job_description_button_xpath=dto.expand_job_description_button_xpath,
+                        expandable_job_description_xpath=dto.expandable_job_description_xpath,
+                        not_expanded_job_description_xpath=dto.not_expanded_job_description_xpath,
+                        click_button_timeout=dto.click_button_timeout,
+                        log_file_path=dto.log_file_path,
+                    )
+                )
+                # extrac the job description
+                is_successful, description = get_description(get_full_description_dto)
+
+                if is_successful:
+                    job_listings_result_list.append(description)
+                    inserted_descriptions += 1
+
+                # Update the skip amount for the next iteration
+                skip_amount = len(job_listings)
+
+            # Refind the job listings to avoid StaleElementReferenceException
+            job_listings = dto.driver.find_elements(By.CSS_SELECTOR, "li")
+
+        except Exception as e:
+            print(f"Exeption from get_job_listings ({dto.role}): {e}")
 
     # log the final result of the function how many listings were collected
     text = f"""
     Inserted descriptions: {inserted_descriptions} 
     Error titles counter: {false_title_counter} 
     Repeated URLS: {repeated_urls_counter}
-    Problematic URLS: 1
+    Problematic URLS: {bad_url_counter + 1}
     --------------------------------------
     Total Job Listings: {len(job_listings)}
 """

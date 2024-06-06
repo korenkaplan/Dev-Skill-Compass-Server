@@ -23,6 +23,7 @@ webdriver-manager = "^4.0.1"
 lxml = "^5.2.2"
 pydantic = "^2.7.2"
 python-dateutil = "^2.9.0.post0"
+django-cors-headers = "^4.3.1"
 
 
 

@@ -131,7 +131,7 @@ def thread_pool_role_pipline(period: GoogleJobsTimePeriod):
 def thread_pool_role_pipline_test(period: GoogleJobsTimePeriod):
     """Main function that creates a process for each role."""
     try:
-        roles_list = ["cloud engineer"]
+        roles_list = ["devops engineer"]
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
         google_jobs_time_period_month = period

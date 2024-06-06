@@ -7,17 +7,18 @@ from .serializers import (MonthlyHistoricalTopTechnologiesSerializer, MonthlyTec
                           AggregatedTechCountsSerializer)
 from rest_framework.decorators import api_view
 
-from .services.aggregated_tech_counts_service import (get_top_counts_for_role,
-                                                      get_top_counts_for_all_roles, get_last_scan_date_and_time)
+from .services.aggregated_tech_counts_service import (get_last_scan_date_and_time, get_role_count_stats)
 
 
 @api_view(['Post'])
-def get_top_counts_for_all_roles_view(request):
+@check_parameters('role_id')
+def get_role_count_stats_view(request):
     # get the params from body
     number_of_categories = request.data.get('number_of_categories')
     limit = request.data.get('limit')
+    role_id = request.data.get('role_id')
     # Call the function
-    result = get_top_counts_for_all_roles(number_of_categories, limit)
+    result = get_role_count_stats(role_id, number_of_categories, limit)
     # Return the results
     body = {
         'data': result
@@ -25,20 +26,20 @@ def get_top_counts_for_all_roles_view(request):
     return Response(body, status=200)
 
 
-@api_view(['Post'])
-@check_parameters('role')
-def get_top_by_role_view(request):
-    # get the params from body
-    role = request.data.get('role')
-    number_of_categories = request.data.get('number_of_categories')
-    limit = request.data.get('limit')
-    # Call the function
-    result = get_top_counts_for_role(role, number_of_categories, limit)
-    # Return the results
-    body = {
-        'data': result
-    }
-    return Response(body, status=200)
+# @api_view(['Post'])
+# @check_parameters('role')
+# def get_top_by_role_view(request):
+#     # get the params from body
+#     role = request.data.get('role')
+#     number_of_categories = request.data.get('number_of_categories')
+#     limit = request.data.get('limit')
+#     # Call the function
+#     result = get_top_counts_for_role(role, number_of_categories, limit)
+#     # Return the results
+#     body = {
+#         'data': result
+#     }
+#     return Response(body, status=200)
 
 
 @api_view(['Get'])

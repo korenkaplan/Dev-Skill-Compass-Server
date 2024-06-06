@@ -26,7 +26,7 @@ def weekly_pipeline():
 
         # Get the min date
         today = timezone.now()
-        past_date = today - relativedelta(days=1)
+        past_date = today - relativedelta(days=2)
 
         # Get the monthly counts from the last scan
         items: list[MonthlyTechnologiesCounts] = MonthlyTechnologiesCounts.objects.filter(created_at__gte=past_date)
@@ -45,7 +45,7 @@ def weekly_pipeline():
 def weekly_pipeline_test():
     try:
         # Define the time period
-        period: GoogleJobsTimePeriod = GoogleJobsTimePeriod.WEEK
+        period: GoogleJobsTimePeriod = GoogleJobsTimePeriod.MONTH
 
         # Run the main pipeline with the period time set to one week
         thread_pool_role_pipline_test(period)

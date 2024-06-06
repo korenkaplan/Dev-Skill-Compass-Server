@@ -68,25 +68,26 @@ def _insert_technologies_to_db_pipeline(tech_dict: dict) -> int:
 
 
 def get_category_objects(categories_names: list[str]) -> list[Categories]:
-    result: list[Categories] = [category for category in Categories.objects.all() if category.name in categories_names]
+    result: list[Categories] = []
+    for name in categories_names:
+        try:
+            category = Categories.objects.get(name=name)
+            result.append(category)
+        except Categories.DoesNotExist:
+            continue  # Handle the case where category with the given name does not exist
     return result
+
 
 
 def create_roles(roles: dict) -> list[Roles]:
     """ Create the Roles objects"""
     description_field = "description"
-    categories_field = "categories"
     result: list[Roles] = []
     for role_name, category_description_dict in roles.items():
         # get the name and description and categories list from json data
         role_name = role_name
         description = category_description_dict[description_field]
-        categories_names = category_description_dict[categories_field]
-        # get the category objects by the names from the json data
-        category_objects = get_category_objects(categories_names)
         obj: Roles = Roles.objects.create(name=role_name, description=description)
-        obj.categories.set(category_objects)
-        obj.save()
         result.append(obj)
     return result
 
