@@ -114,7 +114,7 @@ def get_role_count_stats(role_id: int, number_of_categories=NUMBER_OF_CATEGORIES
 
     # get the categories objects
     categories_objects: list[Categories] = get_category_objects(categories_str_list)
-
+    result['all categories'] = get_top_counts_overall(role.id, limit)
     # iterate through the categories and add to dictionary
     for category in categories_objects:
         # Get a formatted list of categories in dictionary
@@ -123,7 +123,6 @@ def get_role_count_stats(role_id: int, number_of_categories=NUMBER_OF_CATEGORIES
         # add the category as key and the counts as value
         result[category.name] = category_role_count
 
-    result['all categories'] = get_top_counts_overall(role.id, limit)
     # return the duct
     return result
 
