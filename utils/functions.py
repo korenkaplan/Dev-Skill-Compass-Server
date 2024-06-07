@@ -82,3 +82,16 @@ def get_logger() -> logging.Logger:
     logger.addHandler(stdout_handler)
 
     return logger
+
+
+def get_formatted_date_time_now() -> str:
+    # Get the current date and time
+    now = datetime.now()
+
+    # Format the date and time
+    formatted_date_time = now.strftime("%d/%m/%Y %H:%M")
+
+    # Print the formatted date and time
+    return formatted_date_time
+
+

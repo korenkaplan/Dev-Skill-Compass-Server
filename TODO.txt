@@ -1,9 +1,6 @@
 =============  Most Important =================
-- (done)  Create a mockup for the website using figma
-- analyze the mockup and get list of endpoints and the result needed.
-- create the endpoints and the views needed
-- test the endpoints with postman
-- Create a new React.
+- create emailing system to see how much was actually inserted
+- change to 24 hours job scan
 
 
 ============= General Assignments =================
