@@ -14,7 +14,9 @@ from usage_stats.services.technologies_counts_service import (
     update_technologies_counts_table_in_db_pipeline,
 )
 from core.services.technologies_service import get_tech_dict
+from utils.mail_module.email_module_functions import send_recap_email_prepared
 from utils.settings import MAX_NUMBER_OF_WORKERS, MAX_NUMBER_OF_RETRIES_SCARPING
+from concurrent.futures import as_completed
 
 
 def get_all_roles() -> list[str]:
@@ -51,7 +53,7 @@ def scrape_job_listings(role: str, time_period: GoogleJobsTimePeriod) -> list[st
 
 
 def extract_tech_words_from_job_listings(
-    listings_list: list[str], tech_set: set
+        listings_list: list[str], tech_set: set
 ) -> list[set]:
     """Extract tech words from job listings."""
     try:
@@ -62,7 +64,7 @@ def extract_tech_words_from_job_listings(
 
 
 def process_the_tech_words_from_analysis(
-    jobs_sets_list: list[set[str]], role: str, tech_dict: dict
+        jobs_sets_list: list[set[str]], role: str, tech_dict: dict
 ) -> dict:
     """Process tech words from analysis."""
     try:
@@ -81,7 +83,7 @@ def update_the_database(role_techs_tuple: (str, dict)):
 
 
 def single_role_pipline(
-    role: str, tech_set: set, tech_dict: dict, time_period: GoogleJobsTimePeriod
+        role: str, tech_set: set, tech_dict: dict, time_period: GoogleJobsTimePeriod
 ):
     """Pipeline for each role."""
     try:
@@ -98,6 +100,7 @@ def single_role_pipline(
         print(f"({role}) Started inserting to db...")
         update_the_database(role_techs_tuple)
         print(f"({role}) Finished pipeline successfully")
+        return role.title(), len(job_listings)
     except Exception as e:
         print(f"Error in pipeline for role {role}: {e}")
 
@@ -124,6 +127,13 @@ def thread_pool_role_pipline(period: GoogleJobsTimePeriod):
             # Wait for all tasks to complete
             for future in futures:
                 future.result()
+
+            # create the string of the email:
+            result = [future.result() for future in as_completed(futures)]
+            email_text = collect_results(result)
+
+            # Send the email summarizing the scan session
+            send_recap_email_prepared(email_text, 'Google Jobs')
     except Exception as e:
         print(f"Error in main pipeline: {e}")
 
@@ -150,5 +160,30 @@ def thread_pool_role_pipline_test(period: GoogleJobsTimePeriod):
             # Wait for all tasks to complete
             for future in futures:
                 future.result()
+
+            # create the string of the email:
+            result = [future.result() for future in as_completed(futures)]
+            email_text = collect_results(result)
+
+            # Send the email summarizing the scan session
+            send_recap_email_prepared(email_text, 'Google Jobs')
     except Exception as e:
         print(f"Error in main pipeline: {e}")
+
+
+def collect_results(futures: list[tuple[str, int]]) -> str:
+    """Collect results from futures and return as a single string."""
+    total_count = 0
+    final_message = []
+    try:
+        for result in futures:
+            final_message.append(f"{result[0]}: {result[1]}")
+            total_count += result[1]
+        final_message.append("-------------------------------")
+        final_message.append(f"Total: {total_count}")
+    except Exception as e:
+        print(f"Error collecting results: {e}")
+    return '\n'.join(final_message)
+
+
+

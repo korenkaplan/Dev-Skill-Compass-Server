@@ -137,6 +137,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CRONJOBS = [
     (
+        CronExpressions.EVERY_DAY_AT_10.value,
+        "usage_stats.cron.cron_jobs.daily_scrape"
+    ),
+    (
         CronExpressions.EVERY_MONDAY_AT_4.value,
         "logic.pipelines.weekly_pipeline.weekly_pipeline",
         ">> /var/log/cron.log 2>&1",

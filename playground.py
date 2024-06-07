@@ -13,8 +13,6 @@ from collections import defaultdict
 
 from django.core.wsgi import get_wsgi_application
 
-from utils.functions import get_formatted_date_time_now
-from utils.mail_module.email_module_functions import send_scan_recap_email
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_server.settings")
 
@@ -29,7 +27,7 @@ from init_db.init_database_functions import initialize_pipeline
 from init_db.data.data import get_tech_dict, get_roles_dict
 from core.models import Roles, Technologies, Synonyms, Categories
 from usage_stats.models import MonthlyTechnologiesCounts, HistoricalTechCounts, AggregatedTechCounts
-from logic.pipelines.main import thread_pool_role_pipline_test
+from logic.pipelines.main import thread_pool_role_pipline_test, thread_pool_role_pipline
 from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
 from logic.web_scraping.main_scrape_file import job_scrape_pipeline
 import json
@@ -55,6 +53,24 @@ load_dotenv()
 #     if v > 6:
 #         print(k)
 # endregion
+# region Test Email
+# to = os.environ.get('EMAIL_HOST_USER')
+# website_name = 'Google Jobs'
+# date_and_time = get_formatted_date_time_now()
+# text = """
+# Backend Developer: 125
+# Frontend Developer: 125
+# Devops Developer: 125
+# Data Analyst: 125
+# QA Engineer: 125
+# --------------------
+# Total: 625
+# """
+# send_scan_recap_email(to, website_name, date_and_time, text)
+# endregion
+
+
+thread_pool_role_pipline(GoogleJobsTimePeriod.TODAY)
 
 
 def clear_db():
@@ -66,18 +82,4 @@ def clear_db():
     Categories.objects.all().delete()
     Roles.objects.all().delete()
 
-
-to = os.environ.get('EMAIL_HOST_USER')
-website_name = 'Google Jobs'
-date_and_time = get_formatted_date_time_now()
-text = """
-Backend Developer: 125 
-Frontend Developer: 125
-Devops Developer: 125
-Data Analyst: 125
-QA Engineer: 125
---------------------
-Total: 625
-"""
-send_scan_recap_email(to, website_name, date_and_time, text)
 
