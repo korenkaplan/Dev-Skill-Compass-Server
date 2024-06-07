@@ -1,7 +1,10 @@
 """ The pipeline that happens at the start of every month"""
 import os
 
-from usage_stats.models import MonthlyTechnologiesCounts
+from dateutil.relativedelta import relativedelta
+from django.db.models import QuerySet
+from django.utils import timezone
+from usage_stats.models import MonthlyTechnologiesCounts, AggregatedTechCounts, HistoricalTechCounts
 from usage_stats.services.historical_tech_counts_service import insert_rows_from_monthly_tech_table
 from usage_stats.services.aggregated_tech_counts_service import refresh_aggregated_table
 from utils.functions import write_text_to_file
@@ -31,16 +34,40 @@ def monthly_pipeline(number_of_months):
 
     try:
         # Get all the rows from the monthly tech counts table
-        technology_counts = MonthlyTechnologiesCounts.objects.all()
+        technology_counts: QuerySet[MonthlyTechnologiesCounts] = MonthlyTechnologiesCounts.objects.all()
 
         # Insert them into the historical data table
-        insert_rows_from_monthly_tech_table(technology_counts)
+        for row in technology_counts:
+            HistoricalTechCounts.objects.create(technology_id=row.technology_id, role_id=row.role_id, counter=row.counter)
 
         # Truncate the monthly stats table
         MonthlyTechnologiesCounts.objects.all().delete()
 
-        # Refresh the table
-        refresh_aggregated_table(number_of_months)
+        # Truncate the aggregated stats table
+        AggregatedTechCounts.objects.all().delete()
+
+
+        # get the date of today before months_number ago
+        today = timezone.now()
+        past_date = today - relativedelta(months=number_of_months)
+
+        # get the list of rows where created at is larger than the date
+        rows: QuerySet[HistoricalTechCounts] = HistoricalTechCounts.objects.filter(created_at__gte=past_date)
+
+        # insert the rows into the empty aggregated table
+        for row in rows:
+            # See if there is already a count of this Tech & Role combination
+            object_in_db: AggregatedTechCounts = AggregatedTechCounts.objects.filter(role_id=row.role_id, technology_id=row.technology_id).first()
+
+            # if exist update the count (To merge same counts from different months)
+            if object_in_db:
+                object_in_db.counter += row.counter
+                object_in_db.save()
+
+            # if not exist create the object
+            else:
+                AggregatedTechCounts.objects.create(technology_id=row.technology_id, role_id=row.role_id, counter=row.counter)
+
 
     except Exception as e:
         # Log the error or handle it as needed

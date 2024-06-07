@@ -13,7 +13,6 @@ from collections import defaultdict
 
 from django.core.wsgi import get_wsgi_application
 
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_server.settings")
 
 application = get_wsgi_application()
@@ -35,7 +34,10 @@ from core.serializers import RoleSerializer
 from usage_stats.services.aggregated_tech_counts_service import get_role_count_stats
 from dotenv import load_dotenv
 import os
-
+from dateutil.relativedelta import relativedelta
+from django.utils import timezone
+from logic.pipelines.daily_pipeline import daily_pipeline
+from django.db.models import QuerySet
 
 load_dotenv()
 
@@ -68,10 +70,20 @@ load_dotenv()
 # """
 # send_scan_recap_email(to, website_name, date_and_time, text)
 # endregion
+# region Check Daily pipline
+# clear_db()
+#daily_pipeline()
 
 
-thread_pool_role_pipline(GoogleJobsTimePeriod.TODAY)
-
+# rows1 = AggregatedTechCounts.objects.all().order_by('-counter', 'technology_id__name')
+# rows2 = MonthlyTechnologiesCounts.objects.all().order_by('-counter', 'technology_id__name')
+#
+#
+# print(len(rows1) == len(rows2))
+# print(len(HistoricalTechCounts.objects.all()) == 0)
+# for row1, row2 in zip(rows1[:10], rows2[:10]):
+#     print(row1.technology_id.name, row1.counter, " | ", row2.technology_id.name, row2.counter)
+# endregion
 
 def clear_db():
     MonthlyTechnologiesCounts.objects.all().delete()
@@ -82,4 +94,18 @@ def clear_db():
     Categories.objects.all().delete()
     Roles.objects.all().delete()
 
+
+monthly_pipeline(3)
+
+# expect monthly_data to be empty
+rows1 = MonthlyTechnologiesCounts.objects.all()
+print(f"Is Monthly empty: {rows1 is None or len(rows1) == 0}")
+
+is_same = AggregatedTechCounts.objects.all().count() != HistoricalTechCounts.objects.all().count()
+print("Is AggregatedTechCounts and HistoricalTechCounts not the same length: ", is_same)
+
+is_same = AggregatedTechCounts.objects.all().count() + 1 != HistoricalTechCounts.objects.all().count()
+print("Is AggregatedTechCounts + 1 and HistoricalTechCounts  the same : ", is_same)
+
+# ID: 262 | Tech: Sql | Amount: 1 | Role: full stack developer | 67 | Created At: 07/02/2024
 

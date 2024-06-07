@@ -2,6 +2,7 @@
 
 from usage_stats.models import MonthlyTechnologiesCounts
 from core.models import Roles, Technologies
+from usage_stats.services.aggregated_tech_counts_service import update_count_aggregated_table
 
 """
 backend_developer : {
@@ -32,7 +33,7 @@ databases: {'mysql':2, 'postgresql':4}
 """
 
 
-def update_technologies_counts_table_in_db_pipeline(role_techs_tuple: (str, dict)):
+def update_monthly_counts_table_and_aggregated_table_in_db_pipeline(role_techs_tuple: (str, dict)):
     try:
         # Get the role id from db
         role = get_role_from_db(role_techs_tuple[0])
@@ -54,7 +55,9 @@ def update_technologies_counts_table_in_db_pipeline(role_techs_tuple: (str, dict
                 continue
 
             try:
+                # update aggregated table and monthly count table
                 update_count_of_technology_in_db(tech, role, count)
+                update_count_aggregated_table(tech, role, count)
             except Exception as e:
                 print(
                     f"Error updating count of technology '{tech_name}' for role '{role_techs_tuple[0]}': {e}"

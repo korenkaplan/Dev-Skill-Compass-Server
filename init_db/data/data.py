@@ -1006,7 +1006,7 @@ _tech_list_synonyms = {
         "fastapi": ["fastapi"],
         "svelte": ["svelte"],
         "ruby on rails": ["ruby on rails", "rails", "ror"],
-        "nest js": ["nestjs", "nest.js", "nest"],
+        "nestjs": ["nestjs", "nest.js", "nest"],
         "blazor": ["blazor"],
         "nuxt.js": ["nuxt.js", "nuxtjs", "nuxt"],
         "symfony": ["symfony"],

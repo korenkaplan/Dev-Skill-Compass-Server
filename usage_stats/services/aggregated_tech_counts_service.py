@@ -8,6 +8,23 @@ from django.db.models import QuerySet
 from utils.settings import NUMBER_OF_CATEGORIES, NUMBER_OF_ITEMS_PER_CATEGORY
 
 
+def update_count_aggregated_table(tech: int, role: Roles, count: int):
+    #  Get the object from db
+    tech_count_obj = AggregatedTechCounts.objects.filter(
+        role_id=role, technology_id=tech
+    ).first()
+
+    # check if exists
+    if tech_count_obj:
+        tech_count_obj.counter += count
+        tech_count_obj.save()
+    # if not exist create
+    else:
+        AggregatedTechCounts.objects.create(
+            role_id=role, technology_id=tech, counter=count
+        )
+
+
 def format_aggregated_tech_count(items: QuerySet[AggregatedTechCounts]):
     return [{'id': item.id, 'tech': item.technology_id.name, 'amount': item.counter, 'role': item.role_id.name}
             for item in items]
@@ -55,16 +72,10 @@ def refresh_aggregated_table(number_of_months: int):
     # Clear the table
     truncate_table()
 
-    # Get all from monthly counts
-    monthly_counts_objects = MonthlyTechnologiesCounts.objects.all()
-
     # Get the historical data from last X months
     historical_counts_objects = get_tech_counts_from_last_number_of_months(number_of_months)
 
-    # insert into the table
-    if monthly_counts_objects:
-        objects_inserted_from_monthly_table = insert_from_monthly_table(monthly_counts_objects)
-        print(f"Total inserted from Monthly table: {len(objects_inserted_from_monthly_table)}")
+
     if historical_counts_objects:
         objects_inserted_from_historical_table = insert_from_historical_table(historical_counts_objects)
         print(f"Total inserted from Monthly table: {len(objects_inserted_from_historical_table)}")

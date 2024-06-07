@@ -11,7 +11,7 @@ from logic.text_analysis.tech_term_finder import find_tech_terms_pool_threads
 from logic.data_processing.data_aggragation import data_processing_pipeline
 from concurrent.futures import ThreadPoolExecutor
 from usage_stats.services.technologies_counts_service import (
-    update_technologies_counts_table_in_db_pipeline,
+    update_monthly_counts_table_and_aggregated_table_in_db_pipeline,
 )
 from core.services.technologies_service import get_tech_dict
 from utils.mail_module.email_module_functions import send_recap_email_prepared
@@ -77,7 +77,7 @@ def process_the_tech_words_from_analysis(
 def update_the_database(role_techs_tuple: (str, dict)):
     """Update the database."""
     try:
-        update_technologies_counts_table_in_db_pipeline(role_techs_tuple)
+        update_monthly_counts_table_and_aggregated_table_in_db_pipeline(role_techs_tuple)
     except Exception as e:
         print(f"Error while updating the database for role {role_techs_tuple[0]}: {e}")
 

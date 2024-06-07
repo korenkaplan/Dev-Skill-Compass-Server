@@ -12,9 +12,10 @@ class MonthlyTechnologiesCounts(models.Model):
 
     def __str__(self):
         date_formatted = self.updated_at.strftime("%d/%m/%Y")
+        created_date_formatted = self.created_at.strftime("%d/%m/%Y")
         return (
             f"ID: {self.id} | Tech: {self.technology_id.name.title()} | Amount: {self.counter} |"
-            f" Role: {self.role_id} | Updated To: {date_formatted} "
+            f" Role: {self.role_id}| Created At: {created_date_formatted}  | Updated To: {date_formatted} "
         )
 
 
