@@ -1,5 +1,4 @@
 """A module that holds Tech names in lists"""
-from core.models import Categories
 from utils.settings import NUMBER_OF_CATEGORIES
 
 _tech_dict = {

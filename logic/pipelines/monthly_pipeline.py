@@ -5,8 +5,6 @@ from dateutil.relativedelta import relativedelta
 from django.db.models import QuerySet
 from django.utils import timezone
 from usage_stats.models import MonthlyTechnologiesCounts, AggregatedTechCounts, HistoricalTechCounts
-from usage_stats.services.historical_tech_counts_service import insert_rows_from_monthly_tech_table
-from usage_stats.services.aggregated_tech_counts_service import refresh_aggregated_table
 from utils.functions import write_text_to_file
 
 

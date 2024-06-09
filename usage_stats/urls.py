@@ -6,12 +6,17 @@ from .views import (
     HistoricalTopTechnologiesRetrieveUpdateDestroy,
     AggregatedTechCountsListCreate,
     AggregatedTechCountsRetrieveUpdateDestroy,
-    get_last_scan_date_and_time_view, get_role_count_stats_view
+    get_last_scan_date_and_time_view, get_role_count_stats_view, get_all_roles
 )
 
 
 # Main URL pattern that includes all routes URL
 urlpatterns = [
+    path(
+        "get_all_roles/",
+        get_all_roles,
+        name="get_all_roles",
+    ),
     path(
         "get-last-scan-date-and-time-view/",
         get_last_scan_date_and_time_view,

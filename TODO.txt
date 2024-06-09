@@ -1,13 +1,16 @@
 =============  Most Important =================
-- create emailing system to see how much was actually inserted
-- change to 24 hours job scan
-
+- create emailing system to see how much was actually inserted ??
+- change to 24 hours job scan ??
+- add redis to docker-compose as a service
+- fix mailing system
+- create about me page
+- scrape more websites
 
 ============= General Assignments =================
 - Organize the files and naming in the project
 - Check the option to use neon postgresql database
 - Add more scraping sites to the project
-- Fix healthcheck for web service database initalization
+- Fix healthcheck for web service database initialization
 - add historical data to the website
 
 

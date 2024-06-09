@@ -1,4 +1,3 @@
-from typing import Any
 from core.models import Categories, Roles
 from init_db.data.data import get_top_categories_for_role_data
 from init_db.init_database_functions import get_category_objects

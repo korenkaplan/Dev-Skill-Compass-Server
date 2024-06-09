@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework.response import Response
 
+from core.models import Roles, Synonyms
 from decorators.chcek_parameters import check_parameters
 from .models import HistoricalTechCounts, MonthlyTechnologiesCounts, AggregatedTechCounts
 from .serializers import (MonthlyHistoricalTopTechnologiesSerializer, MonthlyTechnologyCountSerializer,
@@ -8,17 +9,53 @@ from .serializers import (MonthlyHistoricalTopTechnologiesSerializer, MonthlyTec
 from rest_framework.decorators import api_view
 
 from .services.aggregated_tech_counts_service import (get_last_scan_date_and_time, get_role_count_stats)
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_headers
+from django.core.cache import cache
+from core.serializers import RoleSerializer, SynonymsSerializer
+# @check_parameters('role_id')
+cache_time = 60 * 15
 
 
+@cache_page(60 * 1)
+@api_view(['Get'])
+def get_all_roles(request):
+    cache_key = 'all_roles'
+    roles = cache.get(cache_key)
+    if roles is None:
+        result = Roles.objects.all()
+        serializer = RoleSerializer(result, many=True)
+        cache.set(cache_key, serializer.data)
+        return Response({'data': serializer.data})
+    else:
+        return Response(roles, 200)
+
+
+
+@cache_page(60 * 1)
 @api_view(['Post'])
-@check_parameters('role_id')
 def get_role_count_stats_view(request):
     # get the params from body
     number_of_categories = request.data.get('number_of_categories')
     limit = request.data.get('limit')
     role_id = request.data.get('role_id')
-    # Call the function
+
+    # Define a cache key based on the input parameters
+    cache_key = f"role_stats_{role_id}_{number_of_categories}_{limit}"
+
+    # Check if the data is already cached
+    cached_result = cache.get(cache_key)
+    if cached_result:
+        print("used cache key")
+        return Response({'data': cached_result}, status=200)
+
+    # If not cached, call the function
     result = get_role_count_stats(role_id, number_of_categories, limit)
+
+    # Cache the result for future requests (adjust the timeout as needed)
+    cache.set(cache_key, result, timeout=3600)  # Cache for 1 hour
+
     # Return the results
     body = {
         'data': result

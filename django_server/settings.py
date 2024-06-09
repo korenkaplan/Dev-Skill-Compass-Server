@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-from utils.enums import CronExpressions
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,7 +33,7 @@ DEBUG = os.environ.get("DEBUG") == "true"
 ALLOWED_HOSTS = []
 
 # Application definition
-
+INTERNAL_IPS = ['127.0.0.1']
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -47,14 +46,18 @@ INSTALLED_APPS = [
     "core",
     "usage_stats",
     'corsheaders',
+    "debug_toolbar",
 ]
 
 CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS').split(" ")
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "django.middleware.cache.UpdateCacheMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -85,30 +88,30 @@ WSGI_APPLICATION = "django_server.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.environ.get('PGDATABASE'),
-#         'USER': os.environ.get('PGUSER'),
-#         'PASSWORD': os.environ.get('PGPASSWORD'),
-#         'HOST': os.environ.get('PGHOST'),
-#         'PORT': os.environ.get('PGPORT', 5432),
-#         'OPTIONS': {
-#              'sslmode': 'require',
-#         }
-#     }
-# }
-
 DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("DATABASE_ENGINE"),
-        "NAME": os.environ.get("DATABASE_NAME"),
-        "USER": os.environ.get("DATABASE_USER"),
-        "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
-        "HOST": os.environ.get("DATABASE_HOST"),
-        "PORT": os.environ.get("DATABASE_PORT", "5432"),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('PGDATABASE'),
+        'USER': os.environ.get('PGUSER'),
+        'PASSWORD': os.environ.get('PGPASSWORD'),
+        'HOST': os.environ.get('PGHOST'),
+        'PORT': os.environ.get('PGPORT', 5432),
+        'OPTIONS': {
+            'sslmode': 'require',
+        }
     }
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": os.environ.get("DATABASE_ENGINE"),
+#         "NAME": os.environ.get("DATABASE_NAME"),
+#         "USER": os.environ.get("DATABASE_USER"),
+#         "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
+#         "HOST": os.environ.get("DATABASE_HOST"),
+#         "PORT": os.environ.get("DATABASE_PORT", "5432"),
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -149,23 +152,19 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CRONJOBS = [
-    (
-        CronExpressions.EVERY_DAY_AT_10.value,
-        "usage_stats.cron.cron_jobs.daily_scrape"
-    ),
-    (
-        CronExpressions.EVERY_MONDAY_AT_4.value,
-        "logic.pipelines.weekly_pipeline.weekly_pipeline",
-        ">> /var/log/cron.log 2>&1",
-    ),
-    (
-        CronExpressions.EVERY_FIRST_OF_MONTH_AT_4.value,
-        "logic.pipelines.monthly_pipeline.monthly_pipeline",
-        ">> /var/log/cron.log 2>&1",
-    )
-]
 
+CRONJOBS = [
+    ('45 9 * * *', "logic.pipelines.daily_pipeline.daily_pipeline", '>> /cron/django_cron_log 2>&1'),
+    ('*/1 * * * *', "logic.pipelines.daily_pipeline.test_send_email", '>> /cron/django_cron_log 2>&1'),
+]
+# (
+#     CronExpressions.EVERY_FIRST_OF_MONTH_AT_4.value,
+#     "logic.pipelines.monthly_pipeline.monthly_pipeline",
+# )
+# (
+#     CronExpressions.EVERY_DAY_AT_10.value,S
+#     "logic.pipelines.daily_pipeline.daily_pipeline",
+# ),
 # region Email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -174,3 +173,16 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # endregion
+# settings.py
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",  # Use /0, /1, /2, etc. to use different Redis databases
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+

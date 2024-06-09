@@ -9,15 +9,16 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends build-essential cron postgresql-client wget unzip && \
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    apt install -y ./google-chrome-stable_current_amd64.deb && \
-    rm google-chrome-stable_current_amd64.deb && \
-    apt-get clean
+    && apt-get install -y --no-install-recommends build-essential cron postgresql-client wget unzip ca-certificates \
+    && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && apt install -y ./google-chrome-stable_current_amd64.deb \
+    && rm google-chrome-stable_current_amd64.deb \
+    && update-ca-certificates \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Poetry
 RUN pip install poetry
-
 
 # Copy the entrypoint script into the container
 COPY entrypoint.sh /app/
@@ -32,5 +33,11 @@ COPY pyproject.toml poetry.lock* /app/
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
 
+# django-crontab logfile
+RUN mkdir /cron
+RUN touch /cron/django_cron_log
+
 # Expose port 8000 for Django
 EXPOSE 8000
+
+CMD service cron start && python manage.py runserver 0.0.0.0:8000
