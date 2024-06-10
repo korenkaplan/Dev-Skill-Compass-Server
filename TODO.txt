@@ -1,15 +1,19 @@
+=============  Most Important =================
+- LinkedIn Scraping MUST.
+- click the load more listings button
+- attempt to use bs4 from the href
+- Count Java developer and Python developer for backend searches
+- compate bs4 scan vs regular scan
+
 =============  Frontend =================
 - Handle loading time (cache) loading
 - Try a different color schema
 
-
 =============  Backend =================
-- LinkedIn Scraping MUST.
 - Handle caching with redis on server.
 - Create an index for the common queries
 - decide on scanning time routine every 1 / 3 / 7 days. and adjust the cache to the days.
 - fix mailing system in docker
-
 
 ============= General Assignments =================
 - Organize the files and naming in the project
