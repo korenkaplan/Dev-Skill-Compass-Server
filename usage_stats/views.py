@@ -14,11 +14,12 @@ from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
 from django.core.cache import cache
 from core.serializers import RoleSerializer, SynonymsSerializer
+
 # @check_parameters('role_id')
 cache_time = 60 * 15
 
 
-@cache_page(60 * 1)
+# @cache_page(cache_time)
 @api_view(['Get'])
 def get_all_roles(request):
     cache_key = 'all_roles'
@@ -27,13 +28,12 @@ def get_all_roles(request):
         result = Roles.objects.all()
         serializer = RoleSerializer(result, many=True)
         cache.set(cache_key, serializer.data)
-        return Response({'data': serializer.data})
+        return Response(serializer.data, 200)
     else:
         return Response(roles, 200)
 
 
-
-@cache_page(60 * 1)
+# @cache_page(cache_time)
 @api_view(['Post'])
 def get_role_count_stats_view(request):
     # get the params from body

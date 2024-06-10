@@ -1,3 +1,4 @@
+from django.views.decorators.cache import cache_page
 from rest_framework import generics
 from .models import Technologies, Roles, Categories, Synonyms
 from .serializers import (
@@ -26,6 +27,8 @@ class CategoriesListCreate(generics.ListCreateAPIView):
 class CategoriesRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Categories.objects.all()
     serializer_class = CategorySerializer
+
+
 
 
 class RolesListCreate(generics.ListCreateAPIView):

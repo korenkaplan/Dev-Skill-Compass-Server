@@ -1,25 +1,21 @@
-=============  Most Important =================
-- create emailing system to see how much was actually inserted ??
-- change to 24 hours job scan ??
-- add redis to docker-compose as a service
-- fix mailing system
-- create about me page
-- scrape more websites
+=============  Frontend =================
+- Handle loading time (cache) loading
+- Try a different color schema
+
+
+=============  Backend =================
+- LinkedIn Scraping MUST.
+- Handle caching with redis on server.
+- Create an index for the common queries
+- decide on scanning time routine every 1 / 3 / 7 days. and adjust the cache to the days.
+- fix mailing system in docker
+
 
 ============= General Assignments =================
 - Organize the files and naming in the project
 - Check the option to use neon postgresql database
-- Add more scraping sites to the project
-- Fix healthcheck for web service database initialization
 - add historical data to the website
-
-
-============= Repository & CV Adjustment =============
-- Create a Readme.md file to the project.
+- Create a Readme.md files to the project.
 - Create the CV and add the project to the CV.
 
 
-============= Deploy Website  =============
-- Deploy the react site to netlify. adjust the cors
-- Deploy the service to render adjust the allowed hosts.
-- Host the postgresql and adjust the postgresql ENV variables.
