@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
 import os
 import re
 import time
+from random import uniform
 
 from django.core.wsgi import get_wsgi_application
 
@@ -31,7 +32,7 @@ from selenium.common.exceptions import (
     TimeoutException,
     NoSuchElementException,
     StaleElementReferenceException,
-    ElementClickInterceptedException,
+    ElementClickInterceptedException, ElementNotInteractableException,
 )
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -42,8 +43,6 @@ from init_db.data.data import get_words_to_remove_from_title, get_synonyms_words
 import requests
 from bs4 import BeautifulSoup
 from lxml import etree
-
-
 
 
 # region Setup and Initialization functions
@@ -113,7 +112,6 @@ def get_full_description(description_div_xpath: str, show_more_button_xpath: str
     except Exception as e:
         print(f"Function: get_full_description -> error: {e}")
         return False, job_details_text
-
 
 
 def get_job_listings_li_elements_list(result_list_xpath: str, wait: WebDriverWait) -> list[WebElement]:
@@ -278,7 +276,7 @@ def find_and_match_title(role: str, i: int, listing_li_element: WebElement, wait
 
 def extract_text_from_href(url: str, description_div_xpath: str) -> str:
     # Send a GET request to fetch the raw HTML content
-    response = requests.get(url)
+    response = fetch_url_with_retries(url, 5)
     response.raise_for_status()  # Ensure the request was successful
 
     # Parse the HTML content with BeautifulSoup using lxml parser
@@ -328,6 +326,45 @@ def get_href_from_li(element: WebElement) -> str:
         print(f"Function: get_href_from_li error: {e} ")
 
 
+def fetch_url_with_retries(url, max_retries):
+    retries = 0
+    while retries < max_retries:
+        try:
+            # Use a common User-Agent string to mimic a real browser
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()
+            return response
+        except requests.exceptions.HTTPError as e:
+            if response.status_code == 429:
+                retries += 1
+                wait_time = 2 ** retries + uniform(0, 1)  # Exponential backoff with jitter
+                print(f"429 error encountered. Retrying in {wait_time:.2f} seconds...")
+                time.sleep(wait_time)
+            else:
+                raise e
+    raise requests.exceptions.HTTPError(f"Max retries exceeded for URL: {url}")
+
+
+def click_see_more_button_if_exist(driver: WebDriver, xpath: str, short_timeout=2, long_timeout=5):
+    try:
+        # Short wait to see if the button is present
+        button_element = WebDriverWait(driver, short_timeout).until(
+            EC.presence_of_element_located((By.XPATH, xpath))
+        )
+        if button_element:
+            # If the button is present, wait until it is clickable
+            button_element = WebDriverWait(driver, long_timeout).until(
+                EC.element_to_be_clickable((By.XPATH, xpath))
+            )
+            button_element.click()
+            time.sleep(3)  # Wait for new jobs to load
+    except (TimeoutException, ElementNotInteractableException, NoSuchElementException) as e:
+        pass
+
+
 def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
     # region Unpack Dto
     result_list_xpath = dto.result_list_xpath
@@ -336,6 +373,7 @@ def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
     role = dto.role
     description_div_xpath = dto.description_div_xpath
     show_more_button_xpath = dto.show_more_button_xpath
+    see_more_jobs_btn_xpath = dto.see_more_jobs_btn_xpath
     # endregion
 
     # region Get initial result list
@@ -398,22 +436,30 @@ def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
                     continue
 
                 # endregion
+
+                # region Get the full Description
                 job_url: str = get_href_from_li(job_listings[i])
-                xpath='/html/body/main/section[1]/div/div/section[1]/div/div/section/div'
-                description: str = extract_text_from_href(job_url, xpath)
+                print(job_url)
+                description: str = extract_text_from_href(job_url, description_div_xpath)
+
                 if description:
                     job_listings_result_list.append(description)
                     write_text_to_file('job_description.txt', 'a', description)
-
                     inserted_descriptions += 1
                 else:
                     write_text_to_file('not_found_description.txt', 'a', f"{i} -> {title_from_li}")
+
+                # endregion
+
 
             # Update the skip amount for the next iteration
             skip_amount = len(job_listings)
 
             # Refind the job listings to avoid StaleElementReferenceException
             job_listings = get_job_listings_li_elements_list(result_list_xpath, wait)
+
+            # Check and click "See More Jobs" button if it exists
+            click_see_more_button_if_exist(driver, see_more_jobs_btn_xpath)
 
         except Exception as e:
             print(e)
@@ -436,6 +482,72 @@ def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
     # endregion
 
 
+def main():
+    # bs4 config
+    # URL of the webpage to scrape
+    bs4_url = 'https://il.linkedin.com/jobs/view/full-stack-engineer-at-bolt-3940304372?position=33&pageNum=0&refId=aVzfZ%2BQM76VnMW572JVktg%3D%3D&trackingId=LVK5lFPxccELa7Ekrths8w%3D%3D&trk=public_jobs_jserp-result_search-card'
+    bs4_parent_xpath = '/html/body/main/section[1]/div/div/section[1]/div/div/section/div'
+
+    url = r"https://www.linkedin.com/jobs/search/?currentJobId=3939018469&f_TPR=r604800&geoId=101620260&keywords=backend%20developer&location=Israel&origin=JOB_SEARCH_PAGE_SEARCH_BUTTON&refresh=true&start=0"
+    # full_description_xpath = '/html/body/div[1]/div/section/div[2]/div/section[1]/div/div[2]'  # class="description__text description__text--rich"
+    full_description_xpath = '/html/body/div[1]/div/section/div[2]/div/section[1]/div/div/section/div'  # class="description__text description__text--rich"
+    show_more_btn_full_xpath = '/html/body/div[1]/div/section/div[2]/div/section[1]/div/div/section/button[1]'
+    full_description_inner_div_xpath = full_description_xpath + '/section/div'
+    result_list_xpath = '/html/body/div[1]/div/main/section[2]/ul'
+    see_more_jobs_button_xpath = '/html/body/div[1]/div/main/section[2]/button'
+    remote_page_description_div_xpath = '/html/body/main/section[1]/div/div/section[1]/div/div/section/div'
+
+    drivers = setup_chrome_driver(activate=True, url=url)
+    drivers.maximize_window()
+    wait = setup_web_driver_wait(drivers)
+
+    dto: LinkedinGetJobListingsDto = LinkedinGetJobListingsDto(
+        role='full stack developer',
+        driver=drivers,
+        wait=wait,
+        result_list_xpath=result_list_xpath,
+        description_div_xpath=remote_page_description_div_xpath,
+        show_more_button_xpath=show_more_btn_full_xpath,
+        see_more_jobs_btn_xpath=see_more_jobs_button_xpath
+    )
+    # res = get_full_description(full_description_inner_div_xpath, show_more_btn_full_xpath, wait)
+    # print(res)
+    listings = get_job_listings(dto)
+
+
+if __name__ == '__main__':
+    main()
+
+
+# titles_for_testing = """
+# Full Stack Engineer
+# Backend Software Engineer - Mid/Senior
+# Full Stack Engineer
+# Backend Engineer
+# Java Software Engineer - LLM
+# Backend Engineer
+# Full stack developer
+# Java developer (Platform engineering)
+# Fullstack Developer- Front-End Oriented
+# Python Developer
+# React.js Developer -LLM Project
+# Full Stack Engineer (Backend Oriented)
+# Backend Engineer
+# Full Stack Engineer
+# Senior Full Stack Engineer
+# Full Stack Engineer
+# Full Stack Engineer
+# Backend Developer
+# JAVA Developer
+# Full Stack Engineer - 4952
+# Senior Backend Developer
+# Full Stack Developer (Hybrid)
+# Senior Back End Developer
+# Backend Engineer
+# """
+
+
+# region get listings backup
 def get_job_listings_backup(dto: LinkedinGetJobListingsDto) -> list[str]:
     # region Unpack Dto
     result_list_xpath = dto.result_list_xpath
@@ -544,64 +656,4 @@ def get_job_listings_backup(dto: LinkedinGetJobListingsDto) -> list[str]:
     return job_listings_result_list
     # endregion
 
-
-
-def main():
-
-    # bs4 config
-    # URL of the webpage to scrape
-    bs4_url = 'https://il.linkedin.com/jobs/view/full-stack-engineer-at-bolt-3940304372?position=33&pageNum=0&refId=aVzfZ%2BQM76VnMW572JVktg%3D%3D&trackingId=LVK5lFPxccELa7Ekrths8w%3D%3D&trk=public_jobs_jserp-result_search-card'
-    bs4_parent_xpath = '/html/body/main/section[1]/div/div/section[1]/div/div/section/div'
-
-
-    url = r"https://www.linkedin.com/jobs/search/?currentJobId=3939018469&f_TPR=r604800&geoId=101620260&keywords=backend%20developer&location=Israel&origin=JOB_SEARCH_PAGE_SEARCH_BUTTON&refresh=true&start=0"
-    # full_description_xpath = '/html/body/div[1]/div/section/div[2]/div/section[1]/div/div[2]'  # class="description__text description__text--rich"
-    full_description_xpath = '/html/body/div[1]/div/section/div[2]/div/section[1]/div/div/section/div'  # class="description__text description__text--rich"
-    show_more_btn_full_xpath = '/html/body/div[1]/div/section/div[2]/div/section[1]/div/div/section/button[1]'
-    full_description_inner_div_xpath = full_description_xpath + '/section/div'
-    result_list_xpath = '/html/body/div[1]/div/main/section[2]/ul'
-    drivers = setup_chrome_driver(activate=True, url=url)
-    drivers.maximize_window()
-    wait = setup_web_driver_wait(drivers)
-
-    dto: LinkedinGetJobListingsDto = LinkedinGetJobListingsDto(
-        role='full stack developer',
-        driver=drivers,
-        wait=wait,
-        result_list_xpath= result_list_xpath,
-        description_div_xpath=full_description_xpath,
-        show_more_button_xpath=show_more_btn_full_xpath
-    )
-    # res = get_full_description(full_description_inner_div_xpath, show_more_btn_full_xpath, wait)
-    # print(res)
-    listings = get_job_listings(dto)
-
-
-if __name__ == '__main__':
-    main()
-# titles_for_testing = """
-# Full Stack Engineer
-# Backend Software Engineer - Mid/Senior
-# Full Stack Engineer
-# Backend Engineer
-# Java Software Engineer - LLM
-# Backend Engineer
-# Full stack developer
-# Java developer (Platform engineering)
-# Fullstack Developer- Front-End Oriented
-# Python Developer
-# React.js Developer -LLM Project
-# Full Stack Engineer (Backend Oriented)
-# Backend Engineer
-# Full Stack Engineer
-# Senior Full Stack Engineer
-# Full Stack Engineer
-# Full Stack Engineer
-# Backend Developer
-# JAVA Developer
-# Full Stack Engineer - 4952
-# Senior Backend Developer
-# Full Stack Developer (Hybrid)
-# Senior Back End Developer
-# Backend Engineer
-# """
+# endregion
