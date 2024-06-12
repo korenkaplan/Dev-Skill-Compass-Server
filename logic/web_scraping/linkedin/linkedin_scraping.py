@@ -43,6 +43,8 @@ from init_db.data.data import get_words_to_remove_from_title, get_synonyms_words
 import requests
 from bs4 import BeautifulSoup
 from lxml import etree
+from time import sleep
+import random
 
 
 # region Setup and Initialization functions
@@ -58,14 +60,13 @@ def setup_chrome_driver(activate=False, url="", headless=False) -> WebDriver:
             "--headless",
             "--no-sandbox",
             "--disable-dev-shm-usage",
-            "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+            "--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
         )
         for option in chrome_headless_arguments:
             chrome_options.add_argument(option)
         driver = webdriver.Chrome(
             service=ChromeService(ChromeDriverManager().install()),
-            options=chrome_options,
+            options=chrome_options
         )
     else:
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -276,7 +277,7 @@ def find_and_match_title(role: str, i: int, listing_li_element: WebElement, wait
 
 def extract_text_from_href(url: str, description_div_xpath: str) -> str:
     # Send a GET request to fetch the raw HTML content
-    response = fetch_url_with_retries(url, 5)
+    response = fetch_url_with_retries(url, 3)
     response.raise_for_status()  # Ensure the request was successful
 
     # Parse the HTML content with BeautifulSoup using lxml parser
@@ -344,11 +345,10 @@ def fetch_url_with_retries(url, max_retries):
                 print(f"429 error encountered. Retrying in {wait_time:.2f} seconds...")
                 time.sleep(wait_time)
             else:
-                raise e
-    raise requests.exceptions.HTTPError(f"Max retries exceeded for URL: {url}")
+                pass
 
 
-def click_see_more_button_if_exist(driver: WebDriver, xpath: str, short_timeout=2, long_timeout=5):
+def click_see_more_button_if_exist(driver: WebDriver, xpath: str, short_timeout=2, long_timeout=5) -> bool:
     try:
         # Short wait to see if the button is present
         button_element = WebDriverWait(driver, short_timeout).until(
@@ -361,8 +361,12 @@ def click_see_more_button_if_exist(driver: WebDriver, xpath: str, short_timeout=
             )
             button_element.click()
             time.sleep(3)  # Wait for new jobs to load
+            return True
+
+        else:
+            return False
     except (TimeoutException, ElementNotInteractableException, NoSuchElementException) as e:
-        pass
+        return False
 
 
 def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
@@ -374,7 +378,10 @@ def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
     description_div_xpath = dto.description_div_xpath
     show_more_button_xpath = dto.show_more_button_xpath
     see_more_jobs_btn_xpath = dto.see_more_jobs_btn_xpath
+    short_timeout=1.5
+    has_done_big_sleep = False
     # endregion
+
 
     # region Get initial result list
     # get the initial job_listings visible on page load
@@ -395,8 +402,12 @@ def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
     increase_every_ten = 0
     repeated_urls_counter = 0
     bad_url_counter = 0
+    is_pressed = False
     # endregion
-
+    try:
+        button = driver.find_element(By.XPATH, see_more_jobs_btn_xpath)
+    except NoSuchElementException:
+        button = None
     # region While loop main process
     while job_listings:
         try:
@@ -409,9 +420,10 @@ def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
             previous_size = job_listings_len
             print(f"({dto.role}) Total listings collected: {inserted_descriptions}")
 
+
             # Iterate through each job listing, skipping the previously clicked ones
             for i in range(skip_amount, job_listings_len):
-                time.sleep(1.5)
+
                 # region Scroll the element into view
                 # Start the process bys scrolling to view and clicking the listing
                 result: int = scroll_and_click_and_visited_pipeline(driver, job_listings[i],
@@ -437,9 +449,9 @@ def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
 
                 # endregion
 
+                time.sleep(1.5)
                 # region Get the full Description
                 job_url: str = get_href_from_li(job_listings[i])
-                print(job_url)
                 description: str = extract_text_from_href(job_url, description_div_xpath)
 
                 if description:
@@ -451,15 +463,40 @@ def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
 
                 # endregion
 
-
             # Update the skip amount for the next iteration
             skip_amount = len(job_listings)
+
+            if button and button.is_displayed():
+                if has_done_big_sleep is False:
+                    random_float = random.uniform(5.0, 10.0)
+                    print(f"random_float: {random_float}")
+                    sleep(random_float)
+
+                max_tries = 15
+                attempts = 1
+                length_before = len(job_listings)
+                while attempts < max_tries:
+                    button.click()
+                    wait_time = 2 ** attempts + uniform(0, 1)  # Exponential backoff with jitter
+                    wait_time = min(wait_time, 60)
+                    print(f"wait_time: {wait_time}")
+                    sleep(wait_time)
+                    job_listings = get_job_listings_li_elements_list(result_list_xpath, wait)
+
+                    length_of_list = len(job_listings)
+
+                    print(f"length_before: {length_before}   -----  len(job_listings): {length_of_list}")
+                    if length_before < len(job_listings):
+                        break
+                    attempts += 1
+                    print(f"button displayed:  -> is pressed: {is_pressed}")
 
             # Refind the job listings to avoid StaleElementReferenceException
             job_listings = get_job_listings_li_elements_list(result_list_xpath, wait)
 
-            # Check and click "See More Jobs" button if it exists
-            click_see_more_button_if_exist(driver, see_more_jobs_btn_xpath)
+
+            # # Check and click "See More Jobs" button if it exists
+            # is_pressed = click_see_more_button_if_exist(driver, see_more_jobs_btn_xpath)
 
         except Exception as e:
             print(e)
@@ -469,10 +506,10 @@ def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
     # region Log the result to file and return it
     # log the final result of the function how many listings were collected
     text = f"""
-        Inserted descriptions: {inserted_descriptions} 
-        Error titles counter: {false_title_counter} 
+        Inserted Descriptions: {inserted_descriptions} 
+        Title Don't Match: {false_title_counter} 
         Repeated URLS: {repeated_urls_counter}
-        Problematic URLS: {bad_url_counter + 1}
+        Problematic URLS: {bad_url_counter + 2}
         --------------------------------------
         Total Job Listings: {len(job_listings)}
     """
@@ -485,8 +522,6 @@ def get_job_listings(dto: LinkedinGetJobListingsDto) -> list[str]:
 def main():
     # bs4 config
     # URL of the webpage to scrape
-    bs4_url = 'https://il.linkedin.com/jobs/view/full-stack-engineer-at-bolt-3940304372?position=33&pageNum=0&refId=aVzfZ%2BQM76VnMW572JVktg%3D%3D&trackingId=LVK5lFPxccELa7Ekrths8w%3D%3D&trk=public_jobs_jserp-result_search-card'
-    bs4_parent_xpath = '/html/body/main/section[1]/div/div/section[1]/div/div/section/div'
 
     url = r"https://www.linkedin.com/jobs/search/?currentJobId=3939018469&f_TPR=r604800&geoId=101620260&keywords=backend%20developer&location=Israel&origin=JOB_SEARCH_PAGE_SEARCH_BUTTON&refresh=true&start=0"
     # full_description_xpath = '/html/body/div[1]/div/section/div[2]/div/section[1]/div/div[2]'  # class="description__text description__text--rich"
@@ -497,7 +532,7 @@ def main():
     see_more_jobs_button_xpath = '/html/body/div[1]/div/main/section[2]/button'
     remote_page_description_div_xpath = '/html/body/main/section[1]/div/div/section[1]/div/div/section/div'
 
-    drivers = setup_chrome_driver(activate=True, url=url)
+    drivers = setup_chrome_driver(activate=True, url=url, headless=True)
     drivers.maximize_window()
     wait = setup_web_driver_wait(drivers)
 

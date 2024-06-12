@@ -1,0 +1,2145 @@
+(11/06/2024 17:24:03) -> Apono is a fast-growing startup in the DevSecOps realm, based in Tel Aviv and NYC.
+
+Apono provides a permission management automation platform with 'just in time' access to cloud assets, databases, Kubernetes clusters, and more.
+
+We help companies automate permission management in a way that allows organizations to stay agile and secure.
+
+We believe that fast movement and developers' ownership do not need to affect the environment's security level.
+
+We strive to be a product-led organization, building a product with fast Time to Value while prioritizing the frictionless developer experience.
+
+We are looking for an exceptional and passionate software engineer with an affinity for system programming who wants to be part of a solid elite team.
+
+What will you do?
+
+
+Participate in the architecture, design, and implementation of innovative cloud-based services and development infrastructure.
+
+Address multi-tenancy aspects, high availability, agility, security, and more.
+
+Participate in Product Decisions and help design Apono's core product. The challenge is to build an efficient, robust, and bulletproof solution since our infrastructure powers our customers' mission-critical services...
+
+
+Requirements:
+
+
+4+ years of overall programming experience.
+
+Working experience in at least one of the following programming languages: Java/Kotlin/Go (backend), Python/C#/Rust/Scala/TypeScript
+
+Background in Authorization and Authentication Processes - Advantage
+
+Deep understanding of the Cybersecurity domain - Advantage
+
+Experience with databases (PostgreSQL, MySQL, Oracle)
+
+Experience building and integrating with REST APIs and SaaS applications
+
+Experience in a Cloud-Native environment - Microservices, Docker, Kubernetes
+
+Understanding of end-to-end systems architectures
+
+Knowledge and understanding of Cloud systems like AWS - Advantage
+
+Experience with Messaging frameworks (RabbitMQ/ActiveMQ/Kafka)
+
+Startup mindset - A must
+
+
+Located in the lovely Montefiore neighborhood, close to the Hashalom Tel Aviv train station, Dog-friendly
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:24:04) -> Duality is a New Jersey/Israel-based startup at the forefront of developing and commercializing Privacy Enhanced Technology (PET) solutions. Our mission is to enable organizations to collaborate on sensitive data while protecting data privacy, confidentiality, and regulatory compliance.
+
+We lead and use our commercial offerings' best-of-breed open-source privacy software projects. We recently won CB Insights’ AI 100, the Reg Tech 100 Awards, and the AI FinTech 100 Awards. We’re well-funded and backed by Intel Capital, LG Ventures, Team8, Hearst Ventures, and additional leading investors.
+
+Founded in 2016 by world leaders in the fields of data science and cryptography – including Prof. Shafi Goldwasser, a Turing Award winner, Prof. Vinod Vaikundanathan, an associate professor at MIT and a Godel prize winner, and Dr. Kurt Rohloff, a recipient of DARPA Director’s Fellows.
+
+Requirements:
+
+As a Full Stack Developer, you'll play a vital role in developing our innovative, technology-rich product, directly impacting our product's growth. You'll be able to leverage your creativity and problem-solving skills to address challenges.
+
+In this role, you'll report to our Platform R&amp;D Director and collaborate closely with internal stakeholders, including data scientists, product managers, designers, solution architects, etc.
+
+Our technology stack includes ReactJS, TypeScript, Python, HTML/CSS, AWS, SQL, NoSQL (MongoDB), RabbitMQ, Docker, Linux, and Cypress.
+
+Desired Skills
+
+
+B.Sc. in Computer Science/Software Engineering. Graduated from university.
+
+3+ years’ experience in Full stack development
+
+Hands-on, proficient in ReactJS
+
+Experience with TypeScript
+
+Knowledge of UI design principles, design patterns, and best practices
+
+Experience in backend / server-side / API development
+
+Experience with NoSQL databases
+
+Experience with Python - a major advantage
+
+Experience with AWS - a major advantage
+
+Background in mathematics, statistics, and ML - an advantage
+
+Experience with Big Data and distributed data pipelines - an advantage
+
+English - high level, verbal and written.
+
+People person
+
+Fast learner
+
+
+Duality Technologies is an equal-opportunity employer. We celebrate diversity and are committed to creating an inclusive environment for all employees.
+
+For more information or to apply, please send an inquiry email to: jobs@dualitytech.com or visit our website: https://www.dualitytech.com
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:24:05) -> 
+BlueSnap, an international payments company, is seeking an experienced and motivated Java Developer to join one of our dynamic development teams!
+
+The team is focused on building the next generation of services that pay thousands of BlueSnap merchants worldwide.
+
+As a Java Developer, you will design, develop, and maintain high-performance services and applications.
+
+We are looking for passionate team players eager to join an exciting, collaborative work environment. 
+
+
+
+
+<u>We work in hybrid work mode in Herzliya.</u>
+
+
+
+
+What must you have?
+
+Minimum 3 years of proven experience in software development.
+
+Experience with Java and Spring Framework.
+
+Experience with SQL/Hibernate and relational databases.
+
+Knowledge of backend development principles and best practices.
+
+High level of English.
+
+
+
+
+Nice to have:
+
+Experience with:
+
+Large-scale web applications handling massive amounts of data.
+
+Microservices architecture.
+
+GitLab, Kubernetes, and Docker
+
+React / Angular
+
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:24:06) -> Plusgrade powers the global travel industry with its portfolio of leading ancillary revenue solutions. Over 200 airline, hospitality, cruise, passenger rail, and financial services companies trust Plusgrade to create new, meaningful revenue streams through incredible customer experiences. As an ancillary revenue powerhouse, Plusgrade has generated billions of dollars in new revenue opportunities across its platform for its partners, while creating enhanced travel experiences for millions of their passengers and guests. Plusgrade was founded in 2009 with headquarters in Montreal and has offices around the world.
+
+YOU ARE SOMEONE WITH:
+
+4+ years of professional experience as an engineer.
+
+4+ Server-side expertise in Python.
+
+2+ Experience with MySql/PostgreSQL.
+
+Team player, strong communication skills, a positive attitude, and empathy.
+
+A quick learner and initiative-taker.
+
+Experience in product-driven and data-driven development.
+
+Proven experience in designing, developing, and testing scalable distributed systems.
+
+Advantage - experience with cloud services like AWS, Heroku, GCP or Azure.
+
+WHAT YOU’LL LOVE ABOUT US:
+
+📅 Flexible Paid Time Off
+
+✈️ Travel Experience Credit
+
+🧘 Annual Wellness Credit
+
+🥗 Team Events and Monthly Lunches
+
+💻 Home Office/Commuter Credit
+
+🍼 Parental Leave Top Up
+
+🌍 Adventure Pass
+
+OUR PROCESS:
+
+Plusgrade is an equal-opportunity employer and is committed to providing an accessible recruitment process. We welcome applications from all qualified individuals and are committed to equal employment opportunities regardless of gender identity or expression, race, ethnic origin, creed, place of origin, age, sex, marital status, physical or mental disability, sexual orientation, and any other category protected by law. Upon request, we will provide accommodation for applicants with disabilities.
+
+We believe in diversity and inclusivity and that is why our interview process is designed for a positive candidate experience and to ensure every candidate is evaluated equally. All applications will be reviewed by our Talent Team and the successful candidate(s) will go through the following recruitment process:
+
+
+ Recruiter Phone Interview
+
+ Hiring Manager Interview
+
+ Take-home Assessment or remote coding exercise (if applicable)
+
+ Team Interview
+
+
+
+
+All candidates will be provided with feedback regardless if they pass or didn’t pass any of our interview stages. All your information will be kept confidential.
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:24:07) -> The payments group is responsible for the entire payment cycle - payouts and balance management.
+
+The process includes payment creation flows, processing, and submission while managing the balance of our clients' accounts
+
+We work closely with different engineering and product teams and with operational functions within the company as well as maintaining a relationship with our customers and Tipalti's payment partners.
+
+As a Backend Engineer at Tipalti, you will play a crucial role in designing, developing, and maintaining innovative software solutions, You will collaborate with a diverse team of engineers, product managers, and QA to create robust, scalable, and secure software applications.
+
+Why join Tipalti?
+
+Tipalti is one of the world’s fastest-growing fintech companies. We free finance professionals to lead by modernizing the entire payables operation. We are a well-funded, late-stage start-up backed by high-profile investors. Our 2021 Series F funding round raised $270 million, valuing us at over $8.3 billion. With total funding of just over $550 million, and with more than 3000 global customers, Tipalti is one of the most valuable private fintech companies in the world.
+
+At Tipalti, we pride ourselves on our collaborative culture, the quality of our product and the capabilities of our people. Tipaltians are passionate about the work they do, and keen to get the job done. Tipalti oﬀers competitive benefits, a flexible workplace, career coaching, and an environment where diverse individuals can thrive and make an impact. Our culture ensures everyone checks their egos at the door and stands ready to reach for success together.
+
+In This Role, You Will Be Responsible For
+
+
+3+ years of backend development experience, preferably in C#/Java.
+
+Experience with Microservices. 
+
+Strong knowledge of OOP design and implementation
+
+Experience with Sql and noSql DBs
+
+Experience with Agile methodology – an advantage
+
+Experience from a startup company – an advantage
+
+Good communication skills
+
+BSc in computer sciences or equivalent
+
+
+Our tech teams are the engine behind our business. Tipalti’s tech ecosystem is extremely rich and we continually add new features to our products, ensuring that we respond to our clients’ needs at scale. Our tech teams retain a fast-paced, start-up vibe that encourages innovation and critical thinking. At Tipalti, you’ll have the opportunity to work with a diverse, global team of engineers, developers and product leaders who are collectively building the future of our best-in-class product suite as we transform financial operations for the future.
+
+Interested in learning more about us?
+
+Tipalti is the only company handling both global partner payments and accounts payable workflows for high-velocity companies across the entire financial operations cycle: onboarding and managing global suppliers, instituting procurement controls, streamlining invoice processing and approvals, executing payments around the world, and reconciling payables data across a multi-subsidiary finance organization. Tipalti enables companies to scale quickly by making payables strategic with operational, compliance, and financial controls. Through Tipalti, our clients can efficiently and securely pay thousands of partners and suppliers in 196 countries within minutes.
+
+Tipalti is fueled by a commitment to our customers and a desire to build lasting connections. Our client portfolio includes high-velocity businesses such as Amazon Twitch, GoDaddy, Roku, WordPress.com, and ZipRecruiter. We work hard for our 98% customer retention rate which is built on trust, reliability and innovation. Tipalti means we handled it" - a mission to which we are constantly committed.
+
+Job Candidate Privacy Notice | Tipalti
+
+www.tipalti.com/privacy/job-candidate-privacy-notice/
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:24:09) -> About The Position
+
+Coralogix is a modern, full-stack observability platform transforming how businesses process and understand their data. Our unique architecture powers in-stream analytics without reliance on expensive indexing or hot storage. We specialize in comprehensive monitoring of logs, metrics, trace and security events with features such as APM, RUM, SIEM, Kubernetes monitoring and more, all enhancing operational efficiency and reducing observability spend by up to 70%.
+
+We are looking for a Backend Engineer to join a growing team!
+
+Our Stack
+
+
+Scala, Node.js
+
+Kafka Streams / Akka Streams
+
+Spark
+
+Kafka, ElasticSearch, Redis
+
+Kubernetes
+
+AWS
+
+
+What You'll Do
+
+
+End-to-end development and ownership of our products and features, from design to scalable and predictable production behavior.
+
+Solve diverse complex problems of high scale
+
+Collaborate with other engineers and product managers in order to improve our products
+
+Review code, architecture, and data to identify and troubleshoot problems
+
+
+Requirements
+
+
+5+ years of development experience
+
+Hands-on experience with Data Streaming technologies: Apache Kafka / Spark Streaming / KafkaStreams / Apache Flink
+
+Experience in Scala or another jvm language (Java, Kotlin, etc)
+
+B.Sc. in computer science or an equivalent
+
+Experience in data modeling
+
+
+Advantage
+
+
+Knowledge in JVM or rockdb optimizations and tuning
+
+Production experience in a SaaS environment - Metrics, Logging, Troubleshooting production systems
+
+Experience with at least one major cloud provider - AWS, Azure, or GCP
+
+Experience with Kubernetes and Docker containers
+
+
+Cultural Fit
+
+We’re seeking candidates who are hungry, humble, and smart. Coralogix fosters a culture of innovation and continuous learning, where team members are encouraged to challenge the status quo and contribute to our shared mission. If you thrive in dynamic environments and are eager to shape the future of observability solutions, we’d love to hear from you.
+
+Coralogix is an equal opportunity employer and encourages applicants from all backgrounds to apply.
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:24:11) -> 
+<span>⭐ I'm Hiring! ⭐</span>
+
+
+
+
+<span>☘&nbsp;</span>Backend<span>&nbsp;</span>Developer<span>&nbsp;-&nbsp;</span>Python<span>&nbsp;| Full time | Israel - Ramat Gan ☘</span>
+
+
+
+
+<span>Our client, a rapidly growing startup in the field of SaaS Security, is seeking a&nbsp;</span>Backend<span>&nbsp;</span>Developer<span>&nbsp;to join their team in Ramat Gan, Israel.</span>
+
+
+
+
+<span>🌷 Responsibilities:🌷</span>
+
+<span>* Collaborate with cross-functional teams to design, develop, and deploy robust and scalable features for a cutting-edge data analytics platform.</span>
+
+<span> * Architect, implement, and optimize&nbsp;</span>backend<span>&nbsp;solutions using&nbsp;</span>Python<span>&nbsp;to ensure seamless data processing, storage, and retrieval</span>
+
+<span> * Work closely with product managers, data scientists, and tech leads to understand requirements, provide technical insights, and deliver high-quality solutions.</span>
+
+<span> * Continuously enhance the performance, scalability, and security of the platform and&nbsp;</span>backend<span>&nbsp;services through code reviews, testing, and optimization.</span>
+
+<span> * Stay updated with industry trends and emerging technologies; proactively recommend and implement improvements to enhance the platform's capabilities.</span>
+
+
+
+
+<span>💡 Qualifications:💡</span>
+
+<span>* At least 5 years of experience in&nbsp;</span>Backend<span>&nbsp;development, including designing and implementing micro-services.</span>
+
+<span> * Substantial experience with&nbsp;</span>Python<span>.</span>
+
+<span> * Experience working with&nbsp;</span>NoSQL<span>&nbsp;and&nbsp;</span>SQL<span>&nbsp;databases (e.g., MongoDB, Elasticsearch, MS</span>SQL<span>).</span>
+
+<span> * Experience with Messaging Queues (e.g., Redis, RabbitMQ, Kafka).</span>
+
+<span> * Good knowledge of&nbsp;</span>AWS<span>&nbsp;services (e.g., EC2,&nbsp;</span>VPC<span>,&nbsp;</span>ECS<span>, Lambda).</span>
+
+<span> * Good knowledge of containerization technologies (e.g., Docker, Kubernetes).</span>
+
+<span> * Familiarity with CI/CD tools (e.g., CircleCI, Gitlab CI, Jenkins).</span>
+
+
+
+
+<span> ✔If you're interested in this opportunity, please contact me now to learn more!</span>
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:24:11) -> Request failed: 429 Client Error: Request denied for url: https://il.linkedin.com/jobs/view/senior-full-stack-developer-at-titan-3944983658?position=1&pageNum=6&refId=y6mfqH1Oh9Oi322w333Hpw%3D%3D&trackingId=VBFK1Fd6mgWKieI9M20B0g%3D%3D&trk=public_jobs_jserp-result_search-card
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:24:12) -> Request failed: 429 Client Error: Request denied for url: https://il.linkedin.com/jobs/view/fullstack-developer-at-coralogix-3945360002?position=1&pageNum=7&refId=n0P9SjEHVnh6LGz5WnT06w%3D%3D&trackingId=rO6sQ5VGv7Cf7T1s9S7RfA%3D%3D&trk=public_jobs_jserp-result_search-card
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:24:13) -> Request failed: 429 Client Error: Request denied for url: https://il.linkedin.com/jobs/view/senior-fullstack-developer-at-riskified-3942722132?position=1&pageNum=8&refId=YaMW5UvICQZcNjZNyqK%2Bhw%3D%3D&trackingId=sNBD6BCfWQiQxdIfU1Ly5A%3D%3D&trk=public_jobs_jserp-result_search-card
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:24:52) -> Apono is a fast-growing startup in the DevSecOps realm, based in Tel Aviv and NYC.
+
+Apono provides a permission management automation platform with 'just in time' access to cloud assets, databases, Kubernetes clusters, and more.
+
+We help companies automate permission management in a way that allows organizations to stay agile and secure.
+
+We believe that fast movement and developers' ownership do not need to affect the environment's security level.
+
+We strive to be a product-led organization, building a product with fast Time to Value while prioritizing the frictionless developer experience.
+
+We are looking for an exceptional and passionate software engineer with an affinity for system programming who wants to be part of a solid elite team.
+
+What will you do?
+
+
+Participate in the architecture, design, and implementation of innovative cloud-based services and development infrastructure.
+
+Address multi-tenancy aspects, high availability, agility, security, and more.
+
+Participate in Product Decisions and help design Apono's core product. The challenge is to build an efficient, robust, and bulletproof solution since our infrastructure powers our customers' mission-critical services...
+
+
+Requirements:
+
+
+4+ years of overall programming experience.
+
+Working experience in at least one of the following programming languages: Java/Kotlin/Go (backend), Python/C#/Rust/Scala/TypeScript
+
+Background in Authorization and Authentication Processes - Advantage
+
+Deep understanding of the Cybersecurity domain - Advantage
+
+Experience with databases (PostgreSQL, MySQL, Oracle)
+
+Experience building and integrating with REST APIs and SaaS applications
+
+Experience in a Cloud-Native environment - Microservices, Docker, Kubernetes
+
+Understanding of end-to-end systems architectures
+
+Knowledge and understanding of Cloud systems like AWS - Advantage
+
+Experience with Messaging frameworks (RabbitMQ/ActiveMQ/Kafka)
+
+Startup mindset - A must
+
+
+Located in the lovely Montefiore neighborhood, close to the Hashalom Tel Aviv train station, Dog-friendly
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:24:53) -> 
+DigitalOps is seeking a Backend Developer responsible for managing the interchange of data between the server and the users. Your primary focus will be the development of all server-side logic, definition, and maintenance of the central database, and ensuring high performance and responsiveness to requests from the front end.
+
+
+
+
+Job Duties and Responsibilities:
+
+Integration of user-facing elements developed by front-end developers with server-side logic.
+
+Writing reusable, testable, and efficient code.
+
+Design and implementation of low-latency, high-availability, and performant applications.
+
+Implementation of security and data protection.
+
+Integration of data storage solutions.
+
+
+
+
+Requirements, Knowledge, and Experience:
+
+Proven experience as a Backend Developer or similar role (3+ years).
+
+Bachelor's degree in Computer Science, Engineering, or related field.
+
+Strong proficiency with backend programming languages - Node.js or Python.
+
+Understanding of Node.js and frameworks available for it (such as Express, StrongLoop).
+
+Good understanding of server-side templating languages.
+
+Basic understanding of front-end technologies, such as HTML5, and CSS3.
+
+Cloud development experience using AWS &amp; Serverless
+
+Experience with databases (e.g., PostgreSQL, MySQL, MongoDB), web servers.
+
+Understanding of accessibility and security compliance.
+
+User authentication and authorization between multiple systems, servers, and environments.
+
+Integration of multiple data sources and databases into one system.
+
+Management of the hosting environment, including database administration and scaling an application to support load changes.
+
+Exceptional proficiency in writing and speaking English.
+
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:25:03) -> Apono is a fast-growing startup in the DevSecOps realm, based in Tel Aviv and NYC.
+
+Apono provides a permission management automation platform with 'just in time' access to cloud assets, databases, Kubernetes clusters, and more.
+
+We help companies automate permission management in a way that allows organizations to stay agile and secure.
+
+We believe that fast movement and developers' ownership do not need to affect the environment's security level.
+
+We strive to be a product-led organization, building a product with fast Time to Value while prioritizing the frictionless developer experience.
+
+We are looking for an exceptional and passionate software engineer with an affinity for system programming who wants to be part of a solid elite team.
+
+What will you do?
+
+
+Participate in the architecture, design, and implementation of innovative cloud-based services and development infrastructure.
+
+Address multi-tenancy aspects, high availability, agility, security, and more.
+
+Participate in Product Decisions and help design Apono's core product. The challenge is to build an efficient, robust, and bulletproof solution since our infrastructure powers our customers' mission-critical services...
+
+
+Requirements:
+
+
+4+ years of overall programming experience.
+
+Working experience in at least one of the following programming languages: Java/Kotlin/Go (backend), Python/C#/Rust/Scala/TypeScript
+
+Background in Authorization and Authentication Processes - Advantage
+
+Deep understanding of the Cybersecurity domain - Advantage
+
+Experience with databases (PostgreSQL, MySQL, Oracle)
+
+Experience building and integrating with REST APIs and SaaS applications
+
+Experience in a Cloud-Native environment - Microservices, Docker, Kubernetes
+
+Understanding of end-to-end systems architectures
+
+Knowledge and understanding of Cloud systems like AWS - Advantage
+
+Experience with Messaging frameworks (RabbitMQ/ActiveMQ/Kafka)
+
+Startup mindset - A must
+
+
+Located in the lovely Montefiore neighborhood, close to the Hashalom Tel Aviv train station, Dog-friendly
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:25:04) -> 
+DigitalOps is seeking a Backend Developer responsible for managing the interchange of data between the server and the users. Your primary focus will be the development of all server-side logic, definition, and maintenance of the central database, and ensuring high performance and responsiveness to requests from the front end.
+
+
+
+
+Job Duties and Responsibilities:
+
+Integration of user-facing elements developed by front-end developers with server-side logic.
+
+Writing reusable, testable, and efficient code.
+
+Design and implementation of low-latency, high-availability, and performant applications.
+
+Implementation of security and data protection.
+
+Integration of data storage solutions.
+
+
+
+
+Requirements, Knowledge, and Experience:
+
+Proven experience as a Backend Developer or similar role (3+ years).
+
+Bachelor's degree in Computer Science, Engineering, or related field.
+
+Strong proficiency with backend programming languages - Node.js or Python.
+
+Understanding of Node.js and frameworks available for it (such as Express, StrongLoop).
+
+Good understanding of server-side templating languages.
+
+Basic understanding of front-end technologies, such as HTML5, and CSS3.
+
+Cloud development experience using AWS &amp; Serverless
+
+Experience with databases (e.g., PostgreSQL, MySQL, MongoDB), web servers.
+
+Understanding of accessibility and security compliance.
+
+User authentication and authorization between multiple systems, servers, and environments.
+
+Integration of multiple data sources and databases into one system.
+
+Management of the hosting environment, including database administration and scaling an application to support load changes.
+
+Exceptional proficiency in writing and speaking English.
+
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:25:05) -> 
+About The Position
+
+We’re looking for a Back-end Developer with a hands-on approach and high self-motivation to join our R&amp;D team. As part of the Application Backend Team, you will be responsible for building and maintaining our application and customer-facing infrastructure and features. If you’re into solving problems, seeing patterns, working with others, and want to transform the world of cybersecurity—this is the job for you.
+
+Responsibilities
+
+
+
+
+
+
+
+Designing and developing a real-time cyber system
+
+Own the full lifecycle – from architecture, design and implementation to deployment and monitoring
+
+Working closely with product and CS team to achieve a great value for our customers and partners
+
+Get an experience with new technologies and languages, develop challenges solutions, and have a great opportunity to grow and create impact.
+
+Requirements
+
+
+
+
+
+
+
+Highly motivated team player
+
+4+ years of software development experience 
+
+1.5+ years of experience in Python development 
+
+Web backend framework development (Django – Must) 
+
+Databases experience (Elasticsearch &amp; Redis – Advantage) 
+
+Experience with cloud web services (AWS – Advantage) 
+
+Cyber experience – Advantage
+
+Academic degree in Computer Science/Engineering – or equivalent experience
+
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:25:06) -> 
+About MyndYou
+
+
+
+
+The MyndYou team serves a higher mission to impact lives for the better.&nbsp;
+
+
+
+
+MyndYou developed and marketed to HealthCare Providers and Insurance Companies the world’s most empathetic, fully-present, richly-communicative virtual care coordinator. MyEleanor is an AI-powered care navigator that is able to make thousands of highly personalized phone calls every day; transforming remote care management by overcoming the desperate shortage of skilled nursing staff.&nbsp;
+
+
+
+
+With the ability to detect subtle changes in a patient's voice, listening not only to what patients say, but also how they say it, our solution predicts risk, triages patients, and sends actionable information to care team members so they can spend more time doing what they do best: Caring for patients.
+
+MyndYou is a group of clinicians, technical experts, and innovators on a mission to pair simple but sophisticated technology and actionable data with a human touch to keep people safe, engaged, and healthy.
+
+
+
+
+We perform our work with respect and trust, maintaining open communication, working collaboratively to solve challenges, and enabling rapid progress. We are a culturally diverse team committed to providing the best product experience for our healthcare industry clients and the many lives they serve.
+
+The company is backed by an industry-leading, NY-based Healthcare PE firm.
+
+
+
+
+Our offices are in Tel Aviv, Hybrid.
+
+
+
+
+The Opportunity
+
+MyndYou is looking for a passionate backend developer to join our team. In this position, you will take part in building MyElanor, a conversational AI system and its supporting systems. This will include the design and development of a system using ML models in real-time and data ingestion and transformation.&nbsp;
+
+
+
+
+About You
+
+You are a developer who cares about the product and wants end-to-end involvement in the development process from design through coding and testing and all the way to production. You are passionate about creating impact and have the ability to make things happen.
+
+
+
+
+Minimum Qualifications
+
+ Bachelor's degree in computer science&nbsp;
+
+5 years of experience in software development
+
+Last 3 years of proven experience with backend development using&nbsp;python
+
+5 years of experience developing applications utilizing relational databases as part of the overall application architecture (MySQL or Postgres).
+
+3 years of experience designing and defining architecture, including writing design reviews, test plans as part of launching software products&nbsp;
+
+
+
+
+Preferred Qualifications
+
+Experience in CI/CD processes with tools like Github Actions, Gitlab, Jenkins.
+
+Experience with Cloud (AWS advantage) - working with ECS , EC2 , Lambdas and more
+
+Experience with Redis, or similar frameworks - Advantage
+
+Experience with front-end frameworks&nbsp;- Advantage for react
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:25:08) -> About The Company
+
+Cybereason is on a mission to reverse the adversary's advantage by empowering defenders with ingenuity and technology to end cyber attacks.
+
+We have the technology, and now we are looking to expand our talent! Come and talk to us about joining a market leader and a diverse team of passionate people who win as one, ensure a customer-first approach is core to everything we do, and never give up on reversing the adversary advantage.
+
+We are looking for a Senior Java Software Engineer to become an integral member of our EP GW Core team. Cybereason is actively seeking passionate and motivated Senior Java Software Engineer to become an integral member of our EP GW Core team. This dynamic team plays a pivotal role in developing and sustaining Cybereason's multi-tenant platform, responsible for efficiently streaming data from millions of agents to our backend detection servers.
+
+In This Position You Will
+
+
+Join an esteemed autonomous, cross-functional agile team where you will assume complete responsibility for features and/or services through the entire lifecycle from design to deployment.
+
+Leverage cloud-native technologies within a GCP environment to deliver resilient and scalable solutions.
+
+Specialize in designing, developing, and deploying Java services with a strong emphasis on high availability, low latency, and scalability.
+
+Establish and sustain a cost-effective infrastructure capable of real-time processing for millions of events per second.
+
+Engage in close collaboration with fellow engineers, product owners, and designers to tackle complex challenges in the field of cybersecurity.
+
+Thrive in an environment that actively supports your individual growth.
+
+
+Requirements
+
+
+Minimum of 6 years of Java coding experience (mandatory)
+
+Collaborative team player with a strong sense of accountability, dedication, and passion
+
+Proficient in working within a cloud environment
+
+Hands-on experience with SpringBoot
+
+Proven expertise in designing and implementing microservices using the Spring framework
+
+Demonstrated experience in crafting distributed, scalable, and multithreading systems (mandatory)
+
+In-depth knowledge of system design, data structures and algorithms
+
+Experience in constructing deployment pipelines using Jenkins and Kubernetes
+
+Familiarity with queues and messaging systems such as PubSub, SQS, Kafka, etc.
+
+Proficiency in both relational databases (e.g., MySQL, Postgres) and NoSQL databases (e.g., MongoDB, AeroSpike)
+
+Possession of a B.Sc. in Computer Science/Engineering or equivalent knowledge
+
+
+More About Cybereason
+
+Our culture and how we operate reflects in our shared values. Our #Defenders are individuals with diverse skill sets and backgrounds who are driven to innovate and scale with our growing organization. We are a team that strives to learn from each other, solve challenging problems, and work collaboratively toward our goal of reversing the adversary advantage.
+
+Core Values
+
+
+Win As One: The power of an individual is less than the power of a team.
+
+Ever Evolving: Change keeps us at the forefront, so we encourage it.
+
+Daring: To achieve the impossible, we must dare to be different.
+
+Obsessed with Customers: We believe gaining our customers’ trust is the most important part of what we do.
+
+Never Give Up: We are tenacious and resilient, and we never stop.
+
+UbU: We believe people can only unlock their full potential when they work somewhere that accepts who they are.
+
+
+If these values resonate with you and our vision excites you, join us today and help us end cyber attacks from the endpoint to everywhere! #Defenders
+
+Don’t meet every single requirement? Studies have shown that women and people of color are less likely to apply to jobs unless they meet every single qualification. At Cybereason we are dedicated to building a diverse, inclusive, and authentic workplace (#uBu), so if you’re excited about this role but your past experience doesn’t align perfectly with every qualification in the job description, we encourage you to apply anyways. You may be just the right candidate for this or other roles.
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:28:59) -> 
+DigitalOps is seeking a Backend Developer responsible for managing the interchange of data between the server and the users. Your primary focus will be the development of all server-side logic, definition, and maintenance of the central database, and ensuring high performance and responsiveness to requests from the front end.
+
+
+
+
+Job Duties and Responsibilities:
+
+Integration of user-facing elements developed by front-end developers with server-side logic.
+
+Writing reusable, testable, and efficient code.
+
+Design and implementation of low-latency, high-availability, and performant applications.
+
+Implementation of security and data protection.
+
+Integration of data storage solutions.
+
+
+
+
+Requirements, Knowledge, and Experience:
+
+Proven experience as a Backend Developer or similar role (3+ years).
+
+Bachelor's degree in Computer Science, Engineering, or related field.
+
+Strong proficiency with backend programming languages - Node.js or Python.
+
+Understanding of Node.js and frameworks available for it (such as Express, StrongLoop).
+
+Good understanding of server-side templating languages.
+
+Basic understanding of front-end technologies, such as HTML5, and CSS3.
+
+Cloud development experience using AWS &amp; Serverless
+
+Experience with databases (e.g., PostgreSQL, MySQL, MongoDB), web servers.
+
+Understanding of accessibility and security compliance.
+
+User authentication and authorization between multiple systems, servers, and environments.
+
+Integration of multiple data sources and databases into one system.
+
+Management of the hosting environment, including database administration and scaling an application to support load changes.
+
+Exceptional proficiency in writing and speaking English.
+
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:29:19) -> Apono is a fast-growing startup in the DevSecOps realm, based in Tel Aviv and NYC.
+
+Apono provides a permission management automation platform with 'just in time' access to cloud assets, databases, Kubernetes clusters, and more.
+
+We help companies automate permission management in a way that allows organizations to stay agile and secure.
+
+We believe that fast movement and developers' ownership do not need to affect the environment's security level.
+
+We strive to be a product-led organization, building a product with fast Time to Value while prioritizing the frictionless developer experience.
+
+We are looking for an exceptional and passionate software engineer with an affinity for system programming who wants to be part of a solid elite team.
+
+What will you do?
+
+
+Participate in the architecture, design, and implementation of innovative cloud-based services and development infrastructure.
+
+Address multi-tenancy aspects, high availability, agility, security, and more.
+
+Participate in Product Decisions and help design Apono's core product. The challenge is to build an efficient, robust, and bulletproof solution since our infrastructure powers our customers' mission-critical services...
+
+
+Requirements:
+
+
+4+ years of overall programming experience.
+
+Working experience in at least one of the following programming languages: Java/Kotlin/Go (backend), Python/C#/Rust/Scala/TypeScript
+
+Background in Authorization and Authentication Processes - Advantage
+
+Deep understanding of the Cybersecurity domain - Advantage
+
+Experience with databases (PostgreSQL, MySQL, Oracle)
+
+Experience building and integrating with REST APIs and SaaS applications
+
+Experience in a Cloud-Native environment - Microservices, Docker, Kubernetes
+
+Understanding of end-to-end systems architectures
+
+Knowledge and understanding of Cloud systems like AWS - Advantage
+
+Experience with Messaging frameworks (RabbitMQ/ActiveMQ/Kafka)
+
+Startup mindset - A must
+
+
+Located in the lovely Montefiore neighborhood, close to the Hashalom Tel Aviv train station, Dog-friendly
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:29:23) -> Description
+
+Moon Active is one of the world's fastest-growing mobile game companies, providing entertainment to millions of active users across the universe. The company is headquartered in the heart of Tel Aviv.
+
+This is a great chance for developers to join our team, get familiar with cutting edge technologies, get experience in coding and implementing complex systems.
+
+We’re looking for a talented Full Stack Developer to join our amazing and growing R&amp;D platform group.
+
+You’ll make a huge impact on Moon Active's growth by developing Business Applications for Operations, Monetization, CRM, analysts, BI and more, in a multi-game-studio environment that enables us to leverage insights from massive amounts of data and deliver an optimized and personalized experience to our players.
+
+Responsibilities
+
+
+You will develop, debug, deliver and maintain a highly-complex system, that is the core of our company’s growth
+
+You will work in an agile development environment
+
+You will deliver high quality and well-structured code
+
+
+Requirements
+
+
+1+ year of experience as a software developer with front-end and back-end development. 
+
+B.Sc. degree in Computer Science/Computer Engineering
+
+Excellent JavaScript (including ES6), HTML and CSS skills.
+
+Experience with at least one front end, single page application oriented frameworks such as Angular, React, etc.
+
+Experience with SQL and NoSQL databases.
+
+Working with web services (e.g. REST services) and good understanding of network concepts (e.g. HTTP protocol, sockets etc).
+
+Knowledge of browser troubleshooting and debugging practices and techniques.
+
+
+An Advantage
+
+
+Experience with Node.JS.
+
+Familiarity with cloud infrastructure such as GCP, AWS, k8s
+
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:29:28) -> 
+Prisma Photonics, a fast-growing startup, transforms infrastructure monitoring with optical fibers. We eliminate the need for extra sensors by offering sensor-free solutions to monitor electrical power grids and oil &amp; gas pipelines across thousands of kilometers.
+
+
+
+
+Our fiber-sensing technology, integrated with AI and machine learning, enables our customers to achieve environmental and renewable energy targets, ensuring smooth utility operations on their path to net-zero emissions.
+
+We are looking for the best minds and spirits to join us in our journey. We know our product is only as great as the individuals building the hardware and software and harnessing data for good causes. Being a great team member means being eager to learn and grow, able to challenge while accepting being challenged, and working for the team and the product with enthusiasm and passion.
+
+
+
+
+We are now hiring an eager&nbsp;Backend Developer Intern&nbsp;to take a meaningful part in overcoming the company’s challenges while maintaining a professional work methodology.&nbsp;
+
+
+
+
+Responsibilities:&nbsp;
+
+System analysis, development of smart tools, performance optimization, and troubleshooting system issues.&nbsp;
+
+Development of ad hoc solutions – adapting systems and creating solutions to special customer needs.&nbsp;
+
+Software integration – build, testing, and deployment automation.&nbsp;
+
+Software operations – Installations, updates, version integrations, and Release processes.&nbsp;
+
+Maintain high standards of operational quality by utilizing good practices and processes and improving them along the way.&nbsp;&nbsp;
+
+
+
+
+Requirements:
+
+3rd year in BSc. In computer science or equivalent related area.&nbsp;
+
+Python&nbsp;– Learned about data structures, algorithms, and object-oriented design and coding practices.&nbsp;
+
+Excellent English communication skills, both verbal and written.&nbsp;
+
+Strong problem-solving skills and attention to detail.&nbsp;
+
+Strong organizational skills and the ability to manage multiple tasks simultaneously.&nbsp;
+
+Strong organizational skills and the ability to manage multiple tasks simultaneously.&nbsp;
+
+&nbsp;
+
+Advantages:&nbsp;
+
+Existing experience in the BE domain on projects.&nbsp;
+
+Knowledge in c++ programming.&nbsp;
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:29:35) -> Node.js Developer - LLM Project
+
+Experience: 3 - 15 Years
+
+Location: - Anywhere in the World - Permanent Remote
+
+Contract Duration: 6 Months
+
+Payout: USD 25 - 30 Hourly
+
+Work timings which is :-primarily, overlap is required from 8 AM to 1 PM PST. The remaining 3 hours can be accommodated either before 8 AM PST or after 1 PM PST
+
+Opportunity- Full Time, 8 hours, 6 months
+
+Overlap Required: 5 hours PST timing
+
+Must-Have
+
+Bachelor’s/Master’s degree in Engineering, Computer Science (or equivalent experience)
+
+3+ years experience as a front-end OR full-stack engineer
+
+3+ years in React or Node
+
+3+ years in Javascript or Typescript.
+
+Experience in developing web apps using modular development and scalable architectures as well as a strong focus on code readability and security/stability (i.e. testing)
+
+Proficiency with the language's syntax and conventions
+
+Solid understanding of JavaScript ES6 and either Node.js or React
+
+Job Description
+
+A well-established company that is leveraging the advanced power of technology to help realize the science-fiction fantasy of collaborative and open-ended computer dialogues, is looking for front-end or fullstack JS web engineers. The engineer will be working together on the definition, design, and delivery of new features with cross-functional teams. The company is developing the next generation of dialog agents, which will have a wide range of uses in areas including education, entertainment, and general question-answering. This is an exciting opportunity for candidates who are keen to learn in a fast-paced setting.
+
+Required Skills
+
+
+Write readable, reusable, and maintainable code
+
+Participate in code reviews to ensure that the standards for code quality are met
+
+Demonstrate your proficiency with your language of choice, while covering all bases
+
+Provide clear, clean, well-organized, correct, and clearly annotated/classifiable code in the responses
+
+Bachelor’s/Master’s degree in Engineering, Computer Science (or equivalent experience)
+
+At least 3+ years of relevant experience as a front-end OR full-stack engineer
+
+Demonstrable experience with developing web apps using modular development and scalable architectures as well as a strong focus on code readability and security/stability (i.e. testing)
+
+Proficiency with the language's syntax and conventions
+
+Extensive experience working with JavaScript or TypeScript
+
+Solid understanding of JavaScript ES6 and either Node.js or React
+
+Nice to have some prior software Quality Assurance and Test Planning experience
+
+Excellent spoken and written English communication skills
+
+
+Skills: javascript,code quality,web application development,javascript es6,engineering,modular development,test planning,es6,scalable architectures,software quality assurance,frontend development,english communication,security/stability,code readability,testing,computer science,front-end,node.js,security,web applications,web apps,typescript,full-stack development,quality assurance,english communication skills,full-stack,front end engineering design (feed),front-end development,react
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:29:38) -> We are looking for a passionate Full Stack to join our all-star team.
+
+As part of your role, you will design the architecture, develop, and deploy new SaaS platform from scratch, working closely with the product, design, and QA teams to deliver the best product.
+
+At Appsforce you will lead the way to be in the most cutting edge technologies, with our elite development team, you will help our customers to be at the forefront of their fields.
+
+A super interesting development for a Cyber Company, one of the leading companies in the world market!
+
+As a senior developer in our group, you will design and build our new high scale, complex, cutting-edge systems built in React &amp; Python running over AWS.
+
+Responsibilities:
+
+
+Research and implement sophisticated Cyber security mechanisms.
+
+Work closely with Product Managers, Architects, DevOps, UI/UX, and other tech leads from our game teams.
+
+Ensure the performance, quality, and responsiveness of applications.
+
+Troubleshoot and debug applications.
+
+Collaborate with UX/UI designers, QA Engineers, and other developers to create effective solutions.
+
+
+Requirements:
+
+
+4+ years of experience in Python
+
+Experience in cloud environment AWS &amp; Serverless
+
+Deep knowledge and expertise with React.js
+
+Experience with modern CI/CD pipelines
+
+Proactive by nature, internal drive for excellence and improvement
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:29:43) -> 
+Driivz empowers major service providers that aspire to take a significant role in the e-mobility landscape with a market-leading, end-to-end EV charging and smart energy management software platform.
+
+Since founding Driivz, our core focus has been on providing a digital services software platform to major players in the EV market. With hypergrowth in EV charging infrastructure, we offer a scalable, intelligent and integrated solution that enables our clients to effectively manage their networks and provide drivers with an exceptional EV charging experience.
+
+Operating in over 30 countries in the US, Europe and Asia, we enable hundreds of millions of events for millions of EV drivers and manage tens of thousands of public chargers (100,000s in roaming).
+
+Our customers include global industry players such as: EVgo, Volvo Group, Shell, CircleK, Recharge, Centrica, ESB, ElaadNL, CEZ, Mer, MOL Group, and eMobility Power.
+
+
+
+
+Join our team to work alongside the most brilliant and disruptive minds that are focused on leading the eMobility industry and building a greener world.
+
+
+
+
+For more information, please visit http://www.driivz.com
+
+
+
+
+What will you do?
+
+
+
+
+Become an eminent member of the product’s core team.
+
+Focus on next-gen architecture, scalability and performance.
+
+Enhance core capabilities in LOB areas such as Billing, CRM.
+
+Assist in overall performance improvements, advanced optimizations.
+
+
+
+
+What should you have?
+
+
+
+
+Experienced Back End Developer.
+
+Proven Java/Kotlin experience with Spring Boot framework.
+
+Proven experience with Micro-Services Architecture.
+
+Proven experience in SaaS multitenant high throughput systems.
+
+Proficient in OOD (Object Oriented Design).
+
+Proven experience with a rational Database (MySQL/Postgres, etc.)
+
+Experience with Docker.
+
+Team player with extensive experience working in teams.
+
+
+
+
+Advantages:
+
+
+
+
+Hibernate deep knowledge.
+
+Experience with ActiveMQ/RabbitMQ.
+
+Proficient in advanced SQL.
+
+Familiarity with a public Cloud provider (GCP/AWS/Azure).
+
+Experience with non-blocking programming (Vertx).
+
+Experience with Event driven architecture.
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:29:46) -> 
+Guesty is the all-in-one platform for hospitality businesses to automate and optimize every aspect of their operations. With purpose-built technology, industry-wide expertise, and an R&amp;D team of 200+ engineers, Guesty ensures that hospitality businesses can streamline and achieve growth, while delivering the best value to guests. With a complete suite of features and 150+ industry partners, including major booking OTAs like Airbnb, Vrbo, <u>Booking.com</u>, Tripadvisor, Expedia, Hopper, Google Travel, and many more, Guesty is transforming the hospitality industry with innovative solutions.
+
+
+
+
+Today, Guesty has 15 offices and 700+ team members across the globe.
+
+
+
+
+Our team is growing, and we are looking for a talented back-end developer. You will work in small teams on various products, from integrating multiple platforms into one dashboard to managing our data and analytics systems.
+
+
+
+
+Guesty provides a property management software product and support services for the $100 billion Airbnb and vacation rental market. We are one of the fastest growing high-tech start-ups in Tel Aviv, we are profitable and showing very promising results.
+
+
+
+
+The team is all about accuracy, architecture, and impact. We handle complex business logic, data flows and transformations, and focus on providing high-most quality &amp; accuracy.
+
+
+
+
+When you will join us, you will have a tremendous impact on Guesty's success.
+
+
+
+
+Stack: Node.js, NestJS, TypeScript, MongoDB, postgreSQL, Kafka, RabbitMQ, React, AWS
+
+
+
+
+If you are looking for an interesting product and enjoy being challenged - this is the place for you!
+
+
+
+
+<u>Responsibilities:</u>
+
+Design of the data-intensive web applications. 
+
+Optimize performance to support the fast growing business. 
+
+Write clean maintainable code. 
+
+
+
+
+<u>Requirements:</u>
+
+At least 5 years of experience in development roles, preferably from startups (or other agile environments).
+
+ Experience with NodeJS/Typescript (ExpressJS/NestJS)- Must!
+
+ Experience in either Java/ Python/ Scala/ JavaScript - - Advantage!
+
+Experience in designing high performance, highly scalable microservices architecture with OOP design-patterns and complex business logic.
+
+Experience in relational databases and NoSQL databases (PostgreSQL, MongoDB, Redis). 
+
+Proficiency in design of distributed enterprise systems - Advantage! 
+
+Passionate about technology, enjoys solving complex problems and learning new technologies.
+
+B.Sc in Computer Science (or equivalent) 
+
+A team player with strong communication skills.
+
+
+
+
+Guesty is proud to be an Equal Opportunity Employer. We provide equal employment opportunities to all employees and applicants regardless of any characteristic protected by law.
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:29:50) -> The opportunity
+
+Unity LevelPlay is the world’s leading mediation platform for mobile advertising. It allows app developers to manage and optimize their ad monetization.
+
+At the core of LevelPlay, the LevelPlay Infra team is responsible for the mission-critical, real-time In-App Bidding system, which serves billions of requests per day.
+
+Our team is looking for a passionate Software Engineer to join a rapidly growing team. We work in a fast-paced environment, building a real-time bidding system which serves hundreds of millions of users.
+
+This is a great opportunity for those looking to make a huge impact on a technically challenging product with a huge audience.
+
+We value team players with technical excellence and a sense of ownership who know how to choose the right tool for the right task.
+
+What You'll Be Doing
+
+
+End-to-end development of backend software components (research, design, development, testing, rollout, monitoring)
+
+Contributing to technological and architectural decisions
+
+Conducting design and code reviews
+
+Analyzing and improving efficiency, scalability, and stability of various backend system components
+
+Interfacing with other teams and departments to deliver best-in-class features
+
+
+
+What We're Looking For
+
+
+3+ years of experience in building server-side components using a high level programming language (e.g. Scala, Java, Golang, Python)
+
+Experience with key-value databases (Aerospike, Redis) and message queue technologies (Kafka, Kinesis, SQS)
+
+Experience with continuous integration and deployment (CI/CD)
+
+Experience with cloud platforms (e.g. AWS, GCP, Azure)
+
+
+
+You might also have
+
+
+Experience with Kubernetes / Docker and microservices based architecture
+
+Understanding of distributed stream processing
+
+Previous ad-tech experience
+
+
+
+Additional Information
+
+
+Relocation support is not available for this position
+
+International relocation support is not available for this position
+
+Work visa/immigration sponsorship is not available for this position
+
+
+
+Life at Unity
+
+Unity [NYSE: U] is the world's leading platform of tools for creators to build and grow real-time games, apps, and experiences across multiple platforms. Creators, ranging from game developers to artists, architects, automotive designers, infrastructure experts, filmmakers, and more, use Unity to bring their imaginations to life across multiple platforms, from mobile, PC, and console, to spatial computing.
+
+As of the fourth quarter of 2023, more than 69% of the top 1,000 mobile games are made with Unity as derived from a blended number of the top 1,000 games in the Google Play Store and iOS App Store. In 2023, Made with Unity applications had an average of 3.7 billion downloads per month. For more information, please visit www.unity.com.
+
+<em>Unity is a proud equal opportunity employer. We are committed to fostering an inclusive, innovative environment and celebrate our employees across age, race, color, ancestry, national origin, religion, disability, sex, gender identity or expression, sexual orientation, or any other protected status in accordance with applicable law. Our differences are strengths that enable us to support the growing and evolving needs of our customers, partners, and collaborators. If there are preparations or accommodations we can make to help ensure you have a comfortable and positive interview experience, please fill out this form to let us know.
+
+</em><em>This position requires the incumbent to have a sufficient knowledge of English to have professional verbal and written exchanges in this language since the performance of the duties related to this position requires frequent and regular communication with colleagues and partners located worldwide and whose common language is English. Headhunters and recruitment agencies may not submit resumes/CVs through this website or directly to managers. Unity does not accept unsolicited headhunter and agency resumes. Unity will not pay fees to any third-party agency or company that does not have a signed agreement with Unity.
+
+</em><em>Your privacy is important to us. Please take a moment to review our Prospect and Applicant Privacy Policies. Should you have any concerns about your privacy, please contact us at DPO@unity.com.
+
+</em>#MID
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:29:58) -> About Us
+
+Riskified empowers businesses to unleash ecommerce growth by taking risk off the table. Many of the world’s biggest brands and publicly traded companies selling online rely on Riskified for guaranteed protection against chargebacks, to fight fraud and policy abuse at scale, and to improve customer retention. Developed and managed by the largest team of ecommerce risk analysts, data scientists and researchers, Riskified’s AI-powered fraud and risk intelligence platform analyzes the individual behind each interaction to provide real-time decisions and robust identity-based insights. Riskified is proud to work with incredible companies in virtually all industries including Wayfair, Acer, Gucci, Lorna Jane, GoPro, and many more.
+
+We thrive in a collaborative work setting, alongside great people, to build and enhance products that matter. Abundant opportunities to create and contribute provide us with a sense of purpose that extends beyond ourselves, leaving a lasting impact. These sentiments capture why we choose Riskified every day.
+
+About The Role
+
+The Core team is part of the Merchant Platform group, which provides platform capabilities for fraud prevention and abuse protection to thousands of eCommerce merchants.
+
+The Core Team consists of experienced backend engineers who are strong owners of Riskified’s flagship product and core microservices. Core team is responsible for all aspects of development: from planning with architects and product managers, researching the right technologies, implementing highly reliable and scalable systems, and making sure they run smoothly in production at all times. Core team works with vast amounts of data and processes billions of transactions.
+
+Our Stack: Scala, TypeScript, Ruby, JVM, SQS, Kafka, Aerospike, PostgreSQL, Redis, Spark, Airflow, Kubernetes, Prometheus, Grafana.
+
+What You'll Be Doing
+
+
+Design and develop a highly reliable, available, and scalable architecture for our core services and flagship products
+
+Deploy your code to production daily (we have advanced CI/CD pipelines)
+
+Be a strong owner of production systems, keeping them running smoothly
+
+Work with large volumes of data both in real-time and batch jobs, using stream processing, ETLs, and data warehouse technologies
+
+Active part in planning the team roadmap and products
+
+Collaborate with other engineering teams and product managers teams to work on cross-department projects
+
+
+Qualifications
+
+
+B.Sc. in Computer Science or military equivalent certifications
+
+4+ years of proven experience in hands-on server-side coding
+
+Passion for writing clean, high-quality code
+
+Great attitude - an independent self-learner and a strong team player
+
+Hands-on experience in Scala/Java - advantage 
+
+Experience in High-throughput and low-latency systems - advantage
+
+
+Life at Riskified
+
+We are a fast-growing and dynamic tech company with 750+ team members globally. We value collaboration and innovative thinking. We’re looking for bright, driven, and passionate people to grow with us.
+
+Our Tel-Aviv team is currently working in a hybrid of remote and in-office work. We have recently moved to our new space in Tel Aviv - check it out here!
+
+Some Of Our Tel Aviv Benefits &amp; Perks
+
+
+Equity for all employees, Keren Hishtalmut, pension 
+
+Private medical insurance, extra time off for parents and caregivers
+
+Commuter and parking benefits
+
+Team events, fully-stocked kitchen,lunch stipend, happy hours, yoga, pilates, functional training, basketball, soccer
+
+Wide-ranging opportunities to volunteer and make an impact
+
+Commitment to your professional development with global onboarding, skills-based courses, full access to Udemy, lunch &amp; learns
+
+Awesome Riskified gifts and swag! 
+
+
+In the News
+
+Geektime: Riskified Goes Public
+
+Walla!: Happy Hour at the Riskified Offices 
+
+Geektime Insider: A look at Riskified Tel Aviv
+
+Globes: Riskified to contribute the highest amount up to date to Tmura
+
+Globes: Riskified is among Israel’s fastest growing companies 
+
+TechCrunch: Riskified Prevents Fraud on Your Favorite E-commerce Site
+
+Riskified is deeply committed to the principle of equal opportunity for all individuals. We do not discriminate based on race, color, religion, sex, sexual orientation, national origin, age, disability, veteran status, or any other status protected by law.
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:31:47) -> Grab your cape, become a SuperHyro!
+
+Hyro, the leading responsible conversational AI platform for healthcare, enables enterprises to automate workflows and conversations across their most valuable platforms, services, and channels—including call centers, websites, SMS, mobile apps, and more. Top-performing organizations trust Hyro's plug-and-play approach, including an award-winning natural language engine, to help them recapture time and investment lost to building and maintaining chat and voice solutions.
+
+What Are We Looking For?
+
+We're searching for a Senior Backend Engineer to join our growing team in Tel Aviv. We are looking for an experienced and passionate engineer who will help take our engineering team to the next level. As a member of the team, you'll play a pivotal role in Hyro's growth. With ample responsibilities and corresponding impact, you'll help spearhead our product and wear multiple hats at a fast-growing, dynamic early-stage company.
+
+Responsibilities
+
+
+Enriching Hyro's platform to support our main products: voice and chat
+
+Designing and implementing new backend services, ensuring high availability and reliability while guaranteeing that our services are performant
+
+Develop features and improvements to the Hyro's platform and product in a secure, well-tested, performant and scalable way
+
+Work closely with engineers, designers and product managers to develop friendly and smooth experiences
+
+Build and maintain databases and APIs (both private and public)
+
+Build and own services written in Node.js and Python
+
+
+
+Requirements
+
+
+4-5 years of Python or Javascript (Node.JS) coding experience
+
+Team player with a positive attitude
+
+Capacity to work in a time-sensitive and high-volume environment
+
+Familiarity with AWS / Azure / GCP services
+
+Experience designing, building and operating large system with scalability, availability, testing and performance requirements
+
+Experience using Databases (MySQL/ Postgres / Snowflake / BigQuery)
+
+A passion for applying DevOps concepts (CI/CD, etc..) to improve the delivery process of software
+
+Strong interpersonal and communication skills
+
+Strong knowledge of test-driven development, refactoring, clean architecture, design patterns, etc. 
+
+Bonus: Frontend experience
+
+
+<em>Hyro is an equal opportunity employer. We do not discriminate against any employee or job applicant on the basis of race, color, gender, national origin, age, religion, creed, disability or sex.</em>
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:31:50) -> Optimove is a global marketing tech company, recognized as a Leader by Forrester and a Challenger by Gartner. We work with some of the world's most exciting brands, such as Sephora, Staples, and Entain, who love our thought-provoking combination of art and science. With a strong product, a proven business, and the DNA of a vibrant, fast-growing startup, we're on the cusp of our next growth spurt. It's the perfect time to join our team of ~450 thinkers and doers across NYC, LDN, TLV, and other locations, where 2 of every 3 managers were promoted from within. Growing your career with Optimove is basically guaranteed.
+
+Responsibilities
+
+
+Develop end-to-end features in a complex, data-intensive web application
+
+Focus on high-quality client-side development (about 70% client)
+
+Take part in design and implementation of client-side infrastructure
+
+Write clean and maintainable code, including high coverage of unit and E2E tests
+
+
+Requirements:
+
+
+B.Sc. (or higher) in Computer Science, or equivalent
+
+2+ years of professional experience with Client-Side development Angular/React
+
+Experience with Backend Development
+
+Experience with databases
+
+Experience with automated tests (Unit Tests/Integration Tests/End to End Tests)
+
+Strong background in computer science fundamentals - data structures, Object-Oriented programming and multi threading.
+
+
+Advantages:
+
+
+Experience with relational databases (SQL)
+
+Experience with backend development using .NET
+
+Experience with cloud database such as Snowflake
+
+Good understanding of micro-services architecture, experience with Docker and Orchestration Infrastructures (K8S)
+
+Experience with automation frameworks such as Cypress and Cucumber
+
+Hands-on experience in designing and developing large-scale highly performing applications
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:31:52) -> 
+accessiBe is the market leader in web accessibility that makes websites accessible to people with disabilities. accessiBe is more than a workplace, it’s a passion. Each day you’re surrounded by people who share the same goal and values, who work passionately to break down accessibility barriers. We care about all people, regardless of their ability. We hire people that are determined to succeed and who are not afraid of rapid change. Our core values showcase who we are and we strive to focus on excellence and sincerity.
+
+We are looking for an experienced Full Stack Developer to join our growing R&amp;D department. You will be responsible for influencing the department's architecture, methodologies, and work protocols. This role is hands-on while being able to learn new things every day and adapting to the company’s growth.
+
+<u>Want to make a real impact? Click here and find out how! </u>
+
+<u>Click here to learn more about accessiBe's #companyculture </u>
+
+ 
+
+
+
+
+What you'll be doing:
+
+End-to-end ownership (from design to deployment) of new components, prototypes, services, and new features.
+
+Providing tech architecture designs backed by diagrams and documents.
+
+Smashing bugs and preserving the systems alive.
+
+Conducting code and design reviews for other teammates.
+
+Take part in building the R&amp;D department’s processes and workflow from scratch
+
+Share your expertise among the team and become a mentor for new teammates.
+
+Technology Stack: NodeJS, React, MongoDB, My-SQL, GCP
+
+
+
+
+Requirements: 
+
+4+ years of proven experience as a Full Stack developer
+
+Proven experience and deep understanding of web applications development
+
+Working experience with one of the following backend technologies: PHP, NodeJS, Python, Ruby, Java, C#, Go and alike.
+
+Working experience with one of the following frontend technologies: VueJS, ReactJS
+
+Working experience with relational and non-relational databases
+
+Working experience with cloud environments (preferred AWS), CI/CD processes, and virtualization: Docker, Kubernetes.
+
+Working experience with test automation (unit, functional, E2E, etc)
+
+
+
+
+Equal opportunities
+
+At accessiBe, we prioritize diversity. We celebrate difference and embed it into every aspect of our workplace and product, as well as our community. accessiBe is proud and committed to providing equal opportunity employment to all individuals regardless of disability, race, color, religion, sex, sexual orientation, citizenship, national origin, veteran status, pregnancy or any other characteristic protected by law. In addition, accessiBe will provide accommodation to individuals with disabilities or a special need.
+
+Please don't hesitate to share your needs when applying so that we can provide the necessary accommodations for an accessible and inclusive recruitment process.
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:31:55) -> 
+<span>Axon Pulse presents next-generation radar signal processing. Using AI and Deep Neural network techniques, Axon Pulse improves the classical radar and signal processing performance and enables enhanced detection, classification, resolution, and tracking capabilities.</span>
+
+
+
+
+<span>We are looking for a Back-End Python Developer to develop</span><span> an advanced AI system based on Language Models (LLM).</span>
+
+
+
+
+<em>Responsibilities</em>:
+
+Implement efficient algorithms and data structures to handle large-scale data processing and machine-learning tasks.
+
+Collaborate with AI researchers to integrate state-of-the-art language models and algorithms into the backend system.
+
+Optimize system performance and scalability to support real-time processing and high throughput.
+
+Write clean, modular, and well-documented code that adheres to best practices and coding standards.
+
+Stay updated on the latest developments in Python, AI, and related technologies, and apply them to enhance our system.
+
+Work with AI model verification processes of NLP models.
+
+
+
+
+<em>Requirements:</em>
+
+<span>Bachelor's degree in Computer Science, or a related field.</span>
+
+<span>4+ years of hands-on development experience using Python</span>
+
+<span>Experience working in a Linux environment and developing applications on Docker containers.</span>
+
+<span>Experience with web technologies, and cloud environment – Advantage.</span>
+
+<span>Experience with big data and data engineering – Advantage.</span>
+
+<span>Experience with prompt engineering – Advantage.</span>
+
+
+
+
+
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:31:58) -> Job Description
+
+
+Become a frontend master as part of our amazing Frontend Engineering team. 
+
+Improve your skills and learn from top-notch engineers. 
+
+Tackle tough problems and find creative ways to solve them. 
+
+Push your code to millions of users every day. 
+
+Work on cutting-edge technologies and become an industry leader. 
+
+Write TDD and clean code
+
+
+
+Qualifications:
+
+
+An ambitious, experienced Fullstack or Backend Developer who’s excited at the prospect of entering the world of Frontend. 
+
+You’re fluent in server-side technologies (NodeJS, Java, .NET, Python, Ruby). If you have experience in Test Driven Development (TDD) and Continuous Delivery, that’s a bonus. 
+
+You’re also a self-learner who is independent but a great team player
+
+
+
+About The Team
+
+Wix’s Frontend Engineering group. We have a development culture that is transparent, highly technical and agile. We develop and maintain highly scalable systems that support Wix’s hundreds of millions of users—and the people who visit their websites. Our team leaders set the tone and standard of our developer-centric culture. They are also mentors of engineers, helping them better themselves, both in terms of technical and human skills, through pair-programming, coaching and mentorship.
+
+About Wix:
+
+Wix makes it possible for anyone to succeed online.
+
+Since 2006, we've grown to 5,000 employees in 17 countries, launched over 40 products, and serve over 230 million users and their visitors worldwide.
+
+At Wix, we push you to innovate, evolve in non-traditional ways, and grow outside your comfort zone. We operate in small teams that work closely together to create incredible things.
+
+Although we're already industry leaders in web creation and business, our work is nowhere near done. Our goal is to become the main engine of the Internet so we can create a more open web for all.
+
+<em>We're proud to be an equal opportunity employer. Wix was built around the idea that everyone has the right to be successful, online. This same vision defines us as an employer: creating a work environment where everyone is welcome, and anyone has the right to succeed.</em>
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:32:02) -> mPrest Defense division is looking for a passionate Java developer to join our software development teams.
+
+If you would like to be involved with the development of core defense solutions,
+
+participate in all product development stages, attend military experiments,
+
+and use cutting-edge technologies to contribute to the national security,
+
+your place is with us!
+
+The job includes development of innovative software systems for projects in the defense industry in the North.
+
+Requirements:
+
+
+3+ years of experience in Java –must.
+
+Experience with Spring Boot 3 - must.
+
+Experience with Spring Framework 6 - must.
+
+Experience with microservice development methodologies - a must.
+
+Experience with Git - advantage.
+
+Experience with Docker in conjunction with OpenShift or Kubernetes - advantage.
+
+Knowledge and experience in various communication protocols such as Kafka, WS, RabbitMQ, REST, and more - advantage
+
+Knowledge and experience with various types of databases for big data and for Time series - advantage
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:32:06) -> 
+We're looking for a senior backend engineer to join our team. You'll be designing and implementing the infrastructure that powers Ownera's cutting-edge technology. You will be deeply involved in the design process, and support the product from conception to roll out.
+
+As a creative and fast-moving startup, we value diverse perspectives and a passion about building the future of tokenization of real world assets. If you're an impact-driven developer who thrives on software creation, we would love to hear from you.
+
+
+
+
+Responsibilities: 
+
+Design and develop the Ownera core network components and services, programming primarily in Go.
+
+Deal with a wide variety of challenges implementing a scalable global distributed network
+
+Collaborate with a global team of tech, product, and business experts to define the platform design.
+
+
+
+
+Requierements: 
+
+A highly motivated, detail-oriented engineer, able to work with minimal direction
+
+At least 5 years of backend development experience
+
+Programming experience with Go/Rust/C++. Golang experience is a big advantage
+
+Understanding of micro-service architecture and working with Docker / Kubernetes environments
+
+Excellent communication, collaboration, and documentation skills
+
+BS/MS in Computer Science or a related field
+
+Experience working with distributed systems, databases and DLT networks is an advantage.
+
+Experience working on and contributions to open source projects is an advantage
+
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:32:11) -> 
+Veev, an innovative large-scale company in the construction industry and a subsidiary of Lennar (the second-largest home developer in the United States) with a fabrication factory and site assembly in the Silicon Valley area and design and development offices in Tel-Aviv, is looking for a talented Full Stack Developer with a passion for optimizing processes and efficiency. You should be a creative thinker, focused on problem-solving and working smarter, not harder.
+
+
+
+
+Responsibilities and Duties:
+
+Developing Innovative Solutions: Design, develop, and maintain robust applications and algorithms tailored for internal use within our organization, ensuring they meet the highest standards of efficiency, reliability, and scalability.
+
+Frontend and Backend Development: Utilize your expertise in frontend and backend technologies to create user-friendly interfaces and powerful backend systems, delivering seamless experiences for our internal users.
+
+Architectural Design: Take ownership of the architectural design of our applications, leveraging your knowledge of microservices, design patterns, and best practices.
+
+API Development: Develop APIs to facilitate data retrieval, perform complex calculations, and deliver insights to our internal teams, enabling seamless integration and interaction with our cloud-based resources.
+
+Clean Code and Testing: Design and implement clean, well-tested code as a foundation for reliable and efficient software.
+
+
+
+
+Requirements, Knowledge, and Experience:
+
+3+ years of experience as a Full Stack Developer, or Backend Developer with 1+ years of experience in Frontend development.
+
+Bachelor's degree in Computer Science, Engineering, or related field; or equivalent professional experience (B.Sc is not a must-have, talent is).
+
+Proficiency in either Node.js or Python (ideally both), along with experience in database technologies such as SQL and NoSQL.
+
+Demonstrated experience in basic architectural design, including knowledge of microservices architecture, design patterns, and other scalability-related principles.
+
+Analytical mindset focusing on problem-solving and optimizations, particularly in handling large datasets and performing complex calculations and queries.
+
+Fully comfortable working in English, both spoken and in writing.
+
+
+
+
+Advantages:
+
+Hands-on experience with cloud platforms, particularly AWS, including services like S3, Lambda, API Gateway, Athena, and more.
+
+Knowledge of frontend design principles and UX/UI best practices, enhancing the usability and aesthetics of our internal applications for an optimal user experience.
+
+Python experience with Pandas library to manage large datasets.
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:32:13) -> 
+About The Position
+
+We’re looking for a Back-end Developer with a hands-on approach and high self-motivation to join our R&amp;D team. As part of the Application Backend Team, you will be responsible for building and maintaining our application and customer-facing infrastructure and features. If you’re into solving problems, seeing patterns, working with others, and want to transform the world of cybersecurity—this is the job for you.
+
+Responsibilities
+
+
+
+
+
+
+
+Designing and developing a real-time cyber system
+
+Own the full lifecycle – from architecture, design and implementation to deployment and monitoring
+
+Working closely with product and CS team to achieve a great value for our customers and partners
+
+Get an experience with new technologies and languages, develop challenges solutions, and have a great opportunity to grow and create impact.
+
+Requirements
+
+
+
+
+
+
+
+Highly motivated team player
+
+4+ years of software development experience 
+
+1.5+ years of experience in Python development 
+
+Web backend framework development (Django – Must) 
+
+Databases experience (Elasticsearch &amp; Redis – Advantage) 
+
+Experience with cloud web services (AWS – Advantage) 
+
+Cyber experience – Advantage
+
+Academic degree in Computer Science/Engineering – or equivalent experience
+
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:32:16) -> <em>abra R&amp;D is looking for a Fullstack Developer for our Jerusalem team!
+
+</em>abra R&amp;D Solutions leads the market by adopting innovative technologies &amp; providing top-notch development solutions, and now we are looking for you - a Java Developer to join our talented software engineering team
+
+Responsibilities
+
+
+Develop services using C# .Net Core.
+
+Create application requirements and project documentation using top-notch client technologies with Angular.
+
+Be involved in team architectural discussions.
+
+Solve complex problems, create object models, define APIs, build web services, etc.
+
+Work directly with others (developers and internal stakeholders) to develop a solid understanding of the business application and requirements for which the application is being designed.
+
+
+Requirements:
+
+
+At least 3 years of experience as a Fullstack developer, with expertise in Angular and .NET technologies.
+
+In-depth knowledge of Angular 2+ framework, .NET framework, C#, TypeScript, HTML, CSS, and related technologies.
+
+Experience with database technologies such as Oracle, PL/SQL
+
+Strong understanding of software development methodologies, including Agile and Scrum.
+
+Excellent problem-solving skills and ability to analyze complex technical issues.
+
+Bachelor's degree in Computer Science, Engineering, or a related field.
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:32:20) -> 
+About The Position
+
+We’re looking for a Back-end Developer with a hands-on approach and high self-motivation to join our R&amp;D team. As part of the Application Backend Team, you will be responsible for building and maintaining our application and customer-facing infrastructure and features. If you’re into solving problems, seeing patterns, working with others, and want to transform the world of cybersecurity—this is the job for you.
+
+Responsibilities
+
+
+
+
+
+
+
+Designing and developing a real-time cyber system
+
+Own the full lifecycle – from architecture, design and implementation to deployment and monitoring
+
+Working closely with product and CS team to achieve a great value for our customers and partners
+
+Get an experience with new technologies and languages, develop challenges solutions, and have a great opportunity to grow and create impact.
+
+Requirements
+
+
+
+
+
+
+
+Highly motivated team player
+
+4+ years of software development experience 
+
+1.5+ years of experience in Python development 
+
+Web backend framework development (Django – Must) 
+
+Databases experience (Elasticsearch &amp; Redis – Advantage) 
+
+Experience with cloud web services (AWS – Advantage) 
+
+Cyber experience – Advantage
+
+Academic degree in Computer Science/Engineering – or equivalent experience
+
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:32:32) -> Apono is a fast-growing startup in the DevSecOps realm, based in Tel Aviv and NYC.
+
+Apono provides a permission management automation platform with 'just in time' access to cloud assets, databases, Kubernetes clusters, and more.
+
+We help companies automate permission management in a way that allows organizations to stay agile and secure.
+
+We believe that fast movement and developers' ownership do not need to affect the environment's security level.
+
+We strive to be a product-led organization, building a product with fast Time to Value while prioritizing the frictionless developer experience.
+
+We are looking for an exceptional and passionate software engineer with an affinity for system programming who wants to be part of a solid elite team.
+
+What will you do?
+
+
+Participate in the architecture, design, and implementation of innovative cloud-based services and development infrastructure.
+
+Address multi-tenancy aspects, high availability, agility, security, and more.
+
+Participate in Product Decisions and help design Apono's core product. The challenge is to build an efficient, robust, and bulletproof solution since our infrastructure powers our customers' mission-critical services...
+
+
+Requirements:
+
+
+4+ years of overall programming experience.
+
+Working experience in at least one of the following programming languages: Java/Kotlin/Go (backend), Python/C#/Rust/Scala/TypeScript
+
+Background in Authorization and Authentication Processes - Advantage
+
+Deep understanding of the Cybersecurity domain - Advantage
+
+Experience with databases (PostgreSQL, MySQL, Oracle)
+
+Experience building and integrating with REST APIs and SaaS applications
+
+Experience in a Cloud-Native environment - Microservices, Docker, Kubernetes
+
+Understanding of end-to-end systems architectures
+
+Knowledge and understanding of Cloud systems like AWS - Advantage
+
+Experience with Messaging frameworks (RabbitMQ/ActiveMQ/Kafka)
+
+Startup mindset - A must
+
+
+Located in the lovely Montefiore neighborhood, close to the Hashalom Tel Aviv train station, Dog-friendly
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:32:33) -> 
+Prisma Photonics, a fast-growing startup, transforms infrastructure monitoring with optical fibers. We eliminate the need for extra sensors by offering sensor-free solutions to monitor electrical power grids and oil &amp; gas pipelines across thousands of kilometers.
+
+
+
+
+Our fiber-sensing technology, integrated with AI and machine learning, enables our customers to achieve environmental and renewable energy targets, ensuring smooth utility operations on their path to net-zero emissions.
+
+We are looking for the best minds and spirits to join us in our journey. We know our product is only as great as the individuals building the hardware and software and harnessing data for good causes. Being a great team member means being eager to learn and grow, able to challenge while accepting being challenged, and working for the team and the product with enthusiasm and passion.
+
+
+
+
+We are now hiring an eager&nbsp;Backend Developer Intern&nbsp;to take a meaningful part in overcoming the company’s challenges while maintaining a professional work methodology.&nbsp;
+
+
+
+
+Responsibilities:&nbsp;
+
+System analysis, development of smart tools, performance optimization, and troubleshooting system issues.&nbsp;
+
+Development of ad hoc solutions – adapting systems and creating solutions to special customer needs.&nbsp;
+
+Software integration – build, testing, and deployment automation.&nbsp;
+
+Software operations – Installations, updates, version integrations, and Release processes.&nbsp;
+
+Maintain high standards of operational quality by utilizing good practices and processes and improving them along the way.&nbsp;&nbsp;
+
+
+
+
+Requirements:
+
+3rd year in BSc. In computer science or equivalent related area.&nbsp;
+
+Python&nbsp;– Learned about data structures, algorithms, and object-oriented design and coding practices.&nbsp;
+
+Excellent English communication skills, both verbal and written.&nbsp;
+
+Strong problem-solving skills and attention to detail.&nbsp;
+
+Strong organizational skills and the ability to manage multiple tasks simultaneously.&nbsp;
+
+Strong organizational skills and the ability to manage multiple tasks simultaneously.&nbsp;
+
+&nbsp;
+
+Advantages:&nbsp;
+
+Existing experience in the BE domain on projects.&nbsp;
+
+Knowledge in c++ programming.&nbsp;
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:32:34) -> Description
+
+Moon Active is one of the world's fastest-growing mobile game companies, providing entertainment to millions of active users across the universe. The company is headquartered in the heart of Tel Aviv.
+
+This is a great chance for developers to join our team, get familiar with cutting edge technologies, get experience in coding and implementing complex systems.
+
+We’re looking for a talented Full Stack Developer to join our amazing and growing R&amp;D platform group.
+
+You’ll make a huge impact on Moon Active's growth by developing Business Applications for Operations, Monetization, CRM, analysts, BI and more, in a multi-game-studio environment that enables us to leverage insights from massive amounts of data and deliver an optimized and personalized experience to our players.
+
+Responsibilities
+
+
+You will develop, debug, deliver and maintain a highly-complex system, that is the core of our company’s growth
+
+You will work in an agile development environment
+
+You will deliver high quality and well-structured code
+
+
+Requirements
+
+
+1+ year of experience as a software developer with front-end and back-end development. 
+
+B.Sc. degree in Computer Science/Computer Engineering
+
+Excellent JavaScript (including ES6), HTML and CSS skills.
+
+Experience with at least one front end, single page application oriented frameworks such as Angular, React, etc.
+
+Experience with SQL and NoSQL databases.
+
+Working with web services (e.g. REST services) and good understanding of network concepts (e.g. HTTP protocol, sockets etc).
+
+Knowledge of browser troubleshooting and debugging practices and techniques.
+
+
+An Advantage
+
+
+Experience with Node.JS.
+
+Familiarity with cloud infrastructure such as GCP, AWS, k8s
+
+
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:32:34) -> Optimove is a global marketing tech company, recognized as a Leader by Forrester and a Challenger by Gartner. We work with some of the world's most exciting brands, such as Sephora, Staples, and Entain, who love our thought-provoking combination of art and science. With a strong product, a proven business, and the DNA of a vibrant, fast-growing startup, we're on the cusp of our next growth spurt. It's the perfect time to join our team of ~450 thinkers and doers across NYC, LDN, TLV, and other locations, where 2 of every 3 managers were promoted from within. Growing your career with Optimove is basically guaranteed.
+
+Responsibilities
+
+
+Develop end-to-end features in a complex, data-intensive web application
+
+Focus on high-quality client-side development (about 70% client)
+
+Take part in design and implementation of client-side infrastructure
+
+Write clean and maintainable code, including high coverage of unit and E2E tests
+
+
+Requirements:
+
+
+B.Sc. (or higher) in Computer Science, or equivalent
+
+2+ years of professional experience with Client-Side development Angular/React
+
+Experience with Backend Development
+
+Experience with databases
+
+Experience with automated tests (Unit Tests/Integration Tests/End to End Tests)
+
+Strong background in computer science fundamentals - data structures, Object-Oriented programming and multi threading.
+
+
+Advantages:
+
+
+Experience with relational databases (SQL)
+
+Experience with backend development using .NET
+
+Experience with cloud database such as Snowflake
+
+Good understanding of micro-services architecture, experience with Docker and Orchestration Infrastructures (K8S)
+
+Experience with automation frameworks such as Cypress and Cucumber
+
+Hands-on experience in designing and developing large-scale highly performing applications
+
+============================================================================================================================================================================================================================================================================================================
+(11/06/2024 17:32:35) -> We are looking for a passionate Full Stack to join our all-star team.
+
+As part of your role, you will design the architecture, develop, and deploy new SaaS platform from scratch, working closely with the product, design, and QA teams to deliver the best product.
+
+At Appsforce you will lead the way to be in the most cutting edge technologies, with our elite development team, you will help our customers to be at the forefront of their fields.
+
+A super interesting development for a Cyber Company, one of the leading companies in the world market!
+
+As a senior developer in our group, you will design and build our new high scale, complex, cutting-edge systems built in React &amp; Python running over AWS.
+
+Responsibilities:
+
+
+Research and implement sophisticated Cyber security mechanisms.
+
+Work closely with Product Managers, Architects, DevOps, UI/UX, and other tech leads from our game teams.
+
+Ensure the performance, quality, and responsiveness of applications.
+
+Troubleshoot and debug applications.
+
+Collaborate with UX/UI designers, QA Engineers, and other developers to create effective solutions.
+
+
+Requirements:
+
+
+4+ years of experience in Python
+
+Experience in cloud environment AWS &amp; Serverless
+
+Deep knowledge and expertise with React.js
+
+Experience with modern CI/CD pipelines
+
+Proactive by nature, internal drive for excellence and improvement
+
+============================================================================================================================================================================================================================================================================================================

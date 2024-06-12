@@ -1,8 +1,8 @@
 =============  Most Important =================
 - LinkedIn Scraping MUST.
-- click the load more listings button
-- attempt to use bs4 from the href
-- Count Java developer and Python developer for backend searches
+- (Done) click the load more listings button
+- (Done) attempt to use bs4 from the href
+- (Done) Count Java developer and Python developer for backend searches
 - compate bs4 scan vs regular scan
 
 =============  Frontend =================

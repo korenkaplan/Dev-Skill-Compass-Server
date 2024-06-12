@@ -1675,8 +1675,8 @@ _words_to_remove_dict = {
     "data analyst": []
 }
 _synonyms_title = {
-    "backend developer": [],
-    "frontend developer": [],
+    "backend developer": ['nodejs', 'python', 'java'],
+    "frontend developer": ['react', 'angular', 'vue'],
     "full stack developer": [],
     "devops engineer": ["dev sec ops"],
     "qa engineer": ["quality assurance", "quality", "test automation", "automation"],
