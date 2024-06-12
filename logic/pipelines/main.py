@@ -14,6 +14,7 @@ from usage_stats.services.technologies_counts_service import (
     update_monthly_counts_table_and_aggregated_table_in_db_pipeline,
 )
 from core.services.technologies_service import get_tech_dict
+from utils.enums import LinkedinTimePeriod
 from utils.mail_module.email_module_functions import send_recap_email_prepared
 from utils.settings import MAX_NUMBER_OF_WORKERS, MAX_NUMBER_OF_RETRIES_SCARPING
 from concurrent.futures import as_completed
@@ -37,13 +38,14 @@ def get_all_techs_from_db() -> set:
         return set()
 
 
-def scrape_job_listings(role: str, time_period: GoogleJobsTimePeriod) -> list[str]:
+def scrape_job_listings(role: str, google_time_period: GoogleJobsTimePeriod, linkedin_time_period: LinkedinTimePeriod) -> list[str]:
     """Scrape job listings for a given role."""
     result = []
     attempts = 1
     while len(result) == 0 and attempts <= MAX_NUMBER_OF_RETRIES_SCARPING:
         try:
-            result = job_scrape_pipeline(role, time_period)
+            result = job_scrape_pipeline(role, google_time_period,
+                                         linkedin_time_period)
         except Exception as e:
             print(f"Error while scraping job listings for role {role} attempt number {attempts}: {e}")
         finally:
@@ -83,12 +85,14 @@ def update_the_database(role_techs_tuple: (str, dict)):
 
 
 def single_role_pipline(
-        role: str, tech_set: set, tech_dict: dict, time_period: GoogleJobsTimePeriod
-):
+        role: str, tech_set: set, tech_dict: dict, google_time_period: GoogleJobsTimePeriod,
+        linkedin_time_period: LinkedinTimePeriod):
+
     """Pipeline for each role."""
     try:
         print(f"({role}) Started collecting job listings...")
-        job_listings: list[str] = scrape_job_listings(role, time_period)
+        job_listings: list[str] = scrape_job_listings(role, google_time_period,
+                                                      linkedin_time_period)
         print(f"({role}) Started extracting tech words from job listings...")
         tech_sets_list: list[set[str]] = extract_tech_words_from_job_listings(
             job_listings, tech_set
@@ -105,13 +109,14 @@ def single_role_pipline(
         print(f"Error in pipeline for role {role}: {e}")
 
 
-def thread_pool_role_pipline(period: GoogleJobsTimePeriod):
+def thread_pool_role_pipline(google_period: GoogleJobsTimePeriod, linkedin_period: LinkedinTimePeriod):
     """Main function that creates a process for each role."""
     try:
         roles_list = get_all_roles()
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
-        google_jobs_time_period_month = period
+        google_jobs_time_period = google_period
+        linkedin_time_period = linkedin_period
         with ThreadPoolExecutor(max_workers=MAX_NUMBER_OF_WORKERS) as executor:
             futures = [
                 executor.submit(
@@ -119,7 +124,8 @@ def thread_pool_role_pipline(period: GoogleJobsTimePeriod):
                     role,
                     tech_set,
                     tech_dictionary,
-                    google_jobs_time_period_month,
+                    google_jobs_time_period,
+                    linkedin_time_period
                 )
                 for role in roles_list
             ]
@@ -138,13 +144,14 @@ def thread_pool_role_pipline(period: GoogleJobsTimePeriod):
         print(f"Error in main pipeline: {e}")
 
 
-def thread_pool_role_pipline_test(period: GoogleJobsTimePeriod):
+def thread_pool_role_pipline_test(google_period: GoogleJobsTimePeriod, linkedin_period: LinkedinTimePeriod):
     """Main function that creates a process for each role."""
     try:
         roles_list = ["devops engineer"]
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
-        google_jobs_time_period_month = period
+        google_jobs_time_period = google_period
+        linkedin_time_period = linkedin_period
         with ThreadPoolExecutor(max_workers=MAX_NUMBER_OF_WORKERS) as executor:
             futures = [
                 executor.submit(
@@ -152,7 +159,8 @@ def thread_pool_role_pipline_test(period: GoogleJobsTimePeriod):
                     role,
                     tech_set,
                     tech_dictionary,
-                    google_jobs_time_period_month,
+                    google_jobs_time_period,
+                    linkedin_time_period
                 )
                 for role in roles_list
             ]

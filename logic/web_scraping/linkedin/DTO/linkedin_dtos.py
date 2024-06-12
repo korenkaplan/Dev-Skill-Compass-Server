@@ -2,6 +2,8 @@ from pydantic import BaseModel
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 
+from utils.enums import LinkedinTimePeriod
+
 
 class LinkedinGetJobListingsDto(BaseModel):
     role: str
@@ -11,6 +13,14 @@ class LinkedinGetJobListingsDto(BaseModel):
     description_div_xpath: str
     show_more_button_xpath: str
     see_more_jobs_btn_xpath: str
+
+    class Config:
+        arbitrary_types_allowed = True
+
+
+class LinkedInScrapingDto(BaseModel):
+    role: str
+    period: LinkedinTimePeriod
 
     class Config:
         arbitrary_types_allowed = True

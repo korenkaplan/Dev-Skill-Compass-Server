@@ -7,7 +7,6 @@ from random import uniform
 import requests
 from bs4 import BeautifulSoup
 from lxml import etree
-from logic.web_scraping.linkedin.linkedin_scraping import fetch_url_with_retries
 from logic.web_scraping.linkedin.title_filtering import is_title_match_role
 from utils.functions import retry_function
 from requests.exceptions import RequestException, SSLError
@@ -40,46 +39,6 @@ def filter_li_elements_by_title(soup: BeautifulSoup, role: str) -> (list, int):
 
     return filtered_li_elements, skip_amount
 
-
-def extract_text_from_href(url: str, description_div_xpath: str) -> str:
-    # Send a GET request to fetch the raw HTML content
-    response = fetch_url_with_retries(url, 3)
-    response.raise_for_status()  # Ensure the request was successful
-
-    # Parse the HTML content with BeautifulSoup using lxml parser
-    soup = BeautifulSoup(response.content, 'lxml')
-
-    # Convert the BeautifulSoup object to an lxml Element object
-    dom = etree.HTML(str(soup))
-
-    # Define the XPath for the parent element you want to extract
-
-    # Use XPath to find the parent element
-    parent_elements = dom.xpath(description_div_xpath)
-
-    if parent_elements:
-        parent_element = parent_elements[0]
-
-        # Now, find all <p>, <ul>, and <li> elements within the located parent element
-        paragraphs = parent_element.xpath(".//p")
-        lists = parent_element.xpath(".//ul")
-        list_items = parent_element.xpath(".//li")
-
-        # Extract and concatenate the text content from the child elements
-        job_details_text = ""
-        for p in paragraphs:
-            text = p.xpath('string()')
-            if text and len(text.strip()) > 0:
-                job_details_text += text.strip() + "\n"
-
-        for ul in lists:
-            for li in ul.xpath(".//li"):
-                text = li.xpath('string()')
-                job_details_text += text.strip() + "\n"
-
-        return job_details_text
-    else:
-        print("Parent element not found")
 
 
 def get_job_details_text(url, tag_name: str, class_name: str):

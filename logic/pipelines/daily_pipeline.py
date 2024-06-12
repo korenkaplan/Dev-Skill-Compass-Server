@@ -3,6 +3,7 @@ import time
 
 from logic.pipelines.main import thread_pool_role_pipline
 from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
+from utils.enums import LinkedinTimePeriod
 from utils.mail_module.email_module_functions import send_scan_recap_email
 
 # Determine the project root directory
@@ -24,11 +25,12 @@ def daily_pipeline():
     try:
         print("started daily pipeline...")
         # Define the time period
-        period: GoogleJobsTimePeriod = GoogleJobsTimePeriod.TODAY
-        period: GoogleJobsTimePeriod = GoogleJobsTimePeriod.MONTH
+        google_period: GoogleJobsTimePeriod = GoogleJobsTimePeriod.TODAY
+        linkedin_period: LinkedinTimePeriod = LinkedinTimePeriod.PAST_24_HOURS
+
 
         # Run the main pipeline with the period time set to one day
-        thread_pool_role_pipline(period)
+        thread_pool_role_pipline(google_period, linkedin_period)
 
     except Exception as e:
         # Log the error or handle it as needed

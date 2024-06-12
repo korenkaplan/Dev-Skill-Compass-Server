@@ -11,6 +11,11 @@ from logic.web_scraping.google_jobs.google_jobs_scraping import (
 import os
 from dotenv import load_dotenv
 
+from logic.web_scraping.linkedin.DTO.linkedin_dtos import LinkedInScrapingDto
+from logic.web_scraping.linkedin.build_url import build_url
+from logic.web_scraping.linkedin.linkedin_scraping_functions import get_listings_from_linkedin
+from utils.enums import LinkedinTimePeriod
+
 load_dotenv()
 
 
@@ -58,18 +63,40 @@ def google_jobs_scraping_pipeline(
 
 # endregion
 
+# region LinkedIn Jobs Configuration
+def linkedin_scraping_entry_point(role: str, linkedin_time_period: LinkedinTimePeriod):
+    # Format the url
+    formatted_url = build_url(role, linkedin_time_period)
 
-def job_scrape_pipeline(role: str, time_period: GoogleJobsTimePeriod) -> list[str]:
+    # Scrape the full descriptions of the job listings
+    job_listings_descriptions_list = get_listings_from_linkedin(formatted_url, role)
+
+    # Check if the job listings fetch happened successfully
+    if job_listings_descriptions_list is None:
+        print("Could not get the job listings")
+        return []
+
+    return job_listings_descriptions_list
+# endregion
+
+
+def job_scrape_pipeline(role: str, google_time_period: GoogleJobsTimePeriod, linkedin_time_period: LinkedinTimePeriod) -> list[str]:
     # All jobs listings from all sites
     job_listings_list: list[str] = []
 
     # get the listings from Google jobs
-    google_jobs_listings = google_jobs_scraping_pipeline(role, time_period)
-
-    # add more lists from other sites...
+    google_jobs_listings = google_jobs_scraping_pipeline(role, google_time_period)
 
     # combine the lists together
     job_listings_list.extend(google_jobs_listings)
+
+    # get the listings from Google jobs
+    linkedin_jobs_listings = linkedin_scraping_entry_point(role, linkedin_time_period)
+
+    # combine the lists together
+    job_listings_list.extend(linkedin_jobs_listings)
+
+    # add more lists from other sites...
 
     # return final result
     return job_listings_list

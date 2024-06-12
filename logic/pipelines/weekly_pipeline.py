@@ -7,6 +7,7 @@ from usage_stats.services.aggregated_tech_counts_service import insert_from_mont
 from dateutil.relativedelta import relativedelta
 from django.utils import timezone
 
+from utils.enums import LinkedinTimePeriod
 from utils.functions import write_text_to_file
 
 # Determine the project root directory
@@ -20,9 +21,11 @@ def weekly_pipeline():
     try:
         # Define the time period
         period: GoogleJobsTimePeriod = GoogleJobsTimePeriod.WEEK
+        linkedin_period: LinkedinTimePeriod = LinkedinTimePeriod.PAST_WEEK
 
+        # Run the main pipeline with the period time set to one day
         # Run the main pipeline with the period time set to one week
-        thread_pool_role_pipline(period)
+        thread_pool_role_pipline(period, linkedin_period)
 
         # Get the min date
         today = timezone.now()
