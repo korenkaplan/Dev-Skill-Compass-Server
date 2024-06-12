@@ -95,3 +95,33 @@ def get_formatted_date_time_now() -> str:
     return formatted_date_time
 
 
+def retry_function(func, max_attempts=3, delay=1.0, backoff=1, *args, **kwargs):
+    """
+    Retry a function for a specified number of attempts.
+
+    Parameters:
+    - func: The function to be retried.
+    - max_attempts: Maximum number of attempts.
+    - delay: Initial delay between attempts in seconds.
+    - backoff: Multiplier for the delay between attempts.
+    - args, kwargs: Arguments to pass to the function being retried.
+
+    Returns:
+    - The result of the function call if successful.
+    """
+    attempt = 0
+    current_delay = delay
+
+    while attempt < max_attempts:
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            print(f"Attempt {attempt + 1} failed: {e}")
+            attempt += 1
+            if attempt < max_attempts:
+                time.sleep(current_delay)
+                current_delay *= backoff
+            else:
+                return None
+
+
