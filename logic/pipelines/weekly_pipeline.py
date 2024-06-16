@@ -1,7 +1,7 @@
 import os
 
 from logic.pipelines.main import thread_pool_role_pipline_test, thread_pool_role_pipline
-from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
+from utils.enums import GoogleJobsTimePeriod
 from usage_stats.models import MonthlyTechnologiesCounts, AggregatedTechCounts
 from usage_stats.services.aggregated_tech_counts_service import insert_from_monthly_table
 from dateutil.relativedelta import relativedelta

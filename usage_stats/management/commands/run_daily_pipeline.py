@@ -3,7 +3,7 @@ from logic.pipelines.main import (
     thread_pool_role_pipline
 )
 from decorators.decorator_measure_function_time import measure_function_time
-from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
+from utils.enums import GoogleJobsTimePeriod
 
 
 class Command(BaseCommand):

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from logic.web_scraping.google_jobs.google_jobs_scraping import GoogleJobsTimePeriod
+from utils.enums import GoogleJobsTimePeriod
 
 
 class GoogleJobsConfigDto(BaseModel):
@@ -12,3 +12,6 @@ class GoogleJobsConfigDto(BaseModel):
     sleep_time_between_attempt_in_seconds: int
     wait_driver_timeout: int
     log_file_path: str
+
+    class Config:
+        arbitrary_types_allowed = True

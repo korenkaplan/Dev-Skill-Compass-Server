@@ -6,7 +6,6 @@ import time
 from random import uniform
 import requests
 from bs4 import BeautifulSoup
-from lxml import etree
 from logic.web_scraping.linkedin.title_filtering import is_title_match_role
 from utils.functions import retry_function
 from requests.exceptions import RequestException, SSLError
@@ -15,7 +14,7 @@ from requests.exceptions import RequestException, SSLError
 # region Sub Functions
 
 
-def filter_li_elements_by_title(soup: BeautifulSoup, role: str) -> (list, int):
+def filter_li_elements_by_title(soup: BeautifulSoup, role: str, log_file_path: str) -> (list, int):
     try:
         li_elements = soup.find_all('li')
         skip_amount = len(li_elements)
@@ -32,7 +31,7 @@ def filter_li_elements_by_title(soup: BeautifulSoup, role: str) -> (list, int):
                 raise ValueError(f"No 'h3' tag found in 'li' element: {li}")
 
             title = tag.text.strip()
-            if is_title_match_role(role, title):
+            if is_title_match_role(role, title, log_file_path):
                 filtered_li_elements.append(li)
         except Exception as e:
             raise RuntimeError(f"Error processing 'li' element: {e}")
@@ -69,7 +68,7 @@ def get_job_details_text(url, tag_name: str, class_name: str):
     return result
 
 
-def get_li_hrefs(url: str, role: str, proxy=None) -> (list, int):
+def get_li_hrefs(url: str, role: str, log_file_path, proxy=None) -> (list, int):
     i = 0
     try:
         # Setup proxy if provided
@@ -88,7 +87,7 @@ def get_li_hrefs(url: str, role: str, proxy=None) -> (list, int):
         # Parse the HTML content using BeautifulSoup
         soup = BeautifulSoup(response.content, 'html.parser')
 
-        li_elements_filtered, skip_amount = filter_li_elements_by_title(soup, role)
+        li_elements_filtered, skip_amount = filter_li_elements_by_title(soup, role, log_file_path)
         # Extract the href attributes from the 'a' tags inside the 'li' elements
         hrefs = []
         for li in li_elements_filtered:
@@ -141,21 +140,8 @@ def get_text_from_href(href: str) -> str:
         raise Exception(f"(get_text_from_href) -> An error occurred: {e}")
 
 
-def get_description_from_href(href: str, max_attempts, sleep_time) -> str:
-    # Try to scrape the description
-    description = retry_function(get_text_from_href, max_attempts=max_attempts,
-                                 delay=sleep_time, backoff=1, href=href)
 
-    # if description is scraped successfully
-    if description:
-        return description
-
-    # else description wasn't fetched successfully print the error and return Noe
-    else:
-        print(f"(main_pipeline) -> couldn't fetch description from href: {href}")
-
-
-def get_job_listings(url: str, role: str, proxy=None) -> list:
+def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> list:
     """
     Fetch job listings descriptions from the specified URL with optional proxy support.
 
@@ -169,7 +155,7 @@ def get_job_listings(url: str, role: str, proxy=None) -> list:
     # Variables
     skip_amount = 0
     job_listings_descriptions = []
-    max_attempts = 5
+    max_attempts = 3
 
     # Each iteration of the loop is a fetch request and loop over the listings from that request.
     while True:
@@ -180,9 +166,9 @@ def get_job_listings(url: str, role: str, proxy=None) -> list:
 
         try:
             # Fetch the href attribute of the job listings from the site.
-            hrefs, scanned_listings_amount = retry_function(get_li_hrefs, max_attempts=3,
+            hrefs, scanned_listings_amount = retry_function(get_li_hrefs, role_name=role, max_attempts=3,
                                                             delay=sleep_time,
-                                                            backoff=1, url=formatted_url, role=role, proxy=proxy)
+                                                            backoff=1, url=formatted_url, role=role, log_file_path=log_file_path, proxy=proxy)
 
         except Exception as e:
             print(f"Failed to fetch job listings: {e}")
@@ -199,7 +185,7 @@ def get_job_listings(url: str, role: str, proxy=None) -> list:
         for href in hrefs:
             try:
                 # Try to fetch the description from the href attribute of the job listings
-                description = retry_function(get_text_from_href, max_attempts=max_attempts, delay=sleep_time, backoff=2,
+                description = retry_function(get_text_from_href, role_name=role, max_attempts=max_attempts, delay=sleep_time, backoff=2,
                                              href=href)
             except Exception as e:
                 print(f"Failed to fetch job description: {e}")
@@ -217,7 +203,7 @@ def get_job_listings(url: str, role: str, proxy=None) -> list:
 
 # endregion
 
-def get_listings_from_linkedin(base_url: str, role: str) -> list:
+def get_listings_from_linkedin(base_url: str, role: str, log_file_path: str) -> list:
     """
     Wrapper function to fetch job listings from LinkedIn.
 
@@ -229,16 +215,18 @@ def get_listings_from_linkedin(base_url: str, role: str) -> list:
     - A list of job listings descriptions.
     """
     sleep_time = uniform(10.0, 30.0)
-    return retry_function(get_job_listings, max_attempts=5, delay=sleep_time, backoff=1, url=base_url, role=role)
+    return retry_function(get_job_listings, role_name=role, max_attempts=5, delay=sleep_time, backoff=1,
+                          url=base_url, role=role, log_file_path=log_file_path)
 
 
 def main():
-    url = "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=frontend%2bdeveloper&location=Israel&geoId=101620260&f_TPR=r604800&start="
-    listings = get_listings_from_linkedin(url, 'frontend developer')
+    log_file_path = r"C:\Users\Koren Kaplan\Desktop\Dev-Skill-Compass-Server\logic\web_scraping\Logs\linkedin"
+    url = "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=frontend%2bdeveloper&location=Israel&geoId=101620260&f_TPR=r604800&start=0"
+    listings = get_listings_from_linkedin(url, 'frontend developer', log_file_path)
 
-    print(500 * "=")
     for i, job in enumerate(listings):
         print(f"{i} -> {job}")
+        print(500 * "=")
 
 
 if __name__ == '__main__':

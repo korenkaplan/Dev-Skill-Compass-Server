@@ -2,6 +2,8 @@
 from init_db.data.data import get_words_to_remove_from_title, get_synonyms_words_title
 import re
 
+from utils.functions import write_text_to_file
+
 
 # region Sub Functions
 def format_role_title(title: str) -> str:
@@ -45,9 +47,9 @@ def is_title_in_synonyms_words(role: str, clean_title: str) -> bool:
 # endregion
 
 
-def is_title_match_role(role: str, title: str) -> bool:
+def is_title_match_role(role: str, title: str, log_file_path: str) -> bool:
+
     try:
-        # Get the words to remove from the title by role
         words_to_remove = get_words_to_remove_from_title(role)
 
         # Remove the words from the title
@@ -64,7 +66,9 @@ def is_title_match_role(role: str, title: str) -> bool:
             res = is_title_in_synonyms_words(role, cleaned_title)
 
         if res is False:
-            print(f"""False match: {cleaned_title}({title} <-> {cleaned_role}({role})""")
+            text = f"False match: {cleaned_title}({title} <-> {cleaned_role}({role})"
+            write_text_to_file(log_file_path, 'a', text)
+
 
         return res
     except Exception as e:

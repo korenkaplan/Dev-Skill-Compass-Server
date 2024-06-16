@@ -13,3 +13,4 @@ def build_url(role_name: str, period: LinkedinTimePeriod):
     return f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={formated_role}&location=Israel&geoId=101620260&f_TPR={period.value}&start="
 
 
+print(build_url('backend developer', LinkedinTimePeriod.PAST_WEEK) + '0')

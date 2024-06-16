@@ -2,6 +2,8 @@
 
 import time
 import re
+from random import uniform
+
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
@@ -19,7 +21,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
 from init_db.data.data import get_words_to_remove_from_title, get_synonyms_words_title
-from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
+from utils.enums import GoogleJobsTimePeriod
 from logic.web_scraping.google_jobs.DTO.google_jobs_configuration_dto import (
     GoogleJobsConfigDto,
 )
@@ -120,7 +122,7 @@ def get_full_description(xpath, _driver) -> (bool, str):
 
 # region Setup and Initialization functions
 def setup_chrome_driver(
-    params=None, set_auto_params=True, activate=False, url="", headless=True
+    params=None, set_auto_params=True, activate=False, url="", headless=False
 ) -> WebDriver:
     """
     Sets up a Chrome WebDriver with optional geolocation parameters and headless mode.
@@ -618,7 +620,7 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
 
                 # Update the skip amount for the next iteration
                 skip_amount = len(job_listings)
-
+            time.sleep(uniform(4.0, 5.0))
             # Refind the job listings to avoid StaleElementReferenceException
             job_listings = dto.driver.find_elements(By.CSS_SELECTOR, "li")
 

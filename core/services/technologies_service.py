@@ -1,25 +1,46 @@
-from collections import defaultdict
+# region WSGI
+"""
+WSGI config for django_server project.
 
+It exposes the WSGI callable as a module-level variable named ``application``.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
+"""
+
+import os
+
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_server.settings")
+
+application = get_wsgi_application()
+# endregion
+
+from collections import defaultdict
+from django.db.models import QuerySet
 from core.models import Technologies, Categories, Roles, Synonyms
 from usage_stats.models import MonthlyTechnologiesCounts
 
 
-def get_tech_dict() -> dict:
-    # create a dict
+def get_tech_dict():
+    # Create a nested defaultdict
     result_dict = defaultdict(lambda: defaultdict(list))
-    # Get all technologies
-    technologies: list[Technologies] = Technologies.objects.all()
-    # iterate through the technologies and get all the synonyms of the technology
+
+    # Get all technologies and synonyms at once
+    technologies: QuerySet[Technologies] = Technologies.objects.select_related('category_id').all()
+    synonyms: QuerySet[Synonyms] = Synonyms.objects.all()
+    # Create a dictionary to map technology IDs to their synonyms
+    synonyms_dict = defaultdict(list)
+    for synonym in synonyms:
+        synonyms_dict[synonym.origin_tech_id_id].append(synonym.name)
+
+    # Iterate through technologies to build the result dictionary
     for technology in technologies:
-        # get all the synonyms of the technology
-        synonyms: list[str] = [
-            synonym.name
-            for synonym in Synonyms.objects.filter(origin_tech_id=technology)
-        ]
-        # get the category of the technology
-        category: Categories = technology.category_id
-        # add to dictionary
-        result_dict[category.name][technology.name] = synonyms
+        category_name = technology.category_id.name
+        technology_name = technology.name
+        tech_synonyms = synonyms_dict.get(technology.id, [])
+        result_dict[category_name][technology_name] = tech_synonyms
 
     return result_dict
 
@@ -48,3 +69,5 @@ def get_count_of_technologies_for_role(role_name: str) -> dict:
 
     # return the dictionary result
     return result_dict
+
+

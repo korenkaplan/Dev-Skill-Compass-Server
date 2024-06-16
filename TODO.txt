@@ -1,9 +1,12 @@
 =============  Most Important =================
-- LinkedIn Scraping MUST.
-- (Done) click the load more listings button
-- (Done) attempt to use bs4 from the href
-- (Done) Count Java developer and Python developer for backend searches
-- compate bs4 scan vs regular scan
+- Initial the database with all time scans for each job(playground)
+- Add logs to LinkedIn scraping pipeline
+- Test full process with cron job
+- Improve code smells
+- dd index to common db quarries.
+- Understand why it’s taking to long to start
+- Add loading animation to the roles.
+- Upload redis cache server.
 
 =============  Frontend =================
 - Handle loading time (cache) loading

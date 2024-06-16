@@ -27,7 +27,7 @@ from init_db.data.data import get_tech_dict, get_roles_dict
 from core.models import Roles, Technologies, Synonyms, Categories
 from usage_stats.models import MonthlyTechnologiesCounts, HistoricalTechCounts, AggregatedTechCounts
 from logic.pipelines.main import thread_pool_role_pipline_test, thread_pool_role_pipline
-from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
+from utils.enums import GoogleJobsTimePeriod
 from logic.web_scraping.main_scrape_file import job_scrape_pipeline
 import json
 from core.serializers import RoleSerializer
@@ -97,8 +97,7 @@ load_dotenv()
 #     print(row1.technology_id.name, row1.counter, " | ", row2.technology_id.name, row2.counter)
 # endregion
 
-res = AggregatedTechCounts.objects.filter(role_id__name='backend developer')
-print(res)
+
 
 
 def clear_db():

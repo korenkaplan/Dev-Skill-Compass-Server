@@ -2,8 +2,8 @@ import os
 import time
 
 from logic.pipelines.main import thread_pool_role_pipline
-from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
-from utils.enums import LinkedinTimePeriod
+from utils.enums import LinkedinTimePeriod, GoogleJobsTimePeriod
+
 from utils.mail_module.email_module_functions import send_scan_recap_email
 
 # Determine the project root directory

@@ -1,6 +1,6 @@
 """ this is the main entry point for scraping module"""
 
-from logic.web_scraping.DTOS.enums import GoogleJobsTimePeriod
+from utils.enums import GoogleJobsTimePeriod
 from logic.web_scraping.google_jobs.DTO.google_jobs_configuration_dto import (
     GoogleJobsConfigDto,
 )
@@ -11,10 +11,10 @@ from logic.web_scraping.google_jobs.google_jobs_scraping import (
 import os
 from dotenv import load_dotenv
 
-from logic.web_scraping.linkedin.DTO.linkedin_dtos import LinkedInScrapingDto
 from logic.web_scraping.linkedin.build_url import build_url
 from logic.web_scraping.linkedin.linkedin_scraping_functions import get_listings_from_linkedin
 from utils.enums import LinkedinTimePeriod
+from utils.functions import write_text_to_file
 
 load_dotenv()
 
@@ -27,7 +27,8 @@ def configure_google_jobs_scrape_engine(
     project_root = os.path.dirname(os.path.abspath(__file__))
 
     # Construct the absolute path to the log file
-    scrape_google_log_file_path = os.path.join(project_root, "Logs", "web_scrape_main_run_log")
+    scrape_google_log_file_path = os.path.join(project_root, "Logs", "google",
+                                               f"{role}.txt")
     google_jobs_configuration = GoogleJobsConfigDto(
         role=role,
         time_period=time_period,
@@ -43,7 +44,7 @@ def configure_google_jobs_scrape_engine(
         max_interval_attempts=10,
         sleep_time_between_attempt_in_seconds=30,
         wait_driver_timeout=3,
-        log_file_path=f"{scrape_google_log_file_path}_{role.replace(' ', '_')}.txt",
+        log_file_path=f"{scrape_google_log_file_path}",
     )
     return google_jobs_configuration
 
@@ -65,11 +66,15 @@ def google_jobs_scraping_pipeline(
 
 # region LinkedIn Jobs Configuration
 def linkedin_scraping_entry_point(role: str, linkedin_time_period: LinkedinTimePeriod):
+    # Determine the project root directory
+    scraping_folder_path = os.path.dirname(os.path.abspath(__file__))
+    # Construct the absolute path to the log file
+    log_file_path = os.path.join(scraping_folder_path, "Logs", "linkedin", f"{role}.txt")
     # Format the url
     formatted_url = build_url(role, linkedin_time_period)
 
     # Scrape the full descriptions of the job listings
-    job_listings_descriptions_list = get_listings_from_linkedin(formatted_url, role)
+    job_listings_descriptions_list = get_listings_from_linkedin(formatted_url, role, log_file_path)
 
     # Check if the job listings fetch happened successfully
     if job_listings_descriptions_list is None:
@@ -80,26 +85,40 @@ def linkedin_scraping_entry_point(role: str, linkedin_time_period: LinkedinTimeP
 # endregion
 
 
+def write_run_recap_to_file(google_amount, linkedin_amount, role, log_file_path):
+    log_text = f"""
+        ({role}) -> Total Jobs Scraped from Google Jobs: {google_amount}
+        ({role}) -> Total Jobs Scraped from linkedIn: {linkedin_amount}
+    """
+    write_text_to_file(log_file_path, 'a', log_text)
+
+
 def job_scrape_pipeline(role: str, google_time_period: GoogleJobsTimePeriod, linkedin_time_period: LinkedinTimePeriod) -> list[str]:
+    # Determine the project root directory
+    scraping_folder_path = os.path.dirname(os.path.abspath(__file__))
+    # Construct the absolute path to the log file
+    log_file_path = os.path.join(scraping_folder_path, "Logs", "scrape_run_recap.log.txt")
+
     # All jobs listings from all sites
     job_listings_list: list[str] = []
 
-    print("Starting Scraping Jobs From Google Jobs...")
     # get the listings from Google jobs
     google_jobs_listings = google_jobs_scraping_pipeline(role, google_time_period)
 
     # combine the lists together
     job_listings_list.extend(google_jobs_listings)
-    print("Finished Scraping Jobs From Google Jobs...")
-    print("Starting Scraping Jobs From LinkedIn...")
+
+    amount_of_listings_from_google_job = len(job_listings_list)
 
     # get the listings from Google jobs
     linkedin_jobs_listings = linkedin_scraping_entry_point(role, linkedin_time_period)
 
     # combine the lists together
     job_listings_list.extend(linkedin_jobs_listings)
-    print("Finished Scraping Jobs From LinkedIn...")
+    amount_of_listings_from_linkedin = len(job_listings_list) - amount_of_listings_from_google_job
 
+    write_run_recap_to_file(amount_of_listings_from_google_job,
+                            amount_of_listings_from_linkedin, role, log_file_path)
     # add more lists from other sites...
 
     # return final result

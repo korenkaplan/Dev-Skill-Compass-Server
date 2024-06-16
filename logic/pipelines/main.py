@@ -147,7 +147,7 @@ def thread_pool_role_pipline(google_period: GoogleJobsTimePeriod, linkedin_perio
 def thread_pool_role_pipline_test(google_period: GoogleJobsTimePeriod, linkedin_period: LinkedinTimePeriod):
     """Main function that creates a process for each role."""
     try:
-        roles_list = ["devops engineer"]
+        roles_list = ["qa engineer"]
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
         google_jobs_time_period = google_period
