@@ -122,7 +122,7 @@ def get_full_description(xpath, _driver) -> (bool, str):
 
 # region Setup and Initialization functions
 def setup_chrome_driver(
-    params=None, set_auto_params=True, activate=False, url="", headless=False
+        params=None, set_auto_params=True, activate=False, url="", headless=False
 ) -> WebDriver:
     """
     Sets up a Chrome WebDriver with optional geolocation parameters and headless mode.
@@ -173,29 +173,32 @@ def setup_chrome_driver(
 
 
 def build_google_jobs_url(
-    search_value: str, googleJobsTimePeriod: GoogleJobsTimePeriod, replace_with_char="+"
+        search_value: str, time_period: GoogleJobsTimePeriod, replace_with_char="+"
 ) -> str:
     """
     Builds a Google Jobs URL based on the search value and time period.
 
     Args:
         search_value (str): The job search query.
-        googleJobsTimePeriod (enum): The time period filter for the job search.
+        time_period (enum): The time period filter for the job search.
         replace_with_char (str): Character to replace spaces in the search query.
 
     Returns:
         str: The constructed Google Jobs URL.
     """
-    snake_case_search_value = search_value.replace(" ", replace_with_char)
-    time_period = googleJobsTimePeriod.value
-    url = (f"https://www.google.com/search?q={snake_case_search_value}+jobs+israel&ibp=htl;"
-           f"jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:{time_period}&"
-           f"htischips=date_posted;{time_period}")
-    return url
+    formatted_search_value = search_value.replace(" ", replace_with_char)
+
+    if time_period == GoogleJobsTimePeriod.ALL_TIME:
+        return (f"https://www.google.com/search?q={formatted_search_value}+jobs+israel&ibp=htl;"
+                "jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs")
+
+    return (f"https://www.google.com/search?q={formatted_search_value}+jobs+israel&ibp=htl;"
+            f"jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:{time_period}&"
+            f"htischips=date_posted;{time_period}")
 
 
 def setup_web_driver_wait(
-    driver: WebDriver, timeout=10
+        driver: WebDriver, timeout=10
 ) -> WebDriverWait[WebDriver | WebElement]:
     """
     Sets up a WebDriverWait instance for the given WebDriver.
@@ -253,10 +256,10 @@ def is_listing_visited(url: str, visited_urls: set[str]):
 
 
 def scroll_and_click_and_visited_pipeline(
-    driver: WebDriver,
-    job_listing_element: WebElement,
-    visited_urls: set[str],
-    log_file_path: str,
+        driver: WebDriver,
+        job_listing_element: WebElement,
+        visited_urls: set[str],
+        log_file_path: str,
 ) -> int:
     """
     Scrolls a job listing element into view, clicks it, and checks if the URL has been visited.
@@ -307,7 +310,7 @@ def scroll_and_click_and_visited_pipeline(
 
 # region get initial job listings li elements
 def get_job_listings_li_elements_list(
-    wait: WebDriverWait, log_file_path: str, role: str
+        wait: WebDriverWait, log_file_path: str, role: str
 ) -> list[WebElement]:
     """
     Retrieves a list of job listing <li> elements.
@@ -384,7 +387,7 @@ def get_description(dto: GoogleJobsGetFullDescriptionDto):
 
 # build the xpath to the title div
 def build_listing_title_xpath_arguments(
-    i: int, increase_every_ten: int
+        i: int, increase_every_ten: int
 ) -> (int, str, int, bool, int):
     only_first_is_one_else_2 = 1 if i == 0 else 2
     # extra_div = '/div' if increase_every_ten > 5 else ''
@@ -422,7 +425,7 @@ def find_title(find_title_dto: GoogleJobsTitleElementXpathDto) -> str:
 
 # Get the list of general words to remove by role
 def get_list_value_by_key(
-    role: str, roles_words_dict: dict[str, list[str]]
+        role: str, roles_words_dict: dict[str, list[str]]
 ) -> list[str]:
     try:
         return roles_words_dict[role]
@@ -491,12 +494,12 @@ def is_title_match_role(role: str, title: str, log_file_path: str) -> (bool, int
 
 
 def find_and_match_title(
-    role: str,
-    i: int,
-    increase_every_ten: int,
-    listing_li_element: WebElement,
-    wait: WebDriverWait,
-    log_file_path: str,
+        role: str,
+        i: int,
+        increase_every_ten: int,
+        listing_li_element: WebElement,
+        wait: WebDriverWait,
+        log_file_path: str,
 ) -> (bool, int):
     # Define the result variables
     is_title_exist = False
@@ -531,6 +534,20 @@ def find_and_match_title(
 
 # endregion
 
+# region Check listings origin site
+def check_job_origin_site(driver: WebDriver, company: str) -> bool:
+    try:
+        list_div_xpath = "/html/body/div[2]/div/div[2]/div[1]/div/div/div[3]/div[2]/div/div[1]/div/div/g-scrolling-carousel/div[1]/div/span/div"
+        element = driver.find_element(By.XPATH, list_div_xpath)
+        a_tags: list[WebElement] = element.find_elements(By.TAG_NAME, 'a')
+
+        for a in a_tags:
+            return company in a.get_attribute('title')
+    except Exception as e:
+        print("is_job_from_linkedin -> ", e)
+        return False
+# endregion
+
 
 def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
     """
@@ -551,6 +568,7 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
     # if successful init variables
     skip_amount = 0
     previous_size = -1
+    listings_from_linkedin_counter = 0
     inserted_descriptions = 0
     job_listings_result_list = []
     urls_attempted_set = set()
@@ -561,7 +579,7 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
 
     while job_listings:
         try:
-        # If the previous size is the same as the current size, there are no more job listings to load
+            # If the previous size is the same as the current size, there are no more job listings to load
             if previous_size == len(job_listings):
                 break
 
@@ -580,11 +598,14 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
                 if result == 0:
                     bad_url_counter += 1
                     continue
-                    # dto.driver.quit()
-                    # return []
+
 
                 elif result == 1:
                     repeated_urls_counter += 1
+                    continue
+
+                if check_job_origin_site(dto.driver, 'LinkedIn'):
+                    listings_from_linkedin_counter += 1
                     continue
 
                 # find and match the title to the role
@@ -632,6 +653,7 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
     Inserted descriptions: {inserted_descriptions} 
     Error titles counter: {false_title_counter} 
     Repeated URLS: {repeated_urls_counter}
+    Listings From Linkedin: {listings_from_linkedin_counter}
     Problematic URLS: {bad_url_counter + 1}
     --------------------------------------
     Total Job Listings: {len(job_listings)}
@@ -642,7 +664,7 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
 
 
 def get_job_listings_google_jobs_pipeline(
-    config_object: GoogleJobsConfigDto,
+        config_object: GoogleJobsConfigDto,
 ) -> list[str]:
     """
     Executes a pipeline to scrape job listings from Google Jobs based on the provided configuration.
@@ -664,7 +686,7 @@ def get_job_listings_google_jobs_pipeline(
 
     # create intervals
     while (
-        is_success is False and interval_attempts < config_object.max_interval_attempts
+            is_success is False and interval_attempts < config_object.max_interval_attempts
     ):
         if interval_attempts > 0:
             print("Interval attempt failed retry in: ")
@@ -693,9 +715,11 @@ def get_job_listings_google_jobs_pipeline(
     # check the results after the while loop
     if is_success is False:
         text = (
-            "Failed to scrape job listings after maximum attempts(%d)"
-            % config_object.max_interval_attempts
+                "Failed to scrape job listings after maximum attempts(%d)"
+                % config_object.max_interval_attempts
         )
         write_text_to_file(config_object.log_file_path, "a", text)
 
     return listings_list
+
+

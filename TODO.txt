@@ -1,12 +1,16 @@
 =============  Most Important =================
+- (done) add filter when apply is from linkedin on google jobs
 - Initial the database with all time scans for each job(playground)
-- Add logs to LinkedIn scraping pipeline
-- Test full process with cron job
-- Improve code smells
+
 - dd index to common db quarries.
-- Understand why it’s taking to long to start
+- Test full process with cron job( set to end of the day)
+
 - Add loading animation to the roles.
 - Upload redis cache server.
+
+- Improve code smells
+- Understand why it’s taking to long to start
+- add visitors counter
 
 =============  Frontend =================
 - Handle loading time (cache) loading

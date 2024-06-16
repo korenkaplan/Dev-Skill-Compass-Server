@@ -10,7 +10,10 @@ def format_role(role: str, seperator="%2B") -> str:
 def build_url(role_name: str, period: LinkedinTimePeriod):
     # format the role name to the url format
     formated_role: str = format_role(role_name)
+
+    if period == LinkedinTimePeriod.ALL_TIME:
+        return f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={formated_role}&location=Israel&geoId=101620260&start="
+
     return f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={formated_role}&location=Israel&geoId=101620260&f_TPR={period.value}&start="
 
 
-print(build_url('backend developer', LinkedinTimePeriod.PAST_WEEK) + '0')
