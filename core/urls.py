@@ -7,11 +7,12 @@ from .views import (
     RolesRetrieveUpdateDestroy,
     RolesListCreate,
     SynonymsListCreate,
-    SynonymsRetrieveUpdateDestroy,
+    SynonymsRetrieveUpdateDestroy, RoleListingsCountListCreate, RoleListingsCountRetrieveUpdateDestroy,
 )
 
 # Main URL pattern the includes all router URLS's
 urlpatterns = [
+
     path(
         "technologies/",
         TechnologiesListCreate.as_view(),
@@ -35,5 +36,15 @@ urlpatterns = [
         "synonyms/<int:pk>",
         SynonymsRetrieveUpdateDestroy.as_view(),
         name="synonyms_details",
+    ),
+    path(
+        "role-listings/",
+        RoleListingsCountListCreate.as_view(),
+        name="role_listings_count_list_create",
+    ),
+    path(
+        "role-listings/<int:pk>",
+        RoleListingsCountRetrieveUpdateDestroy.as_view(),
+        name="role_listings_details",
     ),
 ]

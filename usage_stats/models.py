@@ -18,6 +18,11 @@ class MonthlyTechnologiesCounts(models.Model):
             f" Role: {self.role_id}| Created At: {created_date_formatted}  | Updated To: {date_formatted} "
         )
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['role_id', 'technology_id'])
+        ]
+
 
 class HistoricalTechCounts(models.Model):
     technology_id = models.ForeignKey(Technologies, on_delete=models.PROTECT)
@@ -32,6 +37,12 @@ class HistoricalTechCounts(models.Model):
             f" Amount: {self.counter} | Role: {self.role_id} | Created At: {date_formatted} "
         )
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['role_id', 'technology_id']),
+            models.Index(fields=['created_at'])
+        ]
+
 
 class AggregatedTechCounts(models.Model):
     technology_id = models.ForeignKey(Technologies, on_delete=models.PROTECT)
@@ -45,3 +56,8 @@ class AggregatedTechCounts(models.Model):
             f"ID: {self.id} | Tech: {self.technology_id.name.title()} |"
             f" Amount: {self.counter} | Role: {self.role_id} | Created At: {date_formatted} "
         )
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['role_id', 'technology_id']),
+        ]

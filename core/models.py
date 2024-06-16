@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, MinValueValidator
 
 
 class Categories(models.Model):
@@ -12,6 +12,11 @@ class Categories(models.Model):
     def __str__(self):
         return f"{self.name.title()}"
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['name'])
+        ]
+
 
 class Roles(models.Model):
     name = models.CharField(
@@ -23,6 +28,11 @@ class Roles(models.Model):
 
     def __str__(self):
         return f"{self.name} | {self.id}"
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['name'])
+        ]
 
 
 class Technologies(models.Model):
@@ -38,6 +48,11 @@ class Technologies(models.Model):
             f"Name: {self.name.title()} | Category: {self.category_id} | ID: {self.id}"
         )
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['name'])
+        ]
+
 
 class Synonyms(models.Model):
     origin_tech_id = models.ForeignKey(Technologies, on_delete=models.PROTECT)
@@ -47,3 +62,12 @@ class Synonyms(models.Model):
 
     def __str__(self):
         return f"Name: {self.name} | Technology: {self.origin_tech_id.name} | ID: {self.id}"
+
+
+class RoleListingsCount(models.Model):
+    role_id = models.ForeignKey(Roles, on_delete=models.PROTECT)
+    counter = models.IntegerField(default=1, validators=[MinValueValidator(0)])
+
+
+    def __str__(self):
+        return f"Role: {self.role_id.name} | total: {self.counter}"

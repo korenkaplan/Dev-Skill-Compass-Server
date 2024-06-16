@@ -56,6 +56,9 @@ def preprocess_text(text: str) -> str:
     str: The preprocessed text.
     """
     # Convert text to lowercase
+    if text is None:
+        print("text is None")
+        return ''
     text = text.lower()
     # Remove special characters, numbers, and punctuation except for specific patterns like ci/cd, ui/ux
     text = re.sub(r"[^a-z0-9\s/#+.]", "", text)

@@ -15,6 +15,7 @@ from usage_stats.services.technologies_counts_service import (
 )
 from core.services.technologies_service import get_tech_dict
 from utils.enums import LinkedinTimePeriod
+from utils.functions import write_text_to_file
 from utils.mail_module.email_module_functions import send_recap_email_prepared
 from utils.settings import MAX_NUMBER_OF_WORKERS, MAX_NUMBER_OF_RETRIES_SCARPING
 from concurrent.futures import as_completed
@@ -93,6 +94,9 @@ def single_role_pipline(
         print(f"({role}) Started collecting job listings...")
         job_listings: list[str] = scrape_job_listings(role, google_time_period,
                                                       linkedin_time_period)
+
+        for job in job_listings:
+            write_text_to_file('job_listings.txt', 'a', job)
         print(f"({role}) Started extracting tech words from job listings...")
         tech_sets_list: list[set[str]] = extract_tech_words_from_job_listings(
             job_listings, tech_set
@@ -144,10 +148,10 @@ def thread_pool_role_pipline(google_period: GoogleJobsTimePeriod, linkedin_perio
         print(f"Error in main pipeline: {e}")
 
 
-def thread_pool_role_pipline_test(google_period: GoogleJobsTimePeriod, linkedin_period: LinkedinTimePeriod):
+def thread_pool_role_pipline_test(google_period: GoogleJobsTimePeriod, linkedin_period: LinkedinTimePeriod, roles):
     """Main function that creates a process for each role."""
     try:
-        roles_list = ["qa engineer"]
+        roles_list = roles
         tech_set = get_all_techs_from_db()
         tech_dictionary = get_tech_dict()
         google_jobs_time_period = google_period

@@ -7,7 +7,7 @@ from random import uniform
 import requests
 from bs4 import BeautifulSoup
 from logic.web_scraping.linkedin.title_filtering import is_title_match_role
-from utils.functions import retry_function
+from utils.functions import retry_function, write_text_to_file
 from requests.exceptions import RequestException, SSLError
 
 
@@ -156,7 +156,10 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
     skip_amount = 0
     job_listings_descriptions = []
     max_attempts = 3
-
+    visited_hrefs_set = set()
+    visited_hrefs_counter = 0
+    failed_attempts_counter = 0
+    title_filtered_listings_counter = 0
     # Each iteration of the loop is a fetch request and loop over the listings from that request.
     while True:
         print(f"Total Inserted: {len(job_listings_descriptions)}")
@@ -169,7 +172,9 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
             hrefs, scanned_listings_amount = retry_function(get_li_hrefs, role_name=role, max_attempts=3,
                                                             delay=sleep_time,
                                                             backoff=1, url=formatted_url, role=role, log_file_path=log_file_path, proxy=proxy)
-
+            # count the number of listings with title not matching the role.
+            # total amount per get request (10) - the amount of filtered fetched listings = the amount of error listings
+            title_filtered_listings_counter += scanned_listings_amount - len(hrefs)
         except Exception as e:
             print(f"Failed to fetch job listings: {e}")
             break
@@ -184,10 +189,16 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
         # Iterate through the list of hrefs fetched from the server
         for href in hrefs:
             try:
+                if href in visited_hrefs_set:
+                    visited_hrefs_counter += 1
+                    continue
+                write_text_to_file('hrefs.txt', 'a', href)
+                visited_hrefs_set.add(href)
                 # Try to fetch the description from the href attribute of the job listings
                 description = retry_function(get_text_from_href, role_name=role, max_attempts=max_attempts, delay=sleep_time, backoff=2,
                                              href=href)
             except Exception as e:
+                failed_attempts_counter += 1
                 print(f"Failed to fetch job description: {e}")
                 continue
 
@@ -198,6 +209,15 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
         time.sleep(sleep_time)
 
     # After fetching all the listings, return the descriptions list
+    text: str = f"""
+    Inserted descriptions: {len(job_listings_descriptions)} 
+    Repeated URLS: {visited_hrefs_counter}
+    Failed to fetch description: {failed_attempts_counter}
+    Title not matching role: {title_filtered_listings_counter}
+    --------------------------------------
+    Total Job Listings: {skip_amount}
+    """
+    write_text_to_file(log_file_path, 'a', text)
     return job_listings_descriptions
 
 

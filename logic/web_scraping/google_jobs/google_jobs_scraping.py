@@ -108,7 +108,9 @@ def get_full_description(xpath, _driver) -> (bool, str):
         # Retrieve and return the text of the element
         description = element.text
         if description:
-            return True, description
+            # Remove extra spaces and ensure single line
+            cleaned_description = re.sub(r'\s+', ' ', description).strip()
+            return True, cleaned_description
         else:
             error = "get_full_description() -> Element is present but contains no text."
             return False, error
@@ -193,8 +195,8 @@ def build_google_jobs_url(
                 "jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs")
 
     return (f"https://www.google.com/search?q={formatted_search_value}+jobs+israel&ibp=htl;"
-            f"jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:{time_period}&"
-            f"htischips=date_posted;{time_period}")
+            f"jobs&hl=en&gl=us#fpstate=tldetail&=&=&htivrt=jobs&htichips=date_posted:{time_period.value}&"
+            f"htischips=date_posted;{time_period.value}")
 
 
 def setup_web_driver_wait(
@@ -488,7 +490,6 @@ def is_title_match_role(role: str, title: str, log_file_path: str) -> (bool, int
         log_text = (
             f"""False match: {cleaned_title}({title} <-> {cleaned_role}({role})"""
         )
-        write_text_to_file(log_file_path, "a", log_text)
 
     return res
 
@@ -542,7 +543,9 @@ def check_job_origin_site(driver: WebDriver, company: str) -> bool:
         a_tags: list[WebElement] = element.find_elements(By.TAG_NAME, 'a')
 
         for a in a_tags:
-            return company in a.get_attribute('title')
+            if company in a.get_attribute('title'):
+                return True
+        return False
     except Exception as e:
         print("is_job_from_linkedin -> ", e)
         return False

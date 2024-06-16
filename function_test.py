@@ -17,9 +17,8 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_server.settings")
 
 application = get_wsgi_application()
 # endregion
-from logic.web_scraping.main_scrape_file import job_scrape_pipeline
 from utils.enums import GoogleJobsTimePeriod, LinkedinTimePeriod
+from logic.pipelines.main import thread_pool_role_pipline_test
 
 
-job_scrape_pipeline('backend developer', GoogleJobsTimePeriod.MONTH, LinkedinTimePeriod.ALL_TIME)
-
+thread_pool_role_pipline_test(GoogleJobsTimePeriod.ALL_TIME, LinkedinTimePeriod.ALL_TIME, ['data analyst'])

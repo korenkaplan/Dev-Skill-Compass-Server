@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Technologies, Roles, Categories, Synonyms
+from .models import Technologies, Roles, Categories, Synonyms, RoleListingsCount
 
 
 class TechnologySerializer(serializers.ModelSerializer):
@@ -23,4 +23,10 @@ class RoleSerializer(serializers.ModelSerializer):
 class SynonymsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Synonyms
+        fields = "__all__"
+
+
+class RoleListingsCountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RoleListingsCount
         fields = "__all__"
