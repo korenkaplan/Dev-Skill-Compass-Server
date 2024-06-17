@@ -5,7 +5,6 @@
 
 
 =============  Backend =================
-- Handle caching with redis on server.
 - (done) Fix repeating listings in LinkedIn scraping.
 - Decide how many months should be aggregated.
 - Finish Cron Jobs:
@@ -13,6 +12,7 @@
         - Aggregated table and Monthly table logic.
         - Adjust the caching to 24 hours.
         - set the scraping to the end of the day.
+
     - Monthly(every 1st of the month):
         - Aggregated table and Monthly table logic.
         - Adjust the roleListingsCount table.

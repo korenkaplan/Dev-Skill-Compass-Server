@@ -102,16 +102,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": os.environ.get("DATABASE_ENGINE"),
-#         "NAME": os.environ.get("DATABASE_NAME"),
-#         "USER": os.environ.get("DATABASE_USER"),
-#         "PASSWORD": os.environ.get("DATABASE_PASSWORD"),
-#         "HOST": os.environ.get("DATABASE_HOST"),
-#         "PORT": os.environ.get("DATABASE_PORT", "5432"),
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -154,7 +144,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 CRONJOBS = [
-    ('45 9 * * *', "logic.pipelines.daily_pipeline.daily_pipeline", '>> /cron/django_cron_log 2>&1'),
     ('*/1 * * * *', "logic.pipelines.daily_pipeline.test_send_email", '>> /cron/django_cron_log 2>&1'),
 ]
 # (
@@ -173,16 +162,12 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # endregion
-# settings.py
+
 
 CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",  # Use /0, /1, /2, etc. to use different Redis databases
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-suffix',
     }
 }
-
 

@@ -14,7 +14,7 @@ from django.core.cache import cache
 from core.serializers import RoleSerializer, SynonymsSerializer
 
 # @check_parameters('role_id')
-cache_time = 60 * 15
+cache_time = 60 * 60 * 24
 
 
 # @cache_page(cache_time)
@@ -25,7 +25,7 @@ def get_all_roles(request):
     if roles is None:
         result = Roles.objects.all()
         serializer = RoleSerializer(result, many=True)
-        cache.set(cache_key, serializer.data)
+        cache.set(cache_key, serializer.data, timeout=cache_time)
         return Response(serializer.data, 200)
     else:
         return Response(roles, 200)
@@ -45,36 +45,19 @@ def get_role_count_stats_view(request):
     # Check if the data is already cached
     cached_result = cache.get(cache_key)
     if cached_result:
-        print("used cache key")
         return Response({'data': cached_result}, status=200)
 
     # If not cached, call the function
     result = get_role_count_stats(role_id, number_of_categories, limit)
 
     # Cache the result for future requests (adjust the timeout as needed)
-    cache.set(cache_key, result, timeout=3600)  # Cache for 1 hour
+    cache.set(cache_key, result, timeout=cache_time)  # Cache for 1 hour
 
     # Return the results
     body = {
         'data': result
     }
     return Response(body, status=200)
-
-
-# @api_view(['Post'])
-# @check_parameters('role')
-# def get_top_by_role_view(request):
-#     # get the params from body
-#     role = request.data.get('role')
-#     number_of_categories = request.data.get('number_of_categories')
-#     limit = request.data.get('limit')
-#     # Call the function
-#     result = get_top_counts_for_role(role, number_of_categories, limit)
-#     # Return the results
-#     body = {
-#         'data': result
-#     }
-#     return Response(body, status=200)
 
 
 @api_view(['Get'])

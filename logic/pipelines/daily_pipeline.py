@@ -1,9 +1,7 @@
 import os
-import time
-
 from logic.pipelines.main import thread_pool_role_pipline
 from utils.enums import LinkedinTimePeriod, GoogleJobsTimePeriod
-
+from django.core.cache import cache
 from utils.mail_module.email_module_functions import send_scan_recap_email
 
 # Determine the project root directory
@@ -31,6 +29,11 @@ def daily_pipeline():
 
         # Run the main pipeline with the period time set to one day
         thread_pool_role_pipline(google_period, linkedin_period)
+
+        # Reset Cache
+        cache.clear()
+
+
 
     except Exception as e:
         # Log the error or handle it as needed

@@ -21,7 +21,9 @@ from logic.web_scraping.main_scrape_file import job_scrape_pipeline, job_scrape_
 from utils.enums import GoogleJobsTimePeriod, LinkedinTimePeriod
 
 
+from datetime import datetime
 
 
-job_scrape_pipeline_test('backend developer', LinkedinTimePeriod.PAST_MONTH)
+# job_scrape_pipeline_test('backend developer', LinkedinTimePeriod.PAST_MONTH)
 
+print(datetime.now())
