@@ -123,3 +123,35 @@ def job_scrape_pipeline(role: str, google_time_period: GoogleJobsTimePeriod, lin
 
     # return final result
     return job_listings_list
+
+
+def job_scrape_pipeline_test(role: str, linkedin_time_period: LinkedinTimePeriod) -> list[str]:
+    # Determine the project root directory
+    scraping_folder_path = os.path.dirname(os.path.abspath(__file__))
+    # Construct the absolute path to the log file
+    log_file_path = os.path.join(scraping_folder_path, "Logs", "scrape_run_recap.log.txt")
+
+    # All jobs listings from all sites
+    job_listings_list: list[str] = []
+
+    # get the listings from Google jobs
+    google_jobs_listings = []
+
+    # combine the lists together
+    job_listings_list.extend(google_jobs_listings)
+
+    amount_of_listings_from_google_job = len(job_listings_list)
+
+    # get the listings from Google jobs
+    linkedin_jobs_listings = linkedin_scraping_entry_point(role, linkedin_time_period)
+
+    # combine the lists together
+    job_listings_list.extend(linkedin_jobs_listings)
+    amount_of_listings_from_linkedin = len(job_listings_list) - amount_of_listings_from_google_job
+
+    write_run_recap_to_file(amount_of_listings_from_google_job,
+                            amount_of_listings_from_linkedin, role, log_file_path)
+    # add more lists from other sites...
+
+    # return final result
+    return job_listings_list

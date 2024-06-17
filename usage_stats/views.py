@@ -1,17 +1,15 @@
+import time
+
 from rest_framework import generics
 from rest_framework.response import Response
 
-from core.models import Roles, Synonyms
-from decorators.chcek_parameters import check_parameters
+from core.models import Roles
 from .models import HistoricalTechCounts, MonthlyTechnologiesCounts, AggregatedTechCounts
 from .serializers import (MonthlyHistoricalTopTechnologiesSerializer, MonthlyTechnologyCountSerializer,
                           AggregatedTechCountsSerializer)
 from rest_framework.decorators import api_view
 
 from .services.aggregated_tech_counts_service import (get_last_scan_date_and_time, get_role_count_stats)
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
-from django.views.decorators.vary import vary_on_headers
 from django.core.cache import cache
 from core.serializers import RoleSerializer, SynonymsSerializer
 

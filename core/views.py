@@ -1,5 +1,9 @@
 from django.views.decorators.cache import cache_page
 from rest_framework import generics
+from rest_framework.decorators import api_view
+from django.core.cache import cache
+from rest_framework.response import Response
+
 from .models import Technologies, Roles, Categories, Synonyms, RoleListingsCount
 from .serializers import (
     TechnologySerializer,
@@ -7,6 +11,8 @@ from .serializers import (
     RoleSerializer,
     SynonymsSerializer, RoleListingsCountSerializer,
 )
+
+
 
 
 class TechnologiesListCreate(generics.ListCreateAPIView):
@@ -52,6 +58,13 @@ class SynonymsRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 class RoleListingsCountListCreate(generics.ListCreateAPIView):
     queryset = RoleListingsCount.objects.all()
     serializer_class = RoleListingsCountSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        role_id = self.request.query_params.get('role_id', None)
+        if role_id is None:
+            return queryset
+        return queryset.filter(role_id=role_id)
 
 
 class RoleListingsCountRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):

@@ -1,34 +1,27 @@
-=============  Most Important =================
-- (done) add filter when apply is from linkedin on google jobs
-- (done) Initial the database with all time scans for each job(playground)
+============= Frontend =================
+- (done) Add loading animation to the roles.
+- add visitors counter:
+- responsive
 
-- dd index to common db quarries.
-- Test full process with cron job( set to end of the day)
-
-- Add loading animation to the roles.
-- Upload redis cache server.
-
-- Improve code smells
-- Understand why it’s taking to long to start
-
-
-- add visitors counter
-- add total listings counter for each role
-=============  Frontend =================
-- Handle loading time (cache) loading
-- Try a different color schema
 
 =============  Backend =================
 - Handle caching with redis on server.
-- Create an index for the common queries
-- decide on scanning time routine every 1 / 3 / 7 days. and adjust the cache to the days.
-- fix mailing system in docker
+- Fix repeating listings in LinkedIn scraping.
+- Decide how many months should be aggregated.
+- Finish Cron Jobs:
+    - Daily(24 Hours):
+        - Aggregated table and Monthly table logic.
+        - Adjust the caching to 24 hours.
+        - set the scraping to the end of the day.
+    - Monthly(every 1st of the month):
+        - Aggregated table and Monthly table logic.
+        - Adjust the roleListingsCount table.
+- turn the roleListingsCount table to counters table and add the visitors amount to it, and add indexes.
 
-============= General Assignments =================
-- Organize the files and naming in the project
-- Check the option to use neon postgresql database
-- add historical data to the website
+
+============= Before Finish =================
+- Code smells, files and naming in the project.
 - Create a Readme.md files to the project.
 - Create the CV and add the project to the CV.
-
+- Change the License.
 
