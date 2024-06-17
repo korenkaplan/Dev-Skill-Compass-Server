@@ -19,11 +19,10 @@ application = get_wsgi_application()
 # endregion
 from logic.web_scraping.main_scrape_file import job_scrape_pipeline, job_scrape_pipeline_test
 from utils.enums import GoogleJobsTimePeriod, LinkedinTimePeriod
-
-
+from usage_stats.management.commands.run_daily_pipeline import daily_pipeline
 from datetime import datetime
 
 
 # job_scrape_pipeline_test('backend developer', LinkedinTimePeriod.PAST_MONTH)
 
-print(datetime.now())
+daily_pipeline()

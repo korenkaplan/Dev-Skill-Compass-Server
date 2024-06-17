@@ -2,7 +2,7 @@
 - (done) Add loading animation to the roles.
 - add visitors counter:
 - responsive
-
+- change fetch url to render url and not localhost
 
 =============  Backend =================
 - (done) Fix repeating listings in LinkedIn scraping.

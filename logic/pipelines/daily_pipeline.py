@@ -19,26 +19,7 @@ def test_send_email():
     send_scan_recap_email(recipient_email, website_name, date_and_time, text)
 
 
-def daily_pipeline():
-    try:
-        print("started daily pipeline...")
-        # Define the time period
-        google_period: GoogleJobsTimePeriod = GoogleJobsTimePeriod.TODAY
-        linkedin_period: LinkedinTimePeriod = LinkedinTimePeriod.PAST_24_HOURS
 
-
-        # Run the main pipeline with the period time set to one day
-        thread_pool_role_pipline(google_period, linkedin_period)
-
-        # Reset Cache
-        cache.clear()
-
-
-
-    except Exception as e:
-        # Log the error or handle it as needed
-        message = f"An error occurred during the daily pipeline: {e}"
-        print(message)
 
 
 def daily_test():
