@@ -6,7 +6,7 @@
 
 =============  Backend =================
 - Handle caching with redis on server.
-- Fix repeating listings in LinkedIn scraping.
+- (done) Fix repeating listings in LinkedIn scraping.
 - Decide how many months should be aggregated.
 - Finish Cron Jobs:
     - Daily(24 Hours):

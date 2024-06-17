@@ -42,13 +42,13 @@ def filter_li_elements_by_title(soup: BeautifulSoup, role: str, log_file_path: s
 
     titles, title_filtered_li_elements = filter_li_elements_by_title_action(li_elements, role, log_file_path)
 
-    title_filtered_li_elements = filter_by_unique_title_and_location(titles, title_filtered_li_elements, visited_postings)
+    title_filtered_li_elements = filter_by_unique_title_company_and_location(titles, title_filtered_li_elements, visited_postings)
 
 
     return title_filtered_li_elements, skip_amount
 
 
-def filter_by_unique_title_and_location(titles: list, li_elements: list,  visited_postings: set):
+def filter_by_unique_title_company_and_location(titles: list, li_elements: list,  visited_postings: set):
     filtered_li_elements = []
     for li, title in zip(li_elements, titles):
         company, location = get_company_and_location(li)
@@ -228,7 +228,6 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
                                                   delay=sleep_time, backoff=2, href=href)
                 if description:
                     # If there is a description, add to the list
-                    write_text_to_file('new_descriptions.txt', 'a', description)
                     job_listings_descriptions.append(description)
 
             except Exception as e:
@@ -241,9 +240,8 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
     # After fetching all the listings, return the descriptions list
     text: str = f"""
     Inserted descriptions: {len(job_listings_descriptions)} 
-    Repeated URLS: {visited_hrefs_counter}
     Failed to fetch description: {failed_attempts_counter}
-    Title not matching role: {title_filtered_listings_counter}
+    Title not matching role or repeated postings: {title_filtered_listings_counter}
     --------------------------------------
     Total Job Listings: {skip_amount}
     """
