@@ -1,6 +1,7 @@
 """This is the main pipeline that runs once a week to refresh the data in the database."""
 
-from core.models import Roles, Synonyms
+from core.models import Roles, Synonyms, RoleListingsCount
+from core.services.role_listings_count_services import update_job_listings_count_table
 from logic.web_scraping.google_jobs.google_jobs_scraping import (
     GoogleJobsTimePeriod,
 )
@@ -85,6 +86,14 @@ def update_the_database(role_techs_tuple: (str, dict)):
         print(f"Error while updating the database for role {role_techs_tuple[0]}: {e}")
 
 
+def update_or_create_role_jobs_count_table(job_listings: list, role: str):
+    try:
+        amount = len(job_listings)
+        update_job_listings_count_table(amount, role)
+    except Exception as e:
+        print(f"Error while updating the role and jobs count table: {e}")
+
+
 def single_role_pipline(
         role: str, tech_set: set, tech_dict: dict, google_time_period: GoogleJobsTimePeriod,
         linkedin_time_period: LinkedinTimePeriod):
@@ -95,8 +104,9 @@ def single_role_pipline(
         job_listings: list[str] = scrape_job_listings(role, google_time_period,
                                                       linkedin_time_period)
 
-        for job in job_listings:
-            write_text_to_file('job_listings.txt', 'a', job)
+        print(f"({role}) Started updating jobs count table...")
+        update_or_create_role_jobs_count_table(job_listings, role)
+
         print(f"({role}) Started extracting tech words from job listings...")
         tech_sets_list: list[set[str]] = extract_tech_words_from_job_listings(
             job_listings, tech_set

@@ -12,7 +12,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_server.settings")
 
 application = get_wsgi_application()
@@ -21,8 +20,9 @@ from logic.web_scraping.main_scrape_file import job_scrape_pipeline, job_scrape_
 from utils.enums import GoogleJobsTimePeriod, LinkedinTimePeriod
 from usage_stats.management.commands.run_daily_pipeline import daily_pipeline
 from datetime import datetime
-
+import requests
 
 # job_scrape_pipeline_test('backend developer', LinkedinTimePeriod.PAST_MONTH)
 
-daily_pipeline()
+res = requests.get('http://127.0.0.1:8000//core/get_jobs_count_for_role/?role_id=55')
+print(res.content)

@@ -13,7 +13,7 @@ from .views import (
 # Main URL pattern that includes all routes URL
 urlpatterns = [
     path(
-        "get_all_roles/",
+        "get-all-roles/",
         get_all_roles,
         name="get_all_roles",
     ),

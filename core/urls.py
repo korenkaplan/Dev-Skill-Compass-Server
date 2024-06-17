@@ -8,11 +8,16 @@ from .views import (
     RolesListCreate,
     SynonymsListCreate,
     SynonymsRetrieveUpdateDestroy, RoleListingsCountListCreate, RoleListingsCountRetrieveUpdateDestroy,
+    get_jobs_count_for_role,
 )
 
 # Main URL pattern the includes all router URLS's
 urlpatterns = [
-
+    path(
+        "get-jobs-count-for-role/",
+        get_jobs_count_for_role,
+        name="get_jobs_count_for_role",
+    ),
     path(
         "technologies/",
         TechnologiesListCreate.as_view(),

@@ -67,7 +67,12 @@ class Synonyms(models.Model):
 class RoleListingsCount(models.Model):
     role_id = models.ForeignKey(Roles, on_delete=models.PROTECT)
     counter = models.IntegerField(default=1, validators=[MinValueValidator(0)])
-
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Role: {self.role_id.name} | total: {self.counter}"
+        return f"Role: {self.role_id.name} | total: {self.counter} | created: {self.created_at}"
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['role_id', 'created_at'])
+        ]

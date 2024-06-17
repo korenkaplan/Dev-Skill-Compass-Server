@@ -55,7 +55,7 @@ MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",
+    # "django.middleware.cache.FetchFromCacheMiddleware", Auto cache GET requests.avoid toHandle caching in the endpoint
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -102,7 +102,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -142,7 +141,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
 CRONJOBS = [
     ('*/1 * * * *', "logic.pipelines.daily_pipeline.test_send_email", '>> /cron/django_cron_log 2>&1'),
 ]
@@ -170,4 +168,3 @@ CACHES = {
         'LOCATION': 'unique-suffix',
     }
 }
-

@@ -4,6 +4,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 
 from core.models import Roles
+from utils.settings import CACHE_TTL
 from .models import HistoricalTechCounts, MonthlyTechnologiesCounts, AggregatedTechCounts
 from .serializers import (MonthlyHistoricalTopTechnologiesSerializer, MonthlyTechnologyCountSerializer,
                           AggregatedTechCountsSerializer)
@@ -13,22 +14,19 @@ from .services.aggregated_tech_counts_service import (get_last_scan_date_and_tim
 from django.core.cache import cache
 from core.serializers import RoleSerializer, SynonymsSerializer
 
-# @check_parameters('role_id')
-cache_time = 60 * 60 * 24
 
-
-# @cache_page(cache_time)
 @api_view(['Get'])
 def get_all_roles(request):
-    cache_key = 'all_roles'
-    roles = cache.get(cache_key)
-    if roles is None:
+    cache_key = 'all_roless'
+    cache_result = cache.get(cache_key)
+    if cache_result is None:
         result = Roles.objects.all()
         serializer = RoleSerializer(result, many=True)
-        cache.set(cache_key, serializer.data, timeout=cache_time)
+        cache.set(cache_key, serializer.data, timeout=CACHE_TTL)
         return Response(serializer.data, 200)
     else:
-        return Response(roles, 200)
+        print("get_all_roles -> cache_result")
+        return Response(cache_result, 200)
 
 
 # @cache_page(cache_time)
@@ -45,13 +43,14 @@ def get_role_count_stats_view(request):
     # Check if the data is already cached
     cached_result = cache.get(cache_key)
     if cached_result:
+        print("get_role_count_stats_view -> cache_result")
         return Response({'data': cached_result}, status=200)
 
     # If not cached, call the function
     result = get_role_count_stats(role_id, number_of_categories, limit)
 
     # Cache the result for future requests (adjust the timeout as needed)
-    cache.set(cache_key, result, timeout=cache_time)  # Cache for 1 hour
+    cache.set(cache_key, result, timeout=CACHE_TTL)  # Cache for 1 hour
 
     # Return the results
     body = {

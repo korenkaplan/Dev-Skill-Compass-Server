@@ -16,8 +16,8 @@
     - Monthly(every 1st of the month):
         - Aggregated table and Monthly table logic.
         - Adjust the roleListingsCount table.
-- turn the roleListingsCount table to counters table and add the visitors amount to it, and add indexes.
-
+- turn the roleListingsCount table to counters table , and add indexes.
+- fix categories of role to be with at least 10 items
 
 ============= Before Finish =================
 - Code smells, files and naming in the project.
