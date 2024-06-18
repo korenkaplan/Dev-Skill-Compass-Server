@@ -9,6 +9,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Lint
-        run: docker-compose run --rm web sh -c "flake8"
+        run: flake8
       - name: Test
         run: pytest
