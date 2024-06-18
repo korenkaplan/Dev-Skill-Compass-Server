@@ -10,6 +10,9 @@ NUMBER_OF_CATEGORIES = 4
 # limit of items per category list in the website
 NUMBER_OF_ITEMS_PER_CATEGORY = 10
 
+# limit of items per category list in the website
+NUMBER_OF_ITEMS_ALL_CATEGORIES = 20
+
 # cache ttl 24 hours
 CACHE_TTL: int = 60 * 60 * 24
 

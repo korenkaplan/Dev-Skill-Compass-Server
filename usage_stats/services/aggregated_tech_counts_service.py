@@ -4,7 +4,7 @@ from init_db.init_database_functions import get_category_objects
 from usage_stats.models import HistoricalTechCounts, MonthlyTechnologiesCounts, AggregatedTechCounts
 from usage_stats.services.historical_tech_counts_service import get_tech_counts_from_last_number_of_months
 from django.db.models import QuerySet
-from utils.settings import NUMBER_OF_CATEGORIES, NUMBER_OF_ITEMS_PER_CATEGORY
+from utils.settings import NUMBER_OF_CATEGORIES, NUMBER_OF_ITEMS_PER_CATEGORY, NUMBER_OF_ITEMS_ALL_CATEGORIES
 from typing import Tuple, List, Dict
 
 
@@ -113,7 +113,8 @@ def get_top_by_category_role(role: str, categories: list[str], limit=-1):
 # endregion
 
 def get_role_count_stats(role_id: int, number_of_categories=NUMBER_OF_CATEGORIES,
-                         limit=NUMBER_OF_ITEMS_PER_CATEGORY) -> dict:
+                         limit=NUMBER_OF_ITEMS_PER_CATEGORY,
+                         all_categories_limit=NUMBER_OF_ITEMS_ALL_CATEGORIES) -> dict:
     """
     Get the count statistics for a role across multiple categories.
 
@@ -121,7 +122,7 @@ def get_role_count_stats(role_id: int, number_of_categories=NUMBER_OF_CATEGORIES
         role_id (int): The ID of the role.
         number_of_categories (int): The number of top categories to retrieve.
         limit (int): The limit of items per category.
-
+        all_categories_limit (int): The limit of items for all categories category.
     Returns:
         dict: A dictionary containing the overall top counts and category-specific counts.
     """
@@ -134,35 +135,53 @@ def get_role_count_stats(role_id: int, number_of_categories=NUMBER_OF_CATEGORIES
         raise ValueError(f"Role with id {role_id} does not exist.")
 
     try:
-        # Get the list of categories for this role
-        categories_str_list: list[str] = get_top_categories_for_role_data(role.name, get_all_categories=True)
-    except Exception as e:
-        raise RuntimeError(f"({role.name}) Error fetching categories for role {role.name}: {e}")
-
-    try:
         # Set the overall top counts for all categories
-        result['all categories'] = get_top_counts_overall(role.id, limit)
+        result['all categories'] = get_top_counts_overall(role.id, all_categories_limit)
     except Exception as e:
         raise RuntimeError(f"({role.name}) Error fetching overall top counts for role {role.id}: {e}")
 
+    categories: QuerySet[Categories] = Categories.objects.all()
     try:
-        # Try to fill with valid counts only
-        result, not_valid_categories_counts, valid_categories_count, is_filled = fill_with_valid_counts(
-            result, categories_str_list, role, number_of_categories, limit
-        )
+        # Initialize dictionaries to store valid and not valid category counts
+        valid_categories_counts = {}
+        not_valid_categories_counts = {}
+
+        # Gather counts for all categories
+        for category in categories:
+
+            try:
+                # Get the top count list for this role-category combination
+                category_role_count: list[dict] = get_top_count_for_role_category(role.id, category.id, limit)
+            except Exception as e:
+                raise RuntimeError(f"Error fetching top count for role {role.id} and category {category.id}: {e}")
+
+            if len(category_role_count) >= limit:
+                valid_categories_counts[category.name] = category_role_count
+            else:
+                not_valid_categories_counts[category.name] = category_role_count
+
+        # Sort all categories by list length and first item amount
+        sorted_valid_counts = get_sorted_dict_based_on_list_length(valid_categories_counts)
+
+        # Check first if there is enough valid categories before sorting the not valid categories
+        if len(sorted_valid_counts) >= number_of_categories:
+            # Convert the dictionary to a list of tuples (key, value)
+            sorted_valid_list = list(sorted_valid_counts.items())
+            # Slice the list to get the first number_of_categories items
+            sliced_valid_dict = dict(sorted_valid_list[:number_of_categories])
+            result.update(sliced_valid_dict)
+            return result
+
+        sorted_invalid_counts = get_sorted_dict_based_on_list_length(not_valid_categories_counts)
+        # Merge sorted valid and invalid counts into result
+        result.update(sorted_valid_counts)
+        result.update(sorted_invalid_counts)
+
     except Exception as e:
-        raise RuntimeError(f"({role.name}) Error filling valid counts: {e}")
+        raise RuntimeError(f"({role.name}) Error processing category counts: {e}")
 
-    # If not enough valid categories, fill with those with the longest invalid counts
-    if not is_filled:
-        try:
-            result = fill_with_invalid_counts(
-                result, not_valid_categories_counts, valid_categories_count, number_of_categories
-            )
-        except Exception as e:
-            raise RuntimeError(f"({role.name}) Error filling invalid counts: {e}")
-
-    return result
+    result_list = list(result.items())
+    return dict(result_list[:number_of_categories])
 
 
 def fill_with_valid_counts(result_dict: dict, categories_str_list: list[str],
@@ -178,7 +197,8 @@ def fill_with_valid_counts(result_dict: dict, categories_str_list: list[str],
         limit (int): Limit of items per category.
 
     Returns:
-        tuple: A tuple containing the result dictionary, not valid categories counts, valid categories count, and a boolean indicating if the result is filled.
+        tuple: A tuple containing the result dictionary, not valid categories counts,
+        valid categories count, and a boolean indicating if the result is filled.
     """
     valid_categories_count = 0
     not_valid_categories_counts = {}
@@ -256,7 +276,6 @@ def get_sorted_dict_based_on_list_length(dict_to_sort: Dict[str, List[dict]]) ->
         else:
             # If the list is empty, ensure it is placed at the end
             return 0, 0
-
 
     sorted_dict = dict(sorted(dict_to_sort.items(), key=list_sort_key))
     return sorted_dict

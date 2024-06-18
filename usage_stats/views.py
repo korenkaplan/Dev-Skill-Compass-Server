@@ -31,10 +31,11 @@ def get_role_count_stats_view(request):
     # get the params from body
     number_of_categories = request.data.get('number_of_categories')
     limit = request.data.get('limit')
+    all_categories_limit = request.data.get('all_categories_limit')
     role_id = request.data.get('role_id')
 
     # Define a cache key based on the input parameters
-    cache_key = f"role_stats_{role_id}_{number_of_categories}_{limit}"
+    cache_key = f"role_stats_{role_id}_{number_of_categories}_{limit}_{all_categories_limit}"
 
     # Check if the data is already cached
     cached_result = cache.get(cache_key)
@@ -42,7 +43,8 @@ def get_role_count_stats_view(request):
         return Response({'data': cached_result}, status=200)
 
     # If not cached, call the function
-    result = get_role_count_stats(role_id, number_of_categories, limit)
+    result = get_role_count_stats(role_id, number_of_categories, limit,
+                                  all_categories_limit)
 
     # Cache the result for future requests (adjust the timeout as needed)
     cache.set(cache_key, result, timeout=CACHE_TTL)  # Cache for 1 hour

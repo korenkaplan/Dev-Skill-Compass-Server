@@ -11,9 +11,7 @@
 
     - Monthly(every 1st of the month):
         - Aggregated table and Monthly table logic.
-        - Adjust the roleListingsCount table.
 
-- fix categories of role to be with at least 10 items
 
 ============= Before Finish =================
 - Code smells, files and naming in the project.
