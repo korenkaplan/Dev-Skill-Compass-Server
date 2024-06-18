@@ -18,7 +18,8 @@ def get_role_by_pk(id_to_find: int) -> Roles:
 
 def get_top_categories_for_role(role_name, number_of_categories) -> list[Categories]:
     # get the roles dictionary
-    categories_names_list = get_top_categories_for_role_data(role_name, number_of_categories)
+    categories_names_list = get_top_categories_for_role_data(role_name,
+                                                             number_of_categories)
 
     # get the categories objects
     categories_objects = get_category_objects(categories_names_list)

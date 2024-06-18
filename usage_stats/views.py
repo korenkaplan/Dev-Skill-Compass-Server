@@ -26,7 +26,6 @@ def get_all_roles(request):
     return Response(serializer.data, 200)
 
 
-# @cache_page(cache_time)
 @api_view(['Post'])
 def get_role_count_stats_view(request):
     # get the params from body

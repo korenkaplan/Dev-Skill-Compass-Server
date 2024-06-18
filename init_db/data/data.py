@@ -1684,8 +1684,12 @@ _synonyms_title = {
 }
 
 
-def get_top_categories_for_role_data(role_name, number_of_categories=NUMBER_OF_CATEGORIES) -> list[str]:
+def get_top_categories_for_role_data(role_name: str,
+                                     number_of_categories=NUMBER_OF_CATEGORIES,
+                                     get_all_categories=False) -> list[str]:
     try:
+        if get_all_categories:
+            return _software_job_roles[role_name]['categories']
         # get the roles dictionary
         return _software_job_roles[role_name]['categories'][:number_of_categories]
     except KeyError:

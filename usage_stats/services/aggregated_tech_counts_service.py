@@ -5,6 +5,7 @@ from usage_stats.models import HistoricalTechCounts, MonthlyTechnologiesCounts, 
 from usage_stats.services.historical_tech_counts_service import get_tech_counts_from_last_number_of_months
 from django.db.models import QuerySet
 from utils.settings import NUMBER_OF_CATEGORIES, NUMBER_OF_ITEMS_PER_CATEGORY
+from typing import Tuple, List, Dict
 
 
 def update_count_aggregated_table(tech: int, role: Roles, count: int):
@@ -111,29 +112,154 @@ def get_top_by_category_role(role: str, categories: list[str], limit=-1):
 
 # endregion
 
-def get_role_count_stats(role_id: int, number_of_categories=NUMBER_OF_CATEGORIES, limit=NUMBER_OF_ITEMS_PER_CATEGORY):
-    result = dict()
+def get_role_count_stats(role_id: int, number_of_categories=NUMBER_OF_CATEGORIES,
+                         limit=NUMBER_OF_ITEMS_PER_CATEGORY) -> dict:
+    """
+    Get the count statistics for a role across multiple categories.
 
-    # find the role
-    role: Roles = Roles.objects.filter(pk=role_id).first()
+    Args:
+        role_id (int): The ID of the role.
+        number_of_categories (int): The number of top categories to retrieve.
+        limit (int): The limit of items per category.
 
-    # get he queryset of categories from Data
-    categories_str_list: list[str] = get_top_categories_for_role_data(role.name,
-                                                                      number_of_categories)
+    Returns:
+        dict: A dictionary containing the overall top counts and category-specific counts.
+    """
+    result = {}
 
-    # get the categories objects
-    categories_objects: list[Categories] = get_category_objects(categories_str_list)
-    result['all categories'] = get_top_counts_overall(role.id, limit)
-    # iterate through the categories and add to dictionary
-    for category in categories_objects:
-        # Get a formatted list of categories in dictionary
-        category_role_count: list[dict] = get_top_count_for_role_category(role.id, category.id,
-                                                                          limit)
-        # add the category as key and the counts as value
-        result[category.name] = category_role_count
+    try:
+        # Find the role
+        role: Roles = Roles.objects.get(pk=role_id)
+    except Roles.DoesNotExist:
+        raise ValueError(f"Role with id {role_id} does not exist.")
 
-    # return the duct
+    try:
+        # Get the list of categories for this role
+        categories_str_list: list[str] = get_top_categories_for_role_data(role.name, get_all_categories=True)
+    except Exception as e:
+        raise RuntimeError(f"({role.name}) Error fetching categories for role {role.name}: {e}")
+
+    try:
+        # Set the overall top counts for all categories
+        result['all categories'] = get_top_counts_overall(role.id, limit)
+    except Exception as e:
+        raise RuntimeError(f"({role.name}) Error fetching overall top counts for role {role.id}: {e}")
+
+    try:
+        # Try to fill with valid counts only
+        result, not_valid_categories_counts, valid_categories_count, is_filled = fill_with_valid_counts(
+            result, categories_str_list, role, number_of_categories, limit
+        )
+    except Exception as e:
+        raise RuntimeError(f"({role.name}) Error filling valid counts: {e}")
+
+    # If not enough valid categories, fill with those with the longest invalid counts
+    if not is_filled:
+        try:
+            result = fill_with_invalid_counts(
+                result, not_valid_categories_counts, valid_categories_count, number_of_categories
+            )
+        except Exception as e:
+            raise RuntimeError(f"({role.name}) Error filling invalid counts: {e}")
+
     return result
+
+
+def fill_with_valid_counts(result_dict: dict, categories_str_list: list[str],
+                           role: Roles, number_of_categories: int, limit: int) -> Tuple[dict, dict, int, bool]:
+    """
+    Fill the result dictionary with valid category counts.
+
+    Args:
+        result_dict (dict): The result dictionary to fill.
+        categories_str_list (list[str]): List of category names.
+        role (Roles): The role object.
+        number_of_categories (int): Number of valid categories needed.
+        limit (int): Limit of items per category.
+
+    Returns:
+        tuple: A tuple containing the result dictionary, not valid categories counts, valid categories count, and a boolean indicating if the result is filled.
+    """
+    valid_categories_count = 0
+    not_valid_categories_counts = {}
+    is_filled = False
+
+    for category_name in categories_str_list:
+        try:
+            category = Categories.objects.get(name=category_name)
+        except Categories.DoesNotExist:
+            continue
+
+        try:
+            # Get the top count list for this role-category combination
+            category_role_count: list[dict] = get_top_count_for_role_category(role.id, category.id, limit)
+        except Exception as e:
+            raise RuntimeError(f"Error fetching top count for role {role.id} and category {category.id}: {e}")
+
+        if len(category_role_count) >= limit:
+            result_dict[category.name] = category_role_count
+            valid_categories_count += 1
+        else:
+            not_valid_categories_counts[category.name] = category_role_count
+
+        if valid_categories_count >= number_of_categories:
+            is_filled = True
+            break
+
+    return result_dict, not_valid_categories_counts, valid_categories_count, is_filled
+
+
+def fill_with_invalid_counts(result_dict: dict, not_valid_counts_dict: dict,
+                             valid_categories_count: int, max_num_of_valid_categories: int) -> dict:
+    """
+    Fill the result dictionary with invalid category counts.
+
+    Args:
+        result_dict (dict): The result dictionary to fill.
+        not_valid_counts_dict (dict): Dictionary of invalid category counts.
+        valid_categories_count (int): Current number of valid categories.
+        max_num_of_valid_categories (int): Maximum number of valid categories needed.
+
+    Returns:
+        dict: The updated result dictionary.
+    """
+    sorted_not_valid_counts_dict = get_sorted_dict_based_on_list_length(not_valid_counts_dict)
+
+    for key, value in sorted_not_valid_counts_dict.items():
+        result_dict[key] = value
+        valid_categories_count += 1
+
+        if valid_categories_count >= max_num_of_valid_categories:
+            break
+
+    return result_dict
+
+
+def get_sorted_dict_based_on_list_length(dict_to_sort: Dict[str, List[dict]]) -> Dict[str, List[dict]]:
+    """
+    Sort a dictionary by the length of its lists in descending order and by the highest 'amount' value in each list.
+
+    Args:
+        dict_to_sort (dict): The dictionary to sort.
+
+    Returns:
+        dict: The sorted dictionary.
+    """
+
+    def list_sort_key(item):
+        # Check if the list is empty
+        if item[1]:  # Check if list is not empty
+            # Sort key: (-len(item[1]), -item[1][0]['amount'])
+            # -len(item[1]) sorts by descending length of the list
+            # -item[1][0]['amount'] sorts by descending 'amount' value of the first item in the list
+            return -item[1][0].get('amount', 0), -len(item[1])
+        else:
+            # If the list is empty, ensure it is placed at the end
+            return 0, 0
+
+
+    sorted_dict = dict(sorted(dict_to_sort.items(), key=list_sort_key))
+    return sorted_dict
 
 
 def get_last_scan_date_and_time():
@@ -153,3 +279,30 @@ def get_top_count_for_role_category(role_id, category_id, limit=NUMBER_OF_ITEMS_
 def get_top_counts_overall(role_id: int, limit=NUMBER_OF_ITEMS_PER_CATEGORY):
     res = AggregatedTechCounts.objects.filter(role_id=role_id).order_by('-counter')[:limit]
     return format_aggregated_tech_count(res)
+
+
+def get_role_count_stats_copy(role_id: int, number_of_categories=NUMBER_OF_CATEGORIES,
+                              limit=NUMBER_OF_ITEMS_PER_CATEGORY):
+    result = dict()
+
+    # find the role
+    role: Roles = Roles.objects.filter(pk=role_id).first()
+
+    # get he queryset of categories from Data
+    categories_str_list: list[str] = get_top_categories_for_role_data(role.name,
+                                                                      number_of_categories)
+
+    # get the categories objects
+    categories_objects: list[Categories] = get_category_objects(categories_str_list)
+    result['all categories'] = get_top_counts_overall(role.id, limit)
+
+    # iterate through the categories and add to dictionary
+    for category in categories_objects:
+        # Get a formatted list of categories in dictionary
+        category_role_count: list[dict] = get_top_count_for_role_category(role.id, category.id,
+                                                                          limit)
+        # add the category as key and the counts as value
+        result[category.name] = category_role_count
+
+    # return the duct
+    return result
