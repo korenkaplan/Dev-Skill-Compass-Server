@@ -1,12 +1,8 @@
 ============= Frontend =================
-- (done) Add loading animation to the roles.
-- add visitors counter:
 - responsive
 - change fetch url to render url and not localhost
 
 =============  Backend =================
-- (done) Fix repeating listings in LinkedIn scraping.
-- Decide how many months should be aggregated.
 - Finish Cron Jobs:
     - Daily(24 Hours):
         - Aggregated table and Monthly table logic.
@@ -16,7 +12,7 @@
     - Monthly(every 1st of the month):
         - Aggregated table and Monthly table logic.
         - Adjust the roleListingsCount table.
-- turn the roleListingsCount table to counters table , and add indexes.
+
 - fix categories of role to be with at least 10 items
 
 ============= Before Finish =================

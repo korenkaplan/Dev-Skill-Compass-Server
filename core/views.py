@@ -25,7 +25,6 @@ def get_jobs_count_for_role(request):
     cache_key = f"get_jobs_count_for_role_{role_id}"
     cached_result = cache.get(cache_key)
     if cached_result:
-        print("get_jobs_count_for_role -> cache_result")
         return Response(cached_result, status=200)
 
     result = get_job_listings_counts_from_last_number_of_months(role_id)

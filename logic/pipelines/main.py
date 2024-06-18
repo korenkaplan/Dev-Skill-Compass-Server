@@ -103,10 +103,6 @@ def single_role_pipline(
         print(f"({role}) Started collecting job listings...")
         job_listings: list[str] = scrape_job_listings(role, google_time_period,
                                                       linkedin_time_period)
-
-        print(f"({role}) Started updating jobs count table...")
-        update_or_create_role_jobs_count_table(job_listings, role)
-
         print(f"({role}) Started extracting tech words from job listings...")
         tech_sets_list: list[set[str]] = extract_tech_words_from_job_listings(
             job_listings, tech_set
@@ -117,6 +113,10 @@ def single_role_pipline(
         )
         print(f"({role}) Started inserting to db...")
         update_the_database(role_techs_tuple)
+
+        print(f"({role}) Started updating jobs count table...")
+        update_or_create_role_jobs_count_table(job_listings, role)
+
         print(f"({role}) Finished pipeline successfully")
         return role.title(), len(job_listings)
     except Exception as e:

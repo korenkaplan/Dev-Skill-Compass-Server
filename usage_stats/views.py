@@ -19,14 +19,15 @@ from core.serializers import RoleSerializer, SynonymsSerializer
 def get_all_roles(request):
     cache_key = 'all_roless'
     cache_result = cache.get(cache_key)
-    if cache_result is None:
-        result = Roles.objects.all()
-        serializer = RoleSerializer(result, many=True)
-        cache.set(cache_key, serializer.data, timeout=CACHE_TTL)
-        return Response(serializer.data, 200)
-    else:
-        print("get_all_roles -> cache_result")
+
+    if cache_result:
         return Response(cache_result, 200)
+
+    result = Roles.objects.all()
+    serializer = RoleSerializer(result, many=True)
+    cache.set(cache_key, serializer.data, timeout=CACHE_TTL)
+
+    return Response(serializer.data, 200)
 
 
 # @cache_page(cache_time)
@@ -43,7 +44,6 @@ def get_role_count_stats_view(request):
     # Check if the data is already cached
     cached_result = cache.get(cache_key)
     if cached_result:
-        print("get_role_count_stats_view -> cache_result")
         return Response({'data': cached_result}, status=200)
 
     # If not cached, call the function

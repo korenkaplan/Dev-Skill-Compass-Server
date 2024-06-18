@@ -12,3 +12,6 @@ NUMBER_OF_ITEMS_PER_CATEGORY = 10
 
 # cache ttl 24 hours
 CACHE_TTL = 60*60*24
+
+# number of months to aggregate backwards
+NUMBER_OF_MONTHS_TO_AGGREGATE = 4

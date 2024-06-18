@@ -6,7 +6,7 @@ from django.db.models import QuerySet
 from django.utils import timezone
 from usage_stats.models import MonthlyTechnologiesCounts, AggregatedTechCounts, HistoricalTechCounts
 from utils.functions import write_text_to_file
-
+from utils.settings import NUMBER_OF_MONTHS_TO_AGGREGATE
 
 # Determine the project root directory
 project_root = os.path.dirname(os.path.abspath(__file__))
@@ -15,18 +15,16 @@ project_root = os.path.dirname(os.path.abspath(__file__))
 log_file_path = os.path.join(project_root, "Logs", "monthly_pipeline.log.txt")
 
 
-def monthly_pipeline(number_of_months):
+def monthly_pipeline():
     """
     Executes the monthly pipeline to move data from the MonthlyTechnologiesCounts table to
      the HistoricalTechCounts table,
     and updates the aggregated counts table with the latest data from the last `number_of_months` months.
 
-    Args:
-        number_of_months (int): The number of months to include in the aggregated counts.
-
     Raises:
         ValueError: If `number_of_months` is not a positive integer.
     """
+    number_of_months = NUMBER_OF_MONTHS_TO_AGGREGATE
     if number_of_months <= 0:
         raise ValueError("number_of_months must be a positive integer")
 

@@ -124,7 +124,7 @@ def get_full_description(xpath, _driver) -> (bool, str):
 
 # region Setup and Initialization functions
 def setup_chrome_driver(
-        params=None, set_auto_params=True, activate=False, url="", headless=False
+        params=None, set_auto_params=True, activate=False, url="", headless=True
 ) -> WebDriver:
     """
     Sets up a Chrome WebDriver with optional geolocation parameters and headless mode.
@@ -552,7 +552,7 @@ def check_job_origin_site(driver: WebDriver, company: str) -> bool:
 # endregion
 
 
-def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
+def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> (list[str], bool):
     """
     Retrieves job listings and their descriptions from a webpage.
 
@@ -562,12 +562,13 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
         list[str]: A list of job descriptions retrieved from the job listings.
 
     """
+    success_status = False
 
     # get the initial job_listings visible on page load
     job_listings = get_job_listings_li_elements_list(dto.wait, dto.log_file_path, dto.role)
     if len(job_listings) == 0:
         dto.driver.quit()
-        return []
+        return [], success_status
     # if successful init variables
     skip_amount = 0
     previous_size = -1
@@ -579,7 +580,6 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
     increase_every_ten = 0
     repeated_urls_counter = 0
     bad_url_counter = 0
-
     while job_listings:
         try:
             # If the previous size is the same as the current size, there are no more job listings to load
@@ -649,7 +649,7 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
             job_listings = dto.driver.find_elements(By.CSS_SELECTOR, "li")
 
         except Exception as e:
-            print(f"Exeption from get_job_listings ({dto.role}): {e}")
+            print(f"Exception from get_job_listings ({dto.role}): {e}")
 
     # log the final result of the function how many listings were collected
     text = f"""
@@ -662,8 +662,8 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> list[str]:
     Total Job Listings: {len(job_listings)}
 """
     write_text_to_file(dto.log_file_path, "a", text)
-
-    return job_listings_result_list
+    success_status = True
+    return job_listings_result_list, success_status
 
 
 def get_job_listings_google_jobs_pipeline(
@@ -710,9 +710,9 @@ def get_job_listings_google_jobs_pipeline(
             not_expanded_job_description_xpath=config_object.not_expandable_job_description_text_xpath,
             click_button_timeout=1.0,
         )
-        listings_list = get_job_listings(dto)
+        listings_list, success_status = get_job_listings(dto)
 
-        if len(listings_list) > 0:
+        if len(listings_list) > 0 or success_status is True:
             is_success = True
 
     # check the results after the while loop

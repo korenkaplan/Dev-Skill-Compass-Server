@@ -6,8 +6,7 @@ from dateutil.relativedelta import relativedelta
 from django.db.models import Sum
 from django.utils import timezone
 from core.models import RoleListingsCount, Roles
-
-load_dotenv()
+from utils.settings import NUMBER_OF_MONTHS_TO_AGGREGATE
 
 
 def update_job_listings_count_table(job_listings_amount: int, role_name: str):
@@ -44,8 +43,7 @@ def get_job_listings_counts_from_last_number_of_months(role_id: int):
         raise ValueError(f"Role with id {role_id} does not exist.")
 
     try:
-        number_of_months = int(os.environ.get('NUMBER_OF_MONTHS_TO_AGGREGATE', 4))  # Default to 4 months if not set
-        past_date = timezone.now() - relativedelta(months=number_of_months)
+        past_date = timezone.now() - relativedelta(months=NUMBER_OF_MONTHS_TO_AGGREGATE)
 
         # Get all the counts from the past date from all the months
         entries = RoleListingsCount.objects.filter(

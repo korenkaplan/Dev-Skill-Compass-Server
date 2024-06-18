@@ -184,7 +184,7 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
     - A list of job listings descriptions.
     """
     # Variables
-    skip_amount = 340
+    skip_amount = 0
     job_listings_descriptions = []
     max_attempts = 3
     visited_postings_set = set()
@@ -193,7 +193,7 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
     title_filtered_listings_counter = 0
     # Each iteration of the loop is a fetch request and loop over the listings from that request.
     while True:
-        print(f"Total Inserted: {len(job_listings_descriptions)}")
+        print(f"({role}) Inserted: {len(job_listings_descriptions)}")
         # Set the initial variables for each iteration: unique sleep time each iteration, pagination on the skip amount
         sleep_time = uniform(4.0, 5.0)
         formatted_url = url + str(skip_amount)
@@ -263,19 +263,9 @@ def get_listings_from_linkedin(base_url: str, role: str, log_file_path: str) -> 
     - A list of job listings descriptions.
     """
     sleep_time = uniform(10.0, 30.0)
+    print(base_url, '0')
     return retry_function(get_job_listings, role_name=role, max_attempts=5, delay=sleep_time, backoff=1,
                           url=base_url, role=role, log_file_path=log_file_path)
 
 
-def main():
-    log_file_path = r"C:\Users\Koren Kaplan\Desktop\Dev-Skill-Compass-Server\logic\web_scraping\Logs\linkedin"
-    url = "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=frontend%2bdeveloper&location=Israel&geoId=101620260&f_TPR=r604800&start=0"
-    listings = get_listings_from_linkedin(url, 'frontend developer', log_file_path)
 
-    for i, job in enumerate(listings):
-        print(f"{i} -> {job}")
-        print(500 * "=")
-
-
-if __name__ == '__main__':
-    main()
