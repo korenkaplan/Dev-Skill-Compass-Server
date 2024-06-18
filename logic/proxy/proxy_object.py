@@ -6,8 +6,5 @@ class ProxyObjectDto(BaseModel):
     port: int
     https: bool
 
-
-
-
     class Config:
         arbitrary_types_allowed = True

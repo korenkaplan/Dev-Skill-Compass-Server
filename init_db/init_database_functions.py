@@ -78,7 +78,6 @@ def get_category_objects(categories_names: list[str]) -> list[Categories]:
     return result
 
 
-
 def create_roles(roles: dict) -> list[Roles]:
     """ Create the Roles objects"""
     description_field = "description"

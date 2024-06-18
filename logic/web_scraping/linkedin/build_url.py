@@ -12,8 +12,8 @@ def build_url(role_name: str, period: LinkedinTimePeriod):
     formated_role: str = format_role(role_name)
 
     if period == LinkedinTimePeriod.ALL_TIME:
-        return f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={formated_role}&location=Israel&geoId=101620260&start="
+        return (f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={formated_role}&"
+                f"location=Israel&geoId=101620260&start=")
 
-    return f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={formated_role}&location=Israel&geoId=101620260&f_TPR={period.value}&start="
-
-
+    return (f"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords={formated_role}&"
+            f"location=Israel&geoId=101620260&f_TPR={period.value}&start=")

@@ -93,7 +93,8 @@ def write_run_recap_to_file(google_amount, linkedin_amount, role, log_file_path)
     write_text_to_file(log_file_path, 'a', log_text)
 
 
-def job_scrape_pipeline(role: str, google_time_period: GoogleJobsTimePeriod, linkedin_time_period: LinkedinTimePeriod) -> list[str]:
+def job_scrape_pipeline(role: str, google_time_period: GoogleJobsTimePeriod,
+                        linkedin_time_period: LinkedinTimePeriod) -> list[str]:
     # Determine the project root directory
     scraping_folder_path = os.path.dirname(os.path.abspath(__file__))
     # Construct the absolute path to the log file
@@ -123,5 +124,3 @@ def job_scrape_pipeline(role: str, google_time_period: GoogleJobsTimePeriod, lin
 
     # return final result
     return job_listings_list
-
-

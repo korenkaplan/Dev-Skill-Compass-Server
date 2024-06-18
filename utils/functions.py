@@ -123,5 +123,3 @@ def retry_function(func, role_name, max_attempts=3, delay=1.0, backoff=1, *args,
                 current_delay *= backoff
             else:
                 return None
-
-

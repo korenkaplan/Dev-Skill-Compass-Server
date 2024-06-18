@@ -1,11 +1,7 @@
-import re
 from queue import Queue
-
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
-from pandas import DataFrame
-
 from logic.proxy.proxy_object import ProxyObjectDto
 
 

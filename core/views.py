@@ -1,11 +1,7 @@
-import time
-
-from django.views.decorators.cache import cache_page
 from rest_framework import generics
 from rest_framework.decorators import api_view
 from django.core.cache import cache
 from rest_framework.response import Response
-
 from utils.settings import CACHE_TTL
 from .models import Technologies, Roles, Categories, Synonyms, RoleListingsCount
 from .serializers import (
@@ -15,8 +11,6 @@ from .serializers import (
     SynonymsSerializer, RoleListingsCountSerializer,
 )
 from .services.role_listings_count_services import get_job_listings_counts_from_last_number_of_months
-
-
 
 
 @api_view(['Get'])

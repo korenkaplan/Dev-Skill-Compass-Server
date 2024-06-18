@@ -74,7 +74,6 @@ def refresh_aggregated_table(number_of_months: int):
     # Get the historical data from last X months
     historical_counts_objects = get_tech_counts_from_last_number_of_months(number_of_months)
 
-
     if historical_counts_objects:
         objects_inserted_from_historical_table = insert_from_historical_table(historical_counts_objects)
         print(f"Total inserted from Monthly table: {len(objects_inserted_from_historical_table)}")
@@ -144,15 +143,13 @@ def get_last_scan_date_and_time():
 
 
 def get_top_count_for_role_category(role_id, category_id, limit=NUMBER_OF_ITEMS_PER_CATEGORY) -> list[dict]:
-    res: QuerySet[AggregatedTechCounts] = AggregatedTechCounts.objects.filter(role_id=role_id,
-                                                                              technology_id__category_id=category_id) \
-                                              .order_by('-counter')[:limit]
+    res = AggregatedTechCounts.objects.filter(role_id=role_id,
+                                              technology_id__category_id=category_id).order_by('-counter')[:limit]
 
     formatted_list = format_aggregated_tech_count(res)
     return formatted_list
 
 
 def get_top_counts_overall(role_id: int, limit=NUMBER_OF_ITEMS_PER_CATEGORY):
-    res: QuerySet[AggregatedTechCounts] = AggregatedTechCounts.objects.filter(role_id=role_id) \
-                                                                            .order_by('-counter')[:limit]
+    res = AggregatedTechCounts.objects.filter(role_id=role_id).order_by('-counter')[:limit]
     return format_aggregated_tech_count(res)

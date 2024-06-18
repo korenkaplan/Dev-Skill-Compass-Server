@@ -1,18 +1,14 @@
-import time
-
 from rest_framework import generics
 from rest_framework.response import Response
-
 from core.models import Roles
 from utils.settings import CACHE_TTL
 from .models import HistoricalTechCounts, MonthlyTechnologiesCounts, AggregatedTechCounts
 from .serializers import (MonthlyHistoricalTopTechnologiesSerializer, MonthlyTechnologyCountSerializer,
                           AggregatedTechCountsSerializer)
 from rest_framework.decorators import api_view
-
 from .services.aggregated_tech_counts_service import (get_last_scan_date_and_time, get_role_count_stats)
 from django.core.cache import cache
-from core.serializers import RoleSerializer, SynonymsSerializer
+from core.serializers import RoleSerializer
 
 
 @api_view(['Get'])

@@ -1,7 +1,3 @@
-import os
-import time
-
-from dotenv import load_dotenv
 from dateutil.relativedelta import relativedelta
 from django.db.models import Sum
 from django.utils import timezone
@@ -57,7 +53,3 @@ def get_job_listings_counts_from_last_number_of_months(role_id: int):
         return sum_of_counts
     except Exception as e:
         raise RuntimeError(f"(get_job_listings_counts_from_last_number_of_months) error: {e}")
-
-
-
-

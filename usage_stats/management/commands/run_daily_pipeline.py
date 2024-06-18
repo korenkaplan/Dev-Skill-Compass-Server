@@ -19,7 +19,6 @@ class Command(BaseCommand):
         self.stdout.write("run_main_pipeline command executed")
 
 
-
 def daily_pipeline():
     try:
         print("started daily pipeline...")
@@ -27,17 +26,13 @@ def daily_pipeline():
         google_period: GoogleJobsTimePeriod = GoogleJobsTimePeriod.TODAY
         linkedin_period: LinkedinTimePeriod = LinkedinTimePeriod.PAST_24_HOURS
 
-
         # Run the main pipeline with the period time set to one day
         thread_pool_role_pipline(google_period, linkedin_period)
 
         # Reset Cache
         cache.clear()
 
-
-
     except Exception as e:
         # Log the error or handle it as needed
         message = f"An error occurred during the daily pipeline: {e}"
         print(message)
-

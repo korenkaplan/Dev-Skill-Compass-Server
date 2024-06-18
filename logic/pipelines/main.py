@@ -1,6 +1,5 @@
 """This is the main pipeline that runs once a week to refresh the data in the database."""
-
-from core.models import Roles, Synonyms, RoleListingsCount
+from core.models import Roles, Synonyms
 from core.services.role_listings_count_services import update_job_listings_count_table
 from logic.web_scraping.google_jobs.google_jobs_scraping import (
     GoogleJobsTimePeriod,
@@ -16,7 +15,6 @@ from usage_stats.services.technologies_counts_service import (
 )
 from core.services.technologies_service import get_tech_dict
 from utils.enums import LinkedinTimePeriod
-from utils.functions import write_text_to_file
 from utils.mail_module.email_module_functions import send_recap_email_prepared
 from utils.settings import MAX_NUMBER_OF_WORKERS, MAX_NUMBER_OF_RETRIES_SCARPING
 from concurrent.futures import as_completed
@@ -40,7 +38,8 @@ def get_all_techs_from_db() -> set:
         return set()
 
 
-def scrape_job_listings(role: str, google_time_period: GoogleJobsTimePeriod, linkedin_time_period: LinkedinTimePeriod) -> list[str]:
+def scrape_job_listings(role: str, google_time_period: GoogleJobsTimePeriod,
+                        linkedin_time_period: LinkedinTimePeriod) -> list[str]:
     """Scrape job listings for a given role."""
     result = []
     attempts = 1
@@ -97,7 +96,6 @@ def update_or_create_role_jobs_count_table(job_listings: list, role: str):
 def single_role_pipline(
         role: str, tech_set: set, tech_dict: dict, google_time_period: GoogleJobsTimePeriod,
         linkedin_time_period: LinkedinTimePeriod):
-
     """Pipeline for each role."""
     try:
         print(f"({role}) Started collecting job listings...")
@@ -206,6 +204,3 @@ def collect_results(futures: list[tuple[str, int]]) -> str:
     except Exception as e:
         print(f"Error collecting results: {e}")
     return '\n'.join(final_message)
-
-
-

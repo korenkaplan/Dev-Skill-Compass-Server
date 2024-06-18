@@ -13,7 +13,6 @@ def format_role_title(title: str) -> str:
     return result
 
 
-
 def remove_words(text: str, words: list) -> str:
     # remove all the common words
     for word in words:
@@ -68,7 +67,6 @@ def is_title_match_role(role: str, title: str, log_file_path: str) -> bool:
         if res is False:
             text = f"False match: {cleaned_title}({title} <-> {cleaned_role}({role})"
             write_text_to_file(log_file_path, 'a', text)
-
 
         return res
     except Exception as e:

@@ -20,4 +20,3 @@ class GoogleJobsTimePeriod(Enum):
     WEEK = "week"
     MONTH = "month"
     ALL_TIME = "r"
-

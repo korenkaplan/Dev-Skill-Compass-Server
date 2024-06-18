@@ -483,13 +483,9 @@ def is_title_match_role(role: str, title: str, log_file_path: str) -> (bool, int
 
     # Check if the cleaned role is in the cleaned title
     res = cleaned_role in cleaned_title
+
     if res is False:
         res = is_title_in_synonyms_words(role, cleaned_title)
-    # log if not matched
-    if res is False:
-        log_text = (
-            f"""False match: {cleaned_title}({title} <-> {cleaned_role}({role})"""
-        )
 
     return res
 
@@ -538,7 +534,8 @@ def find_and_match_title(
 # region Check listings origin site
 def check_job_origin_site(driver: WebDriver, company: str) -> bool:
     try:
-        list_div_xpath = "/html/body/div[2]/div/div[2]/div[1]/div/div/div[3]/div[2]/div/div[1]/div/div/g-scrolling-carousel/div[1]/div/span/div"
+        list_div_xpath = ("/html/body/div[2]/div/div[2]/div[1]/div/div/div[3]/div[2]/div/div[1]/div/div/"
+                          "g-scrolling-carousel/div[1]/div/span/div")
         element = driver.find_element(By.XPATH, list_div_xpath)
         a_tags: list[WebElement] = element.find_elements(By.TAG_NAME, 'a')
 
@@ -549,6 +546,8 @@ def check_job_origin_site(driver: WebDriver, company: str) -> bool:
     except Exception as e:
         print("is_job_from_linkedin -> ", e)
         return False
+
+
 # endregion
 
 
@@ -601,7 +600,6 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> (list[str], bool):
                 if result == 0:
                     bad_url_counter += 1
                     continue
-
 
                 elif result == 1:
                     repeated_urls_counter += 1
@@ -717,12 +715,7 @@ def get_job_listings_google_jobs_pipeline(
 
     # check the results after the while loop
     if is_success is False:
-        text = (
-                "Failed to scrape job listings after maximum attempts(%d)"
-                % config_object.max_interval_attempts
-        )
+        text = f"Failed to scrape job listings after maximum attempts: {config_object.max_interval_attempts}"
         write_text_to_file(config_object.log_file_path, "a", text)
 
     return listings_list
-
-

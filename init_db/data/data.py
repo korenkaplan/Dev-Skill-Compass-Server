@@ -1730,7 +1730,6 @@ def get_synonyms_words_title(role: str = None) -> list[str]:
         return []
 
 
-
 def find_not_matching_categories():
     origin_categories = [key for key, value in _tech_list_synonyms.items()]
     print('Not origin Categories:')

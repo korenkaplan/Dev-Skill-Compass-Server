@@ -34,15 +34,14 @@ def monthly_pipeline():
 
         # Insert them into the historical data table
         for row in technology_counts:
-            HistoricalTechCounts.objects.create(technology_id=row.technology_id, role_id=row.role_id, counter=row.counter)
+            HistoricalTechCounts.objects.create(technology_id=row.technology_id, role_id=row.role_id,
+                                                counter=row.counter)
 
         # Truncate the monthly stats table
         MonthlyTechnologiesCounts.objects.all().delete()
 
         # Truncate the aggregated stats table
         AggregatedTechCounts.objects.all().delete()
-
-
         # get the date of today before months_number ago
         today = timezone.now()
         past_date = today - relativedelta(months=number_of_months)
@@ -53,7 +52,8 @@ def monthly_pipeline():
         # insert the rows into the empty aggregated table
         for row in rows:
             # See if there is already a count of this Tech & Role combination
-            object_in_db: AggregatedTechCounts = AggregatedTechCounts.objects.filter(role_id=row.role_id, technology_id=row.technology_id).first()
+            object_in_db: AggregatedTechCounts = (
+                AggregatedTechCounts.objects.filter(role_id=row.role_id, technology_id=row.technology_id).first())
 
             # if exist update the count (To merge same counts from different months)
             if object_in_db:
@@ -62,8 +62,8 @@ def monthly_pipeline():
 
             # if not exist create the object
             else:
-                AggregatedTechCounts.objects.create(technology_id=row.technology_id, role_id=row.role_id, counter=row.counter)
-
+                AggregatedTechCounts.objects.create(technology_id=row.technology_id,
+                                                    role_id=row.role_id, counter=row.counter)
 
     except Exception as e:
         # Log the error or handle it as needed

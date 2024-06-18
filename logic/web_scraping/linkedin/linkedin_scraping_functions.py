@@ -31,7 +31,8 @@ def filter_li_elements_by_title_action(li_elements: list, role: str, log_file_pa
     return titles, title_filtered_li_elements
 
 
-def filter_li_elements_by_title(soup: BeautifulSoup, role: str, log_file_path: str, visited_postings: set) -> (list, int):
+def filter_li_elements_by_title(soup: BeautifulSoup, role: str, log_file_path: str,
+                                visited_postings: set) -> (list, int):
     try:
         li_elements = soup.find_all('li')
         skip_amount = len(li_elements)
@@ -40,22 +41,23 @@ def filter_li_elements_by_title(soup: BeautifulSoup, role: str, log_file_path: s
     except Exception as e:
         raise RuntimeError(f"Error finding 'li' elements: {e}")
 
-    titles, title_filtered_li_elements = filter_li_elements_by_title_action(li_elements, role, log_file_path)
+    titles, title_filtered_li_elements = filter_li_elements_by_title_action(li_elements,
+                                                                            role, log_file_path)
 
-    title_filtered_li_elements = filter_by_unique_title_company_and_location(titles, title_filtered_li_elements, visited_postings)
-
+    title_filtered_li_elements = filter_by_unique_title_company_and_location(titles,
+                                                                             title_filtered_li_elements,
+                                                                             visited_postings)
 
     return title_filtered_li_elements, skip_amount
 
 
-def filter_by_unique_title_company_and_location(titles: list, li_elements: list,  visited_postings: set):
+def filter_by_unique_title_company_and_location(titles: list, li_elements: list, visited_postings: set):
     filtered_li_elements = []
     for li, title in zip(li_elements, titles):
         company, location = get_company_and_location(li)
         title = title.strip().replace('senior', '').replace('junior', '')
         unique_title = company + location + title
         unique_title = unique_title.lower(). replace(' ', '').replace(',', '')
-
 
         if unique_title not in visited_postings:
             filtered_li_elements.append(li)
@@ -101,7 +103,6 @@ def get_job_details_text(url, tag_name: str, class_name: str):
 
 
 def get_li_hrefs(visited_postings_set: set, url: str, role: str, log_file_path, proxy=None) -> (list, int):
-    i = 0
     try:
         # Setup proxy if provided
         proxies = {
@@ -119,7 +120,9 @@ def get_li_hrefs(visited_postings_set: set, url: str, role: str, log_file_path, 
         # Parse the HTML content using BeautifulSoup
         soup = BeautifulSoup(response.content, 'html.parser')
 
-        li_elements_filtered, skip_amount = filter_li_elements_by_title(soup, role, log_file_path, visited_postings_set)
+        li_elements_filtered, skip_amount = filter_li_elements_by_title(soup, role,
+                                                                        log_file_path,
+                                                                        visited_postings_set)
         # Extract the href attributes from the 'a' tags inside the 'li' elements
         hrefs = []
         for li in li_elements_filtered:
@@ -188,7 +191,6 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
     job_listings_descriptions = []
     max_attempts = 3
     visited_postings_set = set()
-    visited_hrefs_counter = 0
     failed_attempts_counter = 0
     title_filtered_listings_counter = 0
     # Each iteration of the loop is a fetch request and loop over the listings from that request.
@@ -266,6 +268,3 @@ def get_listings_from_linkedin(base_url: str, role: str, log_file_path: str) -> 
     print(base_url, '0')
     return retry_function(get_job_listings, role_name=role, max_attempts=5, delay=sleep_time, backoff=1,
                           url=base_url, role=role, log_file_path=log_file_path)
-
-
-
