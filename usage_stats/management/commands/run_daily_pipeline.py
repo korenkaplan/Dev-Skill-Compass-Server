@@ -16,7 +16,7 @@ class Command(BaseCommand):
         # Call your initialization function here
         retry_function(daily_pipeline, role_name='daily_pipeline')
         # process_pool_role_pipline()
-        self.stdout.write("run_main_pipeline command executed")
+        self.stdout.write("run_daily_pipeline command executed")
 
 
 def daily_pipeline():
