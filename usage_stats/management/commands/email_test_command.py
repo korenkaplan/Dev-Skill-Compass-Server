@@ -1,10 +1,5 @@
-from django.core.cache import cache
 from django.core.management.base import BaseCommand
-from logic.pipelines.main import (
-    thread_pool_role_pipline
-)
 from decorators.decorator_measure_function_time import measure_function_time
-from utils.enums import GoogleJobsTimePeriod, LinkedinTimePeriod
 from utils.functions import retry_function
 from utils.mail_module.email_module_functions import send_scan_recap_email
 
