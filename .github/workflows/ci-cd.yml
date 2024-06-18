@@ -10,3 +10,5 @@ jobs:
     steps:
       - name: Lint
         run: docker-compose run --rm web sh -c "flake8"
+      - name: Test
+        run: pytest
