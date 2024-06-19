@@ -131,29 +131,38 @@ def thread_pool_role_pipline(google_period: GoogleJobsTimePeriod, linkedin_perio
         tech_dictionary = get_tech_dict()
         google_jobs_time_period = google_period
         linkedin_time_period = linkedin_period
-        with ThreadPoolExecutor(max_workers=MAX_NUMBER_OF_WORKERS) as executor:
-            futures = [
-                executor.submit(
-                    single_role_pipline,
-                    role,
-                    tech_set,
-                    tech_dictionary,
-                    google_jobs_time_period,
-                    linkedin_time_period
-                )
-                for role in roles_list
-            ]
+        result = []
+        for role in roles_list:
+            res = single_role_pipline(role, tech_set, tech_dictionary,
+                                      google_period, linkedin_period)
+            result.append(res)
 
-            # Wait for all tasks to complete
-            for future in futures:
-                future.result()
-
-            # create the string of the email:
-            result = [future.result() for future in as_completed(futures)]
-            email_text = collect_results(result)
-
-            # Send the email summarizing the scan session
-            send_recap_email_prepared(email_text, 'Google Jobs')
+        email_text = collect_results(result)
+        # Send the email summarizing the scan session
+        send_recap_email_prepared(email_text, 'LinkedIn')
+        # with ThreadPoolExecutor(max_workers=1) as executor:
+        #     futures = [
+        #         executor.submit(
+        #             single_role_pipline,
+        #             role,
+        #             tech_set,
+        #             tech_dictionary,
+        #             google_jobs_time_period,
+        #             linkedin_time_period
+        #         )
+        #         for role in roles_list
+        #     ]
+        #
+        #     # Wait for all tasks to complete
+        #     for future in futures:
+        #         future.result()
+        #
+        #     # create the string of the email:
+        #     result = [future.result() for future in as_completed(futures)]
+        #     email_text = collect_results(result)
+        #
+        #     # Send the email summarizing the scan session
+        #     send_recap_email_prepared(email_text, 'Google Jobs')
     except Exception as e:
         print(f"Error in main pipeline: {e}")
 

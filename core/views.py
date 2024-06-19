@@ -18,6 +18,13 @@ from .serializers import (
 from .services.role_listings_count_services import get_job_listings_counts_from_last_number_of_months
 from dotenv import load_dotenv
 from memory_profiler import profile
+import concurrent.futures
+import concurrent.futures
+from django.http import JsonResponse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
+import os
 load_dotenv()
 
 
@@ -35,19 +42,22 @@ def trigger_monthly_pipeline(request):
         return Response(f'Error Running DailyPipline{e}', status=400)
 
 
-
 @profile
-@api_view(['Post'])
+@api_view(['POST'])
 def trigger_daily_pipeline(request):
     password = request.data.get('trigger_key')
     try:
         if password == os.environ.get('TRIGGER_KEY'):
-            retry_function(daily_pipeline, role_name='daily_pipeline')
-            return Response('run_daily_pipeline command executed', status=200)
+            # Execute daily_pipeline asynchronously
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future = executor.submit(daily_pipeline)
+                # Return a response immediately
+                return JsonResponse({'message': 'Daily pipeline triggered successfully.'})
         else:
-            return Response('Trigger key is not valid', status=401)
+            return JsonResponse({'error': 'Trigger key is not valid'}, status=401)
     except Exception as e:
-        return Response(f'Error Running DailyPipline{e}', status=400)
+        return JsonResponse({'error': f'Error Running Daily Pipeline: {e}'}, status=400)
+
 
 
 @profile
