@@ -15,6 +15,8 @@ from logic.web_scraping.linkedin.build_url import build_url
 from logic.web_scraping.linkedin.linkedin_scraping_functions import get_listings_from_linkedin
 from utils.enums import LinkedinTimePeriod
 from utils.functions import write_text_to_file
+from utils.settings import NOT_EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS, \
+    SHOW_FULL_DESCRIPTION_BUTTON_XPATH_GOOGLE_JOBS, EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS
 
 load_dotenv()
 
@@ -32,15 +34,9 @@ def configure_google_jobs_scrape_engine(
     google_jobs_configuration = GoogleJobsConfigDto(
         role=role,
         time_period=time_period,
-        show_full_description_button_xpath=os.environ.get(
-            "SHOW_FULL_DESCRIPTION_BUTTON_XPATH_GOOGLE_JOBS"
-        ),
-        expandable_job_description_text_xpath=os.environ.get(
-            "EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS"
-        ),
-        not_expandable_job_description_text_xpath=os.environ.get(
-            "NOT_EXPANDABLE_JOB_DESCRIPTION" "_TEXT_XPATH_GOOGLE_JOBS"
-        ),
+        show_full_description_button_xpath=SHOW_FULL_DESCRIPTION_BUTTON_XPATH_GOOGLE_JOBS,
+        expandable_job_description_text_xpath=EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS,
+        not_expandable_job_description_text_xpath=NOT_EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS,
         max_interval_attempts=10,
         sleep_time_between_attempt_in_seconds=30,
         wait_driver_timeout=3,
