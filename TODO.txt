@@ -1,7 +1,7 @@
 ============= Frontend =================
 - responsive
 - change fetch url to render url and not localhost
-
+-Multi select categories
 =============  Backend =================
 - Finish Cron Jobs:
     - Daily(24 Hours):
