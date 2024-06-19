@@ -18,3 +18,8 @@ CACHE_TTL: int = 60 * 60 * 24
 
 # number of months to aggregate backwards
 NUMBER_OF_MONTHS_TO_AGGREGATE = 4
+
+# ============= Google Jobs ========================
+SHOW_FULL_DESCRIPTION_BUTTON_XPATH_GOOGLE_JOBS = "/html/body/div[2]/div/div[2]/div[1]/div/div/div[3]/div[2]/div/div[1]/div/div/div[4]/g-expandable-container/div/div/div/div/div/div/g-expandable-content/span/div/g-inline-expansion-bar/div[1]/div"
+EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS = "/html/body/div[2]/div/div[2]/div[1]/div/div/div[3]/div[2]/div/div[1]/div/div/div[4]/g-expandable-container/div/div/div/span"
+NOT_EXPANDABLE_JOB_DESCRIPTION_TEXT_XPATH_GOOGLE_JOBS = "/html/body/div[2]/div/div[2]/div[1]/div/div/div[3]/div[2]/div/div[1]/div/div/div[4]/g-expandable-container/div/div/span"
