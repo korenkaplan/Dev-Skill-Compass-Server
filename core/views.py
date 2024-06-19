@@ -21,7 +21,6 @@ from memory_profiler import profile
 load_dotenv()
 
 
-@profile
 @api_view(['Post'])
 def trigger_monthly_pipeline(request):
     password = request.data.get('trigger_key')
@@ -33,7 +32,6 @@ def trigger_monthly_pipeline(request):
             return Response('Trigger key is not valid', status=200)
     except Exception as e:
         return Response(f'Error Running DailyPipline{e}', status=400)
-
 
 
 @profile
@@ -50,7 +48,6 @@ def trigger_daily_pipeline(request):
         return Response(f'Error Running DailyPipline{e}', status=400)
 
 
-@profile
 @api_view(['Get'])
 def get_jobs_count_for_role(request):
     role_id: int = request.GET.get('role_id')
