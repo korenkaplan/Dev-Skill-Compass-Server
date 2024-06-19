@@ -18,6 +18,7 @@ from utils.enums import LinkedinTimePeriod
 from utils.mail_module.email_module_functions import send_recap_email_prepared
 from utils.settings import MAX_NUMBER_OF_WORKERS, MAX_NUMBER_OF_RETRIES_SCARPING
 from concurrent.futures import as_completed
+from memory_profiler import profile
 
 
 def get_all_roles() -> list[str]:
@@ -121,6 +122,7 @@ def single_role_pipline(
         print(f"Error in pipeline for role {role}: {e}")
 
 
+@profile
 def thread_pool_role_pipline(google_period: GoogleJobsTimePeriod, linkedin_period: LinkedinTimePeriod):
     """Main function that creates a process for each role."""
     try:
@@ -129,7 +131,7 @@ def thread_pool_role_pipline(google_period: GoogleJobsTimePeriod, linkedin_perio
         tech_dictionary = get_tech_dict()
         google_jobs_time_period = google_period
         linkedin_time_period = linkedin_period
-        with ThreadPoolExecutor(max_workers=1) as executor:
+        with ThreadPoolExecutor(max_workers=MAX_NUMBER_OF_WORKERS) as executor:
             futures = [
                 executor.submit(
                     single_role_pipline,

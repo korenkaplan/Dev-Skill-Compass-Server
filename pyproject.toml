@@ -27,6 +27,7 @@ pymemcache = "^4.0.0"
 pandas = "^2.2.2"
 gunicorn = "^22.0.0"
 dj-database-url = "^2.2.0"
+memory-profiler = "^0.61.0"
 
 
 
