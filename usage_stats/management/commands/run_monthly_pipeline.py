@@ -36,6 +36,7 @@ def monthly_pipeline():
     Raises:
         ValueError: If `number_of_months` is not a positive integer.
     """
+    print("Started Monthly pipeline")
     number_of_months = NUMBER_OF_MONTHS_TO_AGGREGATE
     if number_of_months <= 0:
         raise ValueError("number_of_months must be a positive integer")

@@ -8,11 +8,22 @@ from .views import (
     RolesListCreate,
     SynonymsListCreate,
     SynonymsRetrieveUpdateDestroy, RoleListingsCountListCreate, RoleListingsCountRetrieveUpdateDestroy,
-    get_jobs_count_for_role,
+    get_jobs_count_for_role, trigger_monthly_pipeline, trigger_daily_pipeline,
 )
 
 # Main URL pattern the includes all router URLS's
 urlpatterns = [
+    path(
+        "trigger-daily-pipeline/",
+        trigger_daily_pipeline,
+        name="trigger_daily_pipeline"
+    ),
+    path(
+        "trigger-monthly-pipeline/",
+        trigger_monthly_pipeline,
+        name="trigger_monthly_pipeline"
+    ),
+
     path(
         "get-jobs-count-for-role/",
         get_jobs_count_for_role,

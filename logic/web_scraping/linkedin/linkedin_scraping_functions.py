@@ -265,6 +265,6 @@ def get_listings_from_linkedin(base_url: str, role: str, log_file_path: str) -> 
     - A list of job listings descriptions.
     """
     sleep_time = uniform(10.0, 30.0)
-    print(base_url, '0')
+    print(f"{base_url}0")
     return retry_function(get_job_listings, role_name=role, max_attempts=5, delay=sleep_time, backoff=1,
                           url=base_url, role=role, log_file_path=log_file_path)
