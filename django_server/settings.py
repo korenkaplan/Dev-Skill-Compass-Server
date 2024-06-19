@@ -53,7 +53,6 @@ INSTALLED_APPS = [
 CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS').split(" ")
 
 MIDDLEWARE = [
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
     # "django.middleware.cache.FetchFromCacheMiddleware", Auto cache GET requests.avoid toHandle caching in the endpoint
@@ -97,13 +96,14 @@ DATABASES = {
         'PASSWORD': os.environ.get('PGPASSWORD'),
         'HOST': os.environ.get('PGHOST'),
         'PORT': os.environ.get('PGPORT', 5432),
+        'CONN_MAX_AGE': 600,  # Set the maximum lifetime of a database connection (optional)
         'OPTIONS': {
             'sslmode': 'require',
-        }
+        },
     }
 }
 
-DATABASES["default"] = dj_database_url.parse(os.environ.get('DB_URL'))
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
