@@ -17,9 +17,11 @@ from .serializers import (
 )
 from .services.role_listings_count_services import get_job_listings_counts_from_last_number_of_months
 from dotenv import load_dotenv
+from memory_profiler import profile
 load_dotenv()
 
 
+@profile
 @api_view(['Post'])
 def trigger_monthly_pipeline(request):
     password = request.data.get('trigger_key')
@@ -34,6 +36,7 @@ def trigger_monthly_pipeline(request):
 
 
 
+@profile
 @api_view(['Post'])
 def trigger_daily_pipeline(request):
     password = request.data.get('trigger_key')
@@ -47,6 +50,7 @@ def trigger_daily_pipeline(request):
         return Response(f'Error Running DailyPipline{e}', status=400)
 
 
+@profile
 @api_view(['Get'])
 def get_jobs_count_for_role(request):
     role_id: int = request.GET.get('role_id')
