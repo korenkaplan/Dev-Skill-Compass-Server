@@ -129,7 +129,7 @@ def thread_pool_role_pipline(google_period: GoogleJobsTimePeriod, linkedin_perio
         tech_dictionary = get_tech_dict()
         google_jobs_time_period = google_period
         linkedin_time_period = linkedin_period
-        with ThreadPoolExecutor(max_workers=MAX_NUMBER_OF_WORKERS) as executor:
+        with ThreadPoolExecutor(max_workers=1) as executor:
             futures = [
                 executor.submit(
                     single_role_pipline,
