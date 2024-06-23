@@ -99,13 +99,13 @@ def job_scrape_pipeline(role: str, google_time_period: GoogleJobsTimePeriod,
     # All jobs listings from all sites
     job_listings_list: list[str] = []
 
-    # print(f"({role}) -> Started Google Jobs Scraper")
-    # # get the listings from Google jobs
-    # google_jobs_listings = google_jobs_scraping_pipeline(role, google_time_period)
-    #
-    # # combine the lists together
-    # job_listings_list.extend(google_jobs_listings)
-    # print(f"({role}) -> Finished Google Jobs Scraper")
+    print(f"({role}) -> Started Google Jobs Scraper")
+    # get the listings from Google jobs
+    google_jobs_listings = google_jobs_scraping_pipeline(role, google_time_period)
+
+    # combine the lists together
+    job_listings_list.extend(google_jobs_listings)
+    print(f"({role}) -> Finished Google Jobs Scraper")
     amount_of_listings_from_google_job = len(job_listings_list)
     print(f"({role}) -> Started LinkedIn Scraper")
 

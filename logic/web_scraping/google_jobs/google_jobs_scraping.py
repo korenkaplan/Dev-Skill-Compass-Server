@@ -124,7 +124,7 @@ def get_full_description(xpath, _driver) -> (bool, str):
 
 # region Setup and Initialization functions
 def setup_chrome_driver(
-        params=None, set_auto_params=True, activate=False, url="", headless=True
+        params=None, set_auto_params=True, activate=False, url="", headless=False
 ) -> WebDriver:
     """
     Sets up a Chrome WebDriver with optional geolocation parameters and headless mode.
