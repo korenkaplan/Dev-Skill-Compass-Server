@@ -7,7 +7,6 @@ from django.db.models import QuerySet
 from utils.settings import NUMBER_OF_CATEGORIES, NUMBER_OF_ITEMS_PER_CATEGORY, NUMBER_OF_ITEMS_ALL_CATEGORIES
 from typing import Tuple, List, Dict
 from dateutil.relativedelta import relativedelta
-from django.utils import timezone
 
 
 def update_count_aggregated_table(tech: int, role: Roles, count: int):

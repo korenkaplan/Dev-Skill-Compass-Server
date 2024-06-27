@@ -1,7 +1,4 @@
-import os
-
 from rest_framework import generics
-from rest_framework.decorators import api_view
 from django.core.cache import cache
 from rest_framework.response import Response
 from usage_stats.management.commands.run_daily_pipeline import daily_pipeline
@@ -19,10 +16,7 @@ from .services.role_listings_count_services import get_job_listings_counts_from_
 from dotenv import load_dotenv
 from memory_profiler import profile
 import concurrent.futures
-import concurrent.futures
 from django.http import JsonResponse
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 import os
 load_dotenv()
@@ -50,7 +44,8 @@ def trigger_daily_pipeline(request):
         if password == os.environ.get('TRIGGER_KEY'):
             # Execute daily_pipeline asynchronously
             with concurrent.futures.ThreadPoolExecutor() as executor:
-                future = executor.submit(daily_pipeline)
+
+                executor.submit(daily_pipeline)
                 # Return a response immediately
                 return JsonResponse({'message': 'Daily pipeline triggered successfully.'})
         else:

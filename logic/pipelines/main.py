@@ -158,7 +158,6 @@ def thread_pool_role_pipline(google_period: GoogleJobsTimePeriod, linkedin_perio
         print(f"Error in main pipeline: {e}")
 
 
-
 def thread_pool_role_pipline_test(google_period: GoogleJobsTimePeriod, linkedin_period: LinkedinTimePeriod, roles):
     """Main function that creates a process for each role."""
     try:
