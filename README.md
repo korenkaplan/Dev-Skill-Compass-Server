@@ -3,6 +3,14 @@
 
 # 🌟 Welcome to "Skills-Compass"
  Our mission is to guide you on the most in-demand technologies in Israel's tech job market. We help you stay relevant by providing the latest information on the skills you need for different tech roles.
+ 
+ 🌍 **What Makes Us Unique:**
+
+ Every day, our system scans the latest job postings online, ensuring that our data is the freshest and most accurate, especially for jobs in Israel. This way, you get real-time insights into what employers are looking for.
+
+🔮 **What's Coming Next:**
+
+🚀 Exciting things are on the horizon! We're planning to add more job roles, highlight emerging and declining tech trends, and provide even more data to help you navigate the job market with confidence.
 
 #### Website: https://skills-compass.netlify.app/
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-My%20Profile-blue?logo=linkedin)](https://www.linkedin.com/in/koren-kaplan/)
