@@ -7,7 +7,7 @@
 #### Website: https://skills-compass.netlify.app/
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-My%20Profile-blue?logo=linkedin)](https://www.linkedin.com/in/koren-kaplan/)
 
-[![GitHub](https://img.shields.io/badge/GitHub-Frontend%20Repository-black?logo=github)](https://github.com/korenkaplan)
+[![GitHub](https://img.shields.io/badge/GitHub-Frontend%20Repository-black?logo=github)](https://github.com/korenkaplan/skills_compass_react.git)
 ## Table of Contents
 
 - [Features](#-features)
