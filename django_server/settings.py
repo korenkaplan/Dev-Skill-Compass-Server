@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-
-import dj_database_url
 from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,7 +32,7 @@ DEBUG = os.environ.get("DEBUG") == "true"
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
 
 # Application definition
-INTERNAL_IPS = os.environ.get("ALLOWED_HOSTS").split(" ")['127.0.0.1', 'https://dev-skill-compass-server.onrender.com']
+INTERNAL_IPS = os.environ.get("ALLOWED_HOSTS").split(" ")
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -48,16 +46,18 @@ INSTALLED_APPS = [
     "usage_stats",
     'corsheaders',
     "debug_toolbar",
+    'rest_framework_swagger',
+    'drf_yasg',
 ]
 
 CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS').split(" ")
 
 MIDDLEWARE = [
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
     # "django.middleware.cache.FetchFromCacheMiddleware", Auto cache GET requests.avoid toHandle caching in the endpoint
     "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -97,13 +97,14 @@ DATABASES = {
         'PASSWORD': os.environ.get('PGPASSWORD'),
         'HOST': os.environ.get('PGHOST'),
         'PORT': os.environ.get('PGPORT', 5432),
+        'CONN_MAX_AGE': 600,  # Set the maximum lifetime of a database connection (optional)
         'OPTIONS': {
             'sslmode': 'require',
-        }
+        },
     }
 }
 
-DATABASES["default"] = dj_database_url.parse(os.environ.get('DB_URL'))
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 

@@ -6,6 +6,7 @@ from usage_stats.services.historical_tech_counts_service import get_tech_counts_
 from django.db.models import QuerySet
 from utils.settings import NUMBER_OF_CATEGORIES, NUMBER_OF_ITEMS_PER_CATEGORY, NUMBER_OF_ITEMS_ALL_CATEGORIES
 from typing import Tuple, List, Dict
+from dateutil.relativedelta import relativedelta
 
 
 def update_count_aggregated_table(tech: int, role: Roles, count: int):
@@ -283,7 +284,8 @@ def get_sorted_dict_based_on_list_length(dict_to_sort: Dict[str, List[dict]]) ->
 
 def get_last_scan_date_and_time():
     res: AggregatedTechCounts = AggregatedTechCounts.objects.all().order_by('-created_at').first()
-    date, time = str(res.created_at.strftime("%d/%m/%y %H:%M")).split(' ')
+    created_at = res.created_at + relativedelta(hours=3)
+    date, time = str(created_at.strftime("%d/%m/%y %H:%M")).split(' ')
     return {'date': date, 'time': time}
 
 
