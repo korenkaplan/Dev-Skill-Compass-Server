@@ -1,4 +1,4 @@
-![Dev-Skill-Compass-Server](https://socialify.git.ci/korenkaplan/Dev-Skill-Compass-Server/image?description=1&descriptionEditable=Server%20Repository%20for%20the%20website%20%22Skills%20Compass%22&font=Raleway&logo=https%3A%2F%2Fgithub.com%2Fkorenkaplan%2FDev-Skill-Compass-Server%2Fassets%2F99595036%2F220c6218-77e6-4ab3-b44b-abc3744635d0&name=1&owner=1&pattern=Charlie%20Brown&theme=Light)
+![Dev-Skill-Compass-Server](https://socialify.git.ci/korenkaplan/Dev-Skill-Compass-Server/image?description=1&descriptionEditable=Server%20Repository%20for%20the%20website%20%22Skills%20Compass%22&font=Raleway&language=1&logo=https%3A%2F%2Fgithub.com%2Fkorenkaplan%2FDev-Skill-Compass-Server%2Fassets%2F99595036%2F220c6218-77e6-4ab3-b44b-abc3744635d0&name=1&owner=1&pattern=Charlie%20Brown&theme=Light)
 
 
 # 🌟 Welcome to "Skills-Compass"
