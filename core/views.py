@@ -54,7 +54,6 @@ def trigger_daily_pipeline(request):
         return JsonResponse({'error': f'Error Running Daily Pipeline: {e}'}, status=400)
 
 
-@profile
 @api_view(['Get'])
 def get_jobs_count_for_role(request):
     role_id: int = request.GET.get('role_id')

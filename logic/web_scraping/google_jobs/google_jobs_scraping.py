@@ -235,7 +235,8 @@ def scroll_element_to_view(element: WebElement, driver: WebDriver) -> bool:
         driver.execute_script("arguments[0].scrollIntoView();", element)
         return True
 
-    except StaleElementReferenceException:
+    except Exception as e:
+        print(e)
         return False
 
 
@@ -604,6 +605,9 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> (list[str], bool):
                 elif result == 1:
                     repeated_urls_counter += 1
                     continue
+                print(f"urls_attempted_set length:{len(urls_attempted_set)}")
+                if len(urls_attempted_set) > 1:
+                    success_status = True
 
                 if check_job_origin_site(dto.driver, 'LinkedIn'):
                     listings_from_linkedin_counter += 1
@@ -660,7 +664,6 @@ def get_job_listings(dto: GoogleJobsGetJobListingsDto) -> (list[str], bool):
     Total Job Listings: {len(job_listings)}
 """
     write_text_to_file(dto.log_file_path, "a", text)
-    success_status = True
     return job_listings_result_list, success_status
 
 

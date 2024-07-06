@@ -37,9 +37,12 @@ def filter_li_elements_by_title(soup: BeautifulSoup, role: str, log_file_path: s
         li_elements = soup.find_all('li')
         skip_amount = len(li_elements)
         if not li_elements:
-            raise ValueError("No 'li' elements found in the provided HTML.")
+            print("No 'li' elements found in the provided HTML.")
+            return [], 0
+
     except Exception as e:
-        raise RuntimeError(f"Error finding 'li' elements: {e}")
+        print(f"Error finding 'li' elements: {e}")
+        return [], 0
 
     titles, title_filtered_li_elements = filter_li_elements_by_title_action(li_elements,
                                                                             role, log_file_path)
@@ -57,7 +60,7 @@ def filter_by_unique_title_company_and_location(titles: list, li_elements: list,
         company, location = get_company_and_location(li)
         title = title.strip().replace('senior', '').replace('junior', '')
         unique_title = company + location + title
-        unique_title = unique_title.lower(). replace(' ', '').replace(',', '')
+        unique_title = unique_title.lower().replace(' ', '').replace(',', '')
 
         if unique_title not in visited_postings:
             filtered_li_elements.append(li)
@@ -199,7 +202,7 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
         # Set the initial variables for each iteration: unique sleep time each iteration, pagination on the skip amount
         sleep_time = uniform(4.0, 5.0)
         formatted_url = url + str(skip_amount)
-
+        print(formatted_url)
         try:
             # Fetch the href attribute of the job listings from the site.
             hrefs, scanned_listings_amount = retry_function(get_li_hrefs, role_name=role, max_attempts=3,
@@ -207,7 +210,9 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
                                                             backoff=1, visited_postings_set=visited_postings_set,
                                                             url=formatted_url, role=role,
                                                             log_file_path=log_file_path, proxy=proxy)
-
+            # if no more li elements found which means no more listings are available break the loop
+            if scanned_listings_amount == 0:
+                break
             # count the number of listings with title not matching the role.
             # total amount per get request (10) - the amount of filtered fetched listings = the amount of error listings
             title_filtered_listings_counter += scanned_listings_amount - len(hrefs)
@@ -216,8 +221,6 @@ def get_job_listings(url: str, role: str, log_file_path: str, proxy=None) -> lis
             break
 
         # **Stopping condition** if hrefs is empty: Means that the list is over and there are no more listings, break.
-        if not hrefs:
-            break
 
         # Update the skip amount for the next fetch
         skip_amount += scanned_listings_amount
@@ -268,3 +271,6 @@ def get_listings_from_linkedin(base_url: str, role: str, log_file_path: str) -> 
     print(f"{base_url}0")
     return retry_function(get_job_listings, role_name=role, max_attempts=5, delay=sleep_time, backoff=1,
                           url=base_url, role=role, log_file_path=log_file_path)
+
+
+2
