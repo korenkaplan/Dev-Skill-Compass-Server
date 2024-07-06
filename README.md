@@ -1,13 +1,20 @@
-![Dev-Skill-Compass-Server](https://socialify.git.ci/korenkaplan/Dev-Skill-Compass-Server/image?description=1&descriptionEditable=Server%20Repository%20for%20the%20website%20%22Skills%20Compass%22&font=Raleway&logo=https%3A%2F%2Fgithub.com%2Fkorenkaplan%2FDev-Skill-Compass-Server%2Fassets%2F99595036%2F220c6218-77e6-4ab3-b44b-abc3744635d0&name=1&owner=1&pattern=Charlie%20Brown&theme=Light)
+![Dev-Skill-Compass-Server](https://socialify.git.ci/korenkaplan/Dev-Skill-Compass-Server/image?description=1&descriptionEditable=Server%20Repository%20for%20the%20website%20%22Skills%20Compass%22&font=Raleway&language=1&logo=https%3A%2F%2Fgithub.com%2Fkorenkaplan%2FDev-Skill-Compass-Server%2Fassets%2F99595036%2F220c6218-77e6-4ab3-b44b-abc3744635d0&name=1&owner=1&pattern=Charlie%20Brown&theme=Light)
 
 
 # 🌟 Welcome to "Skills-Compass"
  Our mission is to guide you on the most in-demand technologies in Israel's tech job market. We help you stay relevant by providing the latest information on the skills you need for different tech roles.
+ 
+ 🌍 **What Makes Us Unique:**
 
-#### Website: https://skills-compass.netlify.app/
+ Every day, our system scans the latest job postings online, ensuring that our data is the freshest and most accurate, especially for jobs in Israel. This way, you get real-time insights into what employers are looking for.
+
+🔮 **What's Coming Next:**
+
+🚀 Exciting things are on the horizon! We're planning to add more job roles, highlight emerging and declining tech trends, and provide even more data to help you navigate the job market with confidence.
+
+#### Website: [Skills-Compass](https://skills-compass.netlify.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-My%20Profile-blue?logo=linkedin)](https://www.linkedin.com/in/koren-kaplan/)
-
-[![GitHub](https://img.shields.io/badge/GitHub-Frontend%20Repository-black?logo=github)](https://github.com/korenkaplan)
+[![GitHub](https://img.shields.io/badge/GitHub-Frontend%20Repository-black?logo=github)](https://github.com/korenkaplan/skills_compass_react.git)
 ## Table of Contents
 
 - [Features](#-features)
