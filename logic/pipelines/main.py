@@ -196,5 +196,3 @@ def thread_pool_role_pipline_test(linkedin_period: LinkedinTimePeriod, roles):
             send_recap_email_prepared(email_text, 'Google Jobs')
     except Exception as e:
         print(f"Error in main pipeline: {e}")
-
-
