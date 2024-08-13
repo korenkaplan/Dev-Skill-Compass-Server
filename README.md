@@ -107,19 +107,21 @@
 
 ## 📸 Screenshots
 #### Website: https://skills-compass.netlify.app/
-![image](https://github.com/korenkaplan/Dev-Skill-Compass-Server/assets/99595036/edefb6eb-78e2-407a-b0cd-55656d1caa42)
+![image](https://github.com/user-attachments/assets/87f8d794-1160-4d71-a2ae-2687c557d754)
 
-![image](https://github.com/korenkaplan/Dev-Skill-Compass-Server/assets/99595036/ba0f1a2b-9742-42fe-8253-34726a7fff80)
+![image](https://github.com/user-attachments/assets/cb59dc6f-d70e-4eeb-beb5-a16dd4c9269b)
+
+![image](https://github.com/user-attachments/assets/fc3018ff-129b-4ab9-97e8-97f80d89e168)
+
+![image](https://github.com/user-attachments/assets/d95b6df9-7dc1-48d5-a96f-6f56fc274310)
+
+![image](https://github.com/user-attachments/assets/f2cab21d-0b24-478a-a33e-1aa4e9c2939e)
+
+![image](https://github.com/user-attachments/assets/781cd2d4-90e5-4f70-9ead-ff3584d5caef)
+
+![image](https://github.com/user-attachments/assets/29a33fb1-46ca-4c93-8988-06763d530611)
 
 
-![image](https://github.com/korenkaplan/Dev-Skill-Compass-Server/assets/99595036/51b5ca1a-e5dc-4270-ab32-be683e3b54c2)
-
-
-![image](https://github.com/korenkaplan/Dev-Skill-Compass-Server/assets/99595036/23d0e416-0b34-4c5b-b682-c5c8e5a6c9bc)
-
-![image](https://github.com/korenkaplan/Dev-Skill-Compass-Server/assets/99595036/709c3a46-577c-4978-9485-a2be8c28d277)
-
-![image](https://github.com/korenkaplan/Dev-Skill-Compass-Server/assets/99595036/4d7c2897-c2da-4612-a2f0-b03fdc5a2a77)
 
 
 ## Contact Information
